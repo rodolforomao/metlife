@@ -8,4 +8,7 @@
 
 @section('content')
     <p>You are logged in!</p>
+    <?php
+    var_dump("teste");
+    ?>
 @stop

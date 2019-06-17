@@ -108,31 +108,17 @@ return [
     */
 
     'menu' => [
-        'Formulário(s) de cadastro(s)',
+        'Cadastro',
         [
             'text' => 'Blog',
-            'url'  => 'admin/blog',
+            'url'  => 'cadastro',
             'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'Cadastro de Cliente',
-            'url'         => 'admin/pages',
-            'icon'        => 'file',
-            'label'       => 0,
-            'label_color' => 'success',
-        ],
-        [
             'text'        => 'Cadastro de Proposta',
-            'url'         => 'admin/pages',
+            'url'         => 'cadastro',
             'icon'        => 'file',
             'label'       => 2,
-            'label_color' => 'success',
-        ],
-        [
-            'text'        => 'Propostas Finalizadas',
-            'url'         => 'admin/pages',
-            'icon'        => 'file',
-            'label'       => 1,
             'label_color' => 'success',
         ],
         'STATUS DA(S) PROPOSTA(s)',
