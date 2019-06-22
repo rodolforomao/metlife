@@ -1,4 +1,4 @@
-@extends('master')
+@extends('layouts/app')
 @section('content')
 <div class="container">
     <table class="table table-striped">
@@ -9,7 +9,7 @@
                 <th>CPF</th>
                 <th>Data de Nascimento</th>
                 <th>Sexo</th>
-                <th>Esyado Civil</th>
+                <th>Estado Civil</th>
                 <th>Endereço</th>
                 <th>E-mail</th>
                 <th>Celular</th>

@@ -16,12 +16,12 @@ class CreateDadosCadastraisTable extends Migration
         Schema::create('dados_cadastrais', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome');
-            $table->number('cpf');
-            $table->number('data_nasc');
+            $table->integer('cpf')->unique();
+            $table->date('data_nasc');
             $table->string('sexo');
             $table->string('estado_civil');
             $table->string('endereco');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('celular');
             $table->timestamps();
             $table->softDeletes();

@@ -26,7 +26,7 @@ class DadosCadastraisController extends Controller
     public function create()
     {
         $dados = DadosCadastrais::all();
-        return view('dados.create', compact('dados'));
+        return view('dados.add', compact('dados'));
     }
 
     /**
@@ -62,7 +62,7 @@ class DadosCadastraisController extends Controller
     public function edit($id)
     {
         $dados = DadosCadastrais::find($id);
-        return view('dados.edit', compact('dados', 'id'));
+        return view('dados.editar', compact('dados', 'id'));
     }
 
     /**
