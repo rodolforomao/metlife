@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDadosCadastraisTable extends Migration
+class CreatePatrimoniosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,19 @@ class CreateDadosCadastraisTable extends Migration
      */
     public function up()
     {
-        Schema::create('dados_cadastrais', function (Blueprint $table) {
+        Schema::create('patrimonios', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('idUser')->unsigned();
             $table->foreign('idUser')->references('id')->on('users')->onDelete('cascate');
-            $table->string('nome');
-            $table->number('cpf');
-            $table->number('data_nasc');
-            $table->string('sexo');
-            $table->string('estado_civil');
-            $table->string('endereco');
-            $table->string('email');
-            $table->string('celular');
+            $table->string('imoveis');
+            $table->string('inventario');
+            $table->string('fundosInvestimentosAcoes');
+            $table->string('emergencia');
+            $table->string('reservasPoupanca');
+            $table->string('funeral');
+            $table->string('outros');
+            $table->string('total');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -37,6 +36,6 @@ class CreateDadosCadastraisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dados_cadastrais');
+        Schema::dropIfExists('patrimonios');
     }
 }
