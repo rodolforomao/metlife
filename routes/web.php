@@ -34,3 +34,5 @@ Route::get('/patrimonios/grid', 'PatrimoniosController@grid');
 Route::resource('/patrimonios', 'PatrimoniosController');
 Route::get('/padrao_de_vidas/grid', 'Padrao_de_vidasController@grid');
 Route::resource('/padrao_de_vidas', 'Padrao_de_vidasController');
+Route::get('/educacaos/grid', 'EducacaosController@grid');
+Route::resource('/educacaos', 'EducacaosController');
