@@ -27,3 +27,6 @@ Route::resource('cadastro', 'DadosCadastraisController');
 Route::resource('cadastro', 'DadosFamiliaresController');
 
 
+
+Route::get('/patrimonios/grid', 'PatrimoniosController@grid');
+Route::resource('/patrimonios', 'PatrimoniosController');

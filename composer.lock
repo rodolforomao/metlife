@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5d6770bb728dff91e4d05fb624048908",
+    "content-hash": "5a099f89ad983aacd9f353a7d6b4f1dc",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -452,6 +452,43 @@
                 }
             ],
             "time": "2015-04-20T18:58:01+00:00"
+        },
+        {
+            "name": "kepex/laravel-crud-generator",
+            "version": "v0.1.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kEpEx/laravel-crud-generator.git",
+                "reference": "72ded59c2d748b818a4ab44ef579e1d2b75a9ad0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kEpEx/laravel-crud-generator/zipball/72ded59c2d748b818a4ab44ef579e1d2b75a9ad0",
+                "reference": "72ded59c2d748b818a4ab44ef579e1d2b75a9ad0",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": ">=5.0.0",
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CrudGenerator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alfredo Aguirre",
+                    "email": "alfrednx@gmail.com"
+                }
+            ],
+            "description": "php artisan command to generate fully working crud with grid paginated server side only by having database tables",
+            "time": "2019-01-03T18:48:49+00:00"
         },
         {
             "name": "laravel/framework",
