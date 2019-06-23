@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Patrimonio extends Model
+class PadraoDeVida extends Model
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'patrimonios';
+    protected $table = 'padrao_de_vidas';
 
     /**
     * The database primary key value.
@@ -25,7 +25,7 @@ class Patrimonio extends Model
      *
      * @var array
      */
-    protected $fillable = ['fundos', 'reservas', 'inventario', 'emergencia', 'funeral', 'outros', 'total', 'imoveis'];
+    protected $fillable = ['moradia', 'servicos', 'transporte', 'saude', 'vestuario', 'seguroDeVidaPrevidencia', 'lazer', 'alimentacao', 'impostos', 'extrasoutros'];
 
     
 }

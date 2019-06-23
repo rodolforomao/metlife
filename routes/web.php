@@ -33,3 +33,7 @@ Route::post('dados/{id}', 'DadosCadastraisController@destroy');
 
 Route::get('/patrimonios/grid', 'PatrimoniosController@grid');
 Route::resource('/patrimonios', 'PatrimoniosController');
+Route::resource('patrimonio', 'PatrimonioController');
+Route::resource('padrao-de-vida', 'PadraoDeVidaController');
+Route::get('/padrao_de_vidas/grid', 'Padrao_de_vidasController@grid');
+Route::resource('/padrao_de_vidas', 'Padrao_de_vidasController');
