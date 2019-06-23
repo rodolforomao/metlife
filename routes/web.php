@@ -24,5 +24,6 @@ Route::get('/dashboard/v3', 'DashboardController@versionthree')->name('v3');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::resource('cadastro', 'DadosCadastraisController');
+Route::resource('cadastro', 'DadosFamiliaresController');
 
 
