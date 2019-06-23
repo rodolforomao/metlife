@@ -1,0 +1,155 @@
+@media print {
+
+    body { 
+        font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif;
+        -webkit-print-color-adjust: exact;
+    }
+ 
+    section {
+        page-break-after: always;
+        page-break-inside: avoid;
+        page-break-before: always;
+        margin: 0px !important;   
+    }
+
+    .landscape-capa{
+        -webkit-transform: rotate(-90deg);     /* Chrome and other webkit browsers */
+        -moz-transform: rotate(-90deg);        /* FF */
+        -o-transform: rotate(-90deg);          /* Opera */
+        -ms-transform: rotate(-90deg);         /* IE9 */
+        transform: rotate(-90deg);             /* W3C compliant browsers */
+        filter: progid:DXImageTransform.Microsoft.BasicImage(Rotation=3);
+        width: 140%; 
+        height: 100%;         
+        position: relative;        
+        top: 330px !important;
+        left: -150px !important;
+        margin-left:-50px !important;
+    }
+
+    .landscape-grafico{
+        -webkit-transform: rotate(-90deg);     /* Chrome and other webkit browsers */
+        -moz-transform: rotate(-90deg);        /* FF */
+        -o-transform: rotate(-90deg);          /* Opera */
+        -ms-transform: rotate(-90deg);         /* IE9 */
+        transform: rotate(-90deg);             /* W3C compliant browsers */
+        filter: progid:DXImageTransform.Microsoft.BasicImage(Rotation=3);       
+        position: relative; 
+        top: 300px !important;                
+    }
+
+    .landscape-tabela{
+       -webkit-transform: rotate(-90deg);     /* Chrome and other webkit browsers */
+        -moz-transform: rotate(-90deg);        /* FF */
+        -o-transform: rotate(-90deg);          /* Opera */
+        -ms-transform: rotate(-90deg);         /* IE9 */
+        transform: rotate(-90deg);             /* W3C compliant browsers */
+        filter: progid:DXImageTransform.Microsoft.BasicImage(Rotation=3);
+        width: 130%; 
+        height: 100%;  
+        position: relative;        
+        top: 320px !important;
+        left: -150px !important;
+        margin-left:-50px !important;             
+    }
+
+    .landscape-painel{
+       -webkit-transform: rotate(-90deg);     /* Chrome and other webkit browsers */
+        -moz-transform: rotate(-90deg);        /* FF */
+        -o-transform: rotate(-90deg);          /* Opera */
+        -ms-transform: rotate(-90deg);         /* IE9 */
+        transform: rotate(-90deg);             /* W3C compliant browsers */
+        filter: progid:DXImageTransform.Microsoft.BasicImage(Rotation=3);
+        width: 125%; 
+        height: 100%;    
+        position: relative;        
+        top: 390px !important;
+        left: -150px !important;
+        margin-left:-60px !important;             
+    }
+
+    .landscape-painelCliente{
+       -webkit-transform: rotate(-90deg);     /* Chrome and other webkit browsers */
+        -moz-transform: rotate(-90deg);        /* FF */
+        -o-transform: rotate(-90deg);          /* Opera */
+        -ms-transform: rotate(-90deg);         /* IE9 */
+        transform: rotate(-90deg);             /* W3C compliant browsers */
+        filter: progid:DXImageTransform.Microsoft.BasicImage(Rotation=3);
+        width: 130%; 
+        height: 100%;    
+        position: relative;        
+        top: 450px !important;
+        left: -220px !important;
+        margin-left:-50px !important;             
+    }
+
+    .center{
+        text-align: center;
+    }
+
+    .border-blue{
+        border:2px solid #1d9ee1;
+        border-bottom-right-radius: 100px;
+        border-top-left-radius: 100px;
+    }
+
+    .margin{
+        margin: 8% !important;
+    }
+
+    .table-responsive {
+        min-height: 0 !important;
+        overflow-x: visible !important;
+    }
+
+    .grafico {    
+        -webkit-print-color-adjust: exact;
+    }
+    
+    .font-table{
+        font-size: 14px;
+        overflow-x: unset !important;
+    }
+
+    .line-table{
+        height: 150px !important;
+        font-size: 14px;
+    }
+
+    .border-table{
+        border: 2px solid black !important;
+        -webkit-print-color-adjust: exact !important;
+    }
+
+   
+    table.table tr > th{
+        background-color: #1f497d !important;
+        color: white !important;
+        -webkit-print-color-adjust: exact !important;
+    }
+
+    table tr:nth-of-type(odd) > td {
+        background-color: #B8CCE4 !important;
+        -webkit-print-color-adjust: exact !important;
+    }
+
+    table tr:nth-of-type(even) > td. {
+        background-color: #DCE6F1 !important;
+        -webkit-print-color-adjust: exact !important;
+    }
+
+
+
+    table tr:nth-of-type(odd).title-table > td {
+         background-color: #1f497d !important;       
+        color: white !important; 
+        -webkit-print-color-adjust: exact !important;
+    }
+
+    table tr:nth-of-type(even).title-table > td {
+         background-color: #1f497d !important;       
+        color: white !important; 
+        -webkit-print-color-adjust: exact !important;
+    }
+   
+}

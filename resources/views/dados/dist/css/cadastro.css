@@ -1,0 +1,30 @@
+.content-wrapper{
+  min-height: 830px;
+}
+
+@media (min-width: 768px){
+  .content-wrapper, .main-footer, .main-header {
+      margin-left: 0px !important;
+  }
+}
+
+.center{
+  text-align: -webkit-center; 
+  text-align: center;
+}
+
+.no-display{
+  display:none;
+}
+
+.card-body{
+  min-height: 375px;
+}
+
+.blue-background{
+	background: ghostwhite !important;
+}
+
+.yellow-background{
+	background: lightgoldenrodyellow !important;
+}

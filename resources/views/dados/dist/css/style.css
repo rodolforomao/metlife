@@ -1,0 +1,94 @@
+@media screen {
+
+	body { 
+		font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif;
+		background: #e0e0e0;
+		margin:5%;
+	}
+
+	section {
+		margin-top: 5%;
+		margin-bottom: 5%;
+		margin-left: 5%;
+		margin-right: 5%;
+		padding: 30px;
+		text-align: justify;
+		background: white;
+	    box-shadow: 0 .5mm 2mm rgba(0,0,0,.3);
+	    margin: 5mm auto;
+	}
+
+	.center{
+		text-align: center;
+	}
+
+	.border-blue{
+		border:2px solid #1d9ee1;
+		border-bottom-right-radius: 100px;
+    	border-top-left-radius: 100px;
+		min-height: 500px;
+		margin: 10px;
+	}
+
+	.margin{
+		margin: 5% !important;
+	}
+
+	.min-grafico {
+        min-width: 300px; 
+        height: 300px; 
+        margin: 0 auto;
+        background: transparent;
+    }
+
+    .pie-grafico {    	
+        min-width: 300px;
+	    max-width: 800px;
+	    height: 500px;
+	    margin: 1em auto;
+	    background: transparent;
+    }
+
+	.grafico {
+        min-width: 300px; 
+        height: 800px; 
+        margin: 0 auto;
+        background: transparent;
+    }
+
+    .font-table{
+    	font-size: 10px;
+    }
+
+    .title-table{
+    	background-color: #1f497d !important;    	
+    	color: white !important;    	
+    	font-weight: 900 !important;   
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+	    background-color: #B8CCE4;
+	}
+
+	.table-striped tbody tr:nth-of-type(even) {
+	    background-color: #DCE6F1;
+	}
+
+	.border-table{
+		border: 2px solid black !important;
+	}
+
+	.line-table{
+		height: 150px !important;
+    	font-size: 15px;
+	}
+
+    /*#graf_situacao_atual{
+    	background-image: url("../img/block-mini.png");
+        background-repeat: repeat;  
+    }
+    #graf_invalidez{
+    	background-image: url("../img/block-mini.png");
+        background-repeat: repeat;  
+    }*/
+}

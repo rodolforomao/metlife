@@ -22,7 +22,7 @@ class CreateDadosCadastraisTable extends Migration
             $table->string('estado_civil');
             $table->string('endereco');
             $table->string('email')->unique();
-            $table->string('celular');
+            $table->integer('celular');
             $table->timestamps();
             $table->softDeletes();
         });

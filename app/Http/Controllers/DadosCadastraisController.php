@@ -15,7 +15,8 @@ class DadosCadastraisController extends Controller
     public function index()
     {
         $dados = DadosCadastrais::all();
-        return view('dados.index', compact('dados'));
+        $json = json_encode($dados);
+        return response()->json($json , 200);
     }
 
     /**
@@ -26,7 +27,8 @@ class DadosCadastraisController extends Controller
     public function create()
     {
         $dados = DadosCadastrais::all();
-        return view('dados.add', compact('dados'));
+        $json = json_encode($dados);
+        return response()->json($json, 200);
     }
 
     /**
@@ -39,7 +41,8 @@ class DadosCadastraisController extends Controller
     {
         $dados = DadosCadastrais::create($request);
         $dados->save();
-        return redirect('dados');
+        $json = json_encode($dados);
+        return response()->json($json, 200);
     }
 
     /**
@@ -62,7 +65,8 @@ class DadosCadastraisController extends Controller
     public function edit($id)
     {
         $dados = DadosCadastrais::find($id);
-        return view('dados.editar', compact('dados', 'id'));
+        $json = json_encode($dados);
+        return response()->json($json, 200);
     }
 
     /**
@@ -77,7 +81,8 @@ class DadosCadastraisController extends Controller
         $dados = DadosCadastrais::find($id);
         $dados->nome = $request->all();
         $dados->update();
-        return redirect('dados.index');
+        $json = json_encode($dados);
+        return response()->json($json, 200);
 
     }
 
@@ -91,6 +96,7 @@ class DadosCadastraisController extends Controller
     {
         $dados = DadosCadastrais::find($id);
         $dados->delete();
-        return redirect('dados.index');
+        $json = json_encode($dados);
+        return response()->json($json, 200);
     }
 }
