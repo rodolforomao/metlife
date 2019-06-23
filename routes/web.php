@@ -30,3 +30,6 @@ Route::post('dados/editar{id}', 'DadosCadastraisController@edit');
 Route::put('dados/{id}}', 'DadosCadastraisController@upddate');
 Route::post('dados/{id}', 'DadosCadastraisController@destroy');
 
+
+Route::get('/patrimonios/grid', 'PatrimoniosController@grid');
+Route::resource('/patrimonios', 'PatrimoniosController');
