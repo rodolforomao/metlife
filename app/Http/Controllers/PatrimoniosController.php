@@ -27,9 +27,10 @@ class PatrimoniosController extends Controller
 
   public function create(Request $request)
   {
-    return view('patrimonios.add', [
-      []
-    ]);
+      //$patrimonio = Patrimonio::findOrFail(0);
+    return view('patrimonios.add', 
+      ['model' => null]
+    );
   }
 
   public function edit(Request $request, $id)

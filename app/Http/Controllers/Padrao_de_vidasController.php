@@ -28,8 +28,7 @@ class Padrao_de_vidasController extends Controller
   public function create(Request $request)
   {
     return view('padrao_de_vidas.add', [
-      []
-    ]);
+      'model' => null    ]);
   }
 
   public function edit(Request $request, $id)
