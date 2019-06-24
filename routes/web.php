@@ -41,3 +41,21 @@ Route::resource('/educacaos', 'EducacaosController');
 
 Route::get('/emprestimos/grid', 'EmprestimosController@grid');
 Route::resource('/emprestimos', 'EmprestimosController');
+
+Route::get('/inssfgtsprevidenciaseguros/grid', 'InssfgtsprevidenciasegurosController@grid');
+Route::resource('/inssfgtsprevidenciaseguros', 'InssfgtsprevidenciasegurosController');
+
+Route::get('/inssprevidenciaclientes/grid', 'InssprevidenciaclientesController@grid');
+Route::resource('/inssprevidenciaclientes', 'InssprevidenciaclientesController');
+
+Route::get('/inssseguroclientes/grid', 'InssseguroclientesController@grid');
+Route::resource('/inssseguroclientes', 'InssseguroclientesController');
+
+Route::get('/planoclientes/grid', 'PlanoclientesController@grid');
+Route::resource('/planoclientes', 'PlanoclientesController');
+
+Route::get('/planoprodutos/grid', 'PlanoprodutosController@grid');
+Route::resource('/planoprodutos', 'PlanoprodutosController');
+
+Route::get('/planoprodutodescs/grid', 'PlanoprodutodescsController@grid');
+Route::resource('/planoprodutodescs', 'PlanoprodutodescsController');
