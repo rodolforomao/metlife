@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Insssegurocliente;
+use App\Dadosfamiliare;
 
 use DB;
 
-class InssseguroclientesController extends Controller
+class DadosfamiliaresController extends Controller
 {
   //
   public function __construct()
@@ -22,27 +22,27 @@ class InssseguroclientesController extends Controller
 
   public function index(Request $request)
   {
-    return view('inssseguroclientes.index', []);
+    return view('dadosfamiliares.index', []);
   }
 
   public function create(Request $request)
   {
-    return view('inssseguroclientes.add', [
+    return view('dadosfamiliares.add', [
       'model' => null    ]);
   }
 
   public function edit(Request $request, $id)
   {
-    $insssegurocliente = Insssegurocliente::findOrFail($id);
-    return view('inssseguroclientes.add', [
-      'model' => $insssegurocliente    ]);
+    $dadosfamiliare = Dadosfamiliare::findOrFail($id);
+    return view('dadosfamiliares.add', [
+      'model' => $dadosfamiliare    ]);
   }
 
   public function show(Request $request, $id)
   {
-    $insssegurocliente = Insssegurocliente::findOrFail($id);
-    return view('inssseguroclientes.show', [
-      'model' => $insssegurocliente    ]);
+    $dadosfamiliare = Dadosfamiliare::findOrFail($id);
+    return view('dadosfamiliares.show', [
+      'model' => $dadosfamiliare    ]);
   }
 
   public function grid(Request $request)
@@ -51,7 +51,7 @@ class InssseguroclientesController extends Controller
     $start = $_GET['start'];
 
     $select = "SELECT *,1,2 ";
-    $presql = " FROM inssseguroclientes a ";
+    $presql = " FROM dadosfamiliares a ";
     if($_GET['search']['value']) {
       $presql .= " WHERE created_at LIKE '%".$_GET['search']['value']."%' ";
     }
@@ -62,7 +62,7 @@ class InssseguroclientesController extends Controller
     // 1/2/18 - Jasmine Robinson Added Orderby Section for the Grid Results
     //------------------------------------
     $orderby = "";
-    $columns = array('id','created_at','updated_at','idUser','idadeparaaposentadoria','segurodevida','capitalsegurado','premiomensal',);
+    $columns = array('id','created_at','updated_at','idUser','nomeconjuge','datanascimento',);
     $order = $columns[$request->input('order.0.column')];
     $dir = $request->input('order.0.dir');
     $orderby = "Order By " . $order . " " . $dir;
@@ -101,41 +101,35 @@ class InssseguroclientesController extends Controller
     /*$this->validate($request, [
     'name' => 'required|max:255',
   ]);*/
-  $insssegurocliente = null;
-  if($request->id > 0) { $insssegurocliente = Insssegurocliente::findOrFail($request->id); }
+  $dadosfamiliare = null;
+  if($request->id > 0) { $dadosfamiliare = Dadosfamiliare::findOrFail($request->id); }
   else {
-    $insssegurocliente = new Insssegurocliente;
+    $dadosfamiliare = new Dadosfamiliare;
   }
 
 
   
-    $insssegurocliente->id = $request->id?:0;
+    $dadosfamiliare->id = $request->id?:0;
     
   
-      $insssegurocliente->created_at = $request->created_at;
+      $dadosfamiliare->created_at = $request->created_at;
   
   
-      $insssegurocliente->updated_at = $request->updated_at;
+      $dadosfamiliare->updated_at = $request->updated_at;
   
   
-      $insssegurocliente->idUser = $request->idUser;
+      $dadosfamiliare->idUser = $request->idUser;
   
   
-      $insssegurocliente->idadeparaaposentadoria = $request->idadeparaaposentadoria;
+      $dadosfamiliare->nomeconjuge = $request->nomeconjuge;
   
   
-      $insssegurocliente->segurodevida = $request->segurodevida;
+      $dadosfamiliare->datanascimento = $request->datanascimento;
   
-  
-      $insssegurocliente->capitalsegurado = $request->capitalsegurado;
-  
-  
-      $insssegurocliente->premiomensal = $request->premiomensal;
-  
-    //$insssegurocliente->user_id = $request->user()->id;
-  $insssegurocliente->save();
+    //$dadosfamiliare->user_id = $request->user()->id;
+  $dadosfamiliare->save();
 
-  return redirect('/inssseguroclientes');
+  return redirect('/dadosfamiliares');
 
 }
 
@@ -146,9 +140,9 @@ public function store(Request $request)
 
 public function destroy(Request $request, $id) {
 
-  $insssegurocliente = Insssegurocliente::findOrFail($id);
+  $dadosfamiliare = Dadosfamiliare::findOrFail($id);
 
-  $insssegurocliente->delete();
+  $dadosfamiliare->delete();
   return "OK";
 
 }

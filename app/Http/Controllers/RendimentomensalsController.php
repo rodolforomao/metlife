@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Insssegurocliente;
+use App\Rendimentomensal;
 
 use DB;
 
-class InssseguroclientesController extends Controller
+class RendimentomensalsController extends Controller
 {
   //
   public function __construct()
@@ -22,27 +22,28 @@ class InssseguroclientesController extends Controller
 
   public function index(Request $request)
   {
-    return view('inssseguroclientes.index', []);
+    return view('rendimentomensals.index', []);
   }
 
   public function create(Request $request)
   {
-    return view('inssseguroclientes.add', [
-      'model' => null    ]);
+    return view('rendimentomensals.add', [
+      []
+    ]);
   }
 
   public function edit(Request $request, $id)
   {
-    $insssegurocliente = Insssegurocliente::findOrFail($id);
-    return view('inssseguroclientes.add', [
-      'model' => $insssegurocliente    ]);
+    $rendimentomensal = Rendimentomensal::findOrFail($id);
+    return view('rendimentomensals.add', [
+      'model' => $rendimentomensal    ]);
   }
 
   public function show(Request $request, $id)
   {
-    $insssegurocliente = Insssegurocliente::findOrFail($id);
-    return view('inssseguroclientes.show', [
-      'model' => $insssegurocliente    ]);
+    $rendimentomensal = Rendimentomensal::findOrFail($id);
+    return view('rendimentomensals.show', [
+      'model' => $rendimentomensal    ]);
   }
 
   public function grid(Request $request)
@@ -51,7 +52,7 @@ class InssseguroclientesController extends Controller
     $start = $_GET['start'];
 
     $select = "SELECT *,1,2 ";
-    $presql = " FROM inssseguroclientes a ";
+    $presql = " FROM rendimentomensals a ";
     if($_GET['search']['value']) {
       $presql .= " WHERE created_at LIKE '%".$_GET['search']['value']."%' ";
     }
@@ -62,7 +63,7 @@ class InssseguroclientesController extends Controller
     // 1/2/18 - Jasmine Robinson Added Orderby Section for the Grid Results
     //------------------------------------
     $orderby = "";
-    $columns = array('id','created_at','updated_at','idUser','idadeparaaposentadoria','segurodevida','capitalsegurado','premiomensal',);
+    $columns = array('id','created_at','updated_at','idUser','nomecompleto','outrasrendas','declaracaodeir',);
     $order = $columns[$request->input('order.0.column')];
     $dir = $request->input('order.0.dir');
     $orderby = "Order By " . $order . " " . $dir;
@@ -101,41 +102,38 @@ class InssseguroclientesController extends Controller
     /*$this->validate($request, [
     'name' => 'required|max:255',
   ]);*/
-  $insssegurocliente = null;
-  if($request->id > 0) { $insssegurocliente = Insssegurocliente::findOrFail($request->id); }
+  $rendimentomensal = null;
+  if($request->id > 0) { $rendimentomensal = Rendimentomensal::findOrFail($request->id); }
   else {
-    $insssegurocliente = new Insssegurocliente;
+    $rendimentomensal = new Rendimentomensal;
   }
 
 
   
-    $insssegurocliente->id = $request->id?:0;
+    $rendimentomensal->id = $request->id?:0;
     
   
-      $insssegurocliente->created_at = $request->created_at;
+      $rendimentomensal->created_at = $request->created_at;
   
   
-      $insssegurocliente->updated_at = $request->updated_at;
+      $rendimentomensal->updated_at = $request->updated_at;
   
   
-      $insssegurocliente->idUser = $request->idUser;
+      $rendimentomensal->idUser = $request->idUser;
   
   
-      $insssegurocliente->idadeparaaposentadoria = $request->idadeparaaposentadoria;
+      $rendimentomensal->nomecompleto = $request->nomecompleto;
   
   
-      $insssegurocliente->segurodevida = $request->segurodevida;
+      $rendimentomensal->outrasrendas = $request->outrasrendas;
   
   
-      $insssegurocliente->capitalsegurado = $request->capitalsegurado;
+      $rendimentomensal->declaracaodeir = $request->declaracaodeir;
   
-  
-      $insssegurocliente->premiomensal = $request->premiomensal;
-  
-    //$insssegurocliente->user_id = $request->user()->id;
-  $insssegurocliente->save();
+    //$rendimentomensal->user_id = $request->user()->id;
+  $rendimentomensal->save();
 
-  return redirect('/inssseguroclientes');
+  return redirect('/rendimentomensals');
 
 }
 
@@ -146,9 +144,9 @@ public function store(Request $request)
 
 public function destroy(Request $request, $id) {
 
-  $insssegurocliente = Insssegurocliente::findOrFail($id);
+  $rendimentomensal = Rendimentomensal::findOrFail($id);
 
-  $insssegurocliente->delete();
+  $rendimentomensal->delete();
   return "OK";
 
 }

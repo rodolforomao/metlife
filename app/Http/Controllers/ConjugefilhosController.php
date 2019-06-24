@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Insssegurocliente;
+use App\Conjugefilho;
 
 use DB;
 
-class InssseguroclientesController extends Controller
+class ConjugefilhosController extends Controller
 {
   //
   public function __construct()
@@ -22,27 +22,27 @@ class InssseguroclientesController extends Controller
 
   public function index(Request $request)
   {
-    return view('inssseguroclientes.index', []);
+    return view('conjugefilhos.index', []);
   }
 
   public function create(Request $request)
   {
-    return view('inssseguroclientes.add', [
+    return view('conjugefilhos.add', [
       'model' => null    ]);
   }
 
   public function edit(Request $request, $id)
   {
-    $insssegurocliente = Insssegurocliente::findOrFail($id);
-    return view('inssseguroclientes.add', [
-      'model' => $insssegurocliente    ]);
+    $conjugefilho = Conjugefilho::findOrFail($id);
+    return view('conjugefilhos.add', [
+      'model' => $conjugefilho    ]);
   }
 
   public function show(Request $request, $id)
   {
-    $insssegurocliente = Insssegurocliente::findOrFail($id);
-    return view('inssseguroclientes.show', [
-      'model' => $insssegurocliente    ]);
+    $conjugefilho = Conjugefilho::findOrFail($id);
+    return view('conjugefilhos.show', [
+      'model' => $conjugefilho    ]);
   }
 
   public function grid(Request $request)
@@ -51,7 +51,7 @@ class InssseguroclientesController extends Controller
     $start = $_GET['start'];
 
     $select = "SELECT *,1,2 ";
-    $presql = " FROM inssseguroclientes a ";
+    $presql = " FROM conjugefilhos a ";
     if($_GET['search']['value']) {
       $presql .= " WHERE created_at LIKE '%".$_GET['search']['value']."%' ";
     }
@@ -62,7 +62,7 @@ class InssseguroclientesController extends Controller
     // 1/2/18 - Jasmine Robinson Added Orderby Section for the Grid Results
     //------------------------------------
     $orderby = "";
-    $columns = array('id','created_at','updated_at','idUser','idadeparaaposentadoria','segurodevida','capitalsegurado','premiomensal',);
+    $columns = array('id','created_at','updated_at','idUser','idconjuge','filho','datanascimento',);
     $order = $columns[$request->input('order.0.column')];
     $dir = $request->input('order.0.dir');
     $orderby = "Order By " . $order . " " . $dir;
@@ -101,41 +101,38 @@ class InssseguroclientesController extends Controller
     /*$this->validate($request, [
     'name' => 'required|max:255',
   ]);*/
-  $insssegurocliente = null;
-  if($request->id > 0) { $insssegurocliente = Insssegurocliente::findOrFail($request->id); }
+  $conjugefilho = null;
+  if($request->id > 0) { $conjugefilho = Conjugefilho::findOrFail($request->id); }
   else {
-    $insssegurocliente = new Insssegurocliente;
+    $conjugefilho = new Conjugefilho;
   }
 
 
   
-    $insssegurocliente->id = $request->id?:0;
+    $conjugefilho->id = $request->id?:0;
     
   
-      $insssegurocliente->created_at = $request->created_at;
+      $conjugefilho->created_at = $request->created_at;
   
   
-      $insssegurocliente->updated_at = $request->updated_at;
+      $conjugefilho->updated_at = $request->updated_at;
   
   
-      $insssegurocliente->idUser = $request->idUser;
+      $conjugefilho->idUser = $request->idUser;
   
   
-      $insssegurocliente->idadeparaaposentadoria = $request->idadeparaaposentadoria;
+      $conjugefilho->idconjuge = $request->idconjuge;
   
   
-      $insssegurocliente->segurodevida = $request->segurodevida;
+      $conjugefilho->filho = $request->filho;
   
   
-      $insssegurocliente->capitalsegurado = $request->capitalsegurado;
+      $conjugefilho->datanascimento = $request->datanascimento;
   
-  
-      $insssegurocliente->premiomensal = $request->premiomensal;
-  
-    //$insssegurocliente->user_id = $request->user()->id;
-  $insssegurocliente->save();
+    //$conjugefilho->user_id = $request->user()->id;
+  $conjugefilho->save();
 
-  return redirect('/inssseguroclientes');
+  return redirect('/conjugefilhos');
 
 }
 
@@ -146,9 +143,9 @@ public function store(Request $request)
 
 public function destroy(Request $request, $id) {
 
-  $insssegurocliente = Insssegurocliente::findOrFail($id);
+  $conjugefilho = Conjugefilho::findOrFail($id);
 
-  $insssegurocliente->delete();
+  $conjugefilho->delete();
   return "OK";
 
 }
