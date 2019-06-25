@@ -1,877 +1,1176 @@
 @extends('layouts.master')
 
 @section('content')
-<!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+
+<div class="content-wrapper">
+
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Dashboard v2</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v2</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+            <h1 class="m-0 text-dark"></h1>
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
+    
     <section class="content">
       <div class="container-fluid">
-        <!-- Info boxes -->
         <div class="row">
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box">
-              <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cogs"></i></span>
 
-              <div class="info-box-content">
-                <span class="info-box-text">CPU Traffic</span>
-                <span class="info-box-number">
-                  10
-                  <small>%</small>
-                </span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Likes</span>
-                <span class="info-box-number">41,410</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-
-          <!-- fix for small devices only -->
-          <div class="clearfix hidden-md-up"></div>
-
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-success elevation-1"><i class="fa fa-shopping-cart"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Sales</span>
-                <span class="info-box-number">760</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-12 col-sm-6 col-md-3">
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-warning elevation-1"><i class="fa fa-users"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">New Members</span>
-                <span class="info-box-number">2,000</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-        </div>
-        <!-- /.row -->
-
-        <div class="row">
-          <div class="col-md-12">
+          <div class="col-sm-12 col-md-3">
             <div class="card">
               <div class="card-header">
-                <h5 class="card-title">Monthly Recap Report</h5>
-
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-widget="collapse">
-                    <i class="fa fa-minus"></i>
-                  </button>
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
-                      <i class="fa fa-wrench"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" role="menu">
-                      <a href="#" class="dropdown-item">Action</a>
-                      <a href="#" class="dropdown-item">Another action</a>
-                      <a href="#" class="dropdown-item">Something else here</a>
-                      <a class="dropdown-divider"></a>
-                      <a href="#" class="dropdown-item">Separated link</a>
-                    </div>
-                  </div>
-                  <button type="button" class="btn btn-tool" data-widget="remove">
-                    <i class="fa fa-times"></i>
-                  </button>
-                </div>
+                <h3 class="card-title">
+                  Cadastro
+                </h3>
               </div>
-              <!-- /.card-header -->
               <div class="card-body">
-                <div class="row">
-                  <div class="col-md-8">
-                    <p class="text-center">
-                      <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
-                    </p>
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                  <li class="nav-item">
+                    <a href="javascript:void(0)" onClick="openDadosCadastrais()" class="nav-link active">
+                      <i class="nav-icon fa fa-user"></i>
+                      <p>
+                        Dados Cadastrais
+                      </p>
+                    </a>
+                  </li>
 
-                    <div class="chart">
-                      <!-- Sales Chart Canvas -->
-                      <canvas id="salesChart" height="180" style="height: 180px;"></canvas>
-                    </div>
-                    <!-- /.chart-responsive -->
-                  </div>
-                  <!-- /.col -->
-                  <div class="col-md-4">
-                    <p class="text-center">
-                      <strong>Goal Completion</strong>
-                    </p>
+                  <li class="nav-item">
+                    <a href="javascript:void(0)" onClick="openDadosFamiliares()" class="nav-link">
+                      <i class="nav-icon fa fa-users"></i>
+                      <p>
+                        Dados Familiares
+                      </p>
+                    </a>
+                  </li>
 
-                    <div class="progress-group">
-                      Add Products to Cart
-                      <span class="float-right"><b>160</b>/200</span>
-                      <div class="progress progress-sm">
-                        <div class="progress-bar bg-primary" style="width: 80%"></div>
-                      </div>
-                    </div>
-                    <!-- /.progress-group -->
+                  <li class="nav-item">
+                    <a href="javascript:void(0)" onClick="openRendimentos()" class="nav-link">
+                      <i class="nav-icon fa fa-dollar"></i>
+                      <p>
+                        Rendimentos
+                      </p>
+                    </a>
+                  </li>
 
-                    <div class="progress-group">
-                      Complete Purchase
-                      <span class="float-right"><b>310</b>/400</span>
-                      <div class="progress progress-sm">
-                        <div class="progress-bar bg-danger" style="width: 75%"></div>
-                      </div>
-                    </div>
+                  <li class="nav-item">
+                    <a href="javascript:void(0)" onClick="openPatrimonio()" class="nav-link">
+                      <i class="nav-icon fa fa-diamond"></i>
+                      <p>
+                        Patrimônio
+                      </p>
+                    </a>
+                  </li>
 
-                    <!-- /.progress-group -->
-                    <div class="progress-group">
-                      <span class="progress-text">Visit Premium Page</span>
-                      <span class="float-right"><b>480</b>/800</span>
-                      <div class="progress progress-sm">
-                        <div class="progress-bar bg-success" style="width: 60%"></div>
-                      </div>
-                    </div>
+                  <li class="nav-item">
+                    <a href="javascript:void(0)" onClick="openEducacaoFilhos()" class="nav-link">
+                      <i class="nav-icon fa fa-graduation-cap"></i>
+                      <p>
+                        Educação dos Filhos
+                      </p>
+                    </a>
+                  </li>
 
-                    <!-- /.progress-group -->
-                    <div class="progress-group">
-                      Send Inquiries
-                      <span class="float-right"><b>250</b>/500</span>
-                      <div class="progress progress-sm">
-                        <div class="progress-bar bg-warning" style="width: 50%"></div>
-                      </div>
-                    </div>
-                    <!-- /.progress-group -->
-                  </div>
-                  <!-- /.col -->
-                </div>
-                <!-- /.row -->
+                  <li class="nav-item">
+                    <a href="javascript:void(0)" onClick="openPadraoVida()" class="nav-link">
+                      <i class="nav-icon fa fa-check"></i>
+                      <p>
+                        Padrão de Vida
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="javascript:void(0)" onClick="openEmprestimos()" class="nav-link">
+                      <i class="nav-icon fa fa-bookmark"></i>
+                      <p>
+                        Emprestimos
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="javascript:void(0)" onClick="openSegurosPrevidencias()" class="nav-link">
+                      <i class="nav-icon fa fa-folder-open"></i>
+                      <p>
+                        Seguros e Previdências
+                      </p>
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a href="javascript:void(0)" onClick="openPlano()" class="nav-link">
+                      <i class="nav-icon fa fa-plus-circle"></i>
+                      <p>
+                        Plano
+                      </p>
+                    </a>
+                  </li>
+
+                </ul>
               </div>
-              <!-- ./card-body -->
-              <div class="card-footer">
-                <div class="row">
-                  <div class="col-sm-3 col-6">
-                    <div class="description-block border-right">
-                      <span class="description-percentage text-success"><i class="fa fa-caret-up"></i> 17%</span>
-                      <h5 class="description-header">$35,210.43</h5>
-                      <span class="description-text">TOTAL REVENUE</span>
-                    </div>
-                    <!-- /.description-block -->
-                  </div>
-                  <!-- /.col -->
-                  <div class="col-sm-3 col-6">
-                    <div class="description-block border-right">
-                      <span class="description-percentage text-warning"><i class="fa fa-caret-left"></i> 0%</span>
-                      <h5 class="description-header">$10,390.90</h5>
-                      <span class="description-text">TOTAL COST</span>
-                    </div>
-                    <!-- /.description-block -->
-                  </div>
-                  <!-- /.col -->
-                  <div class="col-sm-3 col-6">
-                    <div class="description-block border-right">
-                      <span class="description-percentage text-success"><i class="fa fa-caret-up"></i> 20%</span>
-                      <h5 class="description-header">$24,813.53</h5>
-                      <span class="description-text">TOTAL PROFIT</span>
-                    </div>
-                    <!-- /.description-block -->
-                  </div>
-                  <!-- /.col -->
-                  <div class="col-sm-3 col-6">
-                    <div class="description-block">
-                      <span class="description-percentage text-danger"><i class="fa fa-caret-down"></i> 18%</span>
-                      <h5 class="description-header">1200</h5>
-                      <span class="description-text">GOAL COMPLETIONS</span>
-                    </div>
-                    <!-- /.description-block -->
-                  </div>
-                </div>
-                <!-- /.row -->
-              </div>
-              <!-- /.card-footer -->
+
             </div>
-            <!-- /.card -->
           </div>
-          <!-- /.col -->
-        </div>
-        <!-- /.row -->
 
-        <!-- Main row -->
-        <div class="row">
-          <!-- Left col -->
-          <div class="col-md-8">
-            <!-- MAP & BOX PANE -->
+          <div class="col-sm-12 col-md-9" id="dados_cadastrais">
+            <div class="card" >
+              <div class="card-header">
+                <h3 class="card-title">
+                  Dados Cadastrais
+                </h3>
+              </div>
+              <form role="form">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Nome Completo</label>
+                        <input type="text" class="form-control" id="dc_nome_completo" placeholder="Nome Completo">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>CPF</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="CPF">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Data Nascimento</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                          </div>
+                          <input type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" im-insert="true">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Sexo</label>
+                        <select class="form-control">
+                          <option>Masculino</option>
+                          <option>Faminino</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Estado Cívil</label>
+                        <select class="form-control">
+                          <option>Casado</option>
+                          <option>Solteiro</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Endereço Residencial</label>
+                        <input type="text" class="form-control" id="dc_endereco_resd" placeholder="Endereço Residencial">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control" id="dc_email" placeholder="Email">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Celular</label>
+                        <input type="text" class="form-control" id="dc_celular" placeholder="Celular">
+                      </div>
+                    </div>
+                    
+                  </div>
+
+                </div>
+                <div class="card-footer">
+                  <button type="button" class="btn btn-primary">Salvar</button>
+                </div>
+
+              </form>                
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-9 no-display" id="dados_familiares">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Visitors Report</h3>
+                <h3 class="card-title">
+                  Dados Familiares
+                </h3>
+              </div>
+              <form role="form">
+                <div class="card-body">
 
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-widget="collapse">
-                    <i class="fa fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-widget="remove">
-                    <i class="fa fa-times"></i>
-                  </button>
-                </div>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body p-0">
-                <div class="d-md-flex">
-                  <div class="p-1 flex-1" style="overflow: hidden">
-                    <!-- Map will be created here -->
-                    <div id="world-map-markers" style="height: 325px; overflow: hidden"></div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Cônjuge</label>
+                        <input type="text" class="form-control" id="df_conjuje" placeholder="Cônjuge">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Data Nascimento</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                          </div>
+                          <input type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" im-insert="true">
+                        </div>
+                      </div>
+                    </div>                    
                   </div>
-                  <div class="card-pane-right bg-success pt-2 pb-2 pl-4 pr-4">
-                    <div class="description-block mb-4">
-                      <div class="sparkbar pad" data-color="#fff">90,70,90,70,75,80,70</div>
-                      <h5 class="description-header">8390</h5>
-                      <span class="description-text">Visits</span>
+
+                  <div class="row">
+                    <div class="col-md-12 border-bottom">
+                      <h3>Filho(s) <button type="button" class="btn btn-sm btn-info addDivFilho">+</button></h3>
                     </div>
-                    <!-- /.description-block -->
-                    <div class="description-block mb-4">
-                      <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
-                      <h5 class="description-header">30%</h5>
-                      <span class="description-text">Referrals</span>
+                  </div>
+
+                  <div class="row" id="familiares_filhos">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Filho</label>
+                        <input type="text" class="form-control" id="df_filho" placeholder="Filho">
+                      </div>
                     </div>
-                    <!-- /.description-block -->
-                    <div class="description-block">
-                      <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
-                      <h5 class="description-header">70%</h5>
-                      <span class="description-text">Organic</span>
-                    </div>
-                    <!-- /.description-block -->
-                  </div><!-- /.card-pane-right -->
-                </div><!-- /.d-md-flex -->
-              </div>
-              <!-- /.card-body -->
+                    <div class="col-md-5">
+                      <div class="form-group">
+                        <label>Data Nascimento</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                          </div>
+                          <input type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="" im-insert="true">
+                        </div>
+                      </div>
+                    </div> 
+                    <div class="col-md-1">
+                       <input type="button" value="-" class="btn btn-default remDivFilho" style="position: relative;top: 30px;"/>
+                    </div>                   
+                  </div>
+
+                </div>
+                <div class="card-footer">
+                  <button type="button" class="btn btn-primary">Salvar</button>
+                </div>
+
+              </form>
             </div>
-            <!-- /.card -->
-            <div class="row">
-              <div class="col-md-6">
-                <!-- DIRECT CHAT -->
-                <div class="card direct-chat direct-chat-warning">
-                  <div class="card-header">
-                    <h3 class="card-title">Direct Chat</h3>
+          </div>
 
-                    <div class="card-tools">
-                      <span data-toggle="tooltip" title="3 New Messages" class="badge badge-warning">3</span>
-                      <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                      </button>
-                      <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Contacts"
-                              data-widget="chat-pane-toggle">
-                        <i class="fa fa-comments"></i></button>
-                      <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-times"></i>
-                      </button>
-                    </div>
-                  </div>
-                  <!-- /.card-header -->
-                  <div class="card-body">
-                    <!-- Conversations are loaded here -->
-                    <div class="direct-chat-messages">
-                      <!-- Message. Default to the left -->
-                      <div class="direct-chat-msg">
-                        <div class="direct-chat-info clearfix">
-                          <span class="direct-chat-name float-left">Alexander Pierce</span>
-                          <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
-                        </div>
-                        <!-- /.direct-chat-info -->
-                        <img class="direct-chat-img" src="/img/user1-128x128.jpg" alt="message user image">
-                        <!-- /.direct-chat-img -->
-                        <div class="direct-chat-text">
-                          Is this template really for free? Thats unbelievable!
-                        </div>
-                        <!-- /.direct-chat-text -->
-                      </div>
-                      <!-- /.direct-chat-msg -->
-
-                      <!-- Message to the right -->
-                      <div class="direct-chat-msg right">
-                        <div class="direct-chat-info clearfix">
-                          <span class="direct-chat-name float-right">Sarah Bullock</span>
-                          <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
-                        </div>
-                        <!-- /.direct-chat-info -->
-                        <img class="direct-chat-img" src="/img/user3-128x128.jpg" alt="message user image">
-                        <!-- /.direct-chat-img -->
-                        <div class="direct-chat-text">
-                          You better believe it!
-                        </div>
-                        <!-- /.direct-chat-text -->
-                      </div>
-                      <!-- /.direct-chat-msg -->
-
-                      <!-- Message. Default to the left -->
-                      <div class="direct-chat-msg">
-                        <div class="direct-chat-info clearfix">
-                          <span class="direct-chat-name float-left">Alexander Pierce</span>
-                          <span class="direct-chat-timestamp float-right">23 Jan 5:37 pm</span>
-                        </div>
-                        <!-- /.direct-chat-info -->
-                        <img class="direct-chat-img" src="/img/user1-128x128.jpg" alt="message user image">
-                        <!-- /.direct-chat-img -->
-                        <div class="direct-chat-text">
-                          Working with AdminLTE on a great new app! Wanna join?
-                        </div>
-                        <!-- /.direct-chat-text -->
-                      </div>
-                      <!-- /.direct-chat-msg -->
-
-                      <!-- Message to the right -->
-                      <div class="direct-chat-msg right">
-                        <div class="direct-chat-info clearfix">
-                          <span class="direct-chat-name float-right">Sarah Bullock</span>
-                          <span class="direct-chat-timestamp float-left">23 Jan 6:10 pm</span>
-                        </div>
-                        <!-- /.direct-chat-info -->
-                        <img class="direct-chat-img" src="/img/user3-128x128.jpg" alt="message user image">
-                        <!-- /.direct-chat-img -->
-                        <div class="direct-chat-text">
-                          I would love to.
-                        </div>
-                        <!-- /.direct-chat-text -->
-                      </div>
-                      <!-- /.direct-chat-msg -->
-
-                    </div>
-                    <!--/.direct-chat-messages-->
-
-                    <!-- Contacts are loaded here -->
-                    <div class="direct-chat-contacts">
-                      <ul class="contacts-list">
-                        <li>
-                          <a href="#">
-                            <img class="contacts-list-img" src="/img/user1-128x128.jpg">
-
-                            <div class="contacts-list-info">
-                              <span class="contacts-list-name">
-                                Count Dracula
-                                <small class="contacts-list-date float-right">2/28/2015</small>
-                              </span>
-                              <span class="contacts-list-msg">How have you been? I was...</span>
-                            </div>
-                            <!-- /.contacts-list-info -->
-                          </a>
-                        </li>
-                        <!-- End Contact Item -->
-                        <li>
-                          <a href="#">
-                            <img class="contacts-list-img" src="/img/user7-128x128.jpg">
-
-                            <div class="contacts-list-info">
-                              <span class="contacts-list-name">
-                                Sarah Doe
-                                <small class="contacts-list-date float-right">2/23/2015</small>
-                              </span>
-                              <span class="contacts-list-msg">I will be waiting for...</span>
-                            </div>
-                            <!-- /.contacts-list-info -->
-                          </a>
-                        </li>
-                        <!-- End Contact Item -->
-                        <li>
-                          <a href="#">
-                            <img class="contacts-list-img" src="/img/user3-128x128.jpg">
-
-                            <div class="contacts-list-info">
-                              <span class="contacts-list-name">
-                                Nadia Jolie
-                                <small class="contacts-list-date float-right">2/20/2015</small>
-                              </span>
-                              <span class="contacts-list-msg">Ill call you back at...</span>
-                            </div>
-                            <!-- /.contacts-list-info -->
-                          </a>
-                        </li>
-                        <!-- End Contact Item -->
-                        <li>
-                          <a href="#">
-                            <img class="contacts-list-img" src="/img/user5-128x128.jpg">
-
-                            <div class="contacts-list-info">
-                              <span class="contacts-list-name">
-                                Nora S. Vans
-                                <small class="contacts-list-date float-right">2/10/2015</small>
-                              </span>
-                              <span class="contacts-list-msg">Where is your new...</span>
-                            </div>
-                            <!-- /.contacts-list-info -->
-                          </a>
-                        </li>
-                        <!-- End Contact Item -->
-                        <li>
-                          <a href="#">
-                            <img class="contacts-list-img" src="/img/user6-128x128.jpg">
-
-                            <div class="contacts-list-info">
-                              <span class="contacts-list-name">
-                                John K.
-                                <small class="contacts-list-date float-right">1/27/2015</small>
-                              </span>
-                              <span class="contacts-list-msg">Can I take a look at...</span>
-                            </div>
-                            <!-- /.contacts-list-info -->
-                          </a>
-                        </li>
-                        <!-- End Contact Item -->
-                        <li>
-                          <a href="#">
-                            <img class="contacts-list-img" src="/img/user8-128x128.jpg">
-
-                            <div class="contacts-list-info">
-                              <span class="contacts-list-name">
-                                Kenneth M.
-                                <small class="contacts-list-date float-right">1/4/2015</small>
-                              </span>
-                              <span class="contacts-list-msg">Never mind I found...</span>
-                            </div>
-                            <!-- /.contacts-list-info -->
-                          </a>
-                        </li>
-                        <!-- End Contact Item -->
-                      </ul>
-                      <!-- /.contacts-list -->
-                    </div>
-                    <!-- /.direct-chat-pane -->
-                  </div>
-                  <!-- /.card-body -->
-                  <div class="card-footer">
-                    <form action="#" method="post">
-                      <div class="input-group">
-                        <input type="text" name="message" placeholder="Type Message ..." class="form-control">
-                        <span class="input-group-append">
-                          <button type="button" class="btn btn-warning">Send</button>
-                        </span>
-                      </div>
-                    </form>
-                  </div>
-                  <!-- /.card-footer-->
-                </div>
-                <!--/.direct-chat -->
-              </div>
-              <!-- /.col -->
-
-              <div class="col-md-6">
-                <!-- USERS LIST -->
-                <div class="card">
-                  <div class="card-header">
-                    <h3 class="card-title">Latest Members</h3>
-
-                    <div class="card-tools">
-                      <span class="badge badge-danger">8 New Members</span>
-                      <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                      </button>
-                      <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-times"></i>
-                      </button>
-                    </div>
-                  </div>
-                  <!-- /.card-header -->
-                  <div class="card-body p-0">
-                    <ul class="users-list clearfix">
-                      <li>
-                        <img src="/img/user1-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Alexander Pierce</a>
-                        <span class="users-list-date">Today</span>
-                      </li>
-                      <li>
-                        <img src="/img/user8-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Norman</a>
-                        <span class="users-list-date">Yesterday</span>
-                      </li>
-                      <li>
-                        <img src="/img/user7-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Jane</a>
-                        <span class="users-list-date">12 Jan</span>
-                      </li>
-                      <li>
-                        <img src="/img/user6-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">John</a>
-                        <span class="users-list-date">12 Jan</span>
-                      </li>
-                      <li>
-                        <img src="/img/user2-160x160.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Alexander</a>
-                        <span class="users-list-date">13 Jan</span>
-                      </li>
-                      <li>
-                        <img src="/img/user5-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Sarah</a>
-                        <span class="users-list-date">14 Jan</span>
-                      </li>
-                      <li>
-                        <img src="/img/user4-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Nora</a>
-                        <span class="users-list-date">15 Jan</span>
-                      </li>
-                      <li>
-                        <img src="/img/user3-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Nadia</a>
-                        <span class="users-list-date">15 Jan</span>
-                      </li>
-                    </ul>
-                    <!-- /.users-list -->
-                  </div>
-                  <!-- /.card-body -->
-                  <div class="card-footer text-center">
-                    <a href="javascript::">View All Users</a>
-                  </div>
-                  <!-- /.card-footer -->
-                </div>
-                <!--/.card -->
-              </div>
-              <!-- /.col -->
-            </div>
-            <!-- /.row -->
-
-            <!-- TABLE: LATEST ORDERS -->
+          <div class="col-sm-12 col-md-9 no-display" id="rendimentos">
             <div class="card">
-              <div class="card-header border-transparent">
-                <h3 class="card-title">Latest Orders</h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-widget="collapse">
-                    <i class="fa fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-widget="remove">
-                    <i class="fa fa-times"></i>
-                  </button>
-                </div>
+              <div class="card-header">
+                <h3 class="card-title">
+                  Rendimentos
+                </h3>
               </div>
-              <!-- /.card-header -->
-              <div class="card-body p-0">
-                <div class="table-responsive">
-                  <table class="table m-0">
-                    <thead>
-                    <tr>
-                      <th>Order ID</th>
-                      <th>Item</th>
-                      <th>Status</th>
-                      <th>Popularity</th>
-                    </tr>
-                    </thead>
+              <form role="form">
+                <div class="card-body">
+
+                  <div class="row">
+                    <div class="col-md-12 border-bottom">
+                      <h3>Principal</h3>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Rendimento Mensal</label>
+                        <input type="text" class="form-control" id="ren_redimento_mensal_principal" placeholder="Nome Completo">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Outras Rendas</label>
+                        <input type="text" class="form-control" id="ren_outras_principal" placeholder="Outras Rendas">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Declaração de IR</label>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value="completa">
+                          <label class="form-check-label">Completa</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value="simplificada">
+                          <label class="form-check-label">Simplificada</label>
+                        </div>
+
+
+                      </div>
+                    </div>                    
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-md-12 border-bottom">
+                      <h3>Cônjuge</h3>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Rendimento Mensal</label>
+                        <input type="text" class="form-control" id="ren_redimento_mensal_conjuje" placeholder="Rendimento Mensal">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Outras Rendas</label>
+                        <input type="text" class="form-control" id="ren_outras_conjuje" placeholder="Outras Rendas">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Declaração de IR</label>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value="completa">
+                          <label class="form-check-label">Completa</label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value="simplificada">
+                          <label class="form-check-label">Simplificada</label>
+                        </div>
+
+                      </div>
+                    </div>
+                    
+                  </div>
+
+                </div>
+                <div class="card-footer">
+                  <button type="button" class="btn btn-primary">Salvar</button>
+                </div>
+
+              </form>  
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-9 no-display" id="patrimonio">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  Patrimônio
+                </h3>
+              </div>
+              <form role="form">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Imóveis</label>
+                        <input type="text" class="form-control" id="patrim_imoveis" placeholder="Imóveis">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Fundos/Investimentos/Ações</label>
+                        <input type="text" class="form-control" id="patrim_acoes" placeholder="Fundos/Investimentos/Ações">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Reservas/Poupança</label>
+                        <input type="text" class="form-control" id="patrim_reservas" placeholder="Reservas/Poupança">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Outros <small>(veículos, participações, obras de arte, etc.)</small></label>
+                        <input type="text" class="form-control" id="patrim_outros" placeholder="Outros">
+                      </div>
+                    </div>
+                    <div class="col-md-12 border-top">
+                        <label>Total </label><span class="pull-right">R$ 0,00</span>
+                    </div>
+                    
+                  </div>
+                  <br><br>
+                  <div class="row" style="background: #f4f6f9;">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label>Inventário</label>
+                          <input type="text" class="form-control" id="patrim_inventario" placeholder="Inventário">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label>Emergência <small>(X de renda mensal)</small></label>
+                          <input type="text" class="form-control" id="patrim_emergencia" placeholder="Emergência">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label>Funeral</label>
+                          <input type="text" class="form-control" id="patrim_funaral" placeholder="Funeral">
+                        </div>
+                      </div>                      
+                  </div>
+
+                </div>
+                <div class="card-footer">
+                  <button type="button" class="btn btn-primary">Salvar</button>
+                </div>
+
+              </form>   
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-9 no-display" id="educacao_filhos">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  Educação dos Filhos
+                </h3>
+              </div>
+              <form role="form">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-12 border-bottom">
+                      <h3>Filho <button type="button" class="btn btn-sm btn-info">+</button></h3>
+                    </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Idade / Série</label>
+                          <input type="text" class="form-control" id="basico_mensal" placeholder="Idade / Série">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Total de Anos Para Formação</label>
+                          <input type="text" class="form-control" id="basico_anos" placeholder="Total de Anos Para Formação">
+                        </div>
+                      </div> 
+
+                      <div class="col-sm-12 col-md-4">  
+                        <div class="row">
+                          <div class="col-md-12 border-bottom">
+                            <small>Infantil / Básico (12 anos)</small>
+                          </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label>Custo</label>
+                                <input type="text" class="form-control" id="basico_mensal">
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label>Anos</label>
+                                <input type="text" class="form-control" id="basico_anos">
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label>Total</label>
+                                <input type="text" class="form-control" id="basico_total">
+                              </div>
+                            </div>                    
+                        </div>
+                      </div>      
+                      <div class="col-sm-12 col-md-4 blue-background">  
+                        <div class="row">
+                            <div class="col-md-12 border-bottom">
+                              <small>Fundamental (3 anos)</small>
+                            </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label>Custo</label>
+                                  <input type="text" class="form-control" id="fundamental_mensal">
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label>Anos</label>
+                                  <input type="text" class="form-control" id="fundamental_anos">
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label>Total</label>
+                                  <input type="text" class="form-control" id="fundamental_total">
+                                </div>
+                              </div>                    
+                          </div>
+                      </div>   
+                      <div class="col-sm-12 col-md-4">
+                        <div class="row">
+                          <div class="col-md-12 border-bottom">
+                            <small>Superior (4 a 5 anos)</small>
+                          </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label>Custo</label>
+                                <input type="text" class="form-control" id="superior_mensal">
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label>Anos</label>
+                                <input type="text" class="form-control" id="superior_anos">
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label>Total</label>
+                                <input type="text" class="form-control" id="superior_total">
+                              </div>
+                            </div>                    
+                        </div>  
+                      </div>  
+                      <div class="col-md-12">
+                         <input type="button" value="Remover" class="pull-right btn btn-default"/>
+                      </div>       
+                  </div>
+                  <br>
+                  <div class="row border-top">
+                    <div class="col-md-6">
+                      <label>Total Despesas com Educação</label><br>
+                      <span>R$ 0,00</span>
+                    </div>
+                    <div class="col-md-6">
+                      <label>Maior Periodo para Formação (Anos)</label><br>
+                      <span>0</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <button type="button" class="btn btn-primary">Salvar</button>
+                </div>
+
+              </form>   
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-9 no-display" id="padrao_vida">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  Padrão de Vida
+                </h3>
+              </div>
+              <form role="form">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Despesas Gerais</label>
+                        <input type="text" class="form-control" id="pv_gerais" placeholder="Despesas Gerais">
+                      </div>
+                    </div>   
+                  </div>   
+                  <hr>
+                  <div class="row">
+                     <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Moradia <small>(Aluguel/Condomínio)</small></label>
+                        <input type="text" class="form-control" id="pv_moradia" placeholder="Moradia">
+                      </div>
+                    </div> 
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Serviços <small>(água, luz, telefone, gás)</small></label>
+                        <input type="text" class="form-control" id="pv_servicos" placeholder="Serviços">
+                      </div>
+                    </div>  
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Transporte <small>(manuenteção,seguro)</small></label>
+                        <input type="text" class="form-control" id="pv_transporte" placeholder="Serviços">
+                      </div>
+                    </div>  
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Saúde <small>(seguro, medicamentos, etc)</small></label>
+                        <input type="text" class="form-control" id="pv_saude" placeholder="Serviços">
+                      </div>
+                    </div>             
+
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Vestuário</label>
+                        <input type="text" class="form-control" id="pv_vestuario" placeholder="Vestuário">
+                      </div>
+                    </div>      
+                     <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Seguro de Vida/Previdência</label>
+                        <input type="text" class="form-control" id="pv_seguro_vida" placeholder="Seguro de Vida/Previdência">
+                      </div>
+                    </div> 
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Lazer </label>
+                        <input type="text" class="form-control" id="pv_lazer" placeholder="Lazer">
+                      </div>
+                    </div>  
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Impostos <small>(IPTU, IPVA)</small></label>
+                        <input type="text" class="form-control" id="pv_impostos" placeholder="Impostos">
+                      </div>
+                    </div>  
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Extras/Outros </label>
+                        <input type="text" class="form-control" id="pv_extras" placeholder="Extras/Outros">
+                      </div>
+                    </div>  
+                  </div>
+
+                </div>
+                <div class="card-footer">
+                  <button type="button" class="btn btn-primary">Salvar</button>
+                </div>
+
+              </form>   
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-9 no-display" id="emprestimos">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  Emprestimos
+                </h3>
+              </div>
+              <form role="form">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-6">
+                      <label>Descoberto Emprestimo/Financiamento </label>
+                      <input type="text" class="form-control" id="emp_descoberto" placeholder="Descoberto Emprestimo/Financiamento">
+                    </div>
+                    <div class="col-6">
+                      <label>Maior Período para Emprestimo/Finan. (Anos)</label> 
+                      <input type="text" class="form-control" id="emp_perido" placeholder="Maior Período para Emprestimo/Finan. (Anos)">
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-md-12 border-bottom">
+                      <h3>Emprestimos <button type="button" class="btn btn-sm btn-info addDivSeguro">+</button></h3>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label>Saldo Devedor</label>
+                        <input type="text" class="form-control" id="emp_valor" placeholder="Saldo Devedor">
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label>Possui Seguro</label>
+                        <input type="text" class="form-control" id="emp_num" placeholder="Possui Seguro">
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label>Parcela Mensal</label>
+                        <input type="text" class="form-control" id="emp_valor2" placeholder="Parcela Mensal">
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label>Prazo Residual</label>
+                        <input type="text" class="form-control" id="emp_num2" placeholder="(meses)">
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>Saldo Devedor Descoberto</label>
+                        <input type="text" class="form-control" id="emp_valor3" placeholder="Saldo Devedor Descoberto">
+                      </div>
+                    </div>
+                    <div class="col-md-1">
+                       <input type="button" value="-" class="btn btn-default" style="position: relative;top: 30px;"/>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 border-top">
+                        <label>Total </label>
+                        <div class="row">
+                          <div class="col-2"><span class="pull-right">R$ 0,00</span></div>
+                          <div class="col-2"><span class="pull-right">0</span></div>
+                          <div class="col-2"><span class="pull-right">R$ 0,00</span></div>
+                          <div class="col-2"><span class="pull-right">0</span></div>
+                          <div class="col-3"><span class="pull-right">R$ 0,00</span></div>
+                        </div>
+                    </div>
+                    
+                  </div>                  
+
+                </div>
+                <div class="card-footer">
+                  <button type="button" class="btn btn-primary">Salvar</button>
+                </div>
+
+              </form>  
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-9 no-display" id="seguros_previdencias">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  Seguros e Previdências
+                </h3>
+              </div>
+                <form role="form">
+                <div class="card-body">
+
+                  <div class="row">
+                    <div class="col-md-12 border-bottom">
+                      <h3>Principal</h3>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>FGTS <small>Saldo Acum.</small></label>
+                        <input type="text" class="form-control" id="plano_fgts_princial" placeholder="FGTS">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>INSS <small>Rensa Mensal</small></label>
+                        <input type="text" class="form-control" id="plano_inss_princial" placeholder="INSS">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Idade para Aposentadoria</label>
+                        <input type="text" class="form-control" id="idade_aposentadoria_principal" placeholder="Idade para Aposentadoria">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 border-bottom">
+                      <h5>Previdência <button type="button" class="btn btn-sm btn-info">+</button></h5>
+                    </div>
+                  </div>
+                  <div id="previdencia_principal">        
+                     <div class="row">                       
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label>Previdência</label>
+                            <input type="text" class="form-control" id="plano_previdencia_principal" placeholder="Previdência">
+                          </div>
+                        </div>
+                        <div class="col-md-2">
+                          <div class="form-group">
+                            <label>PGBL/VGBL</label>
+                            <input type="text" class="form-control" id="plano_pgbl_principal" placeholder="PGBL/VGBL">
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label>Saldo Acumulado R$</label>
+                            <input type="text" class="form-control" id="plano_saldo_principal" placeholder="Saldo Acumulado R$">
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label>Contribuição Anual</label>
+                            <input type="text" class="form-control" id="plano_contribuicao_principal" placeholder="Contribuição Anual">
+                          </div>
+                        </div>
+                        <div class="col-md-1">
+                           <input type="button" value="-" class="btn btn-default" style="position: relative;top: 30px;"/>
+                        </div>
+                     </div>
+                  </div>
+
+
+                  <div class="row border-top">
+                    <div class="col-md-3">
+                      <label>Total</label>
+                    </div>
+                    <div class="col-md-3 offset-md-2">
+                      <span class="pull-right">R$ 0,00</span>
+                    </div>
+                    <div class="col-md-3">
+                      <span class="pull-right">R$ 0,00</span>
+                    </div>
+                  </div>
+
+                  <br>
+
+                  <div class="row">
+                    <div class="col-md-12 border-bottom">
+                      <h5>Seguro <button type="button" class="btn btn-sm btn-info">+</button></h5>
+                    </div>
+                  </div>
+                  <div id="seguro_principal">
+                     <div class="row">                        
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label>Seguro de Vida</label>
+                            <input type="text" class="form-control" id="seguro_vida_principal" placeholder="Seguro de Vida">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label>Capital Segurado</label>
+                            <input type="text" class="form-control" id="capital_segurado_principal" placeholder="Capital Segurado">
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label>Prêmio Mensal</label>
+                            <input type="text" class="form-control" id="premio_mensal_principal" placeholder="Prêmio">
+                          </div>
+                        </div>
+                        <div class="col-md-1">
+                           <input type="button" value="-" class="btn btn-default" style="position: relative;top: 30px;"/>
+                        </div>
+                     </div>
+                  </div>
+                  
+                  <br>
+
+                  <div class="row">
+                    <div class="col-md-12 border-bottom">
+                      <h3>Cônjuge</h3>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>FGTS <small>Saldo Acum.</small></label>
+                        <input type="text" class="form-control" id="plano_fgts_conjuje" placeholder="FGTS">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>INSS <small>Rensa Mensal</small></label>
+                        <input type="text" class="form-control" id="plano_inss_conjuje" placeholder="INSS">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Idade para Aposentadoria</label>
+                        <input type="text" class="form-control" id="idade_aposentadoria_conjuje" placeholder="Idade para Aposentadoria">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12 border-bottom">
+                      <h5>Previdência <button type="button" class="btn btn-sm btn-info">+</button></h5>
+                    </div>
+                  </div>
+                  <div id="previdencia_conjuje">        
+                     <div class="row">
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label>Previdência</label>
+                            <input type="text" class="form-control" id="plano_previdencia_conjuje" placeholder="Previdência">
+                          </div>
+                        </div>
+                        <div class="col-md-2">
+                          <div class="form-group">
+                            <label>PGBL/VGBL</label>
+                            <input type="text" class="form-control" id="plano_pgbl_conjuje" placeholder="PGBL/VGBL">
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label>Saldo Acumulado R$</label>
+                            <input type="text" class="form-control" id="plano_saldo_conjuje" placeholder="Saldo Acumulado R$">
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label>Contribuição Anual</label>
+                            <input type="text" class="form-control" id="plano_contribuicao_conjuje" placeholder="Contribuição Anual">
+                          </div>
+                        </div>
+                        <div class="col-md-1">
+                           <input type="button" value="-" class="btn btn-default" style="position: relative;top: 30px;"/>
+                        </div>
+                     </div>
+                  </div>
+
+
+                  <div class="row border-top">
+                    <div class="col-md-3">
+                      <label>Total</label>
+                    </div>
+                    <div class="col-md-3 offset-md-2">
+                      <span class="pull-right">R$ 0,00</span>
+                    </div>
+                    <div class="col-md-3">
+                      <span class="pull-right">R$ 0,00</span>
+                    </div>
+                  </div>
+
+                  <br>
+                  <div class="row">
+                    <div class="col-md-12 border-bottom">
+                      <h5>Seguro <button type="button" class="btn btn-sm btn-info">+</button></h5>
+                    </div>
+                  </div>
+                  <div id="seguro_conjuje">                      
+                     <div class="row">                     
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label>Seguro de Vida</label>
+                            <input type="text" class="form-control" id="seguro_vida_conjuje" placeholder="Seguro de Vida">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label>Capital Segurado</label>
+                            <input type="text" class="form-control" id="capital_segurado_conjuje" placeholder="Capital Segurado">
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <label>Prêmio Mensal</label>
+                            <input type="text" class="form-control" id="premio_mensal_conjuje" placeholder="Prêmio Mensal">
+                          </div>
+                        </div>
+                        <div class="col-md-1">
+                           <input type="button" value="-" class="btn btn-default" style="position: relative;top: 30px;"/>
+                        </div>
+                     </div>
+                  </div>
+
+                </div>
+                <div class="card-footer">
+                  <button type="button" class="btn btn-primary">Salvar</button>
+                </div>
+
+              </form> 
+
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-9 no-display" id="plano">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  Plano
+                </h3>
+              </div>              
+              <div class="card-body">
+
+                <div class="row">
+                  <div class="col-md-12 border-bottom">
+                      <h3>Principal</h3>
+                    </div>
+                  <div class="col-md-4">
+                    <label>Nome</label><br>
+                    <span>Leucenir</span>
+                  </div>
+                  <div class="col-md-2">
+                    <label>Risco</label><br>
+                    <span>Padrão</span>
+                  </div>
+                  <div class="col-md-2">
+                    <label>CPF</label><br>
+                    <span>00.000.00-00</span>
+                  </div>
+                  <div class="col-md-2">
+                    <label>Sexo</label><br>
+                    <span>Feminino</span>
+                  </div>
+                  <div class="col-md-2">
+                    <label>Nascimento</label><br>
+                    <span>12/02/1993</span>
+                  </div>
+                </div>
+                <br>
+
+                <div class="row">
+                  <table class="table table-hover" style="font-size: 12px;">
+                    <theader>
+                      <tr>
+                        <th style="width: 160px;">Produto</th>
+                        <th>Vigência</th>
+                        <th>Prazo</th>
+                        <th>Capital Segurado</th>
+                        <th>Valor</th>
+                      </tr>
+                    </theader>
                     <tbody>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                      <td>Call of Duty IV</td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                      <td>Samsung Smart TV</td>
-                      <td><span class="badge badge-warning">Pending</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                      <td>iPhone 6 Plus</td>
-                      <td><span class="badge badge-danger">Delivered</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                      <td>Samsung Smart TV</td>
-                      <td><span class="badge badge-info">Processing</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                      <td>Samsung Smart TV</td>
-                      <td><span class="badge badge-warning">Pending</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                      <td>iPhone 6 Plus</td>
-                      <td><span class="badge badge-danger">Delivered</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                      <td>Call of Duty IV</td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                      </td>
-                    </tr>
+                      <tr>
+                        <td><input type="text" class="form-control" style="font-size: 12px;" value="Vitalício"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                      </tr>
+                      <tr>
+                        <td><input type="text" class="form-control" style="font-size: 12px;" value="Compra de Capital"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                      </tr>
+                      <tr>
+                        <td><input type="text" class="form-control" style="font-size: 12px;" value="Decrescente"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                      </tr>
+                      <tr>
+                        <td><input type="text" class="form-control" style="font-size: 12px;" value="Temporário"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                      </tr>
+                      <tr>
+                        <td><input type="text" class="form-control" style="font-size: 12px;" value="Doenças Graves"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                      </tr>
+                      <tr>
+                        <td><input type="text" class="form-control" style="font-size: 12px;" value="Internação Hospitalar"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                      </tr>
+                      <tr>
+                        <td><input type="text" class="form-control" style="font-size: 12px;" value="Ad. Invalidez acidental"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                      </tr>
+                      <tr>
+                        <td><input type="text" class="form-control" style="font-size: 12px;" value="Ad. Morte Acidental"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                      </tr>
                     </tbody>
                   </table>
-                </div>
-                <!-- /.table-responsive -->
-              </div>
-              <!-- /.card-body -->
-              <div class="card-footer clearfix">
-                <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
-                <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
-              </div>
-              <!-- /.card-footer -->
-            </div>
-            <!-- /.card -->
-          </div>
-          <!-- /.col -->
 
-          <div class="col-md-4">
-            <!-- Info Boxes Style 2 -->
-            <div class="info-box mb-3 bg-warning">
-              <span class="info-box-icon"><i class="fa fa-tag"></i></span>
+                </div>   
 
-              <div class="info-box-content">
-                <span class="info-box-text">Inventory</span>
-                <span class="info-box-number">5,200</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-            <div class="info-box mb-3 bg-success">
-              <span class="info-box-icon"><i class="fa fa-heart-o"></i></span>
+                <br>
 
-              <div class="info-box-content">
-                <span class="info-box-text">Mentions</span>
-                <span class="info-box-number">92,050</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-            <div class="info-box mb-3 bg-danger">
-              <span class="info-box-icon"><i class="fa fa-cloud-download"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Downloads</span>
-                <span class="info-box-number">114,381</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-            <div class="info-box mb-3 bg-info">
-              <span class="info-box-icon"><i class="fa fa-comment-o"></i></span>
-
-              <div class="info-box-content">
-                <span class="info-box-text">Direct Messages</span>
-                <span class="info-box-number">163,921</span>
-              </div>
-              <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Browser Usage</h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-widget="remove"><i class="fa fa-times"></i>
-                  </button>
-                </div>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
                 <div class="row">
-                  <div class="col-md-8">
-                    <div class="chart-responsive">
-                      <canvas id="pieChart" height="150"></canvas>
+                  <div class="col-md-12 border-bottom">
+                      <h3>Cônjuge</h3>
                     </div>
-                    <!-- ./chart-responsive -->
-                  </div>
-                  <!-- /.col -->
                   <div class="col-md-4">
-                    <ul class="chart-legend clearfix">
-                      <li><i class="fa fa-circle-o text-danger"></i> Chrome</li>
-                      <li><i class="fa fa-circle-o text-success"></i> IE</li>
-                      <li><i class="fa fa-circle-o text-warning"></i> FireFox</li>
-                      <li><i class="fa fa-circle-o text-info"></i> Safari</li>
-                      <li><i class="fa fa-circle-o text-primary"></i> Opera</li>
-                      <li><i class="fa fa-circle-o text-secondary"></i> Navigator</li>
-                    </ul>
+                    <label>Nome</label><br>
+                    <span>Leucenir</span>
                   </div>
-                  <!-- /.col -->
+                  <div class="col-md-2">
+                    <label>Risco</label><br>
+                    <span>Padrão</span>
+                  </div>
+                  <div class="col-md-2">
+                    <label>CPF</label><br>
+                    <span>00.000.00-00</span>
+                  </div>
+                  <div class="col-md-2">
+                    <label>Sexo</label><br>
+                    <span>Feminino</span>
+                  </div>
+                  <div class="col-md-2">
+                    <label>Nascimento</label><br>
+                    <span>12/02/1993</span>
+                  </div>
                 </div>
-                <!-- /.row -->
-              </div>
-              <!-- /.card-body -->
-              <div class="card-footer bg-white p-0">
-                <ul class="nav nav-pills flex-column">
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      United States of America
-                      <span class="float-right text-danger">
-                        <i class="fa fa-arrow-down text-sm"></i>
-                        12%</span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      India
-                      <span class="float-right text-success">
-                        <i class="fa fa-arrow-up text-sm"></i> 4%
-                      </span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      China
-                      <span class="float-right text-warning">
-                        <i class="fa fa-arrow-left text-sm"></i> 0%
-                      </span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <!-- /.footer -->
-            </div>
-            <!-- /.card -->
+                <br>
 
-            <!-- PRODUCT LIST -->
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Recently Added Products</h3>
+                <div class="row">
+                  <table class="table table-hover" style="font-size: 12px;">
+                    <theader>
+                      <tr>
+                        <th style="width: 160px;">Produto</th>
+                        <th>Vigência</th>
+                        <th>Prazo</th>
+                        <th>Capital Segurado</th>
+                        <th>Valor</th>
+                      </tr>
+                    </theader>
+                    <tbody>
+                      <tr>
+                        <td><input type="text" class="form-control" style="font-size: 12px;" value="Vitalício"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                      </tr>
+                      <tr>
+                        <td><input type="text" class="form-control" style="font-size: 12px;" value="Compra de Capital"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                      </tr>
+                      <tr>
+                        <td><input type="text" class="form-control" style="font-size: 12px;" value="Decrescente"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                      </tr>
+                      <tr>
+                        <td><input type="text" class="form-control" style="font-size: 12px;" value="Temporário"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                      </tr>
+                      <tr>
+                        <td><input type="text" class="form-control" style="font-size: 12px;" value="Doenças Graves"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                      </tr>
+                      <tr>
+                        <td><input type="text" class="form-control" style="font-size: 12px;" value="Internação Hospitalar"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                      </tr>
+                      <tr>
+                        <td><input type="text" class="form-control" style="font-size: 12px;" value="Ad. Invalidez acidental"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                      </tr>
+                      <tr>
+                        <td><input type="text" class="form-control" style="font-size: 12px;" value="Ad. Morte Acidental"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                        <td class="yellow-background"><input type="text" class="form-control"></td>
+                      </tr>
+                    </tbody>
+                  </table>
 
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-widget="collapse">
-                    <i class="fa fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-widget="remove">
-                    <i class="fa fa-times"></i>
-                  </button>
-                </div>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body p-0">
-                <ul class="products-list product-list-in-card pl-2 pr-2">
-                  <li class="item">
-                    <div class="product-img">
-                      <img src="/img/default-150x150.png" alt="Product Image" class="img-size-50">
-                    </div>
-                    <div class="product-info">
-                      <a href="javascript:void(0)" class="product-title">Samsung TV
-                        <span class="badge badge-warning float-right">$1800</span></a>
-                      <span class="product-description">
-                        Samsung 321080p 60Hz LED Smart HDTV.
-                      </span>
-                    </div>
-                  </li>
-                  <!-- /.item -->
-                  <li class="item">
-                    <div class="product-img">
-                      <img src="/img/default-150x150.png" alt="Product Image" class="img-size-50">
-                    </div>
-                    <div class="product-info">
-                      <a href="javascript:void(0)" class="product-title">Bicycle
-                        <span class="badge badge-info float-right">$700</span></a>
-                      <span class="product-description">
-                        26 Mongoose Dolomite Mens 7-speed, Navy Blue.
-                      </span>
-                    </div>
-                  </li>
-                  <!-- /.item -->
-                  <li class="item">
-                    <div class="product-img">
-                      <img src="/img/default-150x150.png" alt="Product Image" class="img-size-50">
-                    </div>
-                    <div class="product-info">
-                      <a href="javascript:void(0)" class="product-title">
-                        Xbox One <span class="badge badge-danger float-right">
-                        $350
-                      </span>
-                      </a>
-                      <span class="product-description">
-                        Xbox One Console Bundle with Halo Master Chief Collection.
-                      </span>
-                    </div>
-                  </li>
-                  <!-- /.item -->
-                  <li class="item">
-                    <div class="product-img">
-                      <img src="/img/default-150x150.png" alt="Product Image" class="img-size-50">
-                    </div>
-                    <div class="product-info">
-                      <a href="javascript:void(0)" class="product-title">PlayStation 4
-                        <span class="badge badge-success float-right">$399</span></a>
-                      <span class="product-description">
-                        PlayStation 4 500GB Console (PS4)
-                      </span>
-                    </div>
-                  </li>
-                  <!-- /.item -->
-                </ul>
-              </div>
-              <!-- /.card-body -->
-              <div class="card-footer text-center">
-                <a href="javascript:void(0)" class="uppercase">View All Products</a>
-              </div>
-              <!-- /.card-footer -->
+                </div>          
             </div>
-            <!-- /.card -->
+            <div class="card-footer">
+              <button type="button" class="btn btn-primary">Salvar</button>
+            </div>
           </div>
-          <!-- /.col -->
+
         </div>
-        <!-- /.row -->
-      </div><!--/. container-fluid -->
+      </div>      
     </section>
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
+
 @endsection
 
 @section('javascript')
+
 <!-- jQuery -->
 <script src="/dist/plugins/jquery/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="/dist/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- Sparkline -->
-<script src="/dist/plugins/sparkline/jquery.sparkline.min.js"></script>
-<!-- jvectormap -->
-<script src="/dist/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="/dist/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-<!-- Slimscroll -->
-<script src="/dist/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-<!-- ChartJS 1.0.2 -->
-<script src="/dist/plugins/chartjs-old/Chart.min.js"></script>
-<!-- AdminLTE App -->
-<script src="/dist/js/adminlte.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="/dist/js/pages/dashboard2.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="/dist/js/demo.js"></script>
+
+<script src="/dist/js/cadastro.js"></script>
 @stop

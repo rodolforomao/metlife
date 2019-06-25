@@ -1,292 +1,571 @@
-@extends('layouts.master')
+  <!-- relatorio css -->
+  <link rel="stylesheet" href="/dist/plugins/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/dist/css/style.css">   
+  <link rel="stylesheet" href="/dist/css/print.css">
 
-@section('content')
 
-<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
-  <!-- Content Header (Page header) -->
-  <div class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1 class="m-0 text-dark">Dashboard v3</h1>
-        </div><!-- /.col -->
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Dashboard v3</li>
-          </ol>
-        </div><!-- /.col -->
-      </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-  </div>
-  <!-- /.content-header -->
+  <body class="A4">
 
-  <!-- Main content -->
-  <div class="content">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="card">
-            <div class="card-header no-border">
-              <div class="d-flex justify-content-between">
-                <h3 class="card-title">Online Store Visitors</h3>
-                <a href="javascript:void(0);">View Report</a>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="d-flex">
-                <p class="d-flex flex-column">
-                  <span class="text-bold text-lg">820</span>
-                  <span>Visitors Over Time</span>
-                </p>
-                <p class="ml-auto d-flex flex-column text-right">
-                  <span class="text-success">
-                    <i class="fa fa-arrow-up"></i> 12.5%
-                  </span>
-                  <span class="text-muted">Since last week</span>
-                </p>
-              </div>
-              <!-- /.d-flex -->
+    <section class="landscape-capa">
+      <div class="border-blue center">
+        <div class="row margin">
+          <div class="col-12">
+            <h2>Planejamento Financeiro</h2>
 
-              <div class="position-relative mb-4">
-                <canvas id="visitors-chart" height="200"></canvas>
-              </div>
+            <h2><b>Aciole Félix</b></h2>
 
-              <div class="d-flex flex-row justify-content-end">
-                <span class="mr-2">
-                  <i class="fa fa-square text-primary"></i> This Week
-                </span>
-
-                <span>
-                  <i class="fa fa-square text-gray"></i> Last Week
-                </span>
-              </div>
-            </div>
+            <h2>Seguro de Vida Individual</h2>
           </div>
-          <!-- /.card -->
+        </div>
+        <div class="row margin">
+          <div class="col align-self-center">
+            <img src="/dist/img/logoCapa.png" style="width: 50%;">
+          </div>
+        </div>
+        <div class="row margin">
+          <div class="col-12">
+            <p><b>LC (Life Consultant): Jeromy Souto</b></p>
+            <p><b>Corretora: Souto Martins Corretora de Seguros LTDA</b></p>
+            <p><b>Código SUSEP: 20.2023620.4</b></p>  
+          </div>
+        </div>        
+      </div>  
+    </section>  
 
-          <div class="card">
-            <div class="card-header no-border">
-              <h3 class="card-title">Products</h3>
-              <div class="card-tools">
-                <a href="#" class="btn btn-tool btn-sm">
-                  <i class="fa fa-download"></i>
-                </a>
-                <a href="#" class="btn btn-tool btn-sm">
-                  <i class="fa fa-bars"></i>
-                </a>
-              </div>
-            </div>
-            <div class="card-body p-0">
-              <table class="table table-striped table-valign-middle">
-                <thead>
-                <tr>
-                  <th>Product</th>
-                  <th>Price</th>
-                  <th>Sales</th>
-                  <th>More</th>
-                </tr>
+    <section class="landscape-grafico">
+      <div class="center">
+        <div class="row">
+          <div class="col-12">
+            <h2>Situação Atual</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col align-self-center">
+            <div id="graf_situacao_atual" class="grafico"></div>
+          </div>
+        </div>      
+      </div>  
+    </section>  
+
+    <section class="landscape-grafico">
+      <div class="center">
+        <div class="row">
+          <div class="col-12">
+            <h2>Cenário de Invalidez / Doença Grave</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col align-self-center">
+            <div id="graf_invalidez" class="grafico"></div>
+          </div>
+        </div>      
+      </div>  
+    </section>  
+
+    <section class="landscape-grafico">
+      <div class="center">
+        <div class="row">
+          <div class="col-12">
+            <h2>Necessidades de Proteção</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col align-self-center">
+            <div id="graf_necessidades_protecao" class="grafico"></div>
+          </div>
+        </div>      
+      </div>  
+    </section>  
+
+    <section class="landscape-grafico">
+      <div class="center">
+        <div class="row">
+          <div class="col-12">
+            <h2>Custo total da vida</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col align-self-center">
+            <div id="graf_custo_total_vida" class="grafico"></div>
+          </div>
+        </div>      
+      </div>  
+    </section>  
+
+    <section class="landscape-tabela">
+      <div class="center">
+        <div class="row">
+          <div class="col align-self-center table-responsive">
+            <table class="table table-striped font-table">
+                <thead class="title-table">
+                    <tr>
+                        <th>Aciole</th>
+                        <th>37</th>
+                        <th>39</th>
+                        <th>42</th>
+                        <th>47</th>
+                        <th>52</th>
+                        <th>59</th>
+                        <th>62</th>
+                        <th>67</th>
+                        <th>72</th>
+                        <th>77</th>
+                        <th>82</th>
+                        <th>87</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>
-                    <img src="/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
-                    Some Product
-                  </td>
-                  <td>$13 USD</td>
-                  <td>
-                    <small class="text-success mr-1">
-                      <i class="fa fa-arrow-up"></i>
-                      12%
-                    </small>
-                    12,000 Sold
-                  </td>
-                  <td>
-                    <a href="#" class="text-muted">
-                      <i class="fa fa-search"></i>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img src="/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
-                    Another Product
-                  </td>
-                  <td>$29 USD</td>
-                  <td>
-                    <small class="text-warning mr-1">
-                      <i class="fa fa-arrow-down"></i>
-                      0.5%
-                    </small>
-                    123,234 Sold
-                  </td>
-                  <td>
-                    <a href="#" class="text-muted">
-                      <i class="fa fa-search"></i>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img src="/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
-                    Amazing Product
-                  </td>
-                  <td>$1,230 USD</td>
-                  <td>
-                    <small class="text-danger mr-1">
-                      <i class="fa fa-arrow-down"></i>
-                      3%
-                    </small>
-                    198 Sold
-                  </td>
-                  <td>
-                    <a href="#" class="text-muted">
-                      <i class="fa fa-search"></i>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img src="/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
-                    Perfect Item
-                    <span class="badge bg-danger">NEW</span>
-                  </td>
-                  <td>$199 USD</td>
-                  <td>
-                    <small class="text-success mr-1">
-                      <i class="fa fa-arrow-up"></i>
-                      63%
-                    </small>
-                    87 Sold
-                  </td>
-                  <td>
-                    <a href="#" class="text-muted">
-                      <i class="fa fa-search"></i>
-                    </a>
-                  </td>
-                </tr>
+                    <tr>
+                        <td><b>Despesas Fixas</b></td>
+                        <td>R$ 4.290.000,00</td>
+                        <td>R$ 4.290.000,00</td>
+                        <td>R$ 4.290.000,00</td>
+                        <td>R$ 4.290.000,00</td>
+                        <td>R$ 4.290.000,00</td>
+                        <td>R$ 4.290.000,00</td>
+                        <td>R$ 4.290.000,00</td>
+                        <td>R$ 4.290.000,00</td>
+                        <td>R$ 4.290.000,00</td>
+                        <td>R$ 4.290.000,00</td>
+                        <td>R$ 4.290.000,00</td>
+                        <td>R$ 4.290.000,00</td>
+                    </tr>
+                    <tr>
+                        <td><b>Educação</b></td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                    </tr>
+                    <tr>
+                        <td><b>Sonho</b></td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                    </tr>
+                    <tr>
+                        <td><b>Inventário</b></td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                    </tr>
+                    <tr>
+                        <td><b>Emergêncial</b></td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                    </tr>
+                    <tr>
+                        <td><b>Funeral</b></td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                    </tr>
+
+                  <tr class="title-table">
+                      <td>Total de Necessidades</td>
+                      <td>####</td>
+                      <td>####</td>
+                      <td>####</td>
+                      <td>####</td>
+                      <td>####</td>
+                      <td>####</td>
+                      <td>####</td>
+                      <td>####</td>
+                      <td>####</td>
+                      <td>####</td>
+                      <td>####</td>
+                      <td>####</td>
+                  </tr>
+
+                    <tr>
+                        <td><b>FGTS</b></td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                    </tr>
+                    <tr>
+                        <td><b>INSS</b></td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                    </tr>
+                    <tr>
+                        <td><b>Previdência</b></td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                    </tr>
+                    <tr>
+                        <td><b>Seguro de Vida</b></td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                    </tr>
+                    <tr>
+                        <td><b>Patrimônio</b></td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                        <td>R$ -</td>
+                    </tr>
+
+                    <tr class="title-table">
+                      <td>Total de Garantias</td>
+                      <td>####</td>
+                      <td>####</td>
+                      <td>####</td>
+                      <td>####</td>
+                      <td>####</td>
+                      <td>####</td>
+                      <td>####</td>
+                      <td>####</td>
+                      <td>####</td>
+                      <td>####</td>
+                      <td>####</td>
+                      <td>####</td>
+                  </tr>
+
+                  <tr>
+                        <td><b>Necessidades Não Cobertas</b></td>
+                        <td>R$ 4.290,00</td>
+                        <td>R$ 4.290,00</td>
+                        <td>R$ 4.290,00</td>
+                        <td>R$ 4.290,00</td>
+                        <td>R$ 4.290,00</td>
+                        <td>R$ 4.290,00</td>
+                        <td>R$ 4.290,00</td>
+                        <td>R$ 4.290,00</td>
+                        <td>R$ 4.290,00</td>
+                        <td>R$ 4.290,00</td>
+                        <td>R$ 4.290,00</td>
+                        <td>R$ 4.290,00</td>
+                    </tr>
+
                 </tbody>
-              </table>
-            </div>
+            </table>
           </div>
-          <!-- /.card -->
-        </div>
-        <!-- /.col-md-6 -->
-        <div class="col-lg-6">
-          <div class="card">
-            <div class="card-header no-border">
-              <div class="d-flex justify-content-between">
-                <h3 class="card-title">Sales</h3>
-                <a href="javascript:void(0);">View Report</a>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="d-flex">
-                <p class="d-flex flex-column">
-                  <span class="text-bold text-lg">$18,230.00</span>
-                  <span>Sales Over Time</span>
-                </p>
-                <p class="ml-auto d-flex flex-column text-right">
-                  <span class="text-success">
-                    <i class="fa fa-arrow-up"></i> 33.1%
-                  </span>
-                  <span class="text-muted">Since last month</span>
-                </p>
-              </div>
-              <!-- /.d-flex -->
+        </div>      
+      </div>  
+    </section>  
 
-              <div class="position-relative mb-4">
-                <canvas id="sales-chart" height="200"></canvas>
-              </div>
-
-              <div class="d-flex flex-row justify-content-end">
-                <span class="mr-2">
-                  <i class="fa fa-square text-primary"></i> This year
-                </span>
-
-                <span>
-                  <i class="fa fa-square text-gray"></i> Last year
-                </span>
-              </div>
-            </div>
+    <section class="landscape-painel">
+      <div class="center">
+        <div class="row">
+          <div class="col-md-4 border-right"> 
+            <img src="/dist/img/logoMini.png" style="width: 50%;">
           </div>
-          <!-- /.card -->
-
-          <div class="card">
-            <div class="card-header no-border">
-              <h3 class="card-title">Online Store Overview</h3>
-              <div class="card-tools">
-                <a href="#" class="btn btn-sm btn-tool">
-                  <i class="fa fa-download"></i>
-                </a>
-                <a href="#" class="btn btn-sm btn-tool">
-                  <i class="fa fa-bars"></i>
-                </a>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
-                <p class="text-success text-xl">
-                  <i class="ion ion-ios-refresh-empty"></i>
-                </p>
-                <p class="d-flex flex-column text-right">
-                  <span class="font-weight-bold">
-                    <i class="ion ion-android-arrow-up text-success"></i> 12%
-                  </span>
-                  <span class="text-muted">CONVERSION RATE</span>
-                </p>
-              </div>
-              <!-- /.d-flex -->
-              <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
-                <p class="text-warning text-xl">
-                  <i class="ion ion-ios-cart-outline"></i>
-                </p>
-                <p class="d-flex flex-column text-right">
-                  <span class="font-weight-bold">
-                    <i class="ion ion-android-arrow-up text-warning"></i> 0.8%
-                  </span>
-                  <span class="text-muted">SALES RATE</span>
-                </p>
-              </div>
-              <!-- /.d-flex -->
-              <div class="d-flex justify-content-between align-items-center mb-0">
-                <p class="text-danger text-xl">
-                  <i class="ion ion-ios-people-outline"></i>
-                </p>
-                <p class="d-flex flex-column text-right">
-                  <span class="font-weight-bold">
-                    <i class="ion ion-android-arrow-down text-danger"></i> 1%
-                  </span>
-                  <span class="text-muted">REGISTRATION RATE</span>
-                </p>
-              </div>
-              <!-- /.d-flex -->
-            </div>
+          <div class="col-md-2">  
+            <b>Nome</b>
+          </div>
+          <div class="col-md-2">  
+            Aciole
+          </div>
+          <div class="col-md-1">  
+            <b>Sexo</b>
+          </div>
+          <div class="col-md-1">  
+            Masculino
+          </div>
+        </div>    
+        <div class="row">
+          <div class="offset-md-4 col-md-2">  
+            <b>Elaborado</b>
+          </div>
+          <div class="col-md-2">  
+            13/06/2019
+          </div>
+          <div class="col-md-1">  
+            <b>Idade</b>
+          </div>
+          <div class="col-md-1">  
+            37
+          </div>
+          <div class="col-md-1">  
+            <b>Nascimento</b>
+          </div>
+          <div class="col-md-1">  
+            21/06/1982
           </div>
         </div>
-        <!-- /.col-md-6 -->
-      </div>
-      <!-- /.row -->
-    </div>
-    <!-- /.container-fluid -->
-  </div>
-  <!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
+        <hr>
+        <div class="row">         
+          <table class="table table-striped font-table">
+              <thead class="title-table">
+                  <tr>
+                      <th>Produto</th>
+                      <th>Vigência</th>
+                      <th>Prazo</th>
+                      <th>Capital</th>
+                      <th>Segurado</th>
+                      <th>Gráfico</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td><b>Internação Hospitalar</b></td>
+                      <td>5</td>
+                      <td>5</td>
+                      <td>R$</td>
+                      <td>200,00</td>
+                      <td rowspan="4" style="width: 40%;background: white;"><div id="graf_painel" class="min-grafico"></div></td>
+                  </tr>
+                  <tr>
+                      <td><b>Doenças Graves</b></td>
+                      <td>5</td>
+                      <td>5</td>
+                      <td>R$</td>
+                      <td>200,00</td>
+                  </tr>
+                  <tr>
+                      <td><b>Ad. Invalidez acidental</b></td>
+                      <td>5</td>
+                      <td>5</td>
+                      <td>R$</td>
+                      <td>200,00</td>
+                  </tr>
+                  <tr>
+                      <td><b>Vitalício</b></td>
+                      <td>Vida Toda</td>
+                      <td>5</td>
+                      <td>R$</td>
+                      <td>200,00</td>
+                  </tr>
+              </tbody>
+          </table>
+        </div>  
 
-@endsection
+        <div class="row">         
+          <table class="table table-striped font-table border-table">
+              <thead class="title-table">
+                  <tr>
+                      <th colspan="5" class="border-table">Cobertutas em caso de:</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr class="line-table">
+                      <td class="border-table">
+                        <div class="row margin">
+                          <div class="col-12"><b>Morte Qualquer Causa</b></div>
+                          <div class="col-12">Vitalício</div>
+                          <div class="col-6">R$</div><div class="col-6">60.000</div>
+                          <div class="col-6"><b><h4>R$</h4></b></div><div class="col-6"><b><h4>60.000</h4></b></div>
+                        </div>
+                      </td>
+                      <td class="border-table">
+                        <div class="row margin">
+                          <div class="col-12"><b>Morte Acidental</b></div>
+                          <div class="col-12">Capital morte acidental</div>
+                          <div class="col-6">R$</div><div class="col-6">-</div>
+                          <div class="col-6"><b><h4>R$</h4></b></div><div class="col-6"><b><h4>60.000</h4></b></div>
+                        </div>
+                      </td>
+                      <td class="border-table">
+                        <div class="row margin">
+                          <div class="col-12"><b>Invalidez</b></div>
+                          <div class="col-12">Vitalício</div>
+                          <div class="col-6">R$</div><div class="col-6">500.000</div>
+                          <div class="col-6"><b><h4>R$</h4></b></div><div class="col-6"><b><h4>500.000</h4></b></div>
+                        </div>
+                      </td>
+                      <td class="border-table">
+                        <div class="row margin">
+                          <div class="col-12"><b>Doenças Graves</b></div>
+                          <div class="col-12">Vitalício</div>
+                          <div class="col-6">R$</div><div class="col-6">500.000</div>
+                          <div class="col-6"><b><h4>R$</h4></b></div><div class="col-6"><b><h4>500.000</h4></b></div>
+                        </div>
+                      </td>
+                      <td class="border-table">
+                        <div class="row margin">
+                          <div class="col-12"><b>Internação Hospitalar</b></div>
+                          <div class="col-12">Vitalício</div>
+                          <div class="col-6">R$</div><div class="col-6">200,00</div>
+                          <div class="col-6"><b><h4>R$</h4></b></div><div class="col-6"><b> <h4>200,00</h4></b></div>
+                        </div>
+                      </td>
+                  </tr>               
+              </tbody>
+          </table>
+        </div>  
+      </div>  
+    </section>  
 
-@section('javascript')
-<!-- jQuery -->
-<script src="/dist/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap -->
-<script src="/dist/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE -->
-<script src="/dist/js/adminlte.js"></script>
+    <section class="landscape-painelCliente">
+      <div class="center">
+        <div class="row">
+          <div class="col-md-4 border-right"> 
+            <img src="/dist/img/logoMini.png" style="width: 50%;">
+          </div>
+          <div class="col-md-2">  
+            <b>Nome</b>
+          </div>
+          <div class="col-md-2">  
+            Aciole
+          </div>
+          <div class="col-md-1">  
+            <b>Sexo</b>
+          </div>
+          <div class="col-md-1">  
+            Masculino
+          </div>
+        </div>    
+        <div class="row">
+          <div class="offset-md-4 col-md-2">  
+            <b>Elaborado</b>
+          </div>
+          <div class="col-md-2">  
+            13/06/2019
+          </div>
+          <div class="col-md-1">  
+            <b>Idade</b>
+          </div>
+          <div class="col-md-1">  
+            37
+          </div>
+          <div class="col-md-1">  
+            <b>Nascimento</b>
+          </div>
+          <div class="col-md-1">  
+            21/06/1982
+          </div>
+        </div>
+        <hr>
+        <div class="row">         
+          <div class="col-7">
+            <div id="graf_painel_pie" class="pie-grafico"></div>
+          </div>
+          <div class="col-5 align-self-center">
+            <table class="table table-striped font-table">
+                <thead class="title-table">
+                  <tr>
+                      <th></th>
+                      <th>Soma</th>
+                  </tr>
+                </thead>
+              <tbody>
+                  <tr>
+                      <td>Ad. Invalidez Acidental</td>
+                      <td>R$ 67,76</td>
+                  </tr>
+                  <tr>
+                      <td>Doenças Graves</td>
+                      <td>R$ 143,64</td>
+                  </tr>
+                   <tr>
+                      <td>Internação Hospitalar</td>
+                      <td>R$ 11,98</td>
+                  </tr>
+                   <tr>
+                      <td>Vitalício</td>
+                      <td>R$ 136,48</td>
+                  </tr>
 
-<!-- OPTIONAL SCRIPTS -->
-<script src="/dist/plugins/chart.js/Chart.min.js"></script>
-<script src="/dist/js/demo.js"></script>
-<script src="/dist/js/pages/dashboard3.js"></script>
-@stop
+                  <tr>
+                      <td><b>Total Geral</b></td>
+                      <td><b>R$ 359,87</b></td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>  
+
+      </div>  
+    </section>              
+             
+  </body>
+
+<!-- Highcharts -->
+  <script src="/dist/plugins/Highcharts-7.1.2/code/highcharts.js"></script>
+  <script src="/dist/plugins/Highcharts-7.1.2/code/pattern-fill.js"></script>
+  <script src="/dist/plugins/Highcharts-7.1.2/code/modules/variable-pie.js"></script>
+
+  <script src="/dist/js/relatorio.js"></script>
