@@ -1,6 +1,12 @@
 @extends('layouts.master') 
 @section('content')
 
+<script language=javascript type="text/javascript">
+function newPopup(){
+  jan = window.open('../relatorio/relatorio.html','jan','STATUS=NO, TOOLBAR=NO, LOCATION=NO, DIRECTORIES=NO, RESISABLE=NO, SCROLLBARS=YES, TOP=100, LEFT=left, WIDTH=800, HEIGHT=500');
+}
+  </script>
+
 <div class="content-wrapper">
 
     <div class="content-header">
@@ -35,7 +41,7 @@
                           <td>25/06/2019</td>
                           <td>20/06/2019</td>
                           <td>
-                              <a href="../relatorio/relatorio.html" target="_blank"><button type="button" class="btn btn-sm btn-info"><i class="fa fa-print"></i></button>
+                              <a href="javascript:newPopup()"><button type="button" class="btn btn-sm btn-info"><i class="fa fa-print"></i></button>
                               </a>
                               <button type="button" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
                               <button type="button" class="btn btn-sm btn-info"><i class="fa fa-trash"></i></button>
