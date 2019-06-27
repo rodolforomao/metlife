@@ -26,6 +26,7 @@
                     <img src="/dist/img/brazilian_color.png" style="width: 100%;">
                 </div>
                 <div class="col-sm-12 col-md-6">
+                    <p class="text-muted">Acesse sua conta</p>
                     <form action="{{ route('login') }}" method="post">
                         @csrf
                         <div class="input-group mb-3">
@@ -55,8 +56,8 @@
                             <div class="col-12">
                                 <a href="#" style="font-size: 12px;">Esqueci minha senha.</a>
                             </div>
-                            <div class="col-12">
-                                <a href="{{route('register')}}" style="font-size: 12px;">Registrar usuário</a>
+                            <div class="col-12 text-muted" style="font-size: 12px;">
+                                Não tem uma conta? <a href="{{route('register')}}" >Registre-se</a>
                             </div>
                         </div>
                     </form>

@@ -1,0 +1,26 @@
+.content-wrapper{
+  min-height: 830px;
+}
+
+@media (min-width: 768px){
+  .content-wrapper, .main-footer, .main-header {
+      margin-left: 0px !important;
+  }
+}
+
+.center{
+  text-align: -webkit-center; 
+  text-align: center;
+}
+
+.grafico{
+  min-width: 400px; 
+  height: 596px; 
+  margin: 0 auto;
+}
+
+.grafico-wide{
+  min-width: 310px; 
+  height: 440px; 
+  margin: 0 auto;
+}

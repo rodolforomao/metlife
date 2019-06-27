@@ -6,7 +6,7 @@
 
   <body class="A4">
 
-    <section class="landscape-capa">
+    <section class="landscape">
       <div class="border-blue center">
         <div class="row margin">
           <div class="col-12">
@@ -32,7 +32,7 @@
       </div>  
     </section>  
 
-    <section class="landscape-grafico">
+    <section class="landscape">
       <div class="center">
         <div class="row">
           <div class="col-12">
@@ -47,7 +47,7 @@
       </div>  
     </section>  
 
-    <section class="landscape-grafico">
+    <section class="landscape">
       <div class="center">
         <div class="row">
           <div class="col-12">
@@ -62,7 +62,7 @@
       </div>  
     </section>  
 
-    <section class="landscape-grafico">
+    <section class="landscape">
       <div class="center">
         <div class="row">
           <div class="col-12">
@@ -77,7 +77,7 @@
       </div>  
     </section>  
 
-    <section class="landscape-grafico">
+    <section class="landscape">
       <div class="center">
         <div class="row">
           <div class="col-12">
@@ -92,7 +92,7 @@
       </div>  
     </section>  
 
-    <section class="landscape-tabela">
+    <section class="landscape">
       <div class="center">
         <div class="row">
           <div class="col align-self-center table-responsive">
@@ -337,7 +337,7 @@
       </div>  
     </section>  
 
-    <section class="landscape-painel">
+    <section class="landscape">
       <div class="center">
         <div class="row">
           <div class="col-md-4 border-right"> 
@@ -479,7 +479,7 @@
       </div>  
     </section>  
 
-    <section class="landscape-painelCliente">
+    <section class="landscape">
       <div class="center">
         <div class="row">
           <div class="col-md-4 border-right"> 
@@ -564,6 +564,8 @@
   </body>
 
 <!-- Highcharts -->
+  <script src="/dist/plugins/jquery/jquery.min.js"></script>
+
   <script src="/dist/plugins/Highcharts-7.1.2/code/highcharts.js"></script>
   <script src="/dist/plugins/Highcharts-7.1.2/code/pattern-fill.js"></script>
   <script src="/dist/plugins/Highcharts-7.1.2/code/modules/variable-pie.js"></script>

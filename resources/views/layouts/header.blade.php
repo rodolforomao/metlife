@@ -6,8 +6,7 @@
             </li>  
             <li class="nav-item d-none d-sm-inline-block">
               <a href="{{ route('v2') }}" class="nav-link">Cadastro</a>
-            </li>   
-            
+            </li>               
         </ul>
     </div>
     <div class="col center">

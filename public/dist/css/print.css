@@ -12,7 +12,7 @@
         margin: 0px !important;   
     }
 
-    .landscape-capa{
+    .landscape{
         -webkit-transform: rotate(-90deg);     /* Chrome and other webkit browsers */
         -moz-transform: rotate(-90deg);        /* FF */
         -o-transform: rotate(-90deg);          /* Opera */
@@ -21,71 +21,16 @@
         filter: progid:DXImageTransform.Microsoft.BasicImage(Rotation=3);
         width: 140%; 
         height: 100%;         
-        position: relative;        
-        top: 330px !important;
-        left: -150px !important;
-        margin-left:-50px !important;
-    }
-
-    .landscape-grafico{
-        -webkit-transform: rotate(-90deg);     /* Chrome and other webkit browsers */
-        -moz-transform: rotate(-90deg);        /* FF */
-        -o-transform: rotate(-90deg);          /* Opera */
-        -ms-transform: rotate(-90deg);         /* IE9 */
-        transform: rotate(-90deg);             /* W3C compliant browsers */
-        filter: progid:DXImageTransform.Microsoft.BasicImage(Rotation=3);       
-        position: relative; 
-        top: 300px !important;                
-    }
-
-    .landscape-tabela{
-       -webkit-transform: rotate(-90deg);     /* Chrome and other webkit browsers */
-        -moz-transform: rotate(-90deg);        /* FF */
-        -o-transform: rotate(-90deg);          /* Opera */
-        -ms-transform: rotate(-90deg);         /* IE9 */
-        transform: rotate(-90deg);             /* W3C compliant browsers */
-        filter: progid:DXImageTransform.Microsoft.BasicImage(Rotation=3);
-        width: 130%; 
-        height: 100%;  
-        position: relative;        
-        top: 320px !important;
-        left: -150px !important;
-        margin-left:-50px !important;             
-    }
-
-    .landscape-painel{
-       -webkit-transform: rotate(-90deg);     /* Chrome and other webkit browsers */
-        -moz-transform: rotate(-90deg);        /* FF */
-        -o-transform: rotate(-90deg);          /* Opera */
-        -ms-transform: rotate(-90deg);         /* IE9 */
-        transform: rotate(-90deg);             /* W3C compliant browsers */
-        filter: progid:DXImageTransform.Microsoft.BasicImage(Rotation=3);
-        width: 125%; 
-        height: 100%;    
-        position: relative;        
-        top: 390px !important;
-        left: -150px !important;
-        margin-left:-60px !important;             
-    }
-
-    .landscape-painelCliente{
-       -webkit-transform: rotate(-90deg);     /* Chrome and other webkit browsers */
-        -moz-transform: rotate(-90deg);        /* FF */
-        -o-transform: rotate(-90deg);          /* Opera */
-        -ms-transform: rotate(-90deg);         /* IE9 */
-        transform: rotate(-90deg);             /* W3C compliant browsers */
-        filter: progid:DXImageTransform.Microsoft.BasicImage(Rotation=3);
-        width: 130%; 
-        height: 100%;    
-        position: relative;        
-        top: 450px !important;
-        left: -220px !important;
-        margin-left:-50px !important;             
+        position: relative;     
+        left: 250px !important;      
     }
 
     .center{
         text-align: center;
+        font-size: 25px;
     }
+
+    h2{font-size: 60px;}
 
     .border-blue{
         border:2px solid #1d9ee1;
@@ -94,7 +39,7 @@
     }
 
     .margin{
-        margin: 8% !important;
+        margin: 7% !important;
     }
 
     .table-responsive {
@@ -105,15 +50,15 @@
     .grafico {    
         -webkit-print-color-adjust: exact;
     }
-    
+
     .font-table{
-        font-size: 14px;
+        font-size: 23px;
         overflow-x: unset !important;
     }
 
     .line-table{
         height: 150px !important;
-        font-size: 14px;
+        font-size: 25px;
     }
 
     .border-table{

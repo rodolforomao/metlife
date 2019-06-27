@@ -35,7 +35,7 @@
                           <td>25/06/2019</td>
                           <td>20/06/2019</td>
                           <td>
-                              <a href="{{ route('v3') }}" target="_blank"><button type="button" class="btn btn-sm btn-info"><i class="fa fa-print"></i></button>
+                              <a href="../relatorio/relatorio.html" target="_blank"><button type="button" class="btn btn-sm btn-info"><i class="fa fa-print"></i></button>
                               </a>
                               <button type="button" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
                               <button type="button" class="btn btn-sm btn-info"><i class="fa fa-trash"></i></button>
@@ -47,7 +47,7 @@
                           <td>25/06/2019</td>
                           <td>20/06/2019</td>
                           <td>
-                              <button type="button" class="btn btn-sm btn-info"><i class="fa fa-print"></i></button>
+                               <a href="{{ route('v3') }}" target="_blank"><button type="button" class="btn btn-sm btn-info"><i class="fa fa-print"></i></button></a>
                               <button type="button" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
                               <button type="button" class="btn btn-sm btn-info"><i class="fa fa-trash"></i></button>
                           </td>
@@ -84,5 +84,5 @@
           </div>          
         </div>
     </section>
-  </div>
+</div> 
 @endsection
