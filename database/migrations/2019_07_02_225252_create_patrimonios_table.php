@@ -17,7 +17,6 @@ class CreatePatrimoniosTable extends Migration
             $table->timestamps();
             $table->unsignedInteger('idUser')->default(2);
             $table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
-
             $table->string('fundos')->nullable();
             $table->string('reservas')->nullable();
             $table->string('inventario')->nullable();
