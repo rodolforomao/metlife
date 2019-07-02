@@ -37,7 +37,13 @@
                     <input type="text" name="updated_at" id="updated_at" class="form-control" value="{{$model['updated_at'] or ''}}">
                 </div>
             </div>
-                                                            <div class="form-group">
+                                                                        <div class="form-group">
+                <label for="idUser" class="col-sm-3 control-label">IdUser</label>
+                <div class="col-sm-2">
+                    <input type="number" name="idUser" id="idUser" class="form-control" value="{{$model['idUser'] or ''}}">
+                </div>
+            </div>
+                                                                                    <div class="form-group">
                 <label for="fundos" class="col-sm-3 control-label">Fundos</label>
                 <div class="col-sm-6">
                     <input type="text" name="fundos" id="fundos" class="form-control" value="{{$model['fundos'] or ''}}">

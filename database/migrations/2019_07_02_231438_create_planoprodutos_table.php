@@ -15,12 +15,13 @@ class CreatePlanoprodutosTable extends Migration
         Schema::create('planoprodutos', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('idUser')->nullable();
+            $table->unsignedInteger('idUser')->default(2);
+            $table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
             $table->string('idproduto')->nullable();
             $table->string('vigencia')->nullable();
             $table->string('prazo')->nullable();
             $table->string('capital')->nullable();
-            $table->date('segurado')->nullable();
+            $table->string('segurado')->nullable();
             $table->string('valor')->nullable();
             });
     }

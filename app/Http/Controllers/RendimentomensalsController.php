@@ -28,8 +28,7 @@ class RendimentomensalsController extends Controller
   public function create(Request $request)
   {
     return view('rendimentomensals.add', [
-      []
-    ]);
+    'model' => null    ]);
   }
 
   public function edit(Request $request, $id)

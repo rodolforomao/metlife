@@ -18,6 +18,7 @@
                                         <th>Id</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
+                                        <th>IdUser</th>
                                         <th>Moradia</th>
                                         <th>Servicos</th>
                                         <th>Transporte</th>
@@ -68,12 +69,12 @@
                         "render": function ( data, type, row ) {
                             return '<a href="{{ url('/padrao_de_vidas') }}/'+row[0]+'/edit" class="btn btn-default">Update</a>';
                         },
-                        "targets": 13                    },
+                        "targets": 14                    },
                     {
                         "render": function ( data, type, row ) {
                             return '<a href="#" onclick="return doDelete('+row[0]+')" class="btn btn-danger">Delete</a>';
                         },
-                        "targets": 13+1
+                        "targets": 14+1
                     },
                 ]
             });

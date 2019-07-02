@@ -18,6 +18,7 @@
                                         <th>Id</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
+                                        <th>IdUser</th>
                                         <th>Fundos</th>
                                         <th>Reservas</th>
                                         <th>Inventario</th>
@@ -66,12 +67,12 @@
                         "render": function ( data, type, row ) {
                             return '<a href="{{ url('/patrimonios') }}/'+row[0]+'/edit" class="btn btn-default">Update</a>';
                         },
-                        "targets": 11                    },
+                        "targets": 12                    },
                     {
                         "render": function ( data, type, row ) {
                             return '<a href="#" onclick="return doDelete('+row[0]+')" class="btn btn-danger">Delete</a>';
                         },
-                        "targets": 11+1
+                        "targets": 12+1
                     },
                 ]
             });

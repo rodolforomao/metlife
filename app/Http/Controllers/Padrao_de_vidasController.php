@@ -62,7 +62,7 @@ class Padrao_de_vidasController extends Controller
     // 1/2/18 - Jasmine Robinson Added Orderby Section for the Grid Results
     //------------------------------------
     $orderby = "";
-    $columns = array('id','created_at','updated_at','moradia','servicos','transporte','saude','vestuario','seguroDeVidaPrevidencia','lazer','alimentacao','impostos','extrasoutros',);
+    $columns = array('id','created_at','updated_at','idUser','moradia','servicos','transporte','saude','vestuario','seguroDeVidaPrevidencia','lazer','alimentacao','impostos','extrasoutros',);
     $order = $columns[$request->input('order.0.column')];
     $dir = $request->input('order.0.dir');
     $orderby = "Order By " . $order . " " . $dir;
@@ -116,6 +116,9 @@ class Padrao_de_vidasController extends Controller
   
   
       $padrao_de_vida->updated_at = $request->updated_at;
+  
+  
+      $padrao_de_vida->idUser = $request->idUser;
   
   
       $padrao_de_vida->moradia = $request->moradia;

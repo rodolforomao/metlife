@@ -42,6 +42,14 @@
         
                 
         <div class="form-group">
+            <label for="idUser" class="col-sm-3 control-label">IdUser</label>
+            <div class="col-sm-6">
+                <input type="text" name="idUser" id="idUser" class="form-control" value="{{$model['idUser'] or ''}}" readonly="readonly">
+            </div>
+        </div>
+        
+                
+        <div class="form-group">
             <label for="moradia" class="col-sm-3 control-label">Moradia</label>
             <div class="col-sm-6">
                 <input type="text" name="moradia" id="moradia" class="form-control" value="{{$model['moradia'] or ''}}" readonly="readonly">

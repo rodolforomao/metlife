@@ -15,7 +15,6 @@ class CreatePadraoDeVidasTable extends Migration
         Schema::create('padrao_de_vidas', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            
             $table->unsignedInteger('idUser')->default(2);
             $table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
             $table->string('moradia')->nullable();

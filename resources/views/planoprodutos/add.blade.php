@@ -67,13 +67,13 @@
                     <input type="text" name="capital" id="capital" class="form-control" value="{{$model['capital'] or ''}}">
                 </div>
             </div>
-                                                                                                                        <div class="form-group">
+                                                                                                <div class="form-group">
                 <label for="segurado" class="col-sm-3 control-label">Segurado</label>
-                <div class="col-sm-3">
-                    <input type="date" name="segurado" id="segurado" class="form-control" value="{{$model['segurado'] or ''}}">
+                <div class="col-sm-6">
+                    <input type="text" name="segurado" id="segurado" class="form-control" value="{{$model['segurado'] or ''}}">
                 </div>
             </div>
-                                                                        <div class="form-group">
+                                                                                                <div class="form-group">
                 <label for="valor" class="col-sm-3 control-label">Valor</label>
                 <div class="col-sm-6">
                     <input type="text" name="valor" id="valor" class="form-control" value="{{$model['valor'] or ''}}">
