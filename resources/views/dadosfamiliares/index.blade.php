@@ -18,8 +18,9 @@
                                         <th>Id</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
-                                        <th>IdUser</th>
-                                        <th>Nomeconjuge</th>
+                                        <th>IdCliente</th>
+                                        <th>TipoFamiliar</th>
+                                        <th>Nome</th>
                                         <th>Datanascimento</th>
                                         <th style="width:50px"></th>
                     <th style="width:50px"></th>
@@ -61,12 +62,12 @@
                         "render": function ( data, type, row ) {
                             return '<a href="{{ url('/dadosfamiliares') }}/'+row[0]+'/edit" class="btn btn-default">Update</a>';
                         },
-                        "targets": 6                    },
+                        "targets": 7                    },
                     {
                         "render": function ( data, type, row ) {
                             return '<a href="#" onclick="return doDelete('+row[0]+')" class="btn btn-danger">Delete</a>';
                         },
-                        "targets": 6+1
+                        "targets": 7+1
                     },
                 ]
             });

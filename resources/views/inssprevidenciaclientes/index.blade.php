@@ -18,7 +18,7 @@
                                         <th>Id</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
-                                        <th>IdUser</th>
+                                        <th>IdCliente</th>
                                         <th>Previdencia</th>
                                         <th>Pgblvgbl</th>
                                         <th>Saldoacumulado</th>

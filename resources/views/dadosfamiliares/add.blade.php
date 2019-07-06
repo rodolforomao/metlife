@@ -38,15 +38,21 @@
                 </div>
             </div>
                                                                         <div class="form-group">
-                <label for="idUser" class="col-sm-3 control-label">IdUser</label>
+                <label for="idCliente" class="col-sm-3 control-label">IdCliente</label>
                 <div class="col-sm-2">
-                    <input type="number" name="idUser" id="idUser" class="form-control" value="{{$model['idUser'] or ''}}">
+                    <input type="number" name="idCliente" id="idCliente" class="form-control" value="{{$model['idCliente'] or ''}}">
                 </div>
             </div>
                                                                                     <div class="form-group">
-                <label for="nomeconjuge" class="col-sm-3 control-label">Nomeconjuge</label>
+                <label for="tipoFamiliar" class="col-sm-3 control-label">TipoFamiliar</label>
                 <div class="col-sm-6">
-                    <input type="text" name="nomeconjuge" id="nomeconjuge" class="form-control" value="{{$model['nomeconjuge'] or ''}}">
+                    <input type="text" name="tipoFamiliar" id="tipoFamiliar" class="form-control" value="{{$model['tipoFamiliar'] or ''}}">
+                </div>
+            </div>
+                                                                                                <div class="form-group">
+                <label for="nome" class="col-sm-3 control-label">Nome</label>
+                <div class="col-sm-6">
+                    <input type="text" name="nome" id="nome" class="form-control" value="{{$model['nome'] or ''}}">
                 </div>
             </div>
                                                                                                                         <div class="form-group">

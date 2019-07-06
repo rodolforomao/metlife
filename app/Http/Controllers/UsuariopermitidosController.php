@@ -28,7 +28,8 @@ class UsuariopermitidosController extends Controller
   public function create(Request $request)
   {
     return view('usuariopermitidos.add', [
-      'model' => null    ]);
+      []
+    ]);
   }
 
   public function edit(Request $request, $id)

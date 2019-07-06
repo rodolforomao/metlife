@@ -18,7 +18,7 @@
                                         <th>Id</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
-                                        <th>IdUser</th>
+                                        <th>IdCliente</th>
                                         <th>Idproduto</th>
                                         <th>Vigencia</th>
                                         <th>Prazo</th>

@@ -28,7 +28,8 @@ class DadoscadastraisController extends Controller
   public function create(Request $request)
   {
     return view('dadoscadastrais.add', [
-      'model' => null    ]);
+      []
+    ]);
   }
 
   public function edit(Request $request, $id)

@@ -28,7 +28,8 @@ class PlanoprodutodescsController extends Controller
   public function create(Request $request)
   {
     return view('planoprodutodescs.add', [
-      'model' => null    ]);
+      []
+    ]);
   }
 
   public function edit(Request $request, $id)

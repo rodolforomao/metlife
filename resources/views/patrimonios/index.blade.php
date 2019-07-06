@@ -18,7 +18,7 @@
                                         <th>Id</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
-                                        <th>IdUser</th>
+                                        <th>IdCliente</th>
                                         <th>Fundos</th>
                                         <th>Reservas</th>
                                         <th>Inventario</th>

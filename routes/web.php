@@ -67,9 +67,6 @@ Route::resource('/dadoscadastrais', 'DadoscadastraisController');
 Route::get('/dadosfamiliares/grid', 'DadosfamiliaresController@grid');
 Route::resource('/dadosfamiliares', 'DadosfamiliaresController');
 
-Route::get('/conjugefilhos/grid', 'ConjugefilhosController@grid');
-Route::resource('/conjugefilhos', 'ConjugefilhosController');
-
 Route::get('/rendimentomensals/grid', 'RendimentomensalsController@grid');
 Route::resource('/rendimentomensals', 'RendimentomensalsController');
 

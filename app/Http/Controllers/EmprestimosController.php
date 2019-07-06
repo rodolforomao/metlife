@@ -28,7 +28,8 @@ class EmprestimosController extends Controller
   public function create(Request $request)
   {
     return view('emprestimos.add', [
-      'model' => null    ]);
+      []
+    ]);
   }
 
   public function edit(Request $request, $id)
@@ -62,7 +63,7 @@ class EmprestimosController extends Controller
     // 1/2/18 - Jasmine Robinson Added Orderby Section for the Grid Results
     //------------------------------------
     $orderby = "";
-    $columns = array('id','created_at','updated_at','idUser','maiorperiodoparaemprestimofinananos','emprestimos','valor3','descobertoemprestimofinanciamento','valor1','n1','valor2','n2',);
+    $columns = array('id','created_at','updated_at','idCliente','maiorperiodoparaemprestimofinananos','emprestimos','valor3','descobertoemprestimofinanciamento','valor1','n1','valor2','n2',);
     $order = $columns[$request->input('order.0.column')];
     $dir = $request->input('order.0.dir');
     $orderby = "Order By " . $order . " " . $dir;
@@ -118,7 +119,7 @@ class EmprestimosController extends Controller
       $emprestimo->updated_at = $request->updated_at;
   
   
-      $emprestimo->idUser = $request->idUser;
+      $emprestimo->idCliente = $request->idCliente;
   
   
       $emprestimo->maiorperiodoparaemprestimofinananos = $request->maiorperiodoparaemprestimofinananos;

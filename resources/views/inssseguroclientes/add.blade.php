@@ -38,9 +38,9 @@
                 </div>
             </div>
                                                                         <div class="form-group">
-                <label for="idUser" class="col-sm-3 control-label">IdUser</label>
+                <label for="idCliente" class="col-sm-3 control-label">IdCliente</label>
                 <div class="col-sm-2">
-                    <input type="number" name="idUser" id="idUser" class="form-control" value="{{$model['idUser'] or ''}}">
+                    <input type="number" name="idCliente" id="idCliente" class="form-control" value="{{$model['idCliente'] or ''}}">
                 </div>
             </div>
                                                                                     <div class="form-group">

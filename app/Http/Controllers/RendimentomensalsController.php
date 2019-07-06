@@ -28,7 +28,8 @@ class RendimentomensalsController extends Controller
   public function create(Request $request)
   {
     return view('rendimentomensals.add', [
-    'model' => null    ]);
+      []
+    ]);
   }
 
   public function edit(Request $request, $id)
@@ -62,7 +63,7 @@ class RendimentomensalsController extends Controller
     // 1/2/18 - Jasmine Robinson Added Orderby Section for the Grid Results
     //------------------------------------
     $orderby = "";
-    $columns = array('id','created_at','updated_at','idUser','nomecompleto','outrasrendas','declaracaodeir',);
+    $columns = array('id','created_at','updated_at','idCliente','nomecompleto','outrasrendas','declaracaodeir',);
     $order = $columns[$request->input('order.0.column')];
     $dir = $request->input('order.0.dir');
     $orderby = "Order By " . $order . " " . $dir;
@@ -118,7 +119,7 @@ class RendimentomensalsController extends Controller
       $rendimentomensal->updated_at = $request->updated_at;
   
   
-      $rendimentomensal->idUser = $request->idUser;
+      $rendimentomensal->idCliente = $request->idCliente;
   
   
       $rendimentomensal->nomecompleto = $request->nomecompleto;

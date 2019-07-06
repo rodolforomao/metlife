@@ -27,8 +27,9 @@ class InssfgtsprevidenciasegurosController extends Controller
 
   public function create(Request $request)
   {
-   return view('inssfgtsprevidenciaseguros.add', [
-      'model' => null   ]);
+    return view('inssfgtsprevidenciaseguros.add', [
+      []
+    ]);
   }
 
   public function edit(Request $request, $id)
@@ -62,7 +63,7 @@ class InssfgtsprevidenciasegurosController extends Controller
     // 1/2/18 - Jasmine Robinson Added Orderby Section for the Grid Results
     //------------------------------------
     $orderby = "";
-    $columns = array('id','created_at','updated_at','idUser','tipoprincipalconjuge','fgts','inss',);
+    $columns = array('id','created_at','updated_at','idCliente','tipoprincipalconjuge','fgts','inss',);
     $order = $columns[$request->input('order.0.column')];
     $dir = $request->input('order.0.dir');
     $orderby = "Order By " . $order . " " . $dir;
@@ -118,7 +119,7 @@ class InssfgtsprevidenciasegurosController extends Controller
       $inssfgtsprevidenciaseguro->updated_at = $request->updated_at;
   
   
-      $inssfgtsprevidenciaseguro->idUser = $request->idUser;
+      $inssfgtsprevidenciaseguro->idCliente = $request->idCliente;
   
   
       $inssfgtsprevidenciaseguro->tipoprincipalconjuge = $request->tipoprincipalconjuge;

@@ -49,13 +49,13 @@
                     <input type="text" name="nomecompleto" id="nomecompleto" class="form-control" value="{{$model['nomecompleto'] or ''}}">
                 </div>
             </div>
-                                                                                                            <div class="form-group">
+                                                                                                <div class="form-group">
                 <label for="cpf" class="col-sm-3 control-label">Cpf</label>
-                <div class="col-sm-2">
-                    <input type="number" name="cpf" id="cpf" class="form-control" value="{{$model['cpf'] or ''}}">
+                <div class="col-sm-6">
+                    <input type="text" name="cpf" id="cpf" class="form-control" value="{{$model['cpf'] or ''}}">
                 </div>
             </div>
-                                                                                                            <div class="form-group">
+                                                                                                                        <div class="form-group">
                 <label for="datanascimento" class="col-sm-3 control-label">Datanascimento</label>
                 <div class="col-sm-3">
                     <input type="date" name="datanascimento" id="datanascimento" class="form-control" value="{{$model['datanascimento'] or ''}}">

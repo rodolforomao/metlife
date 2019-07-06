@@ -28,7 +28,8 @@ class PlanoprodutosController extends Controller
   public function create(Request $request)
   {
     return view('planoprodutos.add', [
-      'model' => null    ]);
+      []
+    ]);
   }
 
   public function edit(Request $request, $id)
@@ -62,7 +63,7 @@ class PlanoprodutosController extends Controller
     // 1/2/18 - Jasmine Robinson Added Orderby Section for the Grid Results
     //------------------------------------
     $orderby = "";
-    $columns = array('id','created_at','updated_at','idUser','idproduto','vigencia','prazo','capital','segurado','valor',);
+    $columns = array('id','created_at','updated_at','idCliente','idproduto','vigencia','prazo','capital','segurado','valor',);
     $order = $columns[$request->input('order.0.column')];
     $dir = $request->input('order.0.dir');
     $orderby = "Order By " . $order . " " . $dir;
@@ -118,7 +119,7 @@ class PlanoprodutosController extends Controller
       $planoproduto->updated_at = $request->updated_at;
   
   
-      $planoproduto->idUser = $request->idUser;
+      $planoproduto->idCliente = $request->idCliente;
   
   
       $planoproduto->idproduto = $request->idproduto;

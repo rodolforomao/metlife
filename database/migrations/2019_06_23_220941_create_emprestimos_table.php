@@ -15,8 +15,8 @@ class CreateEmprestimosTable extends Migration
         Schema::create('emprestimos', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->unsignedInteger('idUser')->default(2);
-            $table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedInteger('idCliente')->default(2);
+            $table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
             $table->string('maiorperiodoparaemprestimofinananos')->nullable();
             $table->string('emprestimos')->nullable();
             $table->string('valor3')->nullable();

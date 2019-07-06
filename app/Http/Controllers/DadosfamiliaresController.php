@@ -28,7 +28,8 @@ class DadosfamiliaresController extends Controller
   public function create(Request $request)
   {
     return view('dadosfamiliares.add', [
-      'model' => null    ]);
+      []
+    ]);
   }
 
   public function edit(Request $request, $id)
@@ -62,7 +63,7 @@ class DadosfamiliaresController extends Controller
     // 1/2/18 - Jasmine Robinson Added Orderby Section for the Grid Results
     //------------------------------------
     $orderby = "";
-    $columns = array('id','created_at','updated_at','idUser','nomeconjuge','datanascimento',);
+    $columns = array('id','created_at','updated_at','idCliente','tipoFamiliar','nome','datanascimento',);
     $order = $columns[$request->input('order.0.column')];
     $dir = $request->input('order.0.dir');
     $orderby = "Order By " . $order . " " . $dir;
@@ -118,10 +119,13 @@ class DadosfamiliaresController extends Controller
       $dadosfamiliare->updated_at = $request->updated_at;
   
   
-      $dadosfamiliare->idUser = $request->idUser;
+      $dadosfamiliare->idCliente = $request->idCliente;
   
   
-      $dadosfamiliare->nomeconjuge = $request->nomeconjuge;
+      $dadosfamiliare->tipoFamiliar = $request->tipoFamiliar;
+  
+  
+      $dadosfamiliare->nome = $request->nome;
   
   
       $dadosfamiliare->datanascimento = $request->datanascimento;

@@ -15,8 +15,8 @@ class CreatePatrimoniosTable extends Migration
         Schema::create('patrimonios', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->unsignedInteger('idUser')->default(2);
-            $table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedInteger('idCliente')->default(2);
+            $table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
             $table->string('fundos')->nullable();
             $table->string('reservas')->nullable();
             $table->string('inventario')->nullable();

@@ -28,7 +28,8 @@ class PatrimoniosController extends Controller
   public function create(Request $request)
   {
     return view('patrimonios.add', [
-      'model' => null    ]);
+      []
+    ]);
   }
 
   public function edit(Request $request, $id)
@@ -62,7 +63,7 @@ class PatrimoniosController extends Controller
     // 1/2/18 - Jasmine Robinson Added Orderby Section for the Grid Results
     //------------------------------------
     $orderby = "";
-    $columns = array('id','created_at','updated_at','idUser','fundos','reservas','inventario','emergencia','funeral','outros','total','imoveis',);
+    $columns = array('id','created_at','updated_at','idCliente','fundos','reservas','inventario','emergencia','funeral','outros','total','imoveis',);
     $order = $columns[$request->input('order.0.column')];
     $dir = $request->input('order.0.dir');
     $orderby = "Order By " . $order . " " . $dir;
@@ -118,7 +119,7 @@ class PatrimoniosController extends Controller
       $patrimonio->updated_at = $request->updated_at;
   
   
-      $patrimonio->idUser = $request->idUser;
+      $patrimonio->idCliente = $request->idCliente;
   
   
       $patrimonio->fundos = $request->fundos;
