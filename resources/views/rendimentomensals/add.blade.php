@@ -44,9 +44,9 @@
                 </div>
             </div>
                                                                                     <div class="form-group">
-                <label for="nomecompleto" class="col-sm-3 control-label">Nomecompleto</label>
+                <label for="remendimentosmensal" class="col-sm-3 control-label">Remendimentosmensal</label>
                 <div class="col-sm-6">
-                    <input type="text" name="nomecompleto" id="nomecompleto" class="form-control" value="{{$model['nomecompleto'] or ''}}">
+                    <input type="text" name="remendimentosmensal" id="remendimentosmensal" class="form-control" value="{{$model['remendimentosmensal'] or ''}}">
                 </div>
             </div>
                                                                                                 <div class="form-group">

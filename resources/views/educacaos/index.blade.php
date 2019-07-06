@@ -19,6 +19,7 @@
                                         <th>Created At</th>
                                         <th>Updated At</th>
                                         <th>IdCliente</th>
+                                        <th>Apelidofilho</th>
                                         <th>Idadeserie</th>
                                         <th>Totaldeanosparaformacao</th>
                                         <th>Basico</th>
@@ -78,12 +79,12 @@
                         "render": function ( data, type, row ) {
                             return '<a href="{{ url('/educacaos') }}/'+row[0]+'/edit" class="btn btn-default">Update</a>';
                         },
-                        "targets": 23                    },
+                        "targets": 24                    },
                     {
                         "render": function ( data, type, row ) {
                             return '<a href="#" onclick="return doDelete('+row[0]+')" class="btn btn-danger">Delete</a>';
                         },
-                        "targets": 23+1
+                        "targets": 24+1
                     },
                 ]
             });

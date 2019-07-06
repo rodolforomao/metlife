@@ -17,7 +17,7 @@ class CreateRendimentomensalsTable extends Migration
             $table->timestamps();
             $table->unsignedInteger('idCliente')->default(2);
             $table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
-            $table->string('nomecompleto')->nullable();
+            $table->string('remendimentosmensal')->nullable();
             $table->string('outrasrendas')->nullable();
             $table->integer('declaracaodeir')->nullable();
             });

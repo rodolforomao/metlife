@@ -17,6 +17,7 @@ class CreateEducacaosTable extends Migration
             $table->timestamps();
             $table->unsignedInteger('idCliente')->default(2);
             $table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
+            $table->string('apelidofilho')->nullable();
             $table->string('idadeserie')->nullable();
             $table->string('totaldeanosparaformacao')->nullable();
             $table->string('basico')->nullable();

@@ -50,6 +50,14 @@
         
                 
         <div class="form-group">
+            <label for="apelidofilho" class="col-sm-3 control-label">Apelidofilho</label>
+            <div class="col-sm-6">
+                <input type="text" name="apelidofilho" id="apelidofilho" class="form-control" value="{{$model['apelidofilho'] or ''}}" readonly="readonly">
+            </div>
+        </div>
+        
+                
+        <div class="form-group">
             <label for="idadeserie" class="col-sm-3 control-label">Idadeserie</label>
             <div class="col-sm-6">
                 <input type="text" name="idadeserie" id="idadeserie" class="form-control" value="{{$model['idadeserie'] or ''}}" readonly="readonly">

@@ -63,7 +63,7 @@ class RendimentomensalsController extends Controller
     // 1/2/18 - Jasmine Robinson Added Orderby Section for the Grid Results
     //------------------------------------
     $orderby = "";
-    $columns = array('id','created_at','updated_at','idCliente','nomecompleto','outrasrendas','declaracaodeir',);
+    $columns = array('id','created_at','updated_at','idCliente','remendimentosmensal','outrasrendas','declaracaodeir',);
     $order = $columns[$request->input('order.0.column')];
     $dir = $request->input('order.0.dir');
     $orderby = "Order By " . $order . " " . $dir;
@@ -122,7 +122,7 @@ class RendimentomensalsController extends Controller
       $rendimentomensal->idCliente = $request->idCliente;
   
   
-      $rendimentomensal->nomecompleto = $request->nomecompleto;
+      $rendimentomensal->remendimentosmensal = $request->remendimentosmensal;
   
   
       $rendimentomensal->outrasrendas = $request->outrasrendas;

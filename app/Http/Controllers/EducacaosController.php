@@ -63,7 +63,7 @@ class EducacaosController extends Controller
     // 1/2/18 - Jasmine Robinson Added Orderby Section for the Grid Results
     //------------------------------------
     $orderby = "";
-    $columns = array('id','created_at','updated_at','idCliente','idadeserie','totaldeanosparaformacao','basico','custo2','anos2','total2','fundamental3anos','filho','custo3','anos3','total3','superior4a5anos','custo4','anos4','total4','infantil','custo1','anos1','total1',);
+    $columns = array('id','created_at','updated_at','idCliente','apelidofilho','idadeserie','totaldeanosparaformacao','basico','custo2','anos2','total2','fundamental3anos','filho','custo3','anos3','total3','superior4a5anos','custo4','anos4','total4','infantil','custo1','anos1','total1',);
     $order = $columns[$request->input('order.0.column')];
     $dir = $request->input('order.0.dir');
     $orderby = "Order By " . $order . " " . $dir;
@@ -120,6 +120,9 @@ class EducacaosController extends Controller
   
   
       $educacao->idCliente = $request->idCliente;
+  
+  
+      $educacao->apelidofilho = $request->apelidofilho;
   
   
       $educacao->idadeserie = $request->idadeserie;

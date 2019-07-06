@@ -19,7 +19,7 @@
                                         <th>Created At</th>
                                         <th>Updated At</th>
                                         <th>IdCliente</th>
-                                        <th>Nomecompleto</th>
+                                        <th>Remendimentosmensal</th>
                                         <th>Outrasrendas</th>
                                         <th>Declaracaodeir</th>
                                         <th style="width:50px"></th>
