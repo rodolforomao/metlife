@@ -1,15 +1,15 @@
 <?php
 
 /*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+  |--------------------------------------------------------------------------
+  | Web Routes
+  |--------------------------------------------------------------------------
+  |
+  | Here is where you can register web routes for your application. These
+  | routes are loaded by the RouteServiceProvider within a group which
+  | contains the "web" middleware group. Now create something great!
+  |
+ */
 
 Route::get('/', function () {
     //return view('welcome');
@@ -75,3 +75,20 @@ Route::resource('/rendimentomensals', 'RendimentomensalsController');
 
 Route::get('/usuariopermitidos/grid', 'UsuariopermitidosController@grid');
 Route::resource('/usuariopermitidos', 'UsuariopermitidosController');
+
+//Dados Cadastrais
+Route::post('/dadosCadastrais/cadastro', 'DadoscadastraisController@store');
+Route::resource('/dadosCadastrais', 'DadoscadastraisController');
+
+//Dados Familiares
+Route::post('/dadosFamiliares/cadastro', 'DadosfamiliaresController@store');
+Route::post('/dadosFamiliares/cadastroFilho', 'ConjugefilhosController@store');
+
+//Rendimentos
+Route::post('/rendimentos/cadastro', 'RendimentomensalsController@store');
+
+//Patrimonio
+Route::post('/patrimoio/cadastro', 'PatrimoniosController@store');
+
+//Padrão de Vida
+Route::post('/padraoVida/cadastro', 'Padrao_de_vidasController@store');
