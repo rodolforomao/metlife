@@ -90,21 +90,33 @@ class DadosfamiliaresController extends Controller {
           'name' => 'required|max:255',
           ]); */
         $dadosfamiliare = null;
-        $dadosfamiliare->id = $request->id ?: 0;
         if ($request->id > 0) {
             $dadosfamiliare = Dadosfamiliare::findOrFail($request->id);
         } else {
             $dadosfamiliare = new Dadosfamiliare;
         }
 
-        $dadosfamiliare->idUser = $request->idUser;
-        $dadosfamiliare->nomeconjuge = $request->df_conjuje;
-        $dadosfamiliare->datanascimento = date('Y-m-d', strtotime(str_replace("/", "-", ($request->data_nascimento_conjugue))));
+        $dadosfamiliare->id = $request->id ?: 0;
+        $dadosfamiliare->idCliente = $request->idCliente;
+        if ($request->tipoFamiliar == "Conjugue") {
+            $dadosfamiliare->tipoFamiliar = $request->tipoFamiliar;
+            $dadosfamiliare->nome = $request->df_conjuje;
+            $dadosfamiliare->datanascimento = date('Y-m-d', strtotime(str_replace("/", "-", ($request->data_nascimento_conjugue))));
+            $retorno = $dadosfamiliare->save();
+        } else {
+            if (count($request->df_filho) > 0) {
+                for ($i = 0; $i < count($request->df_filho); $i++) {
+                    $dadosfamiliare->tipoFamiliar = $request->tipoFamiliar;
+                    $dadosfamiliare->nome = $request->df_filho[$i];
+                    $dadosfamiliare->datanascimento = date('Y-m-d', strtotime(str_replace("/", "-", ($request->data_nascimento_filho[$i]))));
+                    $retorno = $dadosfamiliare->save();
+                }
+            }
+        }
 
         //$dadosfamiliare->user_id = $request->user()->id;
-
-        $retorno = $dadosfamiliare->save();
-        return json_encode($retorno);
+//        $retorno = $dadosfamiliare->save();
+        return json_encode(true);
     }
 
     public function store(Request $request) {

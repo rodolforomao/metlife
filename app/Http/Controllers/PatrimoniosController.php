@@ -98,6 +98,7 @@ class PatrimoniosController extends Controller {
         }
 
         $patrimonio->id = $request->id ?: 0;
+        $patrimonio->idCliente = $request->idCliente;
         $patrimonio->imoveis = str_replace(",", ".", str_replace(".", "", ($request->patrim_imoveis)));
         $patrimonio->fundos = str_replace(",", ".", str_replace(".", "", ($request->patrim_acoes)));
         $patrimonio->reservas = str_replace(",", ".", str_replace(".", "", ($request->patrim_reservas)));
@@ -107,7 +108,6 @@ class PatrimoniosController extends Controller {
         $patrimonio->outros = str_replace(",", ".", str_replace(".", "", ($request->patrim_outros)));
 
         //$patrimonio->user_id = $request->user()->id;
-        $patrimonio->idUser = 1;
 
         $retorno = $patrimonio->save();
         return json_encode($retorno);

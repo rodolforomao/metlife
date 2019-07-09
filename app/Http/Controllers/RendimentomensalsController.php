@@ -90,8 +90,6 @@ class RendimentomensalsController extends Controller {
         /* $this->validate($request, [
           'name' => 'required|max:255',
           ]); */
-        $request->id = 1;
-        //        $rendimentomensal->id = $request->id ?: 0;
         $rendimentomensal = null;
         if ($request->id > 0) {
             $rendimentomensal = Rendimentomensal::findOrFail($request->id);
@@ -99,22 +97,43 @@ class RendimentomensalsController extends Controller {
             $rendimentomensal = new Rendimentomensal;
         }
 
-        $rendimentomensal->idUser = $request->idUser;
-        $rendimentomensal->rendamensal = $request->ren_redimento_mensal_principal;
+        $rendimentomensal->idCliente = 4;
+        $rendimentomensal->tipoFamiliar = "Principal";
+        $rendimentomensal->remendimentosmensal = $request->ren_redimento_mensal_principal;
         $rendimentomensal->outrasrendas = $request->ren_outras_principal;
         $rendimentomensal->declaracaodeir = $request->declaracaodeir;
-        $rendimentomensal->rendamensal_conjugue = $request->ren_redimento_mensal_conjugue;
-        $rendimentomensal->outrasrendas_conjugue = $request->ren_outras_conjugue;
-        $rendimentomensal->declaracaodeir_conjugue = $request->declaracaodeir_conjugue;
-        $rendimentomensal->idUser = 1;
-        //$rendimentomensal->user_id = $request->user()->id;
-        
+        $retorno = $rendimentomensal->save();
+        return json_encode($retorno);
+    }
+
+    public function updateConjugue(Request $request) {
+        //
+        /* $this->validate($request, [
+          'name' => 'required|max:255',
+          ]); */
+        $rendimentomensal = null;
+        if ($request->id > 0) {
+            $rendimentomensal = Rendimentomensal::findOrFail($request->id);
+        } else {
+            $rendimentomensal = new Rendimentomensal;
+        }
+
+        $rendimentomensal->idCliente = 4;
+        $rendimentomensal->tipoFamiliar = "Conjugue";
+        $rendimentomensal->remendimentosmensal = $request->ren_redimento_mensal_conjugue;
+        $rendimentomensal->outrasrendas = $request->ren_outras_conjugue;
+        $rendimentomensal->declaracaodeir = $request->declaracaodeir_conjugue;
+
         $retorno = $rendimentomensal->save();
         return json_encode($retorno);
     }
 
     public function store(Request $request) {
-        return $this->update($request);
+        $retorno = $this->update($request);
+        if (!empty($request->ren_redimento_mensal_conjugue)) {
+            $retorno = $this->updateConjugue($request);
+        }
+        return $retorno;
     }
 
     public function destroy(Request $request, $id) {

@@ -108,14 +108,11 @@ class DadoscadastraisController extends Controller {
 
 //        $dadoscadastrai->idUser = $request->idUser;
         $dadoscadastrai->idUser = 1;
-
-//        $dadoscadastrai->user_id = $request->user()->id;
-        $retorno = null;
-        if ($id > 0) {
-            
-        } else {
-//            $retorno = $dadoscadastrai->save();
+        $retorno = $dadoscadastrai->save();
+        if ($retorno == true) {
+            $retorno = DB::getPdo()->lastInsertId();
         }
+
         return json_encode($retorno);
     }
 

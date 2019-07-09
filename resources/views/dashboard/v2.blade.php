@@ -119,7 +119,7 @@
                                 Dados Cadastrais
                             </h3>
                         </div>
-                        <input type="hidden" id="id_dadosCadastrais">
+                        <input type="hidden" id="idCliente">
                         <form role="form" id="formDadosCadastrais">
                             <div class="card-body">
                                 <div class="row">
@@ -235,8 +235,6 @@
                             <form role="form" id="formDadosFamiliaresFilhos">
 
                             </form>
-
-
                         </div>
                         <div class="card-footer">
                             <button type="button" class="btn btn-primary" id="insereDadosFamiliares">Salvar</button>
@@ -283,11 +281,11 @@
                                         <div class="form-group">
                                             <label>Declaração de IR</label>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="declaracaodeir" value="completa">
+                                                <input class="form-check-input" type="radio" name="declaracaodeir" value="1">
                                                 <label class="form-check-label">Completa</label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="declaracaodeir" value="simplificada">
+                                                <input class="form-check-input" type="radio" name="declaracaodeir" value="2">
                                                 <label class="form-check-label">Simplificada</label>
                                             </div>
                                         </div>
@@ -322,11 +320,11 @@
                                         <div class="form-group">
                                             <label>Declaração de IR</label>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="declaracaodeir_conjugue" value="completa">
+                                                <input class="form-check-input" type="radio" name="declaracaodeir_conjugue" value="1">
                                                 <label class="form-check-label">Completa</label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="declaracaodeir_conjugue" value="simplificada">
+                                                <input class="form-check-input" type="radio" name="declaracaodeir_conjugue" value="2">
                                                 <label class="form-check-label">Simplificada</label>
                                             </div>
                                         </div>

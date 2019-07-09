@@ -130,20 +130,10 @@ function formatar(mascara, documento) {
 
 }
 
-cloneform = $('#familiares_filhos').html();
-$(document).on('click', '.remDivFilho, .addDivFilho', function (e) {
-    thisClass = e.target.className;
-    thisClass == 'remDivFilho' ?
-            ($('.' + thisClass).length > 1 ?
-                    $(this).closest('.row').prev().add($(this).closest('.row')).remove() : 0) :
-            $('#familiares_filhos').append(cloneform);
-});
-
 $(document).ready(function () {
     $.ajaxSetup({
         headers: {"X-CSRF-TOKEN": jQuery(`meta[name="csrf-token"]`).attr("content")}
     });
-    $("#id_dadosCadastrais").val(1);
     //Dados Cadastrais----------------------------------------------------------
     $("#inserirDadosCadastrais").click(function () {
         var formDadosCadastrais = $("#formDadosCadastrais").serializeArray();
@@ -153,9 +143,7 @@ $(document).ready(function () {
             data: formDadosCadastrais,
             dataType: 'json',
             success: function (data) {
-                $('#formDadosCadastrais').each(function () {
-                    this.reset();
-                });
+                $("#idCliente").val(data);
                 $('#dados_familiares_menu').click();
             }, error: function (data) {
                 console.log(data);
@@ -165,39 +153,40 @@ $(document).ready(function () {
 
     //Dados Familiares----------------------------------------------------------
     $("#insereDadosFamiliares").click(function () {
-        var id_dadosCadastrais = new Object();
-        id_dadosCadastrais.name = "idUser";
-        id_dadosCadastrais.value = $("#id_dadosCadastrais").val();
+        var idCliente = new Object();
+        idCliente.name = "idCliente";
+        idCliente.value = $("#idCliente").val();
 
+        var tipoFamiliar = new Object();
+        tipoFamiliar.name = "tipoFamiliar";
+        tipoFamiliar.value = "Conjugue";
         //Conjugue--------------------------------------------------------------
         var formDadosFamiliares = $("#formDadosFamiliares").serializeArray();
-        formDadosFamiliares.push(id_dadosCadastrais);
+        formDadosFamiliares.push(idCliente);
+        formDadosFamiliares.push(tipoFamiliar);
+
         $.ajax({
             type: 'POST',
             url: '/dadosFamiliares/cadastro',
             data: formDadosFamiliares,
             dataType: 'json',
             success: function (data) {
-                $('#formDadosFamiliares').each(function () {
-                    this.reset();
-                });
-                $('#rendimentos_menu').click();
             }, error: function (data) {
                 console.log(data);
             }
         });
         //Filhos--------------------------------------------------------------
         var formDadosFamiliaresFilhos = $("#formDadosFamiliaresFilhos").serializeArray();
-        formDadosFamiliaresFilhos.push(id_dadosCadastrais);
+        tipoFamiliar.name = "tipoFamiliar";
+        tipoFamiliar.value = "Filho";
+        formDadosFamiliaresFilhos.push(idCliente);
+        formDadosFamiliaresFilhos.push(tipoFamiliar);
         $.ajax({
             type: 'POST',
-            url: '/dadosFamiliares/cadastroFilho',
+            url: '/dadosFamiliares/cadastro',
             data: formDadosFamiliaresFilhos,
             dataType: 'json',
             success: function (data) {
-                $('#formDadosFamiliaresFilhos').each(function () {
-                    this.reset();
-                });
                 $('#rendimentos_menu').click();
             }, error: function (data) {
                 console.log(data);
@@ -208,34 +197,16 @@ $(document).ready(function () {
     //Rendimentos --------------------------------------------------------------
     $("#inserirRendimentos").click(function () {
         var formRendimento = $("#formRendimento").serializeArray();
+        var idCliente = new Object();
+        idCliente.name = "idCliente";
+        idCliente.value = $("#idCliente").val();
+        formRendimento.push(idCliente);
         $.ajax({
             type: 'POST',
             url: '/rendimentos/cadastro',
             data: formRendimento,
             dataType: 'json',
             success: function (data) {
-                $('#formRendimento').each(function () {
-                    this.reset();
-                });
-                $('#patrimonio_menu').click();
-            }, error: function (data) {
-                console.log(data);
-            }
-        });
-    });
-
-    //Rendimentos --------------------------------------------------------------
-    $("#inserirRendimentos").click(function () {
-        var formPatrimonio = $("#formPatrimonio").serializeArray();
-        $.ajax({
-            type: 'POST',
-            url: '/rendimentos/cadastro',
-            data: formPatrimonio,
-            dataType: 'json',
-            success: function (data) {
-                $('#formPatrimonio').each(function () {
-                    this.reset();
-                });
                 $('#patrimonio_menu').click();
             }, error: function (data) {
                 console.log(data);
@@ -246,15 +217,16 @@ $(document).ready(function () {
     //Patrimonio ---------------------------------------------------------------
     $("#inserePatrimonio").click(function () {
         var formPatrimonio = $("#formPatrimonio").serializeArray();
+        var idCliente = new Object();
+        idCliente.name = "idCliente";
+        idCliente.value = $("#idCliente").val();
+        formPatrimonio.push(idCliente);
         $.ajax({
             type: 'POST',
             url: '/patrimoio/cadastro',
             data: formPatrimonio,
             dataType: 'json',
             success: function (data) {
-                $('#formPatrimonio').each(function () {
-                    this.reset();
-                });
                 var valor = 0;
                 $("#valorTotal_patrimonio").text("R$" + valor.toFixed(2).replace(".", ",").replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
                 $('#educacaoFilhos_menu').click();
@@ -291,7 +263,7 @@ function addCampoFilho() {
     html += "   <div class='col-md-6'>";
     html += "       <div class='form-group'>";
     html += "           <label>Filho</label>";
-    html += "           <input type='text' class='form-control' id='df_filho" + qtdeCampos + "' placeholder='Filho'>";
+    html += "           <input type='text' class='form-control' name='df_filho[]' placeholder='Filho'>";
     html += "       </div>";
     html += "   </div>";
     html += "   <div class='col-md-5'>";
@@ -300,7 +272,7 @@ function addCampoFilho() {
     html += "           <div class='input-group'>";
     html += "               <div class='input-group-prepend'>";
     html += "                   <span class='input-group-text'><i class='fa fa-calendar'></i></span>";
-    html += "                   <input id='data_nascimento_filho" + qtdeCampos + "' name='data_nascimento_filho" + qtdeCampos + "' type='text' data-provide='datepicker' class='datepicker form-control'>";
+    html += "                   <input name='data_nascimento_filho[]' type='text' data-provide='datepicker' class='datepicker form-control'>";
     html += "               </div>";
     html += "           </div>";
     html += "       </div>";
