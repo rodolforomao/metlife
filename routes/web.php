@@ -90,5 +90,11 @@ Route::post('/rendimentos/cadastro', 'RendimentomensalsController@store');
 //Patrimonio
 Route::post('/patrimoio/cadastro', 'PatrimoniosController@store');
 
+//Educação ddos filhos
+Route::post('/educacao_filhos/cadastro', 'EducacaosController@store');
+
 //Padrão de Vida
 Route::post('/padraoVida/cadastro', 'Padrao_de_vidasController@store');
+
+//Emprestimos
+Route::post('/emprestimos/cadastro', 'EmprestimosController@store');

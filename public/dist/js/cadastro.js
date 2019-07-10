@@ -134,6 +134,7 @@ $(document).ready(function () {
     $.ajaxSetup({
         headers: {"X-CSRF-TOKEN": jQuery(`meta[name="csrf-token"]`).attr("content")}
     });
+
     //Dados Cadastrais----------------------------------------------------------
     $("#inserirDadosCadastrais").click(function () {
         var formDadosCadastrais = $("#formDadosCadastrais").serializeArray();
@@ -236,18 +237,60 @@ $(document).ready(function () {
         });
     });
 
+    //Educação filhos ----------------------------------------------------------
+    $("#insereEducacaoFilhos").click(function () {
+        var formEducacaoFilhos = $("#formEducacaoFilhos").serializeArray();
+        var idCliente = new Object();
+        idCliente.name = "idCliente";
+        idCliente.value = $("#idCliente").val();
+        formEducacaoFilhos.push(idCliente);
+        console.log(formEducacaoFilhos);
+        $.ajax({
+            type: 'POST',
+            url: '/educacao_filhos/cadastro',
+            data: formEducacaoFilhos,
+            dataType: 'json',
+            success: function (data) {
+//                $('#padraoVida_menu').click();
+            }, error: function (data) {
+                console.log(data);
+            }
+        });
+    });
+
     //Padrão de Vida------------------------------------------------------------
     $("#inserePadraoVida").click(function () {
         var formPadraoVida = $("#formPadraoVida").serializeArray();
+        var idCliente = new Object();
+        idCliente.name = "idCliente";
+        idCliente.value = $("#idCliente").val();
+        formPadraoVida.push(idCliente);
         $.ajax({
             type: 'POST',
             url: '/padraoVida/cadastro',
             data: formPadraoVida,
             dataType: 'json',
             success: function (data) {
-                $('#formPadraoVida').each(function () {
-                    this.reset();
-                });
+                $('#emprestimos_menu').click();
+            }, error: function (data) {
+                console.log(data);
+            }
+        });
+    });
+
+    //Empréstimos --------------------------------------------------------------
+    $("#insereEmprestimos").click(function () {
+        var formEmprestimos = $("#formEmprestimos").serializeArray();
+        var idCliente = new Object();
+        idCliente.name = "idCliente";
+        idCliente.value = $("#idCliente").val();
+        formEmprestimos.push(idCliente);
+        $.ajax({
+            type: 'POST',
+            url: '/emprestimos/cadastro',
+            data: formEmprestimos,
+            dataType: 'json',
+            success: function (data) {
                 $('#emprestimos_menu').click();
             }, error: function (data) {
                 console.log(data);
@@ -255,6 +298,8 @@ $(document).ready(function () {
         });
     });
 });
+
+
 //Dados Familiares--------------------------------------------------------------
 var qtdeCampos = 0;
 function addCampoFilho() {
@@ -341,7 +386,110 @@ function somaTotalPatriomio() {
     $("#valorTotal_patrimonio").text("R$" + valorTotal.toFixed(2).replace(".", ",").replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
 
 }
-
+//EDUCAÇÃO FILHOS --------------------------------------------------------------
+var qtdeCamposEducacao = 0;
+function addCampoFilhoEducacao() {
+    var html = "";
+    html += "<div class='row' id='filho" + qtdeCamposEducacao + "'>";
+    html += "   <div class='col-md-6'>";
+    html += "       <div class='form-group'>";
+    html += "           <label>Idade / Série</label>";
+    html += "           <input type='text' class='form-control' name='idadeserie[]' placeholder='Idade / Série'>";
+    html += "       </div>";
+    html += "   </div>";
+    html += "   <div class='col-md-6'>";
+    html += "       <div class='form-group'>";
+    html += "           <label>Total de Anos Para Formação</label>";
+    html += "           <input type='text' class='form-control' name='total_anos[]' placeholder='Total de Anos Para Formação'>";
+    html += "       </div>";
+    html += "   </div> ";
+    html += "   <div class='col-sm-12 col-md-4'>";
+    html += "       <div class='row'>";
+    html += "           <div class='col-md-12 border-bottom'>";
+    html += "               <small>Infantil / Básico (12 anos)</small>";
+    html += "           </div>";
+    html += "           <div class='col-md-4'>";
+    html += "               <div class='form-group'>";
+    html += "                   <label>Custo</label>";
+    html += "                   <input type='text' class='form-control' name='basico_mensal[]'>";
+    html += "               </div>";
+    html += "           </div>";
+    html += "           <div class='col-md-4'>";
+    html += "               <div class='form-group'>";
+    html += "                   <label>Anos</label>";
+    html += "                   <input type='text' class='form-control' name='basico_anos[]'>";
+    html += "               </div>";
+    html += "           </div>";
+    html += "           <div class='col-md-4'>";
+    html += "               <div class='form-group'>";
+    html += "                   <label>Total</label>";
+    html += "                   <input type='text' class='form-control' name='basico_total[]'>";
+    html += "               </div>";
+    html += "           </div>";
+    html += "       </div>";
+    html += "   </div>";
+    html += "   <div class='col-sm-12 col-md-4 blue-background'>";
+    html += "       <div class='row'>";
+    html += "           <div class='col-md-12 border-bottom'>";
+    html += "               <small>Fundamental (3 anos)</small>";
+    html += "           </div>";
+    html += "           <div class='col-md-4'>";
+    html += "               <div class='form-group'>";
+    html += "                   <label>Custo</label>";
+    html += "                   <input type='text' class='form-control' name='fundamental_mensal[]'>";
+    html += "               </div>";
+    html += "           </div>";
+    html += "           <div class='col-md-4'>";
+    html += "               <div class='form-group'>";
+    html += "                   <label>Anos</label>";
+    html += "                   <input type='text' class='form-control' name='fundamental_anos[]'>";
+    html += "               </div>";
+    html += "           </div>";
+    html += "           <div class='col-md-4'>";
+    html += "               <div class='form-group'>";
+    html += "                   <label>Total</label>";
+    html += "                   <input type='text' class='form-control' name='fundamental_total[]'>";
+    html += "               </div>";
+    html += "           </div>";
+    html += "       </div>";
+    html += "   </div>";
+    html += "   <div class='col-sm-12 col-md-4'>";
+    html += "       <div class='row'>";
+    html += "           <div class='col-md-12 border-bottom'>";
+    html += "               <small>Superior (4 a 5 anos)</small>";
+    html += "           </div>";
+    html += "           <div class='col-md-4'>";
+    html += "               <div class='form-group'>";
+    html += "                   <label>Custo</label>";
+    html += "                   <input type='text' class='form-control' name='superior_mensal[]'>";
+    html += "               </div>";
+    html += "           </div>";
+    html += "           <div class='col-md-4'>";
+    html += "               <div class='form-group'>";
+    html += "                   <label>Anos</label>";
+    html += "                   <input type='text' class='form-control' name='superior_anos[]'>";
+    html += "               </div>";
+    html += "           </div>";
+    html += "           <div class='col-md-4'>";
+    html += "               <div class='form-group'>";
+    html += "                   <label>Total</label>";
+    html += "                   <input type='text' class='form-control' name='superior_total[]'>";
+    html += "               </div>";
+    html += "           </div>";
+    html += "       </div>";
+    html += "   </div>";
+    html += "   <div class='col-md-12'>";
+    html += "       <input type='button' value='Remover' class='pull-right btn btn-default' onclick='removerCampoFilhoEducacao(" + qtdeCamposEducacao + ")'/>";
+    html += "   </div>";
+    html += "</div>";
+    $("#divEducacaoFilhos").append(html);
+    qtdeCamposEducacao++;
+}
+//------------------------------------------------------------------------------
+function removerCampoFilhoEducacao(id) {
+    $("#divEducacaoFilhos")[0].removeChild($("#filho" + id)[0]);
+    qtdeCamposEducacao--;
+}
 
 
 

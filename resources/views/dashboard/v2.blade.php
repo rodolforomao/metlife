@@ -72,7 +72,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="javascript:void(0)" onClick="openPadraoVida()" class="nav-link">
+                                    <a href="javascript:void(0)" id="padraoVida_menu" onClick="openPadraoVida()" class="nav-link">
                                         <i class="nav-icon fa fa-check"></i>
                                         <p>
                                             Padrão de Vida
@@ -459,106 +459,15 @@
                                 Educação dos Filhos
                             </h3>
                         </div>
-                        <form role="form">
+                        <form role="form" id="formEducacaoFilhos">
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-12 border-bottom">
-                                        <h3>Filho <button type="button" class="btn btn-sm btn-info">+</button></h3>
+                                <div id="divEducacaoFilhos">
+                                    <div class="border-bottom">
+                                        <h3>Filho <button type="button" class="btn btn-sm btn-info" onclick="addCampoFilhoEducacao()">+</button></h3>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Idade / Série</label>
-                                            <input type="text" class="form-control" id="basico_mensal" placeholder="Idade / Série">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Total de Anos Para Formação</label>
-                                            <input type="text" class="form-control" id="basico_anos" placeholder="Total de Anos Para Formação">
-                                        </div>
-                                    </div> 
-
-                                    <div class="col-sm-12 col-md-4">  
-                                        <div class="row">
-                                            <div class="col-md-12 border-bottom">
-                                                <small>Infantil / Básico (12 anos)</small>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>Custo</label>
-                                                    <input type="text" class="form-control" id="basico_mensal">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>Anos</label>
-                                                    <input type="text" class="form-control" id="basico_anos">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>Total</label>
-                                                    <input type="text" class="form-control" id="basico_total">
-                                                </div>
-                                            </div>                    
-                                        </div>
-                                    </div>      
-                                    <div class="col-sm-12 col-md-4 blue-background">  
-                                        <div class="row">
-                                            <div class="col-md-12 border-bottom">
-                                                <small>Fundamental (3 anos)</small>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>Custo</label>
-                                                    <input type="text" class="form-control" id="fundamental_mensal">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>Anos</label>
-                                                    <input type="text" class="form-control" id="fundamental_anos">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>Total</label>
-                                                    <input type="text" class="form-control" id="fundamental_total">
-                                                </div>
-                                            </div>                    
-                                        </div>
-                                    </div>   
-                                    <div class="col-sm-12 col-md-4">
-                                        <div class="row">
-                                            <div class="col-md-12 border-bottom">
-                                                <small>Superior (4 a 5 anos)</small>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>Custo</label>
-                                                    <input type="text" class="form-control" id="superior_mensal">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>Anos</label>
-                                                    <input type="text" class="form-control" id="superior_anos">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label>Total</label>
-                                                    <input type="text" class="form-control" id="superior_total">
-                                                </div>
-                                            </div>                    
-                                        </div>  
-                                    </div>  
-                                    <div class="col-md-12">
-                                        <input type="button" value="Remover" class="pull-right btn btn-default"/>
-                                    </div>       
                                 </div>
                                 <br>
-                                <div class="row border-top">
+                                <!--<div class="row border-top">
                                     <div class="col-md-6">
                                         <label>Total Despesas com Educação</label><br>
                                         <span>R$ 0,00</span>
@@ -567,12 +476,11 @@
                                         <label>Maior Periodo para Formação (Anos)</label><br>
                                         <span>0</span>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
                             <div class="card-footer">
-                                <button type="button" class="btn btn-primary">Salvar</button>
+                                <button type="button" class="btn btn-primary" id="insereEducacaoFilhos">Salvar</button>
                             </div>
-
                         </form>   
                     </div>
                 </div>
@@ -730,23 +638,28 @@
                                 Emprestimos
                             </h3>
                         </div>
-                        <form role="form">
+                        <form role="form" id="formEmprestimos">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-6">
                                         <label>Descoberto Emprestimo/Financiamento </label>
-                                        <input type="text" class="form-control" id="emp_descoberto" placeholder="Descoberto Emprestimo/Financiamento">
                                         <div class="input-group date">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">R$</span>
                                             </div>
-                                            <input id="patrim_acoes" name="patrim_acoes" class="form-control" placeholder="Fundos/Investimentos/Ações"
+                                            <input id="emp_descoberto" name="emp_descoberto" class="form-control" placeholder="Descoberto Emprestimo/Financiamento"
                                                    onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="somaTotalPatriomio()">
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <label>Maior Período para Emprestimo/Finan. (Anos)</label> 
-                                        <input type="text" class="form-control" id="emp_perido" placeholder="Maior Período para Emprestimo/Finan. (Anos)">
+                                        <div class="input-group date">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">R$</span>
+                                            </div>
+                                            <input id="emp_perido" name="emp_perido" class="form-control" placeholder="Maior Período para Emprestimo/Finan. (Anos)"
+                                                   onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="somaTotalPatriomio()">
+                                        </div>
                                     </div>
                                 </div>
                                 <br>
@@ -804,9 +717,8 @@
 
                             </div>
                             <div class="card-footer">
-                                <button type="button" class="btn btn-primary">Salvar</button>
+                                <button type="button" class="btn btn-primary" id="insereEmprestimos">Salvar</button>
                             </div>
-
                         </form>  
                     </div>
                 </div>
