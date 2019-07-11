@@ -72,3 +72,10 @@ Route::resource('/rendimentomensals', 'RendimentomensalsController');
 
 Route::get('/usuariopermitidos/grid', 'UsuariopermitidosController@grid');
 Route::resource('/usuariopermitidos', 'UsuariopermitidosController');
+Route::resource('saldoemprestimo', 'saldoemprestimoController');
+Route::resource('emprestimounitario', 'emprestimounitarioController');
+Route::resource('emprestimounitario', 'emprestimounitarioController');
+Route::get('/saldoemprestimos/grid', 'SaldoemprestimosController@grid');
+Route::resource('/saldoemprestimos', 'SaldoemprestimosController');
+Route::get('/emprestimounitarios/grid', 'EmprestimounitariosController@grid');
+Route::resource('/emprestimounitarios', 'EmprestimounitariosController');

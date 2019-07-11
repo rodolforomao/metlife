@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Emprestimo;
+use App\Emprestimounitario;
 
 use DB;
 
-class EmprestimosController extends Controller
+class EmprestimounitariosController extends Controller
 {
   //
   public function __construct()
@@ -22,28 +22,28 @@ class EmprestimosController extends Controller
 
   public function index(Request $request)
   {
-    return view('emprestimos.index', []);
+    return view('emprestimounitarios.index', []);
   }
 
   public function create(Request $request)
   {
-    return view('emprestimos.add', [
+    return view('emprestimounitarios.add', [
       []
     ]);
   }
 
   public function edit(Request $request, $id)
   {
-    $emprestimo = Emprestimo::findOrFail($id);
-    return view('emprestimos.add', [
-      'model' => $emprestimo    ]);
+    $emprestimounitario = Emprestimounitario::findOrFail($id);
+    return view('emprestimounitarios.add', [
+      'model' => $emprestimounitario    ]);
   }
 
   public function show(Request $request, $id)
   {
-    $emprestimo = Emprestimo::findOrFail($id);
-    return view('emprestimos.show', [
-      'model' => $emprestimo    ]);
+    $emprestimounitario = Emprestimounitario::findOrFail($id);
+    return view('emprestimounitarios.show', [
+      'model' => $emprestimounitario    ]);
   }
 
   public function grid(Request $request)
@@ -52,7 +52,7 @@ class EmprestimosController extends Controller
     $start = $_GET['start'];
 
     $select = "SELECT *,1,2 ";
-    $presql = " FROM emprestimos a ";
+    $presql = " FROM emprestimounitarios a ";
     if($_GET['search']['value']) {
       $presql .= " WHERE created_at LIKE '%".$_GET['search']['value']."%' ";
     }
@@ -63,7 +63,7 @@ class EmprestimosController extends Controller
     // 1/2/18 - Jasmine Robinson Added Orderby Section for the Grid Results
     //------------------------------------
     $orderby = "";
-    $columns = array('id','created_at','updated_at','idCliente','maiorperiodoparaemprestimofinananos','emprestimos','valor3','descobertoemprestimofinanciamento','valor1','n1','valor2','n2',);
+    $columns = array('id','created_at','updated_at','idcliente','saldodevedor','possuiseguro','parcelamensal','prazoresidual','saldodevedordescoberto',);
     $order = $columns[$request->input('order.0.column')];
     $dir = $request->input('order.0.dir');
     $orderby = "Order By " . $order . " " . $dir;
@@ -102,53 +102,44 @@ class EmprestimosController extends Controller
     /*$this->validate($request, [
     'name' => 'required|max:255',
   ]);*/
-  $emprestimo = null;
-  if($request->id > 0) { $emprestimo = Emprestimo::findOrFail($request->id); }
+  $emprestimounitario = null;
+  if($request->id > 0) { $emprestimounitario = Emprestimounitario::findOrFail($request->id); }
   else {
-    $emprestimo = new Emprestimo;
+    $emprestimounitario = new Emprestimounitario;
   }
 
 
   
-    $emprestimo->id = $request->id?:0;
+    $emprestimounitario->id = $request->id?:0;
     
   
-      $emprestimo->created_at = $request->created_at;
+      $emprestimounitario->created_at = $request->created_at;
   
   
-      $emprestimo->updated_at = $request->updated_at;
+      $emprestimounitario->updated_at = $request->updated_at;
   
   
-      $emprestimo->idCliente = $request->idCliente;
+      $emprestimounitario->idcliente = $request->idcliente;
   
   
-      $emprestimo->maiorperiodoparaemprestimofinananos = $request->maiorperiodoparaemprestimofinananos;
+      $emprestimounitario->saldodevedor = $request->saldodevedor;
   
   
-      $emprestimo->emprestimos = $request->emprestimos;
+      $emprestimounitario->possuiseguro = $request->possuiseguro;
   
   
-      $emprestimo->valor3 = $request->valor3;
+      $emprestimounitario->parcelamensal = $request->parcelamensal;
   
   
-      $emprestimo->descobertoemprestimofinanciamento = $request->descobertoemprestimofinanciamento;
+      $emprestimounitario->prazoresidual = $request->prazoresidual;
   
   
-      $emprestimo->valor1 = $request->valor1;
+      $emprestimounitario->saldodevedordescoberto = $request->saldodevedordescoberto;
   
-  
-      $emprestimo->n1 = $request->n1;
-  
-  
-      $emprestimo->valor2 = $request->valor2;
-  
-  
-      $emprestimo->n2 = $request->n2;
-  
-    //$emprestimo->user_id = $request->user()->id;
-  $emprestimo->save();
+    //$emprestimounitario->user_id = $request->user()->id;
+  $emprestimounitario->save();
 
-  return redirect('/emprestimos');
+  return redirect('/emprestimounitarios');
 
 }
 
@@ -159,9 +150,9 @@ public function store(Request $request)
 
 public function destroy(Request $request, $id) {
 
-  $emprestimo = Emprestimo::findOrFail($id);
+  $emprestimounitario = Emprestimounitario::findOrFail($id);
 
-  $emprestimo->delete();
+  $emprestimounitario->delete();
   return "OK";
 
 }
