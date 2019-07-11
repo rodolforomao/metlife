@@ -17,10 +17,11 @@ class CreateInssprevidenciaclientesTable extends Migration
             $table->timestamps();
             $table->unsignedInteger('idCliente')->default(2);
             $table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
-            $table->string('previdencia')->nullable();
-            $table->string('pgblvgbl')->nullable();
-            $table->string('saldoacumulado')->nullable();
-            $table->string('contribuicaoanual')->nullable();
+            $table->string('tipoFamiliar')->nullable();
+            $table->float('previdencia')->nullable();
+            $table->float('pgblvgbl')->nullable();
+            $table->float('saldoacumulado')->nullable();
+            $table->float('contribuicaoanual')->nullable();
             });
     }
 

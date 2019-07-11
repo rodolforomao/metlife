@@ -98,14 +98,6 @@
         
                 
         <div class="form-group">
-            <label for="total" class="col-sm-3 control-label">Total</label>
-            <div class="col-sm-6">
-                <input type="text" name="total" id="total" class="form-control" value="{{$model['total'] or ''}}" readonly="readonly">
-            </div>
-        </div>
-        
-                
-        <div class="form-group">
             <label for="imoveis" class="col-sm-3 control-label">Imoveis</label>
             <div class="col-sm-6">
                 <input type="text" name="imoveis" id="imoveis" class="form-control" value="{{$model['imoveis'] or ''}}" readonly="readonly">

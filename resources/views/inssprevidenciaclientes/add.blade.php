@@ -44,6 +44,12 @@
                 </div>
             </div>
                                                                                     <div class="form-group">
+                <label for="tipoFamiliar" class="col-sm-3 control-label">TipoFamiliar</label>
+                <div class="col-sm-6">
+                    <input type="text" name="tipoFamiliar" id="tipoFamiliar" class="form-control" value="{{$model['tipoFamiliar'] or ''}}">
+                </div>
+            </div>
+                                                                                                                                    <div class="form-group">
                 <label for="previdencia" class="col-sm-3 control-label">Previdencia</label>
                 <div class="col-sm-6">
                     <input type="text" name="previdencia" id="previdencia" class="form-control" value="{{$model['previdencia'] or ''}}">
@@ -67,7 +73,7 @@
                     <input type="text" name="contribuicaoanual" id="contribuicaoanual" class="form-control" value="{{$model['contribuicaoanual'] or ''}}">
                 </div>
             </div>
-                                                            
+                        
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
                     <button type="submit" class="btn btn-success">

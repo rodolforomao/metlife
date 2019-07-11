@@ -19,24 +19,23 @@ class CreateEducacaosTable extends Migration
             $table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
             $table->string('apelidofilho')->nullable();
             $table->string('idadeserie')->nullable();
-            $table->string('totaldeanosparaformacao')->nullable();
+            $table->float('totaldeanosparaformacao')->nullable();
             $table->string('basico')->nullable();
-            $table->string('custo2')->nullable();
-            $table->string('anos2')->nullable();
-            $table->string('total2')->nullable();
+            $table->float('custo2')->nullable();
+            $table->float('anos2')->nullable();
+            $table->float('total2')->nullable();
             $table->string('fundamental3anos')->nullable();
-            $table->string('filho')->nullable();
-            $table->string('custo3')->nullable();
-            $table->string('anos3')->nullable();
-            $table->string('total3')->nullable();
+            $table->float('custo3')->nullable();
+            $table->float('anos3')->nullable();
+            $table->float('total3')->nullable();
             $table->string('superior4a5anos')->nullable();
-            $table->string('custo4')->nullable();
-            $table->string('anos4')->nullable();
-            $table->string('total4')->nullable();
+            $table->float('custo4')->nullable();
+            $table->float('anos4')->nullable();
+            $table->float('total4')->nullable();
             $table->string('infantil')->nullable();
-            $table->string('custo1')->nullable();
-            $table->string('anos1')->nullable();
-            $table->string('total1')->nullable();
+            $table->float('custo1')->nullable();
+            $table->float('anos1')->nullable();
+            $table->float('total1')->nullable();
             });
     }
 

@@ -43,7 +43,7 @@
                     <input type="number" name="idCliente" id="idCliente" class="form-control" value="{{$model['idCliente'] or ''}}">
                 </div>
             </div>
-                                                                                    <div class="form-group">
+                                                                                                                        <div class="form-group">
                 <label for="fundos" class="col-sm-3 control-label">Fundos</label>
                 <div class="col-sm-6">
                     <input type="text" name="fundos" id="fundos" class="form-control" value="{{$model['fundos'] or ''}}">
@@ -80,18 +80,12 @@
                 </div>
             </div>
                                                                                                 <div class="form-group">
-                <label for="total" class="col-sm-3 control-label">Total</label>
-                <div class="col-sm-6">
-                    <input type="text" name="total" id="total" class="form-control" value="{{$model['total'] or ''}}">
-                </div>
-            </div>
-                                                                                                <div class="form-group">
                 <label for="imoveis" class="col-sm-3 control-label">Imoveis</label>
                 <div class="col-sm-6">
                     <input type="text" name="imoveis" id="imoveis" class="form-control" value="{{$model['imoveis'] or ''}}">
                 </div>
             </div>
-                                                            
+                        
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
                     <button type="submit" class="btn btn-success">

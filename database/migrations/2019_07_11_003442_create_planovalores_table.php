@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateInssseguroclientesTable extends Migration
+class CreatePlanovaloresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,15 @@ class CreateInssseguroclientesTable extends Migration
      */
     public function up()
     {
-        Schema::create('inssseguroclientes', function (Blueprint $table) {
+        Schema::create('planovalores', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->unsignedInteger('idCliente')->default(2);
-            $table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
+            $table->integer('idcliente')->nullable();
             $table->string('tipoFamiliar')->nullable();
-            $table->float('segurodevida')->nullable();
+            $table->float('vigencia')->nullable();
+            $table->float('prazo')->nullable();
             $table->float('capitalsegurado')->nullable();
-            $table->float('premiomensal')->nullable();
+            $table->float('valor')->nullable();
             });
     }
 
@@ -31,6 +31,6 @@ class CreateInssseguroclientesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('inssseguroclientes');
+        Schema::drop('planovalores');
     }
 }

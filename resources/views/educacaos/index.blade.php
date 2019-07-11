@@ -27,7 +27,6 @@
                                         <th>Anos2</th>
                                         <th>Total2</th>
                                         <th>Fundamental3anos</th>
-                                        <th>Filho</th>
                                         <th>Custo3</th>
                                         <th>Anos3</th>
                                         <th>Total3</th>
@@ -79,12 +78,12 @@
                         "render": function ( data, type, row ) {
                             return '<a href="{{ url('/educacaos') }}/'+row[0]+'/edit" class="btn btn-default">Update</a>';
                         },
-                        "targets": 24                    },
+                        "targets": 23                    },
                     {
                         "render": function ( data, type, row ) {
                             return '<a href="#" onclick="return doDelete('+row[0]+')" class="btn btn-danger">Delete</a>';
                         },
-                        "targets": 24+1
+                        "targets": 23+1
                     },
                 ]
             });

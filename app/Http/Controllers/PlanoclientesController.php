@@ -63,7 +63,7 @@ class PlanoclientesController extends Controller
     // 1/2/18 - Jasmine Robinson Added Orderby Section for the Grid Results
     //------------------------------------
     $orderby = "";
-    $columns = array('id','created_at','updated_at','idCliente','nome','risco','cpf','sexo','nascimento',);
+    $columns = array('id','created_at','updated_at','idCliente','tipoFamiliar','nome','risco','cpf','sexo','nascimento',);
     $order = $columns[$request->input('order.0.column')];
     $dir = $request->input('order.0.dir');
     $orderby = "Order By " . $order . " " . $dir;
@@ -120,6 +120,9 @@ class PlanoclientesController extends Controller
   
   
       $planocliente->idCliente = $request->idCliente;
+  
+  
+      $planocliente->tipoFamiliar = $request->tipoFamiliar;
   
   
       $planocliente->nome = $request->nome;

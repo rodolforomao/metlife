@@ -19,7 +19,7 @@
                                         <th>Created At</th>
                                         <th>Updated At</th>
                                         <th>IdCliente</th>
-                                        <th>Idadeparaaposentadoria</th>
+                                        <th>TipoFamiliar</th>
                                         <th>Segurodevida</th>
                                         <th>Capitalsegurado</th>
                                         <th>Premiomensal</th>

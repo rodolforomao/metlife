@@ -4,16 +4,16 @@
 
 
 
-<h2 class="page-header">Inssfgtsprevidenciaseguro</h2>
+<h2 class="page-header">Perfilusuario</h2>
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        View Inssfgtsprevidenciaseguro    </div>
+        View Perfilusuario    </div>
 
     <div class="panel-body">
                 
 
-        <form action="{{ url('/inssfgtsprevidenciaseguros') }}" method="POST" class="form-horizontal">
+        <form action="{{ url('/perfilusuarios') }}" method="POST" class="form-horizontal">
 
 
                 
@@ -42,48 +42,32 @@
         
                 
         <div class="form-group">
-            <label for="idCliente" class="col-sm-3 control-label">IdCliente</label>
+            <label for="idcliente" class="col-sm-3 control-label">Idcliente</label>
             <div class="col-sm-6">
-                <input type="text" name="idCliente" id="idCliente" class="form-control" value="{{$model['idCliente'] or ''}}" readonly="readonly">
+                <input type="text" name="idcliente" id="idcliente" class="form-control" value="{{$model['idcliente'] or ''}}" readonly="readonly">
             </div>
         </div>
         
                 
         <div class="form-group">
-            <label for="tipoFamiliar" class="col-sm-3 control-label">TipoFamiliar</label>
+            <label for="permissao" class="col-sm-3 control-label">Permissao</label>
             <div class="col-sm-6">
-                <input type="text" name="tipoFamiliar" id="tipoFamiliar" class="form-control" value="{{$model['tipoFamiliar'] or ''}}" readonly="readonly">
+                <input type="text" name="permissao" id="permissao" class="form-control" value="{{$model['permissao'] or ''}}" readonly="readonly">
             </div>
         </div>
         
                 
         <div class="form-group">
-            <label for="fgts" class="col-sm-3 control-label">Fgts</label>
+            <label for="idPerfil" class="col-sm-3 control-label">IdPerfil</label>
             <div class="col-sm-6">
-                <input type="text" name="fgts" id="fgts" class="form-control" value="{{$model['fgts'] or ''}}" readonly="readonly">
-            </div>
-        </div>
-        
-                
-        <div class="form-group">
-            <label for="inss" class="col-sm-3 control-label">Inss</label>
-            <div class="col-sm-6">
-                <input type="text" name="inss" id="inss" class="form-control" value="{{$model['inss'] or ''}}" readonly="readonly">
-            </div>
-        </div>
-        
-                
-        <div class="form-group">
-            <label for="idadeaposentadoria" class="col-sm-3 control-label">Idadeaposentadoria</label>
-            <div class="col-sm-6">
-                <input type="text" name="idadeaposentadoria" id="idadeaposentadoria" class="form-control" value="{{$model['idadeaposentadoria'] or ''}}" readonly="readonly">
+                <input type="text" name="idPerfil" id="idPerfil" class="form-control" value="{{$model['idPerfil'] or ''}}" readonly="readonly">
             </div>
         </div>
         
         
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-6">
-                <a class="btn btn-default" href="{{ url('/inssfgtsprevidenciaseguros') }}"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
+                <a class="btn btn-default" href="{{ url('/perfilusuarios') }}"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
             </div>
         </div>
 

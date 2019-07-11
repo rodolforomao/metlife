@@ -19,6 +19,7 @@
                                         <th>Created At</th>
                                         <th>Updated At</th>
                                         <th>IdCliente</th>
+                                        <th>TipoFamiliar</th>
                                         <th>Remendimentosmensal</th>
                                         <th>Outrasrendas</th>
                                         <th>Declaracaodeir</th>
@@ -62,12 +63,12 @@
                         "render": function ( data, type, row ) {
                             return '<a href="{{ url('/rendimentomensals') }}/'+row[0]+'/edit" class="btn btn-default">Update</a>';
                         },
-                        "targets": 7                    },
+                        "targets": 8                    },
                     {
                         "render": function ( data, type, row ) {
                             return '<a href="#" onclick="return doDelete('+row[0]+')" class="btn btn-danger">Delete</a>';
                         },
-                        "targets": 7+1
+                        "targets": 8+1
                     },
                 ]
             });

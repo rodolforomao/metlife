@@ -44,12 +44,12 @@
                 </div>
             </div>
                                                                                     <div class="form-group">
-                <label for="tipoprincipalconjuge" class="col-sm-3 control-label">Tipoprincipalconjuge</label>
+                <label for="tipoFamiliar" class="col-sm-3 control-label">TipoFamiliar</label>
                 <div class="col-sm-6">
-                    <input type="text" name="tipoprincipalconjuge" id="tipoprincipalconjuge" class="form-control" value="{{$model['tipoprincipalconjuge'] or ''}}">
+                    <input type="text" name="tipoFamiliar" id="tipoFamiliar" class="form-control" value="{{$model['tipoFamiliar'] or ''}}">
                 </div>
             </div>
-                                                                                                <div class="form-group">
+                                                                                                                                    <div class="form-group">
                 <label for="fgts" class="col-sm-3 control-label">Fgts</label>
                 <div class="col-sm-6">
                     <input type="text" name="fgts" id="fgts" class="form-control" value="{{$model['fgts'] or ''}}">
@@ -61,7 +61,13 @@
                     <input type="text" name="inss" id="inss" class="form-control" value="{{$model['inss'] or ''}}">
                 </div>
             </div>
-                                                            
+                                                                        <div class="form-group">
+                <label for="idadeaposentadoria" class="col-sm-3 control-label">Idadeaposentadoria</label>
+                <div class="col-sm-2">
+                    <input type="number" name="idadeaposentadoria" id="idadeaposentadoria" class="form-control" value="{{$model['idadeaposentadoria'] or ''}}">
+                </div>
+            </div>
+                                                
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
                     <button type="submit" class="btn btn-success">

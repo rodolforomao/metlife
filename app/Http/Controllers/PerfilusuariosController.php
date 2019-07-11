@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Inssfgtsprevidenciaseguro;
+use App\Perfilusuario;
 
 use DB;
 
-class InssfgtsprevidenciasegurosController extends Controller
+class PerfilusuariosController extends Controller
 {
   //
   public function __construct()
@@ -22,28 +22,28 @@ class InssfgtsprevidenciasegurosController extends Controller
 
   public function index(Request $request)
   {
-    return view('inssfgtsprevidenciaseguros.index', []);
+    return view('perfilusuarios.index', []);
   }
 
   public function create(Request $request)
   {
-    return view('inssfgtsprevidenciaseguros.add', [
+    return view('perfilusuarios.add', [
       []
     ]);
   }
 
   public function edit(Request $request, $id)
   {
-    $inssfgtsprevidenciaseguro = Inssfgtsprevidenciaseguro::findOrFail($id);
-    return view('inssfgtsprevidenciaseguros.add', [
-      'model' => $inssfgtsprevidenciaseguro    ]);
+    $perfilusuario = Perfilusuario::findOrFail($id);
+    return view('perfilusuarios.add', [
+      'model' => $perfilusuario    ]);
   }
 
   public function show(Request $request, $id)
   {
-    $inssfgtsprevidenciaseguro = Inssfgtsprevidenciaseguro::findOrFail($id);
-    return view('inssfgtsprevidenciaseguros.show', [
-      'model' => $inssfgtsprevidenciaseguro    ]);
+    $perfilusuario = Perfilusuario::findOrFail($id);
+    return view('perfilusuarios.show', [
+      'model' => $perfilusuario    ]);
   }
 
   public function grid(Request $request)
@@ -52,7 +52,7 @@ class InssfgtsprevidenciasegurosController extends Controller
     $start = $_GET['start'];
 
     $select = "SELECT *,1,2 ";
-    $presql = " FROM inssfgtsprevidenciaseguros a ";
+    $presql = " FROM perfilusuarios a ";
     if($_GET['search']['value']) {
       $presql .= " WHERE created_at LIKE '%".$_GET['search']['value']."%' ";
     }
@@ -63,7 +63,7 @@ class InssfgtsprevidenciasegurosController extends Controller
     // 1/2/18 - Jasmine Robinson Added Orderby Section for the Grid Results
     //------------------------------------
     $orderby = "";
-    $columns = array('id','created_at','updated_at','idCliente','tipoFamiliar','fgts','inss','idadeaposentadoria',);
+    $columns = array('id','created_at','updated_at','idcliente','permissao','idPerfil',);
     $order = $columns[$request->input('order.0.column')];
     $dir = $request->input('order.0.dir');
     $orderby = "Order By " . $order . " " . $dir;
@@ -102,41 +102,35 @@ class InssfgtsprevidenciasegurosController extends Controller
     /*$this->validate($request, [
     'name' => 'required|max:255',
   ]);*/
-  $inssfgtsprevidenciaseguro = null;
-  if($request->id > 0) { $inssfgtsprevidenciaseguro = Inssfgtsprevidenciaseguro::findOrFail($request->id); }
+  $perfilusuario = null;
+  if($request->id > 0) { $perfilusuario = Perfilusuario::findOrFail($request->id); }
   else {
-    $inssfgtsprevidenciaseguro = new Inssfgtsprevidenciaseguro;
+    $perfilusuario = new Perfilusuario;
   }
 
 
   
-    $inssfgtsprevidenciaseguro->id = $request->id?:0;
+    $perfilusuario->id = $request->id?:0;
     
   
-      $inssfgtsprevidenciaseguro->created_at = $request->created_at;
+      $perfilusuario->created_at = $request->created_at;
   
   
-      $inssfgtsprevidenciaseguro->updated_at = $request->updated_at;
+      $perfilusuario->updated_at = $request->updated_at;
   
   
-      $inssfgtsprevidenciaseguro->idCliente = $request->idCliente;
+      $perfilusuario->idcliente = $request->idcliente;
   
   
-      $inssfgtsprevidenciaseguro->tipoFamiliar = $request->tipoFamiliar;
+      $perfilusuario->permissao = $request->permissao;
   
   
-      $inssfgtsprevidenciaseguro->fgts = $request->fgts;
+      $perfilusuario->idPerfil = $request->idPerfil;
   
-  
-      $inssfgtsprevidenciaseguro->inss = $request->inss;
-  
-  
-      $inssfgtsprevidenciaseguro->idadeaposentadoria = $request->idadeaposentadoria;
-  
-    //$inssfgtsprevidenciaseguro->user_id = $request->user()->id;
-  $inssfgtsprevidenciaseguro->save();
+    //$perfilusuario->user_id = $request->user()->id;
+  $perfilusuario->save();
 
-  return redirect('/inssfgtsprevidenciaseguros');
+  return redirect('/perfilusuarios');
 
 }
 
@@ -147,9 +141,9 @@ public function store(Request $request)
 
 public function destroy(Request $request, $id) {
 
-  $inssfgtsprevidenciaseguro = Inssfgtsprevidenciaseguro::findOrFail($id);
+  $perfilusuario = Perfilusuario::findOrFail($id);
 
-  $inssfgtsprevidenciaseguro->delete();
+  $perfilusuario->delete();
   return "OK";
 
 }

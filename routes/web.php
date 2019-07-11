@@ -79,3 +79,7 @@ Route::get('/saldoemprestimos/grid', 'SaldoemprestimosController@grid');
 Route::resource('/saldoemprestimos', 'SaldoemprestimosController');
 Route::get('/emprestimounitarios/grid', 'EmprestimounitariosController@grid');
 Route::resource('/emprestimounitarios', 'EmprestimounitariosController');
+Route::resource('planovalores', 'planovaloresController');
+Route::resource('perfilusuario', 'perfilusuarioController');
+Route::get('/perfilusuarios/grid', 'PerfilusuariosController@grid');
+Route::resource('/perfilusuarios', 'PerfilusuariosController');

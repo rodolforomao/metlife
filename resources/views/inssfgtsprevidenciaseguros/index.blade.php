@@ -19,9 +19,10 @@
                                         <th>Created At</th>
                                         <th>Updated At</th>
                                         <th>IdCliente</th>
-                                        <th>Tipoprincipalconjuge</th>
+                                        <th>TipoFamiliar</th>
                                         <th>Fgts</th>
                                         <th>Inss</th>
+                                        <th>Idadeaposentadoria</th>
                                         <th style="width:50px"></th>
                     <th style="width:50px"></th>
                 </tr>
@@ -62,12 +63,12 @@
                         "render": function ( data, type, row ) {
                             return '<a href="{{ url('/inssfgtsprevidenciaseguros') }}/'+row[0]+'/edit" class="btn btn-default">Update</a>';
                         },
-                        "targets": 7                    },
+                        "targets": 8                    },
                     {
                         "render": function ( data, type, row ) {
                             return '<a href="#" onclick="return doDelete('+row[0]+')" class="btn btn-danger">Delete</a>';
                         },
-                        "targets": 7+1
+                        "targets": 8+1
                     },
                 ]
             });

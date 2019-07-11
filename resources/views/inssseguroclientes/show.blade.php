@@ -50,9 +50,9 @@
         
                 
         <div class="form-group">
-            <label for="idadeparaaposentadoria" class="col-sm-3 control-label">Idadeparaaposentadoria</label>
+            <label for="tipoFamiliar" class="col-sm-3 control-label">TipoFamiliar</label>
             <div class="col-sm-6">
-                <input type="text" name="idadeparaaposentadoria" id="idadeparaaposentadoria" class="form-control" value="{{$model['idadeparaaposentadoria'] or ''}}" readonly="readonly">
+                <input type="text" name="tipoFamiliar" id="tipoFamiliar" class="form-control" value="{{$model['tipoFamiliar'] or ''}}" readonly="readonly">
             </div>
         </div>
         

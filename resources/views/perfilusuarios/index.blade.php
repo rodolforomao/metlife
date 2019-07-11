@@ -3,11 +3,11 @@
 @section('content')
 
 
-<h2 class="page-header">{{ ucfirst('padrao_de_vidas') }}</h2>
+<h2 class="page-header">{{ ucfirst('perfilusuarios') }}</h2>
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        List of {{ ucfirst('padrao_de_vidas') }}
+        List of {{ ucfirst('perfilusuarios') }}
     </div>
 
     <div class="panel-body">
@@ -18,18 +18,9 @@
                                         <th>Id</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
-                                        <th>IdCliente</th>
-                                        <th>Despezasgerais</th>
-                                        <th>Moradia</th>
-                                        <th>Servicos</th>
-                                        <th>Transporte</th>
-                                        <th>Saude</th>
-                                        <th>Vestuario</th>
-                                        <th>SeguroDeVidaPrevidencia</th>
-                                        <th>Lazer</th>
-                                        <th>Alimentacao</th>
-                                        <th>Impostos</th>
-                                        <th>Extrasoutros</th>
+                                        <th>Idcliente</th>
+                                        <th>Permissao</th>
+                                        <th>IdPerfil</th>
                                         <th style="width:50px"></th>
                     <th style="width:50px"></th>
                 </tr>
@@ -38,7 +29,7 @@
               </tbody>
             </table>
         </div>
-        <a href="{{url('padrao_de_vidas/create')}}" class="btn btn-primary" role="button">Add padrao_de_vida</a>
+        <a href="{{url('perfilusuarios/create')}}" class="btn btn-primary" role="button">Add perfilusuario</a>
     </div>
 </div>
 
@@ -58,31 +49,31 @@
                 "serverSide": true,
                 "ordering": true,
                 "responsive": true,
-                "ajax": "{{url('padrao_de_vidas/grid')}}",
+                "ajax": "{{url('perfilusuarios/grid')}}",
                 "columnDefs": [
                     {
                         "render": function ( data, type, row ) {
-                            return '<a href="{{ url('/padrao_de_vidas') }}/'+row[0]+'">'+data+'</a>';
+                            return '<a href="{{ url('/perfilusuarios') }}/'+row[0]+'">'+data+'</a>';
                         },
                         "targets": 1
                     },
                     {
                         "render": function ( data, type, row ) {
-                            return '<a href="{{ url('/padrao_de_vidas') }}/'+row[0]+'/edit" class="btn btn-default">Update</a>';
+                            return '<a href="{{ url('/perfilusuarios') }}/'+row[0]+'/edit" class="btn btn-default">Update</a>';
                         },
-                        "targets": 15                    },
+                        "targets": 6                    },
                     {
                         "render": function ( data, type, row ) {
                             return '<a href="#" onclick="return doDelete('+row[0]+')" class="btn btn-danger">Delete</a>';
                         },
-                        "targets": 15+1
+                        "targets": 6+1
                     },
                 ]
             });
         });
         function doDelete(id) {
             if(confirm('You really want to delete this record?')) {
-               $.ajax({ url: '{{ url('/padrao_de_vidas') }}/' + id, type: 'DELETE'}).success(function() {
+               $.ajax({ url: '{{ url('/perfilusuarios') }}/' + id, type: 'DELETE'}).success(function() {
                 theGrid.ajax.reload();
                });
             }

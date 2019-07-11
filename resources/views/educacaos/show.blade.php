@@ -114,14 +114,6 @@
         
                 
         <div class="form-group">
-            <label for="filho" class="col-sm-3 control-label">Filho</label>
-            <div class="col-sm-6">
-                <input type="text" name="filho" id="filho" class="form-control" value="{{$model['filho'] or ''}}" readonly="readonly">
-            </div>
-        </div>
-        
-                
-        <div class="form-group">
             <label for="custo3" class="col-sm-3 control-label">Custo3</label>
             <div class="col-sm-6">
                 <input type="text" name="custo3" id="custo3" class="form-control" value="{{$model['custo3'] or ''}}" readonly="readonly">

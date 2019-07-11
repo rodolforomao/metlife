@@ -43,7 +43,13 @@
                     <input type="number" name="idCliente" id="idCliente" class="form-control" value="{{$model['idCliente'] or ''}}">
                 </div>
             </div>
-                                                                                    <div class="form-group">
+                                                                                                                        <div class="form-group">
+                <label for="despezasgerais" class="col-sm-3 control-label">Despezasgerais</label>
+                <div class="col-sm-6">
+                    <input type="text" name="despezasgerais" id="despezasgerais" class="form-control" value="{{$model['despezasgerais'] or ''}}">
+                </div>
+            </div>
+                                                                                                <div class="form-group">
                 <label for="moradia" class="col-sm-3 control-label">Moradia</label>
                 <div class="col-sm-6">
                     <input type="text" name="moradia" id="moradia" class="form-control" value="{{$model['moradia'] or ''}}">
@@ -103,7 +109,7 @@
                     <input type="text" name="extrasoutros" id="extrasoutros" class="form-control" value="{{$model['extrasoutros'] or ''}}">
                 </div>
             </div>
-                                                            
+                        
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
                     <button type="submit" class="btn btn-success">

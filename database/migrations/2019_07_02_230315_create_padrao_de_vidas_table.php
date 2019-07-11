@@ -17,16 +17,17 @@ class CreatePadraoDeVidasTable extends Migration
             $table->timestamps();
             $table->unsignedInteger('idCliente')->default(2);
             $table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
-            $table->string('moradia')->nullable();
-            $table->string('servicos')->nullable();
-            $table->string('transporte')->nullable();
-            $table->string('saude')->nullable();
-            $table->string('vestuario')->nullable();
-            $table->string('seguroDeVidaPrevidencia')->nullable();
-            $table->string('lazer')->nullable();
-            $table->string('alimentacao')->nullable();
-            $table->string('impostos')->nullable();
-            $table->string('extrasoutros')->nullable();
+            $table->float('despezasgerais')->nullable();
+            $table->float('moradia')->nullable();
+            $table->float('servicos')->nullable();
+            $table->float('transporte')->nullable();
+            $table->float('saude')->nullable();
+            $table->float('vestuario')->nullable();
+            $table->float('seguroDeVidaPrevidencia')->nullable();
+            $table->float('lazer')->nullable();
+            $table->float('alimentacao')->nullable();
+            $table->float('impostos')->nullable();
+            $table->float('extrasoutros')->nullable();
             });
     }
 

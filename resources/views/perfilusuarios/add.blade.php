@@ -3,15 +3,15 @@
 @section('content')
 
 
-<h2 class="page-header">Insssegurocliente</h2>
+<h2 class="page-header">Perfilusuario</h2>
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        Add/Modify Insssegurocliente    </div>
+        Add/Modify Perfilusuario    </div>
 
     <div class="panel-body">
                 
-        <form action="{{ url('/inssseguroclientes'.( isset($model) ? "/" . $model->id : "")) }}" method="POST" class="form-horizontal">
+        <form action="{{ url('/perfilusuarios'.( isset($model) ? "/" . $model->id : "")) }}" method="POST" class="form-horizontal">
             {{ csrf_field() }}
 
             @if (isset($model))
@@ -38,42 +38,30 @@
                 </div>
             </div>
                                                                         <div class="form-group">
-                <label for="idCliente" class="col-sm-3 control-label">IdCliente</label>
+                <label for="idcliente" class="col-sm-3 control-label">Idcliente</label>
                 <div class="col-sm-2">
-                    <input type="number" name="idCliente" id="idCliente" class="form-control" value="{{$model['idCliente'] or ''}}">
-                </div>
-            </div>
-                                                                                    <div class="form-group">
-                <label for="tipoFamiliar" class="col-sm-3 control-label">TipoFamiliar</label>
-                <div class="col-sm-6">
-                    <input type="text" name="tipoFamiliar" id="tipoFamiliar" class="form-control" value="{{$model['tipoFamiliar'] or ''}}">
-                </div>
-            </div>
-                                                                                                                                    <div class="form-group">
-                <label for="segurodevida" class="col-sm-3 control-label">Segurodevida</label>
-                <div class="col-sm-6">
-                    <input type="text" name="segurodevida" id="segurodevida" class="form-control" value="{{$model['segurodevida'] or ''}}">
+                    <input type="number" name="idcliente" id="idcliente" class="form-control" value="{{$model['idcliente'] or ''}}">
                 </div>
             </div>
                                                                                                 <div class="form-group">
-                <label for="capitalsegurado" class="col-sm-3 control-label">Capitalsegurado</label>
-                <div class="col-sm-6">
-                    <input type="text" name="capitalsegurado" id="capitalsegurado" class="form-control" value="{{$model['capitalsegurado'] or ''}}">
+                <label for="permissao" class="col-sm-3 control-label">Permissao</label>
+                <div class="col-sm-2">
+                    <input type="number" name="permissao" id="permissao" class="form-control" value="{{$model['permissao'] or ''}}">
                 </div>
             </div>
                                                                                                 <div class="form-group">
-                <label for="premiomensal" class="col-sm-3 control-label">Premiomensal</label>
-                <div class="col-sm-6">
-                    <input type="text" name="premiomensal" id="premiomensal" class="form-control" value="{{$model['premiomensal'] or ''}}">
+                <label for="idPerfil" class="col-sm-3 control-label">IdPerfil</label>
+                <div class="col-sm-2">
+                    <input type="number" name="idPerfil" id="idPerfil" class="form-control" value="{{$model['idPerfil'] or ''}}">
                 </div>
             </div>
-                        
+                                                
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
                     <button type="submit" class="btn btn-success">
                         <i class="fa fa-plus"></i> Save
                     </button> 
-                    <a class="btn btn-default" href="{{ url('/inssseguroclientes') }}"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
+                    <a class="btn btn-default" href="{{ url('/perfilusuarios') }}"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
                 </div>
             </div>
         </form>

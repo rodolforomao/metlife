@@ -63,7 +63,7 @@ class InssseguroclientesController extends Controller
     // 1/2/18 - Jasmine Robinson Added Orderby Section for the Grid Results
     //------------------------------------
     $orderby = "";
-    $columns = array('id','created_at','updated_at','idCliente','idadeparaaposentadoria','segurodevida','capitalsegurado','premiomensal',);
+    $columns = array('id','created_at','updated_at','idCliente','tipoFamiliar','segurodevida','capitalsegurado','premiomensal',);
     $order = $columns[$request->input('order.0.column')];
     $dir = $request->input('order.0.dir');
     $orderby = "Order By " . $order . " " . $dir;
@@ -122,7 +122,7 @@ class InssseguroclientesController extends Controller
       $insssegurocliente->idCliente = $request->idCliente;
   
   
-      $insssegurocliente->idadeparaaposentadoria = $request->idadeparaaposentadoria;
+      $insssegurocliente->tipoFamiliar = $request->tipoFamiliar;
   
   
       $insssegurocliente->segurodevida = $request->segurodevida;

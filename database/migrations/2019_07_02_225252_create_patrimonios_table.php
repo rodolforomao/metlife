@@ -17,14 +17,13 @@ class CreatePatrimoniosTable extends Migration
             $table->timestamps();
             $table->unsignedInteger('idCliente')->default(2);
             $table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
-            $table->string('fundos')->nullable();
-            $table->string('reservas')->nullable();
-            $table->string('inventario')->nullable();
-            $table->string('emergencia')->nullable();
-            $table->string('funeral')->nullable();
-            $table->string('outros')->nullable();
-            $table->string('total')->nullable();
-            $table->string('imoveis')->nullable();
+            $table->float('fundos')->nullable();
+            $table->float('reservas')->nullable();
+            $table->float('inventario')->nullable();
+            $table->float('emergencia')->nullable();
+            $table->float('funeral')->nullable();
+            $table->float('outros')->nullable();
+            $table->float('imoveis')->nullable();
             });
     }
 

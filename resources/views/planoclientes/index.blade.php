@@ -19,6 +19,7 @@
                                         <th>Created At</th>
                                         <th>Updated At</th>
                                         <th>IdCliente</th>
+                                        <th>TipoFamiliar</th>
                                         <th>Nome</th>
                                         <th>Risco</th>
                                         <th>Cpf</th>
@@ -64,12 +65,12 @@
                         "render": function ( data, type, row ) {
                             return '<a href="{{ url('/planoclientes') }}/'+row[0]+'/edit" class="btn btn-default">Update</a>';
                         },
-                        "targets": 9                    },
+                        "targets": 10                    },
                     {
                         "render": function ( data, type, row ) {
                             return '<a href="#" onclick="return doDelete('+row[0]+')" class="btn btn-danger">Delete</a>';
                         },
-                        "targets": 9+1
+                        "targets": 10+1
                     },
                 ]
             });

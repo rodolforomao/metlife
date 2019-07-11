@@ -17,9 +17,10 @@ class CreateInssfgtsprevidenciasegurosTable extends Migration
             $table->timestamps();
             $table->unsignedInteger('idCliente')->default(2);
             $table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
-            $table->string('tipoprincipalconjuge')->nullable();
-            $table->string('fgts')->nullable();
-            $table->string('inss')->nullable();
+            $table->string('tipoFamiliar')->nullable();
+            $table->float('fgts')->nullable();
+            $table->float('inss')->nullable();
+            $table->integer('idadeaposentadoria')->nullable();
             });
     }
 

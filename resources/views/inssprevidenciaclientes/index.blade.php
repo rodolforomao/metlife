@@ -19,6 +19,7 @@
                                         <th>Created At</th>
                                         <th>Updated At</th>
                                         <th>IdCliente</th>
+                                        <th>TipoFamiliar</th>
                                         <th>Previdencia</th>
                                         <th>Pgblvgbl</th>
                                         <th>Saldoacumulado</th>
@@ -63,12 +64,12 @@
                         "render": function ( data, type, row ) {
                             return '<a href="{{ url('/inssprevidenciaclientes') }}/'+row[0]+'/edit" class="btn btn-default">Update</a>';
                         },
-                        "targets": 8                    },
+                        "targets": 9                    },
                     {
                         "render": function ( data, type, row ) {
                             return '<a href="#" onclick="return doDelete('+row[0]+')" class="btn btn-danger">Delete</a>';
                         },
-                        "targets": 8+1
+                        "targets": 9+1
                     },
                 ]
             });

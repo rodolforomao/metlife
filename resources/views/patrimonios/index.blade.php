@@ -25,7 +25,6 @@
                                         <th>Emergencia</th>
                                         <th>Funeral</th>
                                         <th>Outros</th>
-                                        <th>Total</th>
                                         <th>Imoveis</th>
                                         <th style="width:50px"></th>
                     <th style="width:50px"></th>
@@ -67,12 +66,12 @@
                         "render": function ( data, type, row ) {
                             return '<a href="{{ url('/patrimonios') }}/'+row[0]+'/edit" class="btn btn-default">Update</a>';
                         },
-                        "targets": 12                    },
+                        "targets": 11                    },
                     {
                         "render": function ( data, type, row ) {
                             return '<a href="#" onclick="return doDelete('+row[0]+')" class="btn btn-danger">Delete</a>';
                         },
-                        "targets": 12+1
+                        "targets": 11+1
                     },
                 ]
             });

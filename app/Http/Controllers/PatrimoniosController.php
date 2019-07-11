@@ -63,7 +63,7 @@ class PatrimoniosController extends Controller
     // 1/2/18 - Jasmine Robinson Added Orderby Section for the Grid Results
     //------------------------------------
     $orderby = "";
-    $columns = array('id','created_at','updated_at','idCliente','fundos','reservas','inventario','emergencia','funeral','outros','total','imoveis',);
+    $columns = array('id','created_at','updated_at','idCliente','fundos','reservas','inventario','emergencia','funeral','outros','imoveis',);
     $order = $columns[$request->input('order.0.column')];
     $dir = $request->input('order.0.dir');
     $orderby = "Order By " . $order . " " . $dir;
@@ -138,9 +138,6 @@ class PatrimoniosController extends Controller
   
   
       $patrimonio->outros = $request->outros;
-  
-  
-      $patrimonio->total = $request->total;
   
   
       $patrimonio->imoveis = $request->imoveis;
