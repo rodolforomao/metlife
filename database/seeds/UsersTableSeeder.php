@@ -18,6 +18,11 @@ class UsersTableSeeder extends Seeder
                     'name'  =>  'Rodolfo Romão de Oliveira Neto',
                     'email'  =>  'rodolforomao@gmail.com',
                     'password'  =>  bcrypt('123456'),
+                ],
+                [
+                    'name'  =>  'Jordan Fernandes Aguiar da Silva',
+                    'email'  =>  'jordan_silva93@hotmail.com',
+                    'password'  =>  bcrypt('123456'),
                 ]
                 );
     }
