@@ -15,9 +15,7 @@ class CreatePerfilusuariosTable extends Migration
         Schema::create('perfilusuarios', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('idcliente')->nullable();
-            $table->boolean('permissao')->nullable();
-            $table->integer('idPerfil')->nullable();
+            $table->boolean('descricao')->nullable();
             });
     }
 

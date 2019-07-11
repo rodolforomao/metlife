@@ -19,7 +19,7 @@ class CreateUsuariopermitidosTable extends Migration
             $table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
             $table->boolean('permissao')->nullable();
             $table->unsignedInteger('idPerfil')->default(2);
-            $table->foreign('idPerfil')->references('id')->on('perfilusuario')->onDelete('cascade');
+            $table->foreign('idPerfil')->references('id')->on('perfilusuarios')->onDelete('cascade');
             });
     }
 
