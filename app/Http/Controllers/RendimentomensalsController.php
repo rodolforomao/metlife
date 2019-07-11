@@ -100,7 +100,8 @@ class RendimentomensalsController extends Controller {
         $rendimentomensal->idCliente = 4;
         $rendimentomensal->tipoFamiliar = "Principal";
         $rendimentomensal->remendimentosmensal = $request->ren_redimento_mensal_principal;
-        $rendimentomensal->outrasrendas = $request->ren_outras_principal;
+        $rendimentomensal->remendimentosmensal = str_replace(",", ".", str_replace(".", "", ($request->ren_redimento_mensal_principal)));
+        $rendimentomensal->outrasrendas = str_replace(",", ".", str_replace(".", "", ($request->ren_outras_principal)));
         $rendimentomensal->declaracaodeir = $request->declaracaodeir;
         $retorno = $rendimentomensal->save();
         return json_encode($retorno);
@@ -120,8 +121,8 @@ class RendimentomensalsController extends Controller {
 
         $rendimentomensal->idCliente = 4;
         $rendimentomensal->tipoFamiliar = "Conjugue";
-        $rendimentomensal->remendimentosmensal = $request->ren_redimento_mensal_conjugue;
-        $rendimentomensal->outrasrendas = $request->ren_outras_conjugue;
+        $rendimentomensal->remendimentosmensal = str_replace(",", ".", str_replace(".", "", ($request->ren_redimento_mensal_conjugue)));
+        $rendimentomensal->outrasrendas = str_replace(",", ".", str_replace(".", "", ($request->ren_outras_conjugue)));
         $rendimentomensal->declaracaodeir = $request->declaracaodeir_conjugue;
 
         $retorno = $rendimentomensal->save();

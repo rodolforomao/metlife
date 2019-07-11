@@ -107,7 +107,7 @@ class DadoscadastraisController extends Controller {
         $dadoscadastrai->celular = $request->dc_celular;
 
 //        $dadoscadastrai->idUser = $request->idUser;
-        $dadoscadastrai->idUser = 1;
+        $dadoscadastrai->idUser = 7;
         $retorno = $dadoscadastrai->save();
         if ($retorno == true) {
             $retorno = DB::getPdo()->lastInsertId();

@@ -251,7 +251,7 @@ $(document).ready(function () {
             data: formEducacaoFilhos,
             dataType: 'json',
             success: function (data) {
-//                $('#padraoVida_menu').click();
+                $('#padraoVidaida_menu').click();
             }, error: function (data) {
                 console.log(data);
             }
