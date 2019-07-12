@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Dadoscadastrai;
 use DB;
+use Auth;
 
 class DadoscadastraisController extends Controller {
 
@@ -107,6 +108,7 @@ class DadoscadastraisController extends Controller {
         $dadoscadastrai->celular = $request->dc_celular;
 
 //        $dadoscadastrai->idUser = $request->idUser;
+        $currentuserid = Auth::user()->id;
         $dadoscadastrai->idUser = 7;
         $retorno = $dadoscadastrai->save();
         if ($retorno == true) {
