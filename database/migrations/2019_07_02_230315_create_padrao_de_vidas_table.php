@@ -16,7 +16,7 @@ class CreatePadraoDeVidasTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->unsignedInteger('idCliente')->default(2);
-            $table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
+            //$table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
             $table->float('despezasgerais')->nullable();
             $table->float('moradia')->nullable();
             $table->float('servicos')->nullable();

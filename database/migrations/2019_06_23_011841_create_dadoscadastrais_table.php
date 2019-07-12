@@ -16,7 +16,7 @@ class CreateDadoscadastraisTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->unsignedInteger('idUser')->default(2);
-            $table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
+            //$table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
             $table->string('nomecompleto')->nullable();
             $table->string('cpf')->nullable();
             $table->date('datanascimento')->nullable();

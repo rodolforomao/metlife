@@ -16,7 +16,7 @@ class CreatePlanoprodutosTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->unsignedInteger('idCliente')->default(2);
-            $table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
+            //$table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
             $table->string('idproduto')->nullable();
             $table->string('vigencia')->nullable();
             $table->string('prazo')->nullable();
