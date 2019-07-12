@@ -81,17 +81,17 @@
             },
                     "targets": 1
             },
-//            {
-//            "render": function (data, type, row) {
-//            return '<a href="{{ url(' / dadoscadastrais') }}/' + row[0] + '/edit" class="btn btn-default">Update</a>';
-//            },
-//                    "targets": 12                    },
-            //{
-//            "render": function (data, type, row) {
-//            return '<a href="#" onclick="return doDelete(' + row[0] + ')" class="btn btn-danger">Delete</a>';
-//            },
-//                    "targets": 12 + 1
-//            },
+            {
+            "render": function (data, type, row) {
+            return '<a href="{{ url(' / dadoscadastrais') }}/' + row[0] + '/edit" class="btn btn-default">Update</a>';
+            },
+                    "targets": 12                    },
+            {
+            "render": function (data, type, row) {
+            return '<a href="#" onclick="return doDelete(' + row[0] + ')" class="btn btn-danger">Delete</a>';
+            },
+                    "targets": 12 + 1
+            },
             ]
     });
     });
@@ -104,9 +104,4 @@
     return false;
     }
 </script>
-@endsection
-
-
-@section('scripts')
-
 @endsection
