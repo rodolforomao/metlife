@@ -24,6 +24,12 @@ class UsersTableSeeder extends Seeder
                     'email'  =>  'jordan_silva93@hotmail.com',
                     'password'  =>  bcrypt('123456'),
                 ]
+                ,
+                [
+                    'name'  =>  'Gabriel Omamim',
+                    'email'  =>  'omamigabriel@gmail.com',
+                    'password'  =>  bcrypt('123456'),
+                ]
                 );
     }
 }

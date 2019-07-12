@@ -15,7 +15,8 @@ class CreatePlanovaloresTable extends Migration
         Schema::create('planovalores', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('idcliente')->nullable();
+            $table->unsignedInteger('idCliente')->default(2);
+            //$table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
             $table->string('tipoFamiliar')->nullable();
             $table->float('vigencia')->nullable();
             $table->float('prazo')->nullable();
