@@ -16,7 +16,7 @@ class CreateDadosfamiliaresTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->unsignedInteger('idCliente')->default(2);
-            $table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
+            //$table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
             $table->string('tipoFamiliar')->nullable();
             $table->string('nome')->nullable();
             $table->date('datanascimento')->nullable();
