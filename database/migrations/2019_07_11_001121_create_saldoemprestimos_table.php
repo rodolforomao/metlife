@@ -15,7 +15,8 @@ class CreateSaldoemprestimosTable extends Migration
         Schema::create('saldoemprestimos', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->unsignedInteger('idCliente')->default(2);
+            $table->integer('idCliente')->nullable();
+            //$table->unsignedInteger('idCliente')->default(2);
             //$table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
             $table->string('descoberto')->nullable();
             $table->string('maiorperiodo')->nullable();

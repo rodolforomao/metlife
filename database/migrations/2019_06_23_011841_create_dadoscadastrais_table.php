@@ -15,7 +15,8 @@ class CreateDadoscadastraisTable extends Migration
         Schema::create('dadoscadastrais', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->unsignedInteger('idUser')->default(2);
+            $table->integer('idCliente')->nullable();
+            //$table->unsignedInteger('idUser')->default(2);
             //$table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
             $table->string('nomecompleto')->nullable();
             $table->string('cpf')->nullable();

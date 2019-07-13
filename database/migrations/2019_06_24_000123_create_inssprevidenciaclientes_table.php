@@ -15,7 +15,8 @@ class CreateInssprevidenciaclientesTable extends Migration
         Schema::create('inssprevidenciaclientes', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->unsignedInteger('idCliente')->default(2);
+            $table->integer('idCliente')->nullable();
+            //$table->unsignedInteger('idCliente')->default(2);
             //$table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
             $table->string('tipoFamiliar')->nullable();
             $table->float('previdencia')->nullable();

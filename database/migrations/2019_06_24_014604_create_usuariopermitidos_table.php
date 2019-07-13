@@ -15,8 +15,9 @@ class CreateUsuariopermitidosTable extends Migration
         Schema::create('usuariopermitidos', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->unsignedInteger('idUser')->default(2);
-            //$table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('idCliente')->nullable();
+            //$table->unsignedInteger('idCliente')->default(2);
+            //$table->foreign('idCliente')->references('id')->on('users')->onDelete('cascade');
             $table->boolean('permissao')->nullable();
             $table->unsignedInteger('idPerfil')->default(2);
             $table->foreign('idPerfil')->references('id')->on('perfilusuarios')->onDelete('cascade');

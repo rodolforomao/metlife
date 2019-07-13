@@ -15,7 +15,8 @@ class CreateEmprestimounitariosTable extends Migration
         Schema::create('emprestimounitarios', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->unsignedInteger('idCliente')->default(2);
+            $table->integer('idCliente')->nullable();
+            //$table->unsignedInteger('idCliente')->default(2);
             //$table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
             $table->float('saldodevedor')->nullable();
             $table->float('possuiseguro')->nullable();

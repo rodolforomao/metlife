@@ -15,7 +15,8 @@ class CreateEducacaosTable extends Migration
         Schema::create('educacaos', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->unsignedInteger('idCliente')->default(2);
+            $table->integer('idCliente')->nullable();
+            //$table->unsignedInteger('idCliente')->default(2);
             //$table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
             $table->string('apelidofilho')->nullable();
             $table->string('idadeserie')->nullable();

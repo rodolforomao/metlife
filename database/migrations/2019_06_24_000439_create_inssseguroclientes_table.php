@@ -15,7 +15,8 @@ class CreateInssseguroclientesTable extends Migration
         Schema::create('inssseguroclientes', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->unsignedInteger('idCliente')->default(2);
+            $table->integer('idCliente')->nullable();
+            //$table->unsignedInteger('idCliente')->default(2);
             //$table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
             $table->string('tipoFamiliar')->nullable();
             $table->float('segurodevida')->nullable();
