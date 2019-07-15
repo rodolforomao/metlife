@@ -94,7 +94,18 @@ Route::post('/educacao_filhos/cadastro', 'EducacaosController@store');
 Route::post('/padraoVida/cadastro', 'Padrao_de_vidasController@store');
 
 //Emprestimos
+Route::post('/saldoEmprestimos/cadastro', 'SaldoemprestimosController@store');
 Route::post('/emprestimos/cadastro', 'EmprestimosController@store');
+
+//Seguros e Previdencia
+Route::post('/FGST/cadastro', 'InssfgtsprevidenciasegurosController@store');
+Route::post('/previdencia/cadastro', 'InssprevidenciaclientesController@store');
+Route::post('/seguros/cadastro', 'InssseguroclientesController@store');
+
+//Planos
+Route::post('/planos/cadastro', 'PlanoprodutosController@store');
+
+
 Route::resource('saldoemprestimo', 'saldoemprestimoController');
 Route::resource('emprestimounitario', 'emprestimounitarioController');
 Route::resource('emprestimounitario', 'emprestimounitarioController');

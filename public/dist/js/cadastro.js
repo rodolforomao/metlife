@@ -117,6 +117,16 @@ function openPlano() {
     $('#padrao_vida').hide();
     $('#emprestimos').hide();
     $('#seguros_previdencias').hide();
+
+
+    $("#plano_nome_principal").text($("#dc_nome_completo").val());
+    $("#plano_cpf_principal").text($("#cpf").val());
+    $("#plano_sexo_principal").text($("#sexo").val());
+    $("#plano_nascimento_principal").text($("#data_nascimento").val());
+
+    $("#plano_nome_conjugue").text($("#df_conjuje").val());
+    $("#plano_nascimento_conjugue").text($("#data_nascimento_conjugue").val());
+
 }
 
 function formatar(mascara, documento) {
@@ -144,10 +154,11 @@ $(document).ready(function () {
             data: formDadosCadastrais,
             dataType: 'json',
             success: function (data) {
+                $.notify('Cadastrado com sucesso!', "success");
                 $("#idCliente").val(data);
                 $('#dados_familiares_menu').click();
             }, error: function (data) {
-                console.log(data);
+                $.notify('Falha no cadastro', "warning");
             }
         });
     });
@@ -173,7 +184,7 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (data) {
             }, error: function (data) {
-                console.log(data);
+                $.notify('Falha no cadastro', "warning");
             }
         });
         //Filhos--------------------------------------------------------------
@@ -182,17 +193,24 @@ $(document).ready(function () {
         tipoFamiliar.value = "Filho";
         formDadosFamiliaresFilhos.push(idCliente);
         formDadosFamiliaresFilhos.push(tipoFamiliar);
-        $.ajax({
-            type: 'POST',
-            url: '/dadosFamiliares/cadastro',
-            data: formDadosFamiliaresFilhos,
-            dataType: 'json',
-            success: function (data) {
-                $('#rendimentos_menu').click();
-            }, error: function (data) {
-                console.log(data);
-            }
-        });
+        if (formDadosFamiliaresFilhos.length > 2) {
+            $.ajax({
+                type: 'POST',
+                url: '/dadosFamiliares/cadastro',
+                data: formDadosFamiliaresFilhos,
+                dataType: 'json',
+                success: function (data) {
+                    $.notify('Cadastrado com sucesso!', "success");
+                    $('#rendimentos_menu').click();
+                }, error: function (data) {
+                    $.notify('Falha no cadastro', "warning");
+                }
+            });
+        } else {
+            $.notify('Cadastrado com sucesso!', "success");
+            $('#rendimentos_menu').click();
+        }
+
     });
 
     //Rendimentos --------------------------------------------------------------
@@ -208,9 +226,10 @@ $(document).ready(function () {
             data: formRendimento,
             dataType: 'json',
             success: function (data) {
+                $.notify('Cadastrado com sucesso!', "success");
                 $('#patrimonio_menu').click();
             }, error: function (data) {
-                console.log(data);
+                $.notify('Falha no cadastro', "warning");
             }
         });
     });
@@ -231,8 +250,9 @@ $(document).ready(function () {
                 var valor = 0;
                 $("#valorTotal_patrimonio").text("R$" + valor.toFixed(2).replace(".", ",").replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
                 $('#educacaoFilhos_menu').click();
+                $.notify('Cadastrado com sucesso!', "success");
             }, error: function (data) {
-                console.log(data);
+                $.notify('Falha no cadastro', "warning");
             }
         });
     });
@@ -251,9 +271,10 @@ $(document).ready(function () {
             data: formEducacaoFilhos,
             dataType: 'json',
             success: function (data) {
+                $.notify('Cadastrado com sucesso!', "success");
                 $('#padraoVidaida_menu').click();
             }, error: function (data) {
-                console.log(data);
+                $.notify('Falha no cadastro', "warning");
             }
         });
     });
@@ -271,31 +292,242 @@ $(document).ready(function () {
             data: formPadraoVida,
             dataType: 'json',
             success: function (data) {
+                $.notify('Cadastrado com sucesso!', "success");
                 $('#emprestimos_menu').click();
             }, error: function (data) {
-                console.log(data);
+                $.notify('Falha no cadastro', "warning");
             }
         });
     });
 
     //Empréstimos --------------------------------------------------------------
     $("#insereEmprestimos").click(function () {
+        var formSaldoEmprestimos = $("#formSaldoEmprestimos").serializeArray();
+        var idCliente = new Object();
+        idCliente.name = "idCliente";
+        idCliente.value = $("#idCliente").val();
+        formSaldoEmprestimos.push(idCliente);
+        $.ajax({
+            type: 'POST',
+            url: '/saldoEmprestimos/cadastro',
+            data: formSaldoEmprestimos,
+            dataType: 'json',
+            success: function (data) {
+            }, error: function (data) {
+                $.notify('Falha no cadastro', "warning");
+            }
+        });
+
         var formEmprestimos = $("#formEmprestimos").serializeArray();
         var idCliente = new Object();
         idCliente.name = "idCliente";
         idCliente.value = $("#idCliente").val();
         formEmprestimos.push(idCliente);
+        if (formEmprestimos.length > 2) {
+            $.ajax({
+                type: 'POST',
+                url: '/emprestimos/cadastro',
+                data: formEmprestimos,
+                dataType: 'json',
+                success: function (data) {
+                    $.notify('Cadastrado com sucesso!', "success");
+                    $('#seguro_previdencia_menu').click();
+                }, error: function (data) {
+                    $.notify('Falha no cadastro', "warning");
+                }
+            });
+        } else {
+            $.notify('Cadastrado com sucesso!', "success");
+            $('#seguro_previdencia_menu').click();
+        }
+
+    });
+
+    //Seguroa e Previdências ---------------------------------------------------
+    $("#insereSeguroPrevidencia").click(function () {
+        var idCliente = new Object();
+        var tipoFamiliar = new Object();
+
+        //PRINCIPAL ------------------------------------------------------------
+        var formPrincipalSeguros = $("#formPrincipalSeguros").serializeArray();
+
+        idCliente.name = "idCliente";
+        idCliente.value = $("#idCliente").val();
+
+        tipoFamiliar.name = "tipoFamiliar";
+        tipoFamiliar.value = "Principal";
+
+        formPrincipalSeguros.push(idCliente);
+        formPrincipalSeguros.push(tipoFamiliar);
+
         $.ajax({
             type: 'POST',
-            url: '/emprestimos/cadastro',
-            data: formEmprestimos,
+            url: '/FGST/cadastro',
+            data: formPrincipalSeguros,
             dataType: 'json',
             success: function (data) {
-                $('#emprestimos_menu').click();
             }, error: function (data) {
-                console.log(data);
+                $.notify('Falha no cadastro', "warning");
             }
         });
+        var formPrevidenciaPrincipal = $("#formPrevidenciaPrincipal").serializeArray();
+        if (formPrevidenciaPrincipal.length > 0) {
+            idCliente.name = "idCliente";
+            idCliente.value = $("#idCliente").val();
+
+            tipoFamiliar.name = "tipoFamiliar";
+            tipoFamiliar.value = "Principal";
+
+            formPrevidenciaPrincipal.push(idCliente);
+            formPrevidenciaPrincipal.push(tipoFamiliar);
+
+            $.ajax({
+                type: 'POST',
+                url: '/previdencia/cadastro',
+                data: formPrevidenciaPrincipal,
+                dataType: 'json',
+                success: function (data) {
+                }, error: function (data) {
+                    $.notify('Falha no cadastro', "warning");
+                }
+            });
+        }
+        var formSeguroPrincipal = $("#formSeguroPrincipal").serializeArray();
+        if (formSeguroPrincipal.length > 0) {
+            idCliente.name = "idCliente";
+            idCliente.value = $("#idCliente").val();
+
+            tipoFamiliar.name = "tipoFamiliar";
+            tipoFamiliar.value = "Principal";
+
+            formSeguroPrincipal.push(idCliente);
+            formSeguroPrincipal.push(tipoFamiliar);
+
+            $.ajax({
+                type: 'POST',
+                url: '/seguros/cadastro',
+                data: formSeguroPrincipal,
+                dataType: 'json',
+                success: function (data) {
+                }, error: function (data) {
+                    $.notify('Falha no cadastro', "warning");
+                }
+            });
+        }
+
+        //CONJUGUE -------------------------------------------------------------
+
+        var formConjugueSeguros = $("#formConjugueSeguros").serializeArray();
+        idCliente.name = "idCliente";
+        idCliente.value = $("#idCliente").val();
+
+        tipoFamiliar.name = "tipoFamiliar";
+        tipoFamiliar.value = "Conjugue";
+
+        formConjugueSeguros.push(idCliente);
+        formConjugueSeguros.push(tipoFamiliar);
+
+        $.ajax({
+            type: 'POST',
+            url: '/FGST/cadastro',
+            data: formConjugueSeguros,
+            dataType: 'json',
+            success: function (data) {
+            }, error: function (data) {
+                $.notify('Falha no cadastro', "warning");
+            }
+        });
+
+        var formPrevidenciaConjugue = $("#formPrevidenciaConjugue").serializeArray();
+        if (formPrevidenciaConjugue.length > 0) {
+            idCliente.name = "idCliente";
+            idCliente.value = $("#idCliente").val();
+
+            tipoFamiliar.name = "tipoFamiliar";
+            tipoFamiliar.value = "Conjugue";
+
+            formPrevidenciaConjugue.push(idCliente);
+            formPrevidenciaConjugue.push(tipoFamiliar);
+
+            $.ajax({
+                type: 'POST',
+                url: '/previdencia/cadastro',
+                data: formPrevidenciaConjugue,
+                dataType: 'json',
+                success: function (data) {
+                }, error: function (data) {
+                    $.notify('Falha no cadastro', "warning");
+                }
+            });
+        }
+
+        var formSeguroConjugue = $("#formSeguroConjugue").serializeArray();
+        if (formSeguroConjugue.length > 0) {
+            idCliente.name = "idCliente";
+            idCliente.value = $("#idCliente").val();
+
+            tipoFamiliar.name = "tipoFamiliar";
+            tipoFamiliar.value = "Conjugue";
+
+            formSeguroConjugue.push(idCliente);
+            formSeguroConjugue.push(tipoFamiliar);
+
+            $.ajax({
+                type: 'POST',
+                url: '/seguros/cadastro',
+                data: formSeguroConjugue,
+                dataType: 'json',
+                success: function (data) {
+                }, error: function (data) {
+                    $.notify('Falha no cadastro', "warning");
+                }
+            });
+        }
+        $.notify('Cadastrado com sucesso!', "success");
+        $('#plano_menu').click();
+    });
+
+    //Planos  ------------------------------------------------------------------
+    $("#inserirPlanos").click(function () {
+        var idCliente = new Object();
+        var tipoFamiliar = new Object();
+        idCliente.name = "idCliente";
+        idCliente.value = $("#idCliente").val();
+        
+        var formPlanoPrincipal = $("#formPlanoPrincipal").serializeArray();
+        tipoFamiliar.name = "tipoFamiliar";
+        tipoFamiliar.value = "Principal";
+
+        formPlanoPrincipal.push(idCliente);
+        formPlanoPrincipal.push(tipoFamiliar);
+        $.ajax({
+            type: 'POST',
+            url: '/planos/cadastro',
+            data: formPlanoPrincipal,
+            dataType: 'json',
+            success: function (data) {
+            }, error: function (data) {
+                $.notify('Falha no cadastro', "warning");
+            }
+        });
+
+        var formPlanoConjugue = $("#formPlanoConjugue").serializeArray();
+        tipoFamiliar.name = "tipoFamiliar";
+        tipoFamiliar.value = "Conjugue";
+
+        formPlanoConjugue.push(idCliente);
+        formPlanoConjugue.push(tipoFamiliar);
+        $.ajax({
+            type: 'POST',
+            url: '/planos/cadastro',
+            data: formPlanoConjugue,
+            dataType: 'json',
+            success: function (data) {
+            }, error: function (data) {
+                $.notify('Falha no cadastro', "warning");
+            }
+        });
+        $.notify('Cadastrado com sucesso!', "success");
     });
 });
 
@@ -390,7 +622,7 @@ function somaTotalPatriomio() {
 var qtdeCamposEducacao = 0;
 function addCampoFilhoEducacao() {
     var html = "";
-    html += "<div class='row' id='filho" + qtdeCamposEducacao + "'>";
+    html += "<div class='row' id='filhoEducacao" + qtdeCamposEducacao + "'>";
     html += "   <div class='col-md-6'>";
     html += "       <div class='form-group'>";
     html += "           <label>Idade / Série</label>";
@@ -487,8 +719,231 @@ function addCampoFilhoEducacao() {
 }
 //------------------------------------------------------------------------------
 function removerCampoFilhoEducacao(id) {
-    $("#divEducacaoFilhos")[0].removeChild($("#filho" + id)[0]);
+    $("#divEducacaoFilhos")[0].removeChild($("#filhoEducacao" + id)[0]);
     qtdeCamposEducacao--;
+}
+//EMPRESTIMOS ------------------------------------------------------------------
+var qtdeCamposEmprestimo = 0;
+function addCampoEmprestimo() {
+    var html = "";
+    html += "<div class='row' id='emprestimo" + qtdeCamposEmprestimo + "'>";
+    html += "   <div class='col-md-2'>";
+    html += "       <div class='form-group'>";
+    html += "           <label>Saldo Devedor</label>";
+    html += "           <div class='input-group date'>";
+    html += "               <div class='input-group-prepend'>";
+    html += "                  <span class='input-group-text'>R$</span>";
+    html += "               </div>";
+    html += "               <input name='saldo_devedor[]' class='form-control' placeholder='Saldo Devedor'";
+    html += "                   onkeydown='FormataMoeda(this, 20, event)' onkeypress='return maskKeyPress(event)'>";
+    html += "           </div>";
+    html += "       </div>";
+    html += "   </div>";
+    html += "   <div class='col-md-2'>";
+    html += "       <div class='form-group'>";
+    html += "           <label>Possui Seguro</label>";
+    html += "           <input type='text' class='form-control' id='possui_seguro[]' placeholder='Possui Seguro'>";
+    html += "       </div>";
+    html += "   </div>";
+    html += "   <div class='col-md-2'>";
+    html += "       <div class='form-group'>";
+    html += "           <label>Parcela Mensal</label>";
+    html += "           <div class='input-group date'>";
+    html += "               <div class='input-group-prepend'>";
+    html += "                  <span class='input-group-text'>R$</span>";
+    html += "               </div>";
+    html += "               <input name='parcela_mensal[]' class='form-control' placeholder='Parcela Mensal'";
+    html += "                   onkeydown='FormataMoeda(this, 20, event)' onkeypress='return maskKeyPress(event)'>";
+    html += "           </div>";
+    html += "       </div>";
+    html += "   </div>";
+    html += "   <div class='col-md-2'>";
+    html += "       <div class='form-group'>";
+    html += "           <label>Prazo Residual</label>";
+    html += "           <input type='text' class='form-control' name='prazo_residual[]' placeholder='(meses)'>";
+    html += "       </div>";
+    html += "   </div>";
+    html += "       <div class='col-md-3'>";
+    html += "           <div class='form-group'>";
+    html += "               <label>Saldo Devedor Descoberto</label>";
+    html += "               <input type='text' class='form-control' name='saldo_devedor_emprestimo[]' placeholder='Saldo Devedor Descoberto'>";
+    html += "           </div>";
+    html += "       </div>";
+    html += "   <div class='col-md-1'>";
+    html += "       <input type='button' value='-' class='btn btn-default' style='position: relative;top: 30px;' onclick='removerCampoEmprestimo(" + qtdeCamposEmprestimo + ")'/>";
+    html += "   </div>";
+    html += "</div>";
+    $("#formEmprestimos").append(html);
+    qtdeCamposEmprestimo++;
+}
+//------------------------------------------------------------------------------
+function removerCampoEmprestimo(id) {
+    $("#formEmprestimos")[0].removeChild($("#emprestimo" + id)[0]);
+    qtdeCamposEmprestimo--;
+}
+//SEGURO E PREVIDENCIA ---------------------------------------------------------
+var qtdCamposPrevidenciaPrincipal = 0;
+function addCampoPrevidenciaPrincipal() {
+    var html = "";
+    html += "<div class='row' id='previdenciaPrincipal" + qtdCamposPrevidenciaPrincipal + "'>";
+    html += "   <div class='col-md-3'>";
+    html += "       <div class='form-group'>";
+    html += "           <label>Previdência</label>";
+    html += "           <input type='text' class='form-control' name='previdencia[]' placeholder='Previdência'>";
+    html += "       </div>";
+    html += "   </div>";
+    html += "   <div class='col-md-2'>";
+    html += "       <div class='form-group'>";
+    html += "           <label>PGBL/VGBL</label>";
+    html += "           <input type='text' class='form-control' name='pglb_vgbl[]' placeholder='PGBL/VGBL'>";
+    html += "       </div>";
+    html += "   </div>";
+    html += "   <div class='col-md-3'>";
+    html += "       <div class='form-group'>";
+    html += "           <label>Saldo Acumulado R$</label>";
+    html += "           <div class='input-group date'>";
+    html += "               <div class='input-group-prepend'>";
+    html += "                   <span class='input-group-text'>R$</span>";
+    html += "               </div>";
+    html += "               <input type='text' class='form-control' name='saldo_acumulado[]' placeholder='Saldo Acumulado R$'";
+    html += "                   onkeydown='FormataMoeda(this, 20, event)' onkeypress='return maskKeyPress(event)'>";
+    html += "           </div>";
+    html += "       </div>";
+    html += "   </div>";
+    html += "   <div class='col-md-3'>";
+    html += "       <div class='form-group'>";
+    html += "           <label>Contribuição Anual</label>";
+    html += "           <input type='text' class='form-control' name='contribuicao_anual[]' placeholder='Contribuição Anual'>";
+    html += "       </div>";
+    html += "   </div>";
+    html += "   <div class='col-md-1'>";
+    html += "       <input type='button' value='-' class='btn btn-default' style='position: relative;top: 30px;' onclick='removerCampoPrevidenciaPrincipal(" + qtdCamposPrevidenciaPrincipal + ")'/>";
+    html += "   </div>";
+    html += "</div>";
+    $("#previdencia_principal").append(html);
+    qtdCamposPrevidenciaPrincipal++;
+}
+//------------------------------------------------------------------------------
+function removerCampoPrevidenciaPrincipal(id) {
+    $("#previdencia_principal")[0].removeChild($("#previdenciaPrincipal" + id)[0]);
+    qtdCamposPrevidenciaPrincipal--;
+}
+//------------------------------------------------------------------------------
+var qtdCamposPrevidenciaConjugue = 0;
+function addCampoPrevidenciaConjugue() {
+    var html = "";
+    html += "<div class='row' id='previdenciaConjugue" + qtdCamposPrevidenciaConjugue + "'>";
+    html += "   <div class='col-md-3'>";
+    html += "       <div class='form-group'>";
+    html += "           <label>Previdência</label>";
+    html += "           <input type='text' class='form-control' name='previdencia[]' placeholder='Previdência'>";
+    html += "       </div>";
+    html += "   </div>";
+    html += "   <div class='col-md-2'>";
+    html += "       <div class='form-group'>";
+    html += "           <label>PGBL/VGBL</label>";
+    html += "           <input type='text' class='form-control' name='pglb_vgbl[]' placeholder='PGBL/VGBL'>";
+    html += "       </div>";
+    html += "   </div>";
+    html += "   <div class='col-md-3'>";
+    html += "       <div class='form-group'>";
+    html += "           <label>Saldo Acumulado R$</label>";
+    html += "           <div class='input-group date'>";
+    html += "               <div class='input-group-prepend'>";
+    html += "                   <span class='input-group-text'>R$</span>";
+    html += "               </div>";
+    html += "               <input type='text' class='form-control' name='saldo_acumulado[]' placeholder='Saldo Acumulado R$'";
+    html += "                   onkeydown='FormataMoeda(this, 20, event)' onkeypress='return maskKeyPress(event)'>";
+    html += "           </div>";
+    html += "       </div>";
+    html += "   </div>";
+    html += "   <div class='col-md-3'>";
+    html += "       <div class='form-group'>";
+    html += "           <label>Contribuição Anual</label>";
+    html += "           <input type='text' class='form-control' name='contribuicao_anual[]' placeholder='Contribuição Anual'>";
+    html += "       </div>";
+    html += "   </div>";
+    html += "   <div class='col-md-1'>";
+    html += "       <input type='button' value='-' class='btn btn-default' style='position: relative;top: 30px;' onclick='removerCampoPrevidenciaConjugue(" + qtdCamposPrevidenciaConjugue + ")'/>";
+    html += "   </div>";
+    html += "</div>";
+    $("#previdencia_conjugue").append(html);
+    qtdCamposPrevidenciaConjugue++;
+}
+//------------------------------------------------------------------------------
+function removerCampoPrevidenciaConjugue(id) {
+    $("#previdencia_conjugue")[0].removeChild($("#previdenciaConjugue" + id)[0]);
+    qtdCamposPrevidenciaConjugue--;
+}
+//------------------------------------------------------------------------------
+var qtdCamposSeguroPrincipal = 0;
+function addCampoSeguroPrincipal() {
+    var html = "";
+    html += "<div class='row' id='seguroPrincipal" + qtdCamposSeguroPrincipal + "'>";
+    html += "   <div class='col-md-4'>";
+    html += "       <div class='form-group'>";
+    html += "           <label>Seguro de Vida</label>";
+    html += "           <input type='text' class='form-control' name='seguro_vida[]' placeholder='Seguro de Vida'>";
+    html += "       </div>";
+    html += "   </div>";
+    html += "   <div class='col-md-4'>";
+    html += "       <div class='form-group'>";
+    html += "           <label>Capital Segurado</label>";
+    html += "           <input type='text' class='form-control' name='capital_segurado[]' placeholder='Capital Segurado'>";
+    html += "       </div>";
+    html += "   </div>";
+    html += "   <div class='col-md-3'>";
+    html += "       <div class='form-group'>";
+    html += "           <label>Prêmio Mensal</label>";
+    html += "           <input type='text' class='form-control' name='premio_mensal[]' placeholder='Prêmio Mensal'>";
+    html += "       </div>";
+    html += "   </div>";
+    html += "   <div class='col-md-1'>";
+    html += "       <input type='button' value='-' class='btn btn-default' style='position: relative;top: 30px;' onclick='removerCampoSeguroPrincipal(" + qtdCamposSeguroPrincipal + ")'/>";
+    html += "   </div>";
+    html += "</div>";
+    $("#seguro_principal").append(html);
+    qtdCamposSeguroPrincipal++;
+}
+//------------------------------------------------------------------------------
+function removerCampoSeguroPrincipal(id) {
+    $("#seguro_principal")[0].removeChild($("#seguroPrincipal" + id)[0]);
+    qtdCamposSeguroPrincipal--;
+}
+//------------------------------------------------------------------------------
+var qtdCamposSeguroConjugue = 0;
+function addCampoSeguroConjugue() {
+    var html = "";
+    html += "<div class='row' id='seguroConjugue" + qtdCamposSeguroConjugue + "'>";
+    html += "   <div class='col-md-4'>";
+    html += "       <div class='form-group'>";
+    html += "           <label>Seguro de Vida</label>";
+    html += "           <input type='text' class='form-control' name='seguro_vida[]' placeholder='Seguro de Vida'>";
+    html += "       </div>";
+    html += "   </div>";
+    html += "   <div class='col-md-4'>";
+    html += "       <div class='form-group'>";
+    html += "           <label>Capital Segurado</label>";
+    html += "           <input type='text' class='form-control' name='capital_segurado[]' placeholder='Capital Segurado'>";
+    html += "       </div>";
+    html += "   </div>";
+    html += "   <div class='col-md-3'>";
+    html += "       <div class='form-group'>";
+    html += "           <label>Prêmio Mensal</label>";
+    html += "           <input type='text' class='form-control' name='premio_mensal[]' placeholder='Prêmio Mensal'>";
+    html += "       </div>";
+    html += "   </div>";
+    html += "   <div class='col-md-1'>";
+    html += "       <input type='button' value='-' class='btn btn-default' style='position: relative;top: 30px;' onclick='removerCampoSeguroConjugue(" + qtdCamposSeguroConjugue + ")'/>";
+    html += "   </div>";
+    html += "</div>";
+    $("#seguro_conjugue").append(html);
+    qtdCamposSeguroConjugue++;
+}
+//------------------------------------------------------------------------------
+function removerCampoSeguroConjugue(id) {
+    $("#seguro_conjugue")[0].removeChild($("#seguroConjugue" + id)[0]);
+    qtdCamposSeguroConjugue--;
 }
 
 

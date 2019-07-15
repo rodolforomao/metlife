@@ -84,7 +84,7 @@ class EmprestimosController extends Controller {
         echo json_encode($ret);
     }
 
-    public function update(Request $request) {
+    public function update(Request $request, $id) {
         //
         /* $this->validate($request, [
           'name' => 'required|max:255',
@@ -96,42 +96,13 @@ class EmprestimosController extends Controller {
             $emprestimo = new Emprestimo;
         }
 
-
-
         $emprestimo->id = $request->id ?: 0;
-
-
-        $emprestimo->created_at = $request->created_at;
-
-
-        $emprestimo->updated_at = $request->updated_at;
-
-
-        $emprestimo->idUser = $request->idUser;
-
-
-        $emprestimo->maiorperiodoparaemprestimofinananos = $request->maiorperiodoparaemprestimofinananos;
-
-
-        $emprestimo->emprestimos = $request->emprestimos;
-
-
-        $emprestimo->valor3 = $request->valor3;
-
-
-        $emprestimo->descobertoemprestimofinanciamento = $request->descobertoemprestimofinanciamento;
-
-
-        $emprestimo->valor1 = $request->valor1;
-
-
-        $emprestimo->n1 = $request->n1;
-
-
-        $emprestimo->valor2 = $request->valor2;
-
-
-        $emprestimo->n2 = $request->n2;
+        $emprestimo->idCliente = $request->idCliente;
+        $emprestimo->saldodevedor = str_replace(",", ".", str_replace(".", "", ($request->saldo_devedor[$id])));
+        $emprestimo->possuiseguro = $request->possui_seguro[$id];
+        $emprestimo->parcelamensal = str_replace(",", ".", str_replace(".", "", ($request->parcela_mensal[$id])));
+        $emprestimo->prazoresidual = $request->prazo_residual[$id];
+        $emprestimo->saldodevedordescoberto = str_replace(",", ".", str_replace(".", "", ($request->saldo_devedor_emprestimo[$id])));
 
         //$emprestimo->user_id = $request->user()->id;
         $emprestimo->save();
@@ -140,7 +111,11 @@ class EmprestimosController extends Controller {
     }
 
     public function store(Request $request) {
-        return $this->update($request);
+        $count = count($request->saldo_devedor_emprestimo);
+        for ($i = 0; $i < $count; $i++) {
+            $this->update($request, $i);
+        }
+        return ($request);
     }
 
     public function destroy(Request $request, $id) {

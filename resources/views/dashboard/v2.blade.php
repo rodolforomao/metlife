@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+<link rel="stylesheet" href="/dist/plugins/notify/notify.css">
 
 <div class="content-wrapper">
 
@@ -90,7 +91,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="javascript:void(0)" onClick="openSegurosPrevidencias()" class="nav-link">
+                                    <a href="javascript:void(0)" id="seguro_previdencia_menu" onClick="openSegurosPrevidencias()" class="nav-link">
                                         <i class="nav-icon fa fa-folder-open"></i>
                                         <p>
                                             Seguros e Previdências
@@ -99,7 +100,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="javascript:void(0)" onClick="openPlano()" class="nav-link">
+                                    <a href="javascript:void(0)" id="plano_menu" onClick="openPlano()" class="nav-link">
                                         <i class="nav-icon fa fa-plus-circle"></i>
                                         <p>
                                             Plano
@@ -132,7 +133,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>CPF</label>
-                                            <input type="text" class="form-control" name="cpf" maxlength="14" OnKeyPress="formatar('###.###.###-##', this)">
+                                            <input type="text" class="form-control" id="cpf" name="cpf" maxlength="14" OnKeyPress="formatar('###.###.###-##', this)">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -638,8 +639,8 @@
                                 Emprestimos
                             </h3>
                         </div>
-                        <form role="form" id="formEmprestimos">
-                            <div class="card-body">
+                        <div class="card-body">
+                            <form role="form" id="formSaldoEmprestimos">
                                 <div class="row">
                                     <div class="col-6">
                                         <label>Descoberto Emprestimo/Financiamento </label>
@@ -653,73 +654,34 @@
                                     </div>
                                     <div class="col-6">
                                         <label>Maior Período para Emprestimo/Finan. (Anos)</label> 
-                                        <div class="input-group date">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">R$</span>
-                                            </div>
-                                            <input id="emp_perido" name="emp_perido" class="form-control" placeholder="Maior Período para Emprestimo/Finan. (Anos)"
-                                                   onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="somaTotalPatriomio()">
-                                        </div>
+                                        <input id="emp_perido" name="emp_perido" class="form-control" placeholder="Maior Período para Emprestimo/Finan. (Anos)">
                                     </div>
                                 </div>
-                                <br>
+                            </form>
+                            <br>
+                            <form role="form" id="formEmprestimos">
                                 <div class="row">
                                     <div class="col-md-12 border-bottom">
-                                        <h3>Emprestimos <button type="button" class="btn btn-sm btn-info addDivSeguro">+</button></h3>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label>Saldo Devedor</label>
-                                            <input type="text" class="form-control" id="emp_valor" placeholder="Saldo Devedor">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label>Possui Seguro</label>
-                                            <input type="text" class="form-control" id="emp_num" placeholder="Possui Seguro">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label>Parcela Mensal</label>
-                                            <input type="text" class="form-control" id="emp_valor2" placeholder="Parcela Mensal">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label>Prazo Residual</label>
-                                            <input type="text" class="form-control" id="emp_num2" placeholder="(meses)">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>Saldo Devedor Descoberto</label>
-                                            <input type="text" class="form-control" id="emp_valor3" placeholder="Saldo Devedor Descoberto">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <input type="button" value="-" class="btn btn-default" style="position: relative;top: 30px;"/>
+                                        <h3>Emprestimos <button type="button" class="btn btn-sm btn-info addDivSeguro" onclick="addCampoEmprestimo()">+</button></h3>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12 border-top">
-                                        <label>Total </label>
-                                        <div class="row">
-                                            <div class="col-2"><span class="pull-right">R$ 0,00</span></div>
-                                            <div class="col-2"><span class="pull-right">0</span></div>
-                                            <div class="col-2"><span class="pull-right">R$ 0,00</span></div>
-                                            <div class="col-2"><span class="pull-right">0</span></div>
-                                            <div class="col-3"><span class="pull-right">R$ 0,00</span></div>
-                                        </div>
-                                    </div>
-
-                                </div>                  
-
-                            </div>
-                            <div class="card-footer">
-                                <button type="button" class="btn btn-primary" id="insereEmprestimos">Salvar</button>
-                            </div>
-                        </form>  
+                            </form>  
+                            <!--                            <div class="row">
+                                                            <div class="col-md-12 border-top">
+                                                                <label>Total </label>
+                                                                <div class="row">
+                                                                    <div class="col-2"><span class="pull-right">R$ 0,00</span></div>
+                                                                    <div class="col-2"><span class="pull-right">0</span></div>
+                                                                    <div class="col-2"><span class="pull-right">R$ 0,00</span></div>
+                                                                    <div class="col-2"><span class="pull-right">0</span></div>
+                                                                    <div class="col-3"><span class="pull-right">R$ 0,00</span></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>                  -->
+                        </div>
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-primary" id="insereEmprestimos">Salvar</button>
+                        </div>
                     </div>
                 </div>
 
@@ -731,9 +693,8 @@
                                 Seguros e Previdências
                             </h3>
                         </div>
-                        <form role="form">
-                            <div class="card-body">
-
+                        <div class="card-body">
+                            <form role="form" id="formPrincipalSeguros">
                                 <div class="row">
                                     <div class="col-md-12 border-bottom">
                                         <h3>Principal</h3>
@@ -741,107 +702,64 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>FGTS <small>Saldo Acum.</small></label>
-                                            <input type="text" class="form-control" id="plano_fgts_princial" placeholder="FGTS">
+                                            <div class="input-group date">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">R$</span>
+                                                </div>
+                                                <input type="text" class="form-control" name="fgts" placeholder="FGTS"
+                                                       onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>INSS <small>Rensa Mensal</small></label>
-                                            <input type="text" class="form-control" id="plano_inss_princial" placeholder="INSS">
+                                            <div class="input-group date">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">R$</span>
+                                                </div>
+                                                <input type="text" class="form-control" name="inss" placeholder="INSS"
+                                                       onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Idade para Aposentadoria</label>
-                                            <input type="text" class="form-control" id="idade_aposentadoria_principal" placeholder="Idade para Aposentadoria">
+                                            <input type="text" class="form-control" name="idade_aposentadoria" placeholder="Idade para Aposentadoria">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12 border-bottom">
-                                        <h5>Previdência <button type="button" class="btn btn-sm btn-info">+</button></h5>
-                                    </div>
+                            </form>
+                            <div class="row">
+                                <div class="col-md-12 border-bottom">
+                                    <h5>Previdência <button type="button" class="btn btn-sm btn-info" onclick="addCampoPrevidenciaPrincipal()">+</button></h5>
                                 </div>
-                                <div id="previdencia_principal">        
-                                    <div class="row">                       
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Previdência</label>
-                                                <input type="text" class="form-control" id="plano_previdencia_principal" placeholder="Previdência">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label>PGBL/VGBL</label>
-                                                <input type="text" class="form-control" id="plano_pgbl_principal" placeholder="PGBL/VGBL">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Saldo Acumulado R$</label>
-                                                <input type="text" class="form-control" id="plano_saldo_principal" placeholder="Saldo Acumulado R$">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Contribuição Anual</label>
-                                                <input type="text" class="form-control" id="plano_contribuicao_principal" placeholder="Contribuição Anual">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <input type="button" value="-" class="btn btn-default" style="position: relative;top: 30px;"/>
-                                        </div>
+                            </div>
+                            <div>        
+                                <form role="form" id="formPrevidenciaPrincipal">
+                                    <div class="row" id="previdencia_principal">                       
                                     </div>
+                                </form>
+                            </div>
+
+                            <br>
+
+                            <div class="row">
+                                <div class="col-md-12 border-bottom">
+                                    <h5>Seguro <button type="button" class="btn btn-sm btn-info" onclick="addCampoSeguroPrincipal()">+</button></h5>
                                 </div>
+                            </div>
+                            <div>   
+                                <form role="form" id="formSeguroPrincipal">
+                                    <div class="row" id="seguro_principal">                     
 
-
-                                <div class="row border-top">
-                                    <div class="col-md-3">
-                                        <label>Total</label>
                                     </div>
-                                    <div class="col-md-3 offset-md-2">
-                                        <span class="pull-right">R$ 0,00</span>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <span class="pull-right">R$ 0,00</span>
-                                    </div>
-                                </div>
+                                </form>
+                            </div>
 
-                                <br>
-
-                                <div class="row">
-                                    <div class="col-md-12 border-bottom">
-                                        <h5>Seguro <button type="button" class="btn btn-sm btn-info">+</button></h5>
-                                    </div>
-                                </div>
-                                <div id="seguro_principal">
-                                    <div class="row">                        
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Seguro de Vida</label>
-                                                <input type="text" class="form-control" id="seguro_vida_principal" placeholder="Seguro de Vida">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Capital Segurado</label>
-                                                <input type="text" class="form-control" id="capital_segurado_principal" placeholder="Capital Segurado">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Prêmio Mensal</label>
-                                                <input type="text" class="form-control" id="premio_mensal_principal" placeholder="Prêmio">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <input type="button" value="-" class="btn btn-default" style="position: relative;top: 30px;"/>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <br>
-
+                            <br>
+                            <form role="form" id="formConjugueSeguros">
                                 <div class="row">
                                     <div class="col-md-12 border-bottom">
                                         <h3>Cônjuge</h3>
@@ -849,112 +767,65 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>FGTS <small>Saldo Acum.</small></label>
-                                            <input type="text" class="form-control" id="plano_fgts_conjuje" placeholder="FGTS">
+                                            <div class="input-group date">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">R$</span>
+                                                </div>
+                                                <input type="text" class="form-control" name="fgts" placeholder="FGTS"
+                                                       onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>INSS <small>Rensa Mensal</small></label>
-                                            <input type="text" class="form-control" id="plano_inss_conjuje" placeholder="INSS">
+                                            <div class="input-group date">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">R$</span>
+                                                </div>
+                                                <input type="text" class="form-control" name="inss" placeholder="INSS"
+                                                       onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Idade para Aposentadoria</label>
-                                            <input type="text" class="form-control" id="idade_aposentadoria_conjuje" placeholder="Idade para Aposentadoria">
+                                            <input type="text" class="form-control" name="idade_aposentadoria" placeholder="Idade para Aposentadoria">
                                         </div>
                                     </div>
                                 </div>
+                            </form>
 
-                                <div class="row">
-                                    <div class="col-md-12 border-bottom">
-                                        <h5>Previdência <button type="button" class="btn btn-sm btn-info">+</button></h5>
-                                    </div>
+                            <div class="row">
+                                <div class="col-md-12 border-bottom">
+                                    <h5>Previdência <button type="button" class="btn btn-sm btn-info" onclick="addCampoPrevidenciaConjugue()">+</button></h5>
                                 </div>
-                                <div id="previdencia_conjuje">        
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Previdência</label>
-                                                <input type="text" class="form-control" id="plano_previdencia_conjuje" placeholder="Previdência">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label>PGBL/VGBL</label>
-                                                <input type="text" class="form-control" id="plano_pgbl_conjuje" placeholder="PGBL/VGBL">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Saldo Acumulado R$</label>
-                                                <input type="text" class="form-control" id="plano_saldo_conjuje" placeholder="Saldo Acumulado R$">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Contribuição Anual</label>
-                                                <input type="text" class="form-control" id="plano_contribuicao_conjuje" placeholder="Contribuição Anual">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <input type="button" value="-" class="btn btn-default" style="position: relative;top: 30px;"/>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="row border-top">
-                                    <div class="col-md-3">
-                                        <label>Total</label>
-                                    </div>
-                                    <div class="col-md-3 offset-md-2">
-                                        <span class="pull-right">R$ 0,00</span>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <span class="pull-right">R$ 0,00</span>
-                                    </div>
-                                </div>
-
-                                <br>
-                                <div class="row">
-                                    <div class="col-md-12 border-bottom">
-                                        <h5>Seguro <button type="button" class="btn btn-sm btn-info">+</button></h5>
-                                    </div>
-                                </div>
-                                <div id="seguro_conjuje">                      
-                                    <div class="row">                     
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Seguro de Vida</label>
-                                                <input type="text" class="form-control" id="seguro_vida_conjuje" placeholder="Seguro de Vida">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Capital Segurado</label>
-                                                <input type="text" class="form-control" id="capital_segurado_conjuje" placeholder="Capital Segurado">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label>Prêmio Mensal</label>
-                                                <input type="text" class="form-control" id="premio_mensal_conjuje" placeholder="Prêmio Mensal">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <input type="button" value="-" class="btn btn-default" style="position: relative;top: 30px;"/>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
-                            <div class="card-footer">
-                                <button type="button" class="btn btn-primary">Salvar</button>
+                            <div>        
+                                <form role="form" id="formPrevidenciaConjugue">
+                                    <div class="row" id="previdencia_conjugue">                       
+                                    </div>
+                                </form>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12 border-bottom">
+                                    <h5>Seguro <button type="button" class="btn btn-sm btn-info" onclick="addCampoSeguroConjugue()">+</button></h5>
+                                </div>
+                            </div>
+                            <div>   
+                                <form role="form" id="formSeguroConjugue">
+                                    <div class="row" id="seguro_conjugue">                     
+
+                                    </div>
+                                </form>
                             </div>
 
-                        </form> 
-
+                        </div>
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-primary" id="insereSeguroPrevidencia">Salvar</button>
+                        </div>
                     </div>
                 </div>
 
@@ -967,14 +838,13 @@
                             </h3>
                         </div>              
                         <div class="card-body">
-
                             <div class="row">
                                 <div class="col-md-12 border-bottom">
                                     <h3>Principal</h3>
                                 </div>
                                 <div class="col-md-4">
                                     <label>Nome</label><br>
-                                    <span>Leucenir</span>
+                                    <span id="plano_nome_principal"></span>
                                 </div>
                                 <div class="col-md-2">
                                     <label>Risco</label><br>
@@ -982,92 +852,339 @@
                                 </div>
                                 <div class="col-md-2">
                                     <label>CPF</label><br>
-                                    <span>00.000.00-00</span>
+                                    <span id="plano_cpf_principal"></span>
                                 </div>
                                 <div class="col-md-2">
                                     <label>Sexo</label><br>
-                                    <span>Feminino</span>
+                                    <span id="plano_sexo_principal"></span>
                                 </div>
                                 <div class="col-md-2">
                                     <label>Nascimento</label><br>
-                                    <span>12/02/1993</span>
+                                    <span id="plano_nascimento_principal"></span>
                                 </div>
                             </div>
                             <br>
-
-                            <div class="row">
-                                <table class="table table-hover" style="font-size: 12px;">
-                                    <theader>
-                                        <tr>
-                                            <th style="width: 160px;">Produto</th>
-                                            <th>Vigência</th>
-                                            <th>Prazo</th>
-                                            <th>Capital Segurado</th>
-                                            <th>Valor</th>
-                                        </tr>
-                                    </theader>
-                                    <tbody>
-                                        <tr>
-                                            <td><input type="text" class="form-control" style="font-size: 12px;" value="Vitalício"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="text" class="form-control" style="font-size: 12px;" value="Compra de Capital"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="text" class="form-control" style="font-size: 12px;" value="Decrescente"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="text" class="form-control" style="font-size: 12px;" value="Temporário"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="text" class="form-control" style="font-size: 12px;" value="Doenças Graves"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="text" class="form-control" style="font-size: 12px;" value="Internação Hospitalar"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="text" class="form-control" style="font-size: 12px;" value="Ad. Invalidez acidental"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="text" class="form-control" style="font-size: 12px;" value="Ad. Morte Acidental"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                            </div>   
-
+                            <form role="form" id="formPlanoPrincipal">
+                                <div class="row">
+                                    <table class="table table-hover" style="font-size: 12px;">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 160px;">Produto</th>
+                                                <th>Vigência</th>
+                                                <th>Prazo</th>
+                                                <th>Capital Segurado</th>
+                                                <th>Valor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Vitalício" disabled="true"><input type="hidden" name="id_produto[]" value="1"></td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                                        </div>
+                                                        <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="capital_segurado[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="valor[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Compra de Capital" disabled="true"><input type="hidden" name="id_produto[]" value="2"></td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                                        </div>
+                                                        <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="capital_segurado[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="valor[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Decrescente" disabled="true"><input type="hidden" name="id_produto[]" value="3"></td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                                        </div>
+                                                        <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="capital_segurado[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="valor[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Temporário" disabled="true"><input type="hidden" name="id_produto[]" value="4"></td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                                        </div>
+                                                        <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="capital_segurado[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="valor[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Doenças Graves" disabled="true"><input type="hidden" name="id_produto[]" value="5"></td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                                        </div>
+                                                        <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="capital_segurado[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="valor[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Internação Hospitalar" disabled="true"><input type="hidden" name="id_produto[]" value="6"></td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                                        </div>
+                                                        <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="capital_segurado[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="valor[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Ad. Invalidez acidental" disabled="true"><input type="hidden" name="id_produto[]" value="6"></td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                                        </div>
+                                                        <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="capital_segurado[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="valor[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Ad. Morte Acidental" disabled="true"><input type="hidden" name="id_produto[]" value="7"></td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                                        </div>
+                                                        <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="capital_segurado[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="valor[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>   
+                            </form>
                             <br>
 
                             <div class="row">
@@ -1076,102 +1193,338 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label>Nome</label><br>
-                                    <span>Leucenir</span>
-                                </div>
-                                <div class="col-md-2">
-                                    <label>Risco</label><br>
-                                    <span>Padrão</span>
-                                </div>
-                                <div class="col-md-2">
-                                    <label>CPF</label><br>
-                                    <span>00.000.00-00</span>
-                                </div>
-                                <div class="col-md-2">
-                                    <label>Sexo</label><br>
-                                    <span>Feminino</span>
+                                    <span id="plano_nome_conjugue"></span>
                                 </div>
                                 <div class="col-md-2">
                                     <label>Nascimento</label><br>
-                                    <span>12/02/1993</span>
+                                    <span id="plano_nascimento_conjugue"></span>
                                 </div>
                             </div>
                             <br>
-
-                            <div class="row">
-                                <table class="table table-hover" style="font-size: 12px;">
-                                    <theader>
-                                        <tr>
-                                            <th style="width: 160px;">Produto</th>
-                                            <th>Vigência</th>
-                                            <th>Prazo</th>
-                                            <th>Capital Segurado</th>
-                                            <th>Valor</th>
-                                        </tr>
-                                    </theader>
-                                    <tbody>
-                                        <tr>
-                                            <td><input type="text" class="form-control" style="font-size: 12px;" value="Vitalício"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="text" class="form-control" style="font-size: 12px;" value="Compra de Capital"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="text" class="form-control" style="font-size: 12px;" value="Decrescente"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="text" class="form-control" style="font-size: 12px;" value="Temporário"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="text" class="form-control" style="font-size: 12px;" value="Doenças Graves"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="text" class="form-control" style="font-size: 12px;" value="Internação Hospitalar"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="text" class="form-control" style="font-size: 12px;" value="Ad. Invalidez acidental"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="text" class="form-control" style="font-size: 12px;" value="Ad. Morte Acidental"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                            <td class="yellow-background"><input type="text" class="form-control"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                            </div>          
+                            <form role="form" id="formPlanoConjugue">
+                                <div class="row">
+                                    <table class="table table-hover" style="font-size: 12px;">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 160px;">Produto</th>
+                                                <th>Vigência</th>
+                                                <th>Prazo</th>
+                                                <th>Capital Segurado</th>
+                                                <th>Valor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Vitalício" disabled="true"><input type="hidden" name="id_produto[]" value="1"></td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                                        </div>
+                                                        <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="capital_segurado[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="valor[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Compra de Capital" disabled="true"><input type="hidden" name="id_produto[]" value="2"></td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                                        </div>
+                                                        <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="capital_segurado[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="valor[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Decrescente" disabled="true"><input type="hidden" name="id_produto[]" value="3"></td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                                        </div>
+                                                        <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="capital_segurado[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="valor[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Temporário" disabled="true"><input type="hidden" name="id_produto[]" value="4"></td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                                        </div>
+                                                        <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="capital_segurado[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="valor[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Doenças Graves" disabled="true"><input type="hidden" name="id_produto[]" value="5"></td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                                        </div>
+                                                        <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="capital_segurado[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="valor[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Internação Hospitalar" disabled="true"><input type="hidden" name="id_produto[]" value="6"></td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                                        </div>
+                                                        <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="capital_segurado[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="valor[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Ad. Invalidez acidental" disabled="true"><input type="hidden" name="id_produto[]" value="6"></td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                                        </div>
+                                                        <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="capital_segurado[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="valor[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Ad. Morte Acidental" disabled="true"><input type="hidden" name="id_produto[]" value="7"></td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                                        </div>
+                                                        <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="capital_segurado[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="valor[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>      
+                            </form>
                         </div>
                         <div class="card-footer">
-                            <button type="button" class="btn btn-primary">Salvar</button>
+                            <button type="button" class="btn btn-primary" id="inserirPlanos">Salvar</button>
                         </div>
                     </div>
 
@@ -1188,6 +1541,7 @@
 <!-- jQuery -->
 <script src="/dist/plugins/jquery/jquery.min.js"></script>
 <script src="/dist/plugins/datepicker/bootstrap-datepicker.js"></script>
+<script src="/dist/plugins/notify/notify.js" type="text/javascript"></script>
 
 <script src="/dist/js/cadastro.js"></script>
 @stop
