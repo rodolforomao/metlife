@@ -34,8 +34,14 @@
 }
     
 
-@media (max-width: 767px) {
+@media (max-width: 768px){
   .card-login{       
+    background-color: rgba(243, 243, 243, 0.8);        
+    padding: 0px 15px;             
+    border-bottom-right-radius: 100px;
+    border-top-left-radius: 100px;
+    min-height: 545px;
+    margin: 10px;
     width: 80% !important;
   }
 }

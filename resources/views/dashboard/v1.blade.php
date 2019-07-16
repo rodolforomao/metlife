@@ -1,7 +1,7 @@
 @extends('layouts.master') 
 
 @section('content')
-
+<link rel="stylesheet" href="/dist/plugins/datatables/dataTables.bootstrap4.css">
 <script language=javascript type="text/javascript">
 
     function newPopup(){
@@ -57,14 +57,16 @@
             </div>
     </section>
 </div> 
-        
-        
-        <!-- jQuery -->
-<script src="//code.jquery.com/jquery.js"></script>
+
+<!-- jQuery -->
+<script src="/dist/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="/dist/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- DataTables -->
-<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-<!-- Bootstrap JavaScript -->
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="/dist/plugins/datatables/jquery.dataTables.js"></script>
+<script src="/dist/plugins/datatables/dataTables.bootstrap4.js"></script>
+
+
 <script type="text/javascript">
     var theGrid = null;
     $(document).ready(function(){
@@ -73,6 +75,20 @@
             "serverSide": true,
             "ordering": true,
             "responsive": true,
+            "oLanguage": {
+                "sLengthMenu": "Mostrar _MENU_ registros por página",
+                "sZeroRecords": "Nenhum registro encontrado",
+                "sInfo": "Mostrando _START_ / _END_ de _TOTAL_ registro(s)",
+                "sInfoEmpty": "Mostrando 0 / 0 de 0 registros",
+                "sInfoFiltered": "(filtrado de _MAX_ registros)",
+                "sSearch": "Pesquisar: ",
+                "oPaginate": {
+                    "sFirst": "Início",
+                    "sPrevious": "Anterior",
+                    "sNext": "Próximo",
+                    "sLast": "Último"
+                }
+            },
             "ajax": "{{url('dadoscadastrais/grid')}}",
             "columnDefs": [
             {
