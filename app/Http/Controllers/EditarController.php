@@ -6,17 +6,30 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Dadoscadastrai;
+use App\Dadosfamiliare;
+use App\Rendimentomensal;
 use DB;
 
-class DadoscadastraisController extends Controller {
+class EditarController extends Controller {
 
-    //
     public function __construct() {
         //$this->middleware('auth');
     }
 
-    public function index(Request $request) {
-        return view('dadoscadastrais.index', []);
+    public function index(Request $request, $id) {
+        $dadosCadastrais = Dadoscadastrai::findOrFail($id);
+        $dadosFamiliarConjugue = Dadosfamiliare::where('idCliente', $id)->where('tipoFamiliar', 'Conjugue')->firstOrFail();
+        $dadosFamiliarFilho = Dadosfamiliare::where('idCliente', $id)->where('tipoFamiliar', 'Filho')->get();
+        $dadosRendimentoConjugue = Rendimentomensal::where('idCliente', $id)->where('tipoFamiliar', 'Conjugue')->firstOrFail();
+        $dadosRendimentoPrincipal = Rendimentomensal::where('idCliente', $id)->where('tipoFamiliar', 'Principal')->firstOrFail();
+
+        return view('dashboard.v2_edit', [
+            'dadoscadastrais' => $dadosCadastrais,
+            'dadosFamiliarConjugue' => $dadosFamiliarConjugue,
+            'dadosFamiliarFilho' => $dadosFamiliarFilho,
+            'dadosRendimentoConjugue' => $dadosRendimentoConjugue,
+            'dadosRendimentoPrincipal' => $dadosRendimentoPrincipal,
+        ]);
     }
 
     public function create(Request $request) {
@@ -97,7 +110,11 @@ class DadoscadastraisController extends Controller {
             $dadoscadastrai = new Dadoscadastrai;
         }
 
+
+
         $dadoscadastrai->id = $request->id ?: 0;
+
+
         $dadoscadastrai->nomecompleto = $request->dc_nome_completo;
         $dadoscadastrai->cpf = $request->cpf;
         $dadoscadastrai->datanascimento = date('Y-m-d', strtotime(str_replace("/", "-", ($request->data_nascimento))));
@@ -106,12 +123,9 @@ class DadoscadastraisController extends Controller {
         $dadoscadastrai->enderecoresidencial = $request->dc_endereco_resd;
         $dadoscadastrai->email = $request->dc_email;
         $dadoscadastrai->celular = $request->dc_celular;
-        $dadoscadastrai->save();
-
-        if ($request->id == 0) {
+        $retorno = $dadoscadastrai->save();
+        if ($retorno == true) {
             $retorno = DB::getPdo()->lastInsertId();
-        } else {
-            $retorno = $request->id;
         }
         return json_encode($retorno);
     }

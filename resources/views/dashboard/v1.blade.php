@@ -57,9 +57,9 @@
             </div>
     </section>
 </div> 
-        
-        
-        <!-- jQuery -->
+
+
+<!-- jQuery -->
 <script src="//code.jquery.com/jquery.js"></script>
 <!-- DataTables -->
 <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
@@ -83,7 +83,7 @@
             },
             {
             "render": function (data, type, row) {
-            return '<a href="{{ url(' / dadoscadastrais') }}/' + row[0] + '/edit" class="btn btn-default">Update</a>';
+            return '<a href="{{ url('/dashboard/editar') }}/' + row[0] + '" class="btn btn-default">Update</a>';
             },
                     "targets": 12                    },
             {

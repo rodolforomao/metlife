@@ -105,6 +105,8 @@ Route::post('/seguros/cadastro', 'InssseguroclientesController@store');
 //Planos
 Route::post('/planos/cadastro', 'PlanoprodutosController@store');
 
+//Editar
+Route::get('/dashboard/editar/{id}', 'EditarController@index');
 
 Route::resource('saldoemprestimo', 'saldoemprestimoController');
 Route::resource('emprestimounitario', 'emprestimounitarioController');
