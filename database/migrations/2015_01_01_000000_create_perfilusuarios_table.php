@@ -15,7 +15,11 @@ class CreatePerfilusuariosTable extends Migration
         Schema::create('perfilusuarios', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->boolean('descricao')->nullable();
+            $table->unsignedInteger('idUsuario')->default(2);
+            $table->foreign('idUsuario')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedInteger('idPerfil')->default(2);
+            $table->foreign('idPerfil')->references('id')->on('perfis')->onDelete('cascade');
+            $table->boolean('usuariopermitido')->default(false);
             });
     }
 

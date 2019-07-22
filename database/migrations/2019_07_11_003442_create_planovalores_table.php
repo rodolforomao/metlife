@@ -15,14 +15,16 @@ class CreatePlanovaloresTable extends Migration
         Schema::create('planovalores', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('idCliente')->nullable();
-            //$table->unsignedInteger('idCliente')->default(2);
-            //$table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
-            $table->string('tipoFamiliar')->nullable();
-            $table->float('vigencia')->nullable();
-            $table->float('prazo')->nullable();
-            $table->float('capitalsegurado')->nullable();
-            $table->float('valor')->nullable();
+            $table->unsignedInteger('idCliente')->default(2);
+            $table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
+            $table->unsignedInteger('idTipoFamiliar')->default(2);
+            $table->foreign('idTipoFamiliar')->references('id')->on('tipofamiliars')->onDelete('cascade');
+            $table->unsignedInteger('idPlanoProduto')->default(2);
+            $table->foreign('idPlanoProduto')->references('id')->on('planoprodutodescs')->onDelete('cascade');
+            $table->date('vigencia')->nullable();
+            $table->integer('prazo')->nullable();
+            $table->boolean('capitalsegurado')->nullable();
+            $table->float('valor',15,4)->nullable();
             });
     }
 

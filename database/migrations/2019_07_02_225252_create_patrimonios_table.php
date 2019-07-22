@@ -15,16 +15,16 @@ class CreatePatrimoniosTable extends Migration
         Schema::create('patrimonios', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('idCliente')->nullable();
-            //$table->unsignedInteger('idCliente')->default(2);
-            //$table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
-            $table->float('fundos')->nullable();
-            $table->float('reservas')->nullable();
-            $table->float('inventario')->nullable();
-            $table->float('emergencia')->nullable();
-            $table->float('funeral')->nullable();
-            $table->float('outros')->nullable();
-            $table->float('imoveis')->nullable();
+            $table->unsignedInteger('idCliente')->default(2);
+            $table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
+            $table->float('outros',15,4)->nullable();
+            $table->float('imoveis',15,4)->nullable();
+            $table->float('fundos',15,4)->nullable();
+            $table->float('reservas',15,4)->nullable();
+            $table->float('inventario',15,4)->nullable();
+            $table->float('emergencia',15,4)->nullable();
+            $table->float('funeral',15,4)->nullable()->default(10000);
+            
             });
     }
 

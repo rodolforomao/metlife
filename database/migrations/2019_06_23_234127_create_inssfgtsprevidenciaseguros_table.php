@@ -15,12 +15,10 @@ class CreateInssfgtsprevidenciasegurosTable extends Migration
         Schema::create('inssfgtsprevidenciaseguros', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('idCliente')->nullable();
-            //$table->unsignedInteger('idCliente')->default(2);
-            //$table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
-            $table->string('tipoFamiliar')->nullable();
-            $table->float('fgts')->nullable();
-            $table->float('inss')->nullable();
+            $table->unsignedInteger('idDadosFamiliares')->default(2);
+            $table->foreign('idDadosFamiliares')->references('id')->on('dadosfamiliars')->onDelete('cascade');
+            $table->float('fgts',15,4)->nullable();
+            $table->float('inss',15,4)->nullable();
             $table->integer('idadeaposentadoria')->nullable();
             });
     }

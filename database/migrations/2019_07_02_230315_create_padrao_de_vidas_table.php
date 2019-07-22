@@ -15,20 +15,19 @@ class CreatePadraoDeVidasTable extends Migration
         Schema::create('padrao_de_vidas', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('idCliente')->nullable();
-            //$table->unsignedInteger('idCliente')->default(2);
-            //$table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
-            $table->float('despezasgerais')->nullable();
-            $table->float('moradia')->nullable();
-            $table->float('servicos')->nullable();
-            $table->float('transporte')->nullable();
-            $table->float('saude')->nullable();
-            $table->float('vestuario')->nullable();
-            $table->float('seguroDeVidaPrevidencia')->nullable();
-            $table->float('lazer')->nullable();
-            $table->float('alimentacao')->nullable();
-            $table->float('impostos')->nullable();
-            $table->float('extrasoutros')->nullable();
+            $table->unsignedInteger('idCliente')->default(2);
+            $table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
+            $table->float('despezasgerais',15,4)->nullable();
+            $table->float('moradia',15,4)->nullable();
+            $table->float('servicos',15,4)->nullable();
+            $table->float('transporte',15,4)->nullable();
+            $table->float('saude',15,4)->nullable();
+            $table->float('vestuario',15,4)->nullable();
+            $table->float('seguroDeVidaPrevidencia',15,4)->nullable();
+            $table->float('lazer',15,4)->nullable();
+            $table->float('alimentacao',15,4)->nullable();
+            $table->float('impostos',15,4)->nullable();
+            $table->float('extrasoutros',15,4)->nullable();
             });
     }
 
