@@ -85,18 +85,12 @@ class Padrao_de_vidasController extends Controller {
     }
 
     public function update(Request $request) {
-        //
-        /* $this->validate($request, [
-          'name' => 'required|max:255',
-          ]); */
         $padrao_de_vida = null;
         if ($request->id > 0) {
             $padrao_de_vida = Padrao_de_vida::findOrFail($request->id);
         } else {
             $padrao_de_vida = new Padrao_de_vida;
         }
-
-
 
         $padrao_de_vida->id = $request->id ?: 0;
         $padrao_de_vida->despezasgerais = str_replace(",", ".", str_replace(".", "", ($request->pv_gerais)));
@@ -109,15 +103,14 @@ class Padrao_de_vidasController extends Controller {
         $padrao_de_vida->lazer = str_replace(",", ".", str_replace(".", "", ($request->pv_lazer)));
         $padrao_de_vida->impostos = str_replace(",", ".", str_replace(".", "", ($request->pv_impostos)));
         $padrao_de_vida->extrasoutros = str_replace(",", ".", str_replace(".", "", ($request->pv_extras)));
-        $padrao_de_vida->idCliente = 4;
-
-//        $padrao_de_vida->alimentacao = $request->alimentacao;
-        //$padrao_de_vida->user_id = $request->user()->id;
+        $padrao_de_vida->idCliente = $request->idCliente;
         $retorno = $padrao_de_vida->save();
+        if ($request->id == 0) {
+            $retorno = DB::getPdo()->lastInsertId();
+        } else {
+            $retorno = $request->id;
+        }
         return json_encode($retorno);
-
-
-        return redirect('/padrao_de_vidas');
     }
 
     public function store(Request $request) {

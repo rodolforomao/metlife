@@ -86,11 +86,6 @@ class SaldoemprestimosController extends Controller {
     }
 
     public function update(Request $request) {
-        //
-        /* $this->validate($request, [
-          'name' => 'required|max:255',
-          ]); */
-        $saldoemprestimo = null;
         if ($request->id > 0) {
             $saldoemprestimo = Saldoemprestimo::findOrFail($request->id);
         } else {
@@ -103,8 +98,12 @@ class SaldoemprestimosController extends Controller {
         $saldoemprestimo->descoberto = str_replace(",", ".", str_replace(".", "", ($request->emp_descoberto)));
 
         //$saldoemprestimo->user_id = $request->user()->id;
-        $retorno = $saldoemprestimo->save();
-
+        $saldoemprestimo->save();
+        if ($request->id == 0) {
+            $retorno = DB::getPdo()->lastInsertId();
+        } else {
+            $retorno = $request->id;
+        }
         return json_encode($retorno);
     }
 

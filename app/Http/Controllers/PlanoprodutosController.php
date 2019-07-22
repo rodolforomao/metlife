@@ -85,41 +85,46 @@ class PlanoprodutosController extends Controller {
         echo json_encode($ret);
     }
 
-    public function update(Request $request, $id) {
-        //
-        /* $this->validate($request, [
-          'name' => 'required|max:255',
-          ]); */
-        $planoproduto = null;
-        if ($request->id > 0) {
-            $planoproduto = Planoproduto::findOrFail($request->id);
+    public function update(Request $request, $contador) {
+        if ($request->id[$contador] > 0) {
+            $planoproduto = Planoproduto::findOrFail($request->id[$contador]);
         } else {
             $planoproduto = new Planoproduto;
         }
 
-        $planoproduto->id = $request->id ?: 0;
+        $planoproduto->id = $request->id[$contador] ?: 0;
         $planoproduto->idCliente = $request->idCliente;
-        $planoproduto->idproduto = $request->id_produto[$id];
+        $planoproduto->idproduto = $request->id_produto[$contador];
         $planoproduto->tipoFamiliar = $request->tipoFamiliar;
-        $planoproduto->vigencia = date('Y-m-d', strtotime(str_replace("/", "-", ($request->vigencia[$id]))));
-        $planoproduto->prazo = str_replace(",", ".", str_replace(".", "", ($request->prazo[$id])));
-        $planoproduto->capital = str_replace(",", ".", str_replace(".", "", ($request->capital_segurado[$id])));
-        $planoproduto->valor = str_replace(",", ".", str_replace(".", "", ($request->valor[$id])));
+        $planoproduto->vigencia = date('Y-m-d', strtotime(str_replace("/", "-", ($request->vigencia[$contador]))));
+        $planoproduto->prazo = $request->prazo[$contador];
+        $planoproduto->capital = str_replace(",", ".", str_replace(".", "", ($request->capital_segurado[$contador])));
+        $planoproduto->valor = str_replace(",", ".", str_replace(".", "", ($request->valor[$contador])));
 
-        //$planoproduto->user_id = $request->user()->id;
-        $retorno = $planoproduto->save();
+        if (!empty($request->vigencia[$contador])) {
+            $planoproduto->save();
+            $retorno["id_produto"] = $request->id_produto[$contador] ?: "";
 
-        return json_encode($retorno);
+            if ($request->id[$contador] == 0) {
+                $retorno["id"] = DB::getPdo()->lastInsertId();
+            } else {
+                $retorno["id"] = $request->id[$contador];
+            }
+        } else {
+            $retorno["retorno"] = false;
+        }
+
+        return ($retorno);
     }
 
     public function store(Request $request) {
         $count = count($request->vigencia);
+        $retorno = false;
         for ($i = 0; $i < $count; $i++) {
-            if (!empty($request->vigencia[$i])) {
-                $this->update($request, $i);
-            }
+            $retorno[$i] = $this->update($request, $i);
         }
-        return ($request);
+
+        return ($retorno);
     }
 
     public function destroy(Request $request, $id) {

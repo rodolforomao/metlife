@@ -85,7 +85,7 @@
                                     <a href="javascript:void(0)" id="emprestimos_menu" onClick="openEmprestimos()" class="nav-link">
                                         <i class="nav-icon fa fa-bookmark"></i>
                                         <p>
-                                            Emprestimos
+                                            Empréstimos
                                         </p>
                                     </a>
                                 </li>
@@ -112,6 +112,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!--Dados Cadastrais-->
                 <div class="col-sm-12 col-md-9" id="dados_cadastrais">
                     <div class="card" >
@@ -120,8 +121,8 @@
                                 Dados Cadastrais
                             </h3>
                         </div>
-                        <input type="hidden" id="idCliente">
                         <form role="form" id="formDadosCadastrais">
+                            <input type="hidden" id="idCliente" name="id">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -208,6 +209,7 @@
                         </div>
                         <div class="card-body">
                             <form role="form" id="formDadosFamiliares">
+                                <input type="hidden" id="idFamiliarConjugue" name="id">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -253,6 +255,7 @@
                             </h3>
                         </div>
                         <form role="form" id="formRendimento">
+                            <input type="hidden" id="id_rendimento_principal" name="id_rendimento_principal">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12 border-bottom">
@@ -294,6 +297,7 @@
                                 </div>
                                 <br>
                                 <div class="row">
+                                    <input type="hidden" id="id_rendimento_conjugue" name="id_rendimento_conjugue">
                                     <div class="col-md-12 border-bottom">
                                         <h3>Cônjuge</h3>
                                     </div>
@@ -349,6 +353,7 @@
                             </h3>
                         </div>
                         <form role="form" id="formPatrimonio">
+                            <input type="hidden" id="id_patrimonio" name="id">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -461,23 +466,11 @@
                             </h3>
                         </div>
                         <form role="form" id="formEducacaoFilhos">
-                            <div class="card-body">
-                                <div id="divEducacaoFilhos">
-                                    <div class="border-bottom">
-                                        <h3>Filho <button type="button" class="btn btn-sm btn-info" onclick="addCampoFilhoEducacao()">+</button></h3>
-                                    </div>
-                                </div>
-                                <br>
-                                <!--<div class="row border-top">
-                                    <div class="col-md-6">
-                                        <label>Total Despesas com Educação</label><br>
-                                        <span>R$ 0,00</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>Maior Periodo para Formação (Anos)</label><br>
-                                        <span>0</span>
-                                    </div>
-                                </div>-->
+                            <div class="card-header">
+                                <h3>Filho <button type="button" class="btn btn-sm btn-info" onclick="addCampoFilhoEducacao()">+</button></h3>
+                            </div>
+                            <div class="card-body"  id="divEducacaoFilhos">
+
                             </div>
                             <div class="card-footer">
                                 <button type="button" class="btn btn-primary" id="insereEducacaoFilhos">Salvar</button>
@@ -495,6 +488,7 @@
                             </h3>
                         </div>
                         <form role="form" id="formPadraoVida">
+                            <input id="id_padrao_vida" name="id" type="hidden">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-4">
@@ -636,48 +630,37 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">
-                                Emprestimos
+                                Empréstimos
                             </h3>
                         </div>
                         <div class="card-body">
                             <form role="form" id="formSaldoEmprestimos">
+                                <input type="hidden" name="id" id="id_emprestimos">
                                 <div class="row">
                                     <div class="col-6">
-                                        <label>Descoberto Emprestimo/Financiamento </label>
+                                        <label>Descoberto Empréstimos/Financiamento </label>
                                         <div class="input-group date">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">R$</span>
                                             </div>
-                                            <input id="emp_descoberto" name="emp_descoberto" class="form-control" placeholder="Descoberto Emprestimo/Financiamento"
+                                            <input id="emp_descoberto" name="emp_descoberto" class="form-control" placeholder="Descoberto Empréstimos/Financiamento"
                                                    onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="somaTotalPatriomio()">
                                         </div>
                                     </div>
                                     <div class="col-6">
-                                        <label>Maior Período para Emprestimo/Finan. (Anos)</label> 
-                                        <input id="emp_perido" name="emp_perido" class="form-control" placeholder="Maior Período para Emprestimo/Finan. (Anos)">
+                                        <label>Maior Período para Empréstimos/Finan. (Anos)</label> 
+                                        <input id="emp_perido" name="emp_perido" class="form-control" placeholder="Maior Período para Empréstimos/Finan. (Anos)">
                                     </div>
                                 </div>
                             </form>
                             <br>
                             <form role="form" id="formEmprestimos">
-                                <div class="row">
-                                    <div class="col-md-12 border-bottom">
-                                        <h3>Emprestimos <button type="button" class="btn btn-sm btn-info addDivSeguro" onclick="addCampoEmprestimo()">+</button></h3>
-                                    </div>
+                                <div class="card-header">
+                                    <h3>Empréstimos <button type="button" class="btn btn-sm btn-info addDivSeguro" onclick="addCampoEmprestimo()">+</button></h3>
                                 </div>
-                            </form>  
-                            <!--                            <div class="row">
-                                                            <div class="col-md-12 border-top">
-                                                                <label>Total </label>
-                                                                <div class="row">
-                                                                    <div class="col-2"><span class="pull-right">R$ 0,00</span></div>
-                                                                    <div class="col-2"><span class="pull-right">0</span></div>
-                                                                    <div class="col-2"><span class="pull-right">R$ 0,00</span></div>
-                                                                    <div class="col-2"><span class="pull-right">0</span></div>
-                                                                    <div class="col-3"><span class="pull-right">R$ 0,00</span></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>                  -->
+                                <div class="card-body"  id="divEmprestimos">
+                                </div>
+                            </form>
                         </div>
                         <div class="card-footer">
                             <button type="button" class="btn btn-primary" id="insereEmprestimos">Salvar</button>
@@ -695,6 +678,7 @@
                         </div>
                         <div class="card-body">
                             <form role="form" id="formPrincipalSeguros">
+                                <input type="hidden" id="id_inss_fgts_principal" name="id">
                                 <div class="row">
                                     <div class="col-md-12 border-bottom">
                                         <h3>Principal</h3>
@@ -760,6 +744,7 @@
 
                             <br>
                             <form role="form" id="formConjugueSeguros">
+                                <input type="hidden" id="id_inss_fgts_conjugue" name="id">
                                 <div class="row">
                                     <div class="col-md-12 border-bottom">
                                         <h3>Cônjuge</h3>
@@ -878,7 +863,11 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Vitalício" disabled="true"><input type="hidden" name="id_produto[]" value="1"></td>
+                                                <td>
+                                                    <input type="text" class="form-control" style="font-size: 12px;" value="Vitalício" disabled="true">
+                                                    <input type="hidden" name="id_produto[]" value="1">
+                                                    <input type="hidden" id="id_vitalicio_principal" name="id[]">
+                                                </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
@@ -888,12 +877,43 @@
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
+                                                    <input name="prazo[]" class="form-control">
+                                                </td>
+                                                <td class="yellow-background">
                                                     <div class="input-group date">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text">R$</span>
                                                         </div>
-                                                        <input name="prazo[]" class="form-control"
+                                                        <input name="capital_segurado[]" class="form-control"
                                                                onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="valor[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="text" class="form-control" style="font-size: 12px;" value="Compra de Capital" disabled="true">
+                                                    <input type="hidden" name="id_produto[]" value="2">
+                                                    <input type="hidden" id="id_capital_principal" name="id[]">
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                                        </div>
+                                                        <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <input name="prazo[]" class="form-control">
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
@@ -916,7 +936,11 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Compra de Capital" disabled="true"><input type="hidden" name="id_produto[]" value="2"></td>
+                                                <td>
+                                                    <input type="text" class="form-control" style="font-size: 12px;" value="Decrescente" disabled="true">
+                                                    <input type="hidden" name="id_produto[]" value="3">
+                                                    <input type="hidden" name="id[]" id="id_decrescente_principal">
+                                                </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
@@ -926,12 +950,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">R$</span>
-                                                        </div>
-                                                        <input name="prazo[]" class="form-control"
-                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    <input name="prazo[]" class="form-control">
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
@@ -954,7 +973,11 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Decrescente" disabled="true"><input type="hidden" name="id_produto[]" value="3"></td>
+                                                <td>
+                                                    <input type="text" class="form-control" style="font-size: 12px;" value="Temporário" disabled="true">
+                                                    <input type="hidden" name="id_produto[]" value="4">
+                                                    <input type="hidden" name="id[]" id="id_temporario_principal">
+                                                </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
@@ -964,12 +987,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">R$</span>
-                                                        </div>
-                                                        <input name="prazo[]" class="form-control"
-                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    <input name="prazo[]" class="form-control">
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
@@ -992,7 +1010,11 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Temporário" disabled="true"><input type="hidden" name="id_produto[]" value="4"></td>
+                                                <td>
+                                                    <input type="text" class="form-control" style="font-size: 12px;" value="Doenças Graves" disabled="true">
+                                                    <input type="hidden" name="id_produto[]" value="5">
+                                                    <input type="hidden" name="id[]" id="id_doencas_principal">
+                                                </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
@@ -1002,12 +1024,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">R$</span>
-                                                        </div>
-                                                        <input name="prazo[]" class="form-control"
-                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    <input name="prazo[]" class="form-control">
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
@@ -1030,7 +1047,11 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Doenças Graves" disabled="true"><input type="hidden" name="id_produto[]" value="5"></td>
+                                                <td>
+                                                    <input type="text" class="form-control" style="font-size: 12px;" value="Internação Hospitalar" disabled="true">
+                                                    <input type="hidden" name="id_produto[]" value="6">
+                                                    <input type="hidden" name="id[]" id="id_internacao_principal">
+                                                </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
@@ -1040,12 +1061,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">R$</span>
-                                                        </div>
-                                                        <input name="prazo[]" class="form-control"
-                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    <input name="prazo[]" class="form-control">
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
@@ -1068,7 +1084,11 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Internação Hospitalar" disabled="true"><input type="hidden" name="id_produto[]" value="6"></td>
+                                                <td>
+                                                    <input type="text" class="form-control" style="font-size: 12px;" value="Ad. Invalidez acidental" disabled="true">
+                                                    <input type="hidden" name="id_produto[]" value="7">
+                                                    <input type="hidden" name="id[]" id="id_invalidez_principal">
+                                                </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
@@ -1078,12 +1098,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">R$</span>
-                                                        </div>
-                                                        <input name="prazo[]" class="form-control"
-                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    <input name="prazo[]" class="form-control">
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
@@ -1106,7 +1121,11 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Ad. Invalidez acidental" disabled="true"><input type="hidden" name="id_produto[]" value="6"></td>
+                                                <td>
+                                                    <input type="text" class="form-control" style="font-size: 12px;" value="Ad. Morte Acidental" disabled="true">
+                                                    <input type="hidden" name="id_produto[]" value="8">
+                                                    <input type="hidden" name="id[]" id="id_morte_principal">
+                                                </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
@@ -1116,50 +1135,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">R$</span>
-                                                        </div>
-                                                        <input name="prazo[]" class="form-control"
-                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
-                                                    </div>
-                                                </td>
-                                                <td class="yellow-background">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">R$</span>
-                                                        </div>
-                                                        <input name="capital_segurado[]" class="form-control"
-                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
-                                                    </div>
-                                                </td>
-                                                <td class="yellow-background">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">R$</span>
-                                                        </div>
-                                                        <input name="valor[]" class="form-control"
-                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Ad. Morte Acidental" disabled="true"><input type="hidden" name="id_produto[]" value="7"></td>
-                                                <td class="yellow-background">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                                        </div>
-                                                        <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control">
-                                                    </div>
-                                                </td>
-                                                <td class="yellow-background">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">R$</span>
-                                                        </div>
-                                                        <input name="prazo[]" class="form-control"
-                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    <input name="prazo[]" class="form-control">
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
@@ -1215,7 +1191,11 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Vitalício" disabled="true"><input type="hidden" name="id_produto[]" value="1"></td>
+                                                <td>
+                                                    <input type="text" class="form-control" style="font-size: 12px;" value="Vitalício" disabled="true">
+                                                    <input type="hidden" name="id_produto[]" value="1">
+                                                    <input type="hidden" id="id_vitalicio_conjugue" name="id[]">
+                                                </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
@@ -1225,12 +1205,43 @@
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
+                                                    <input name="prazo[]" class="form-control">
+                                                </td>
+                                                <td class="yellow-background">
                                                     <div class="input-group date">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text">R$</span>
                                                         </div>
-                                                        <input name="prazo[]" class="form-control"
+                                                        <input name="capital_segurado[]" class="form-control"
                                                                onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input name="valor[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="text" class="form-control" style="font-size: 12px;" value="Compra de Capital" disabled="true">
+                                                    <input type="hidden" name="id_produto[]" value="2">
+                                                    <input type="hidden" id="id_capital_conjugue" name="id[]">
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                                        </div>
+                                                        <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <input name="prazo[]" class="form-control">
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
@@ -1253,7 +1264,11 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Compra de Capital" disabled="true"><input type="hidden" name="id_produto[]" value="2"></td>
+                                                <td>
+                                                    <input type="text" class="form-control" style="font-size: 12px;" value="Decrescente" disabled="true">
+                                                    <input type="hidden" name="id_produto[]" value="3">
+                                                    <input type="hidden" name="id[]" id="id_decrescente_conjugue">
+                                                </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
@@ -1263,12 +1278,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">R$</span>
-                                                        </div>
-                                                        <input name="prazo[]" class="form-control"
-                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    <input name="prazo[]" class="form-control">
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
@@ -1291,7 +1301,11 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Decrescente" disabled="true"><input type="hidden" name="id_produto[]" value="3"></td>
+                                                <td>
+                                                    <input type="text" class="form-control" style="font-size: 12px;" value="Temporário" disabled="true">
+                                                    <input type="hidden" name="id_produto[]" value="4">
+                                                    <input type="hidden" name="id[]" id="id_temporario_conjugue">
+                                                </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
@@ -1301,12 +1315,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">R$</span>
-                                                        </div>
-                                                        <input name="prazo[]" class="form-control"
-                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    <input name="prazo[]" class="form-control">
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
@@ -1329,7 +1338,11 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Temporário" disabled="true"><input type="hidden" name="id_produto[]" value="4"></td>
+                                                <td>
+                                                    <input type="text" class="form-control" style="font-size: 12px;" value="Doenças Graves" disabled="true">
+                                                    <input type="hidden" name="id_produto[]" value="5">
+                                                    <input type="hidden" name="id[]" id="id_doencas_conjugue">
+                                                </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
@@ -1339,12 +1352,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">R$</span>
-                                                        </div>
-                                                        <input name="prazo[]" class="form-control"
-                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    <input name="prazo[]" class="form-control">
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
@@ -1367,7 +1375,11 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Doenças Graves" disabled="true"><input type="hidden" name="id_produto[]" value="5"></td>
+                                                <td>
+                                                    <input type="text" class="form-control" style="font-size: 12px;" value="Internação Hospitalar" disabled="true">
+                                                    <input type="hidden" name="id_produto[]" value="6">
+                                                    <input type="hidden" name="id[]" id="id_internacao_conjugue">
+                                                </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
@@ -1377,12 +1389,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">R$</span>
-                                                        </div>
-                                                        <input name="prazo[]" class="form-control"
-                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    <input name="prazo[]" class="form-control">
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
@@ -1405,7 +1412,11 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Internação Hospitalar" disabled="true"><input type="hidden" name="id_produto[]" value="6"></td>
+                                                <td>
+                                                    <input type="text" class="form-control" style="font-size: 12px;" value="Ad. Invalidez acidental" disabled="true">
+                                                    <input type="hidden" name="id_produto[]" value="7">
+                                                    <input type="hidden" name="id[]" id="id_invalidez_principal">
+                                                </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
@@ -1415,12 +1426,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">R$</span>
-                                                        </div>
-                                                        <input name="prazo[]" class="form-control"
-                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    <input name="prazo[]" class="form-control">
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
@@ -1443,7 +1449,11 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Ad. Invalidez acidental" disabled="true"><input type="hidden" name="id_produto[]" value="6"></td>
+                                                <td>
+                                                    <input type="text" class="form-control" style="font-size: 12px;" value="Ad. Morte Acidental" disabled="true">
+                                                    <input type="hidden" name="id_produto[]" value="8">
+                                                    <input type="hidden" name="id[]" id="id_morte_principal">
+                                                </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
@@ -1453,50 +1463,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">R$</span>
-                                                        </div>
-                                                        <input name="prazo[]" class="form-control"
-                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
-                                                    </div>
-                                                </td>
-                                                <td class="yellow-background">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">R$</span>
-                                                        </div>
-                                                        <input name="capital_segurado[]" class="form-control"
-                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
-                                                    </div>
-                                                </td>
-                                                <td class="yellow-background">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">R$</span>
-                                                        </div>
-                                                        <input name="valor[]" class="form-control"
-                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="text" class="form-control" style="font-size: 12px;" value="Ad. Morte Acidental" disabled="true"><input type="hidden" name="id_produto[]" value="7"></td>
-                                                <td class="yellow-background">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                                        </div>
-                                                        <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control">
-                                                    </div>
-                                                </td>
-                                                <td class="yellow-background">
-                                                    <div class="input-group date">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">R$</span>
-                                                        </div>
-                                                        <input name="prazo[]" class="form-control"
-                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
+                                                    <input name="prazo[]" class="form-control">
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
@@ -1544,4 +1511,14 @@
 <script src="/dist/plugins/notify/notify.js" type="text/javascript"></script>
 
 <script src="/dist/js/cadastro.js"></script>
+<script src="/dist/js/cadastro/dadoscadastrais.js"></script>
+<script src="/dist/js/cadastro/dadosfamiliares.js"></script>
+<script src="/dist/js/cadastro/rendimentos.js"></script>
+<script src="/dist/js/cadastro/patrimonio.js"></script>
+<script src="/dist/js/cadastro/educacaofilhos.js"></script>
+<script src="/dist/js/cadastro/padraovida.js"></script>
+<script src="/dist/js/cadastro/emprestimos.js"></script>
+<script src="/dist/js/cadastro/segurosprevidencias.js"></script>
+<script src="/dist/js/cadastro/planovida.js"></script>
+
 @stop

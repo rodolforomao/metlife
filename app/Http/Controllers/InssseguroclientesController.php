@@ -85,45 +85,45 @@ class InssseguroclientesController extends Controller {
         echo json_encode($ret);
     }
 
-    public function update(Request $request, $id) {
-        //
-        /* $this->validate($request, [
-          'name' => 'required|max:255',
-          ]); */
-        $insssegurocliente = null;
-        if ($request->id > 0) {
-            $insssegurocliente = Insssegurocliente::findOrFail($request->id);
+    public function update(Request $request, $contador) {
+        if ($request->id[$contador] > 0) {
+            $insssegurocliente = Insssegurocliente::findOrFail($request->id[$contador]);
         } else {
             $insssegurocliente = new Insssegurocliente;
         }
 
-        $insssegurocliente->id = $request->id ?: 0;
+        $insssegurocliente->id = $request->id[$contador] ?: 0;
         $insssegurocliente->idCliente = $request->idCliente;
         $insssegurocliente->tipoFamiliar = $request->tipoFamiliar;
-        $insssegurocliente->segurodevida = $request->seguro_vida[$id];
-        $insssegurocliente->capitalsegurado = $request->capital_segurado[$id];
-        $insssegurocliente->premiomensal = $request->premio_mensal[$id];
+        $insssegurocliente->segurodevida = $request->seguro_vida[$contador];
+        $insssegurocliente->capitalsegurado = $request->capital_segurado[$contador];
+        $insssegurocliente->premiomensal = $request->premio_mensal[$contador];
 
-        //$insssegurocliente->user_id = $request->user()->id;
-        $retorno = $insssegurocliente->save();
+        $insssegurocliente->save();
 
-        return json_encode($retorno);
+        if ($request->id[$contador] == 0) {
+            $retorno["id"] = DB::getPdo()->lastInsertId();
+        } else {
+            $retorno["id"] = $request->id[$contador];
+        }
+
+        $retorno["seguro_vida"] = $request->seguro_vida[$contador] ?: "";
+        $retorno["capital_segurado"] = $request->capital_segurado[$contador] ?: "";
+        $retorno["premio_mensal"] = $request->premio_mensal[$contador] ?: "";
+        return ($retorno);
     }
 
     public function store(Request $request) {
         $count = count($request->seguro_vida);
         for ($i = 0; $i < $count; $i++) {
-            $this->update($request, $i);
+            $retorno[$i] = $this->update($request, $i);
         }
-        return ($request);
+        return ($retorno);
     }
 
-    public function destroy(Request $request, $id) {
-
-        $insssegurocliente = Insssegurocliente::findOrFail($id);
-
-        $insssegurocliente->delete();
-        return "OK";
+    public function destroy(Request $request) {
+        $retorno = Insssegurocliente::where('id', $request->id)->delete();
+        return $retorno;
     }
 
 }

@@ -86,10 +86,6 @@ class PatrimoniosController extends Controller {
     }
 
     public function update(Request $request) {
-        //
-        /* $this->validate($request, [
-          'name' => 'required|max:255',
-          ]); */
         $patrimonio = null;
         if ($request->id > 0) {
             $patrimonio = Patrimonio::findOrFail($request->id);
@@ -106,10 +102,12 @@ class PatrimoniosController extends Controller {
         $patrimonio->emergencia = str_replace(",", ".", str_replace(".", "", ($request->patrim_emergencia)));
         $patrimonio->funeral = str_replace(",", ".", str_replace(".", "", ($request->patrim_funaral)));
         $patrimonio->outros = str_replace(",", ".", str_replace(".", "", ($request->patrim_outros)));
-
-        //$patrimonio->user_id = $request->user()->id;
-
-        $retorno = $patrimonio->save();
+                $retorno = $patrimonio->save();
+        if ($request->id == 0) {
+            $retorno = DB::getPdo()->lastInsertId();
+        } else {
+            $retorno = $request->id;
+        }
         return json_encode($retorno);
     }
 

@@ -84,60 +84,61 @@ class EducacaosController extends Controller {
         echo json_encode($ret);
     }
 
-    public function update(Request $request, int $id) {
-        //
-        /* $this->validate($request, [
-          'name' => 'required|max:255',
-          ]); */
-        $educacao = null;
-        if ($request->id > 0) {
-            $educacao = Educacao::findOrFail($request->id);
+    public function update(Request $request, $contador) {
+        if ($request->id[$contador] > 0) {
+            $educacao = Educacao::findOrFail($request->id[$contador]);
         } else {
             $educacao = new Educacao;
         }
 
-        $educacao->id = $request->id ?: 0;
-        $educacao->idCliente = 4;
-        $educacao->idadeserie = $request->idadeserie[$id];
-        $educacao->totaldeanosparaformacao = $request->total_anos[$id];
-        //$educacao->basico = $request->basico_mensal;
-        $educacao->custo2 = $request->basico_mensal[$id];
-        $educacao->anos2 = $request->basico_anos[$id];
-        $educacao->total2 = $request->basico_total[$id];
-        //$educacao->fundamental3anos = $request->fundamental3anos;
-        //$educacao->filho = $request->filho;
-        $educacao->custo3 = $request->fundamental_mensal[$id];
-        $educacao->anos3 = $request->fundamental_anos[$id];
-        $educacao->total3 = $request->fundamental_total[$id];
-        //$educacao->superior4a5anos = $request->superior4a5anos;
-        $educacao->custo4 = $request->superior_mensal[$id];
-        $educacao->anos4 = $request->superior_anos[$id];
-        $educacao->total4 = $request->superior_total[$id];
-//        $educacao->infantil = $request->infantil;
-//        $educacao->custo1 = $request->custo1;
-//        $educacao->anos1 = $request->anos1;
-//        $educacao->total1 = $request->total1;
+        $educacao->id = $request->id[$contador] ?: 0;
+        $educacao->idCliente = $request->idCliente;
+        $educacao->apelidofilho = $request->apelido[$contador];
+        $educacao->idadeserie = $request->idadeserie[$contador];
+        $educacao->totaldeanosparaformacao = $request->total_anos[$contador];
+        $educacao->basicocusto = $request->basico_mensal[$contador];
+        $educacao->basicoanos = $request->basico_anos[$contador];
+        $educacao->basicototal = $request->basico_total[$contador];
+        $educacao->fundamentalcusto = $request->fundamental_mensal[$contador];
+        $educacao->fundamentalanos = $request->fundamental_anos[$contador];
+        $educacao->fundamentaltotal = $request->fundamental_total[$contador];
+        $educacao->superiorcusto = $request->superior_mensal[$contador];
+        $educacao->superioranos = $request->superior_anos[$contador];
+        $educacao->superiortotal = $request->superior_total[$contador];
+        $educacao->save();
+        if ($request->id[$contador] == 0) {
+            $retorno["id"] = DB::getPdo()->lastInsertId();
+        } else {
+            $retorno["id"] = $request->id[$contador];
+        }
 
-        //$educacao->user_id = $request->user()->id;
-//        $educacao->save();
-        return $educacao->save();
+        $retorno["apelido"] = $request->apelido[$contador] ?: "";
+        $retorno["idadeserie"] = $request->idadeserie[$contador] ?: "";
+        $retorno["total_anos"] = $request->total_anos[$contador] ?: "";
+        $retorno["basico_mensal"] = $request->basico_mensal[$contador] ?: "";
+        $retorno["basico_anos"] = $request->basico_anos[$contador] ?: "";
+        $retorno["basico_total"] = $request->basico_total[$contador] ?: "";
+        $retorno["fundamental_mensal"] = $request->fundamental_mensal[$contador] ?: "";
+        $retorno["fundamental_anos"] = $request->fundamental_anos[$contador] ?: "";
+        $retorno["fundamental_total"] = $request->fundamental_total[$contador] ?: "";
+        $retorno["superior_mensal"] = $request->superior_mensal[$contador] ?: "";
+        $retorno["superior_anos"] = $request->superior_anos[$contador] ?: "";
+        $retorno["superior_total"] = $request->superior_total[$contador] ?: "";
+
+        return ($retorno);
     }
 
     public function store(Request $request) {
         $count = count($request->idadeserie);
         for ($i = 0; $i < $count; $i++) {
-            $this->update($request, $i);
+            $retorno[$i] = $this->update($request, $i);
         }
-        return ($request);
-//        return $this->update($request);
+        return ($retorno);
     }
 
-    public function destroy(Request $request, $id) {
-
-        $educacao = Educacao::findOrFail($id);
-
-        $educacao->delete();
-        return "OK";
+    public function destroy(Request $request) {
+        $retorno = Educacao::where('id', $request->id)->delete();
+        return $retorno;
     }
 
 }

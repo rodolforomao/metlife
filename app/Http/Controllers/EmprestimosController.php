@@ -84,46 +84,53 @@ class EmprestimosController extends Controller {
         echo json_encode($ret);
     }
 
-    public function update(Request $request, $id) {
+    public function update(Request $request, $contador) {
         //
         /* $this->validate($request, [
           'name' => 'required|max:255',
           ]); */
         $emprestimo = null;
-        if ($request->id > 0) {
-            $emprestimo = Emprestimo::findOrFail($request->id);
+        if ($request->id[$contador] > 0) {
+            $emprestimo = Emprestimo::findOrFail($request->id[$contador]);
         } else {
             $emprestimo = new Emprestimo;
         }
 
-        $emprestimo->id = $request->id ?: 0;
+        $emprestimo->id = $request->id[$contador] ?: 0;
         $emprestimo->idCliente = $request->idCliente;
-        $emprestimo->saldodevedor = str_replace(",", ".", str_replace(".", "", ($request->saldo_devedor[$id])));
-        $emprestimo->possuiseguro = $request->possui_seguro[$id];
-        $emprestimo->parcelamensal = str_replace(",", ".", str_replace(".", "", ($request->parcela_mensal[$id])));
-        $emprestimo->prazoresidual = $request->prazo_residual[$id];
-        $emprestimo->saldodevedordescoberto = str_replace(",", ".", str_replace(".", "", ($request->saldo_devedor_emprestimo[$id])));
-
-        //$emprestimo->user_id = $request->user()->id;
+        $emprestimo->saldodevedor = str_replace(",", ".", str_replace(".", "", ($request->saldo_devedor[$contador])));
+        $emprestimo->possuiseguro = $request->possui_seguro[$contador];
+        $emprestimo->parcelamensal = str_replace(",", ".", str_replace(".", "", ($request->parcela_mensal[$contador])));
+        $emprestimo->prazoresidual = $request->prazo_residual[$contador];
+        $emprestimo->saldodevedordescoberto = str_replace(",", ".", str_replace(".", "", ($request->saldo_devedor_emprestimo[$contador])));
         $emprestimo->save();
 
-        return redirect('/emprestimos');
+        if ($request->id[$contador] == 0) {
+            $retorno["id"] = DB::getPdo()->lastInsertId();
+        } else {
+            $retorno["id"] = $request->id[$contador];
+        }
+
+        $retorno["saldo_devedor"] = $request->saldo_devedor[$contador] ?: "";
+        $retorno["possui_seguro"] = $request->possui_seguro[$contador] ?: "";
+        $retorno["parcela_mensal"] = $request->parcela_mensal[$contador] ?: "";
+        $retorno["prazo_residual"] = $request->prazo_residual[$contador] ?: "";
+        $retorno["saldo_devedor_emprestimo"] = $request->saldo_devedor_emprestimo[$contador] ?: "";
+
+        return $retorno;
     }
 
     public function store(Request $request) {
         $count = count($request->saldo_devedor_emprestimo);
         for ($i = 0; $i < $count; $i++) {
-            $this->update($request, $i);
+            $retorno[$i] = $this->update($request, $i);
         }
-        return ($request);
+        return ($retorno);
     }
 
-    public function destroy(Request $request, $id) {
-
-        $emprestimo = Emprestimo::findOrFail($id);
-
-        $emprestimo->delete();
-        return "OK";
+    public function destroy(Request $request) {
+        $retorno = Emprestimo::where('id', $request->id)->delete();
+        return $retorno;
     }
 
 }
