@@ -15,12 +15,12 @@ class CreateRendimentomensalsTable extends Migration
         Schema::create('rendimentomensals', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('idCliente')->nullable();
-            //$table->unsignedInteger('idCliente')->default(2);
-            //$table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
-            $table->string('tipoFamiliar')->nullable();
-            $table->float('remendimentosmensal')->nullable();
-            $table->float('outrasrendas')->nullable();
+            $table->unsignedInteger('idCliente')->default(2);
+            $table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
+            $table->unsignedInteger('idTipoFamiliar')->default(2);
+            $table->foreign('idTipoFamiliar')->references('id')->on('tipofamiliars')->onDelete('cascade');
+            $table->float('remendimentosmensal',15,4)->nullable();
+            $table->float('outrasrendas',15,4)->nullable();
             $table->integer('declaracaodeir')->nullable();
             });
     }

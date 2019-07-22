@@ -18,7 +18,7 @@ class CreatePlanoclientesTable extends Migration
             $table->unsignedInteger('idCliente')->default(2);
             $table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
             $table->unsignedInteger('idTipoFamiliar')->default(2);
-            $table->foreign('idTipoFamiliare')->references('id')->on('tipofamiliars')->onDelete('cascade');
+            $table->foreign('idTipoFamiliar')->references('id')->on('tipofamiliars')->onDelete('cascade');
             $table->string('nome')->nullable();
             $table->string('risco')->nullable();
             $table->string('cpf')->nullable();

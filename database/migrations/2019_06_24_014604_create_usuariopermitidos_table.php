@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreatePerfilUsuariosTable extends Migration
+class CreateUsuarioPermitidosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreatePerfilUsuariosTable extends Migration
      */
     public function up()
     {
-        Schema::create('perfilusuarios', function (Blueprint $table) {
+        Schema::create('usuariopermitidos', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
             $table->unsignedInteger('idUsuario')->default(2);
