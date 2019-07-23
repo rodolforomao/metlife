@@ -86,53 +86,56 @@ class RendimentomensalsController extends Controller {
     }
 
     public function update(Request $request) {
-        //
-        /* $this->validate($request, [
-          'name' => 'required|max:255',
-          ]); */
-        $rendimentomensal = null;
-        if ($request->id > 0) {
-            $rendimentomensal = Rendimentomensal::findOrFail($request->id);
+        $request->id_rendimento_principal = str_replace('"', "", $request->id_rendimento_principal);
+        if ($request->id_rendimento_principal > 0) {
+            $rendimentomensal = Rendimentomensal::findOrFail($request->id_rendimento_principal);
         } else {
             $rendimentomensal = new Rendimentomensal;
         }
 
-        $rendimentomensal->idCliente = 4;
+        $rendimentomensal->id = $request->id_rendimento_principal ?: 0;
+        $rendimentomensal->idCliente = $request->idCliente;
         $rendimentomensal->tipoFamiliar = "Principal";
         $rendimentomensal->remendimentosmensal = $request->ren_redimento_mensal_principal;
         $rendimentomensal->remendimentosmensal = str_replace(",", ".", str_replace(".", "", ($request->ren_redimento_mensal_principal)));
         $rendimentomensal->outrasrendas = str_replace(",", ".", str_replace(".", "", ($request->ren_outras_principal)));
         $rendimentomensal->declaracaodeir = $request->declaracaodeir;
-        $retorno = $rendimentomensal->save();
+        $rendimentomensal->save();
+
+        if ($request->id_rendimento_principal == 0) {
+            $retorno = DB::getPdo()->lastInsertId();
+        } else {
+            $retorno = $request->id_rendimento_principal;
+        }
         return json_encode($retorno);
     }
 
     public function updateConjugue(Request $request) {
-        //
-        /* $this->validate($request, [
-          'name' => 'required|max:255',
-          ]); */
-        $rendimentomensal = null;
-        if ($request->id > 0) {
-            $rendimentomensal = Rendimentomensal::findOrFail($request->id);
+       $request->id_rendimento_conjugue = str_replace('"', "", $request->id_rendimento_conjugue);
+        if ($request->id_rendimento_conjugue > 0) {
+            $rendimentomensal = Rendimentomensal::findOrFail($request->id_rendimento_conjugue);
         } else {
             $rendimentomensal = new Rendimentomensal;
         }
 
-        $rendimentomensal->idCliente = 4;
+        $rendimentomensal->idCliente = $request->idCliente;
         $rendimentomensal->tipoFamiliar = "Conjugue";
         $rendimentomensal->remendimentosmensal = str_replace(",", ".", str_replace(".", "", ($request->ren_redimento_mensal_conjugue)));
         $rendimentomensal->outrasrendas = str_replace(",", ".", str_replace(".", "", ($request->ren_outras_conjugue)));
         $rendimentomensal->declaracaodeir = $request->declaracaodeir_conjugue;
-
-        $retorno = $rendimentomensal->save();
+        $rendimentomensal->save();
+        if ($request->id_rendimento_conjugue == 0) {
+            $retorno = DB::getPdo()->lastInsertId();
+        } else {
+            $retorno = $request->id_rendimento_conjugue;
+        }
         return json_encode($retorno);
     }
 
     public function store(Request $request) {
-        $retorno = $this->update($request);
+        $retorno["principal"] = $this->update($request);
         if (!empty($request->ren_redimento_mensal_conjugue)) {
-            $retorno = $this->updateConjugue($request);
+            $retorno["conjugue"] = $this->updateConjugue($request);
         }
         return $retorno;
     }

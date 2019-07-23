@@ -97,11 +97,7 @@ class DadoscadastraisController extends Controller {
             $dadoscadastrai = new Dadoscadastrai;
         }
 
-
-
         $dadoscadastrai->id = $request->id ?: 0;
-
-
         $dadoscadastrai->nomecompleto = $request->dc_nome_completo;
         $dadoscadastrai->cpf = $request->cpf;
         $dadoscadastrai->datanascimento = date('Y-m-d', strtotime(str_replace("/", "-", ($request->data_nascimento))));
@@ -110,9 +106,12 @@ class DadoscadastraisController extends Controller {
         $dadoscadastrai->enderecoresidencial = $request->dc_endereco_resd;
         $dadoscadastrai->email = $request->dc_email;
         $dadoscadastrai->celular = $request->dc_celular;
-        $retorno = $dadoscadastrai->save();
-        if ($retorno == true) {
+        $dadoscadastrai->save();
+
+        if ($request->id == 0) {
             $retorno = DB::getPdo()->lastInsertId();
+        } else {
+            $retorno = $request->id;
         }
         return json_encode($retorno);
     }

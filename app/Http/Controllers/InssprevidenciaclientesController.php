@@ -85,46 +85,48 @@ class InssprevidenciaclientesController extends Controller {
         echo json_encode($ret);
     }
 
-    public function update(Request $request, $id) {
-        //
-        /* $this->validate($request, [
-          'name' => 'required|max:255',
-          ]); */
+    public function update(Request $request, $contador) {
         $inssprevidenciacliente = null;
-        if ($request->id > 0) {
-            $inssprevidenciacliente = Inssprevidenciacliente::findOrFail($request->id);
+        if ($request->id[$contador] > 0) {
+            $inssprevidenciacliente = Inssprevidenciacliente::findOrFail($request->id[$contador]);
         } else {
             $inssprevidenciacliente = new Inssprevidenciacliente;
         }
 
-        $inssprevidenciacliente->id = $request->id ?: 0;
+        $inssprevidenciacliente->id = $request->id[$contador] ?: 0;
         $inssprevidenciacliente->idCliente = $request->idCliente;
         $inssprevidenciacliente->tipoFamiliar = $request->tipoFamiliar;
-        $inssprevidenciacliente->previdencia = $request->previdencia[$id];
-        $inssprevidenciacliente->pgblvgbl = $request->pglb_vgbl[$id];
-        $inssprevidenciacliente->saldoacumulado = str_replace(",", ".", str_replace(".", "", ($request->saldo_acumulado[$id])));
-        $inssprevidenciacliente->contribuicaoanual = $request->contribuicao_anual[$id];
+        $inssprevidenciacliente->previdencia = $request->previdencia[$contador];
+        $inssprevidenciacliente->pgblvgbl = $request->pglb_vgbl[$contador];
+        $inssprevidenciacliente->saldoacumulado = str_replace(",", ".", str_replace(".", "", ($request->saldo_acumulado[$contador])));
+        $inssprevidenciacliente->contribuicaoanual = $request->contribuicao_anual[$contador];
+        $inssprevidenciacliente->save();
 
-        //$inssprevidenciacliente->user_id = $request->user()->id;
-        $retorno = $inssprevidenciacliente->save();
+        if ($request->id[$contador] == 0) {
+            $retorno["id"] = DB::getPdo()->lastInsertId();
+        } else {
+            $retorno["id"] = $request->id[$contador];
+        }
 
-        return json_encode($retorno);
+        $retorno["previdencia"] = $request->previdencia[$contador] ?: "";
+        $retorno["pglb_vgbl"] = $request->pglb_vgbl[$contador] ?: "";
+        $retorno["saldo_acumulado"] = $request->saldo_acumulado[$contador] ?: "";
+        $retorno["contribuicao_anual"] = $request->contribuicao_anual[$contador] ?: "";
+        return ($retorno);
     }
 
     public function store(Request $request) {
         $count = count($request->previdencia);
         for ($i = 0; $i < $count; $i++) {
-            $this->update($request, $i);
+            $retorno[$i] = $this->update($request, $i);
         }
-        return ($request);
+        return ($retorno);
     }
 
-    public function destroy(Request $request, $id) {
-
-        $inssprevidenciacliente = Inssprevidenciacliente::findOrFail($id);
-
-        $inssprevidenciacliente->delete();
-        return "OK";
+    public function destroy(Request $request) {
+        $retorno = Inssprevidenciacliente::where('id', $request->id)->delete();
+        
+        return $retorno;
     }
 
 }

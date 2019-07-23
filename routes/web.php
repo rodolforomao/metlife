@@ -79,7 +79,7 @@ Route::resource('/dadosCadastrais', 'DadoscadastraisController');
 
 //Dados Familiares
 Route::post('/dadosFamiliares/cadastro', 'DadosfamiliaresController@store');
-Route::post('/dadosFamiliares/cadastroFilho', 'ConjugefilhosController@store');
+Route::post('/dadosFamiliares/excluir', 'DadosfamiliaresController@destroy');
 
 //Rendimentos
 Route::post('/rendimentos/cadastro', 'RendimentomensalsController@store');
@@ -89,6 +89,7 @@ Route::post('/patrimoio/cadastro', 'PatrimoniosController@store');
 
 //Educação ddos filhos
 Route::post('/educacao_filhos/cadastro', 'EducacaosController@store');
+Route::post('/educacao_filhos/excluir', 'EducacaosController@destroy');
 
 //Padrão de Vida
 Route::post('/padraoVida/cadastro', 'Padrao_de_vidasController@store');
@@ -96,15 +97,21 @@ Route::post('/padraoVida/cadastro', 'Padrao_de_vidasController@store');
 //Emprestimos
 Route::post('/saldoEmprestimos/cadastro', 'SaldoemprestimosController@store');
 Route::post('/emprestimos/cadastro', 'EmprestimosController@store');
+Route::post('/emprestimos/excluir', 'EmprestimosController@destroy');
 
 //Seguros e Previdencia
 Route::post('/FGST/cadastro', 'InssfgtsprevidenciasegurosController@store');
 Route::post('/previdencia/cadastro', 'InssprevidenciaclientesController@store');
 Route::post('/seguros/cadastro', 'InssseguroclientesController@store');
 
+Route::post('/previdencia/excluir', 'InssprevidenciaclientesController@destroy');
+Route::post('/seguros/excluir', 'InssseguroclientesController@destroy');
+
 //Planos
 Route::post('/planos/cadastro', 'PlanoprodutosController@store');
 
+//Editar
+Route::get('/dashboard/editar/{id}', 'EditarController@index');
 
 Route::resource('saldoemprestimo', 'saldoemprestimoController');
 Route::resource('emprestimounitario', 'emprestimounitarioController');

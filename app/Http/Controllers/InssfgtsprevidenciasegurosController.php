@@ -86,10 +86,6 @@ class InssfgtsprevidenciasegurosController extends Controller {
     }
 
     public function update(Request $request) {
-        //
-        /* $this->validate($request, [
-          'name' => 'required|max:255',
-          ]); */
         $inssfgtsprevidenciaseguro = null;
         if ($request->id > 0) {
             $inssfgtsprevidenciaseguro = Inssfgtsprevidenciaseguro::findOrFail($request->id);
@@ -105,9 +101,12 @@ class InssfgtsprevidenciasegurosController extends Controller {
         $inssfgtsprevidenciaseguro->inss = str_replace(",", ".", str_replace(".", "", ($request->inss)));
         $inssfgtsprevidenciaseguro->idadeaposentadoria = $request->idade_aposentadoria;
 
-        //$inssfgtsprevidenciaseguro->user_id = $request->user()->id;
-        $retorno = $inssfgtsprevidenciaseguro->save();
-
+        $inssfgtsprevidenciaseguro->save();
+        if ($request->id == 0) {
+            $retorno = DB::getPdo()->lastInsertId();
+        } else {
+            $retorno = $request->id;
+        }
         return json_encode($retorno);
     }
 

@@ -99,7 +99,7 @@
             },
             {
             "render": function (data, type, row) {
-            return '<a href="{{ url(' / dadoscadastrais') }}/' + row[0] + '/edit" class="btn btn-default">Update</a>';
+            return '<a href="{{ url('/dashboard/editar') }}/' + row[0] + '" class="btn btn-default">Update</a>';
             },
                     "targets": 12                    },
             {
