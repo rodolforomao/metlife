@@ -55,6 +55,10 @@
 
                 </div>          
             </div>
+            <!--Botão flutuante-->
+            <a href="{{ route('v2') }}" class="btn btn-primary floatButton">
+                <b><i class="fa fa-plus"></i></b>
+            </a>
     </section>
 </div> 
 

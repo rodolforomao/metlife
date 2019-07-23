@@ -72,7 +72,7 @@
                     </div>
 
                     <div class="row">
-                      <div class="col-12 text-muted" style="font-size: 12px;">
+                      <div class="col-12 text-muted" style="font-size: 12px;  top: 10px;">
                           Já tenho uma conta! <a href="{{route('login')}}" >Entrar</a>
                       </div>
                     </div>
