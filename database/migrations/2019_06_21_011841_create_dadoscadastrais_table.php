@@ -14,10 +14,8 @@ class CreateDadoscadastraisTable extends Migration
     {
         Schema::create('dadoscadastrais', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
-            $table->integer('idCliente')->nullable();
-            //$table->unsignedInteger('idUser')->default(2);
-            //$table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedInteger('idUser')->default(2);
+            $table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
             $table->string('nomecompleto')->nullable();
             $table->string('cpf')->nullable();
             $table->date('datanascimento')->nullable();
@@ -26,6 +24,7 @@ class CreateDadoscadastraisTable extends Migration
             $table->string('enderecoresidencial')->nullable();
             $table->string('email')->nullable();
             $table->string('celular')->nullable();
+            $table->timestamps();
             });
     }
 

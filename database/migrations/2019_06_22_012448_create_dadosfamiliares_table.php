@@ -15,10 +15,10 @@ class CreateDadosfamiliaresTable extends Migration
         Schema::create('dadosfamiliares', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('idCliente')->nullable();
-            //$table->unsignedInteger('idCliente')->default(2);
-            //$table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
-            $table->string('tipoFamiliar')->nullable();
+            $table->unsignedInteger('idCliente')->default(2);
+            $table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
+            $table->unsignedInteger('idTipoFamiliar')->default(2);
+            $table->foreign('idTipoFamiliar')->references('id')->on('tipofamiliars')->onDelete('cascade');
             $table->string('nome')->nullable();
             $table->date('datanascimento')->nullable();
             });

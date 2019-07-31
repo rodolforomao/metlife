@@ -15,14 +15,14 @@ class CreateInssprevidenciaclientesTable extends Migration
         Schema::create('inssprevidenciaclientes', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('idCliente')->nullable();
-            //$table->unsignedInteger('idCliente')->default(2);
-            //$table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
-            $table->string('tipoFamiliar')->nullable();
-            $table->float('previdencia')->nullable();
-            $table->float('pgblvgbl')->nullable();
-            $table->float('saldoacumulado')->nullable();
-            $table->float('contribuicaoanual')->nullable();
+            $table->unsignedInteger('idCliente')->default(2);
+            $table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
+            $table->unsignedInteger('idTipoFamiliar')->default(2);
+            $table->foreign('idTipoFamiliar')->references('id')->on('tipofamiliars')->onDelete('cascade');
+            $table->float('previdencia',15,4)->nullable();
+            $table->float('pgblvgbl',15,4)->nullable();
+            $table->float('saldoacumulado',15,4)->nullable();
+            $table->float('contribuicaoanual',15,4)->nullable();
             });
     }
 
