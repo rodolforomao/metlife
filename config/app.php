@@ -161,6 +161,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         
         CrudGenerator\CrudGeneratorServiceProvider::class,
+        
+        Laravel\Passport\PassportServiceProvider::class,
 
     ],
 

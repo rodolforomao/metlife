@@ -10,6 +10,7 @@
         "fideloper/proxy": "^4.0",
         "kepex/laravel-crud-generator": "^0.1.8",
         "laravel/framework": "5.7.*",
+        "laravel/passport": "^7.3",
         "laravel/tinker": "^1.0"
     },
     "require-dev": {
