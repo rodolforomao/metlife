@@ -15,12 +15,11 @@ class CreateConfiguracoesTable extends Migration
     {
         Schema::create('configuracoes', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('idCliente')->default(2);
-            $table->foreign('idCliente')->references('id')->on('dadoscadastrais')->onDelete('cascade');
+            $table->unsignedInteger('idUser')->default(2);
+            $table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
             $table->double('idadeFinalSituacaoAtual');
             $table->double('valorSonho');
             $table->double('valorFuneral');
-            $table->double('valorInventario');
             $table->double('valorEmergencial');
             $table->double('valorInventario');
             $table->timestamps();
