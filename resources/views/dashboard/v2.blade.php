@@ -67,7 +67,7 @@
                                     <a href="javascript:void(0)" id="educacaoFilhos_menu" onClick="openEducacaoFilhos()" class="nav-link">
                                         <i class="nav-icon fa fa-graduation-cap"></i>
                                         <p>
-                                            Educação dos Filhos
+                                            Educação
                                         </p>
                                     </a>
                                 </li>
@@ -122,7 +122,7 @@
                             </h3>
                         </div>
                         <form role="form" id="formDadosCadastrais">
-                            <input type="hidden" id="idCliente" name="id">
+                            <input type="text" id="idCliente" name="id">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -208,34 +208,12 @@
                             </h3>
                         </div>
                         <div class="card-body">
-                            <form role="form" id="formDadosFamiliares">
-                                <input type="hidden" id="idFamiliarConjugue" name="id">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Cônjuge</label>
-                                            <input type="text" class="form-control" id="df_conjuje" name="df_conjuje" placeholder="Cônjuge">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Data Nascimento</label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                                </div>
-                                                <input id="data_nascimento_conjugue" name="data_nascimento_conjugue" type="text" data-provide="datepicker" class="datepicker form-control">
-                                            </div>
-                                        </div>
-                                    </div>                    
-                                </div>
-                            </form>
                             <div class="row">
                                 <div class="col-md-12 border-bottom">
-                                    <h3>Filho(s) <button type="button" class="btn btn-sm btn-info" onclick="addCampoFilho()">+</button></h3>
+                                    <h3>Familiar(es) <button type="button" class="btn btn-sm btn-info" onclick="addCampoFamiliar()">+</button></h3>
                                 </div>
                             </div>
-                            <form role="form" id="formDadosFamiliaresFilhos">
+                            <form role="form" id="formDadosFamiliares">
 
                             </form>
                         </div>
@@ -284,58 +262,23 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Declaração de IR</label>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="declaracaodeir" value="1">
-                                                <label class="form-check-label">Completa</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="declaracaodeir" value="2">
-                                                <label class="form-check-label">Simplificada</label>
-                                            </div>
+                                            <select name='declaracaodeir_principal' class='form-control'>
+                                                <option value=''>Selecione</option>
+                                                <option value='1'>Completa</option>
+                                                <option value='2'>Simplificada</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="row">
-                                    <input type="hidden" id="id_rendimento_conjugue" name="id_rendimento_conjugue">
-                                    <div class="col-md-12 border-bottom">
-                                        <h3>Cônjuge</h3>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Rendimento Mensal</label>
-                                        <div class="input-group date">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">R$</span>
-                                            </div>
-                                            <input id="ren_redimento_mensal_conjugue" name="ren_redimento_mensal_conjugue" class="form-control" placeholder="Renda Mensal"
-                                                   onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Outras Rendas</label>
-                                        <div class="input-group date">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">R$</span>
-                                            </div>
-                                            <input id="ren_outras_conjugue" name="ren_outras_conjugue" class="form-control" placeholder="Renda Mensal"
-                                                   onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Declaração de IR</label>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="declaracaodeir_conjugue" value="1">
-                                                <label class="form-check-label">Completa</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="declaracaodeir_conjugue" value="2">
-                                                <label class="form-check-label">Simplificada</label>
-                                            </div>
-                                        </div>
+                                    <h3 class="col-md-12 border-bottom">
+                                        Familiar(es)<button type="button" class="btn btn-sm btn-info addDivSeguro" onclick="addCampoRendimentos()">+</button>
+                                    </h3>
+                                    <div class="card-body"  id="divRendimentosFamiliares">
+
                                     </div>
                                 </div>
-
                             </div>
                             <div class="card-footer">
                                 <button type="button" class="btn btn-primary" id="inserirRendimentos">Salvar</button>
@@ -416,10 +359,9 @@
                                             <label>Inventário</label>
                                             <div class="input-group date">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text">R$</span>
+                                                    <span class="input-group-text">%</span>
                                                 </div>
-                                                <input id="patrim_inventario" name="patrim_inventario" class="form-control" placeholder="Inventário"
-                                                       onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="somaTotalPatriomio()">
+                                                <input id="patrim_inventario" name="patrim_inventario" class="form-control" placeholder="Inventário"> 
                                             </div>
                                         </div>
                                     </div>
@@ -428,10 +370,9 @@
                                             <label>Emergência <small>(X de renda mensal)</small></label>
                                             <div class="input-group date">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text">R$</span>
+                                                    <span class="input-group-text">(X)</span>
                                                 </div>
-                                                <input id="patrim_emergencia" name="patrim_emergencia" class="form-control" placeholder="Emergência"
-                                                       onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="somaTotalPatriomio()">
+                                                <input id="patrim_emergencia" name="patrim_emergencia" class="form-control" placeholder="Emergência">
                                             </div>
                                         </div>
                                     </div>
@@ -442,8 +383,8 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">R$</span>
                                                 </div>
-                                                <input id="patrim_funaral" name="patrim_funaral" class="form-control" placeholder="Funeral"
-                                                       onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="somaTotalPatriomio()">
+                                                <input id="patrim_funaral" name="patrim_funaral" class="form-control" placeholder="Funeral" value="10.000,00"
+                                                       onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
                                             </div>
                                         </div>
                                     </div>                      
@@ -457,25 +398,22 @@
                     </div>
                 </div>
 
-                <!--Educação dos Filhos-->
+                <!--Educação-->
                 <div class="col-sm-12 col-md-9 no-display" id="educacao_filhos">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">
-                                Educação dos Filhos
+                                Educação <button type="button" class="btn btn-sm btn-info" onclick="addCampoFilhoEducacao()">+</button>
                             </h3>
                         </div>
                         <form role="form" id="formEducacaoFilhos">
-                            <div class="card-header">
-                                <h3>Filho <button type="button" class="btn btn-sm btn-info" onclick="addCampoFilhoEducacao()">+</button></h3>
-                            </div>
                             <div class="card-body"  id="divEducacaoFilhos">
-
-                            </div>
-                            <div class="card-footer">
-                                <button type="button" class="btn btn-primary" id="insereEducacaoFilhos">Salvar</button>
+                                
                             </div>
                         </form>   
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-primary" id="insereEducacaoFilhos">Salvar</button>
+                        </div>
                     </div>
                 </div>
 
@@ -513,7 +451,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">R$</span>
                                                 </div>
-                                                <input id="pv_moradia" name="pv_moradia" class="form-control" placeholder="Moradia"
+                                                <input id="pv_moradia" name="pv_moradia" class="form-control" placeholder="Moradia" onchange="somaValorPadraoVida(this.value)"
                                                        onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
                                             </div>
                                         </div>
@@ -525,7 +463,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">R$</span>
                                                 </div>
-                                                <input id="pv_servicos" name="pv_servicos" class="form-control" placeholder="Serviços"
+                                                <input id="pv_servicos" name="pv_servicos" class="form-control" placeholder="Serviços" onchange="somaValorPadraoVida(this.value)"
                                                        onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
                                             </div>
                                         </div>
@@ -537,7 +475,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">R$</span>
                                                 </div>
-                                                <input id="pv_transporte" name="pv_transporte" class="form-control" placeholder="Serviços"
+                                                <input id="pv_transporte" name="pv_transporte" class="form-control" placeholder="Serviços" onchange="somaValorPadraoVida(this.value)"
                                                        onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
                                             </div>
                                         </div>
@@ -549,7 +487,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">R$</span>
                                                 </div>
-                                                <input id="pv_saude" name="pv_saude" class="form-control" placeholder="Saúde"
+                                                <input id="pv_saude" name="pv_saude" class="form-control" placeholder="Saúde" onchange="somaValorPadraoVida(this.value)"
                                                        onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
                                             </div>
                                         </div>
@@ -562,7 +500,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">R$</span>
                                                 </div>
-                                                <input id="pv_vestuario" name="pv_vestuario" class="form-control" placeholder="Vestuário"
+                                                <input id="pv_vestuario" name="pv_vestuario" class="form-control" placeholder="Vestuário" onchange="somaValorPadraoVida(this.value)"
                                                        onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
                                             </div>
                                         </div>
@@ -574,7 +512,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">R$</span>
                                                 </div>
-                                                <input id="pv_seguro_vida" name="pv_seguro_vida" class="form-control" placeholder="Seguro de Vida/Previdência"
+                                                <input id="pv_seguro_vida" name="pv_seguro_vida" class="form-control" placeholder="Seguro de Vida/Previdência" onchange="somaValorPadraoVida(this.value)"
                                                        onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
                                             </div>
                                         </div>
@@ -586,7 +524,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">R$</span>
                                                 </div>
-                                                <input id="pv_lazer" name="pv_lazer" class="form-control" placeholder="Lazer"
+                                                <input id="pv_lazer" name="pv_lazer" class="form-control" placeholder="Lazer" onchange="somaValorPadraoVida(this.value)"
                                                        onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
                                             </div>
                                         </div>
@@ -598,7 +536,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">R$</span>
                                                 </div>
-                                                <input id="pv_impostos" name="pv_impostos" class="form-control" placeholder="Impostos"
+                                                <input id="pv_impostos" name="pv_impostos" class="form-control" placeholder="Impostos" onchange="somaValorPadraoVida(this.value)"
                                                        onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
                                             </div>
                                         </div>
@@ -610,7 +548,7 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">R$</span>
                                                 </div>
-                                                <input id="pv_extras" name="pv_extras" class="form-control" placeholder="Extras/Outros"
+                                                <input id="pv_extras" name="pv_extras" class="form-control" placeholder="Extras/Outros" onchange="somaValorPadraoVida(this.value)"
                                                        onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
                                             </div>
                                         </div>
@@ -873,7 +811,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                         </div>
-                                                        <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control">
+                                                        <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control" disabled="true">
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
@@ -1201,7 +1139,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                         </div>
-                                                        <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control">
+                                                        <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control" disabled="true">
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">

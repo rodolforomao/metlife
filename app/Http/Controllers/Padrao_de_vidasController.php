@@ -93,16 +93,20 @@ class Padrao_de_vidasController extends Controller {
         }
 
         $padrao_de_vida->id = $request->id ?: 0;
-        $padrao_de_vida->despezasgerais = str_replace(",", ".", str_replace(".", "", ($request->pv_gerais)));
-        $padrao_de_vida->moradia = str_replace(",", ".", str_replace(".", "", ($request->pv_moradia)));
-        $padrao_de_vida->servicos = str_replace(",", ".", str_replace(".", "", ($request->pv_servicos)));
-        $padrao_de_vida->transporte = str_replace(",", ".", str_replace(".", "", ($request->pv_transporte)));
-        $padrao_de_vida->saude = str_replace(",", ".", str_replace(".", "", ($request->pv_saude)));
-        $padrao_de_vida->vestuario = str_replace(",", ".", str_replace(".", "", ($request->pv_vestuario)));
-        $padrao_de_vida->seguroDeVidaPrevidencia = str_replace(",", ".", str_replace(".", "", ($request->pv_seguro_vida)));
-        $padrao_de_vida->lazer = str_replace(",", ".", str_replace(".", "", ($request->pv_lazer)));
-        $padrao_de_vida->impostos = str_replace(",", ".", str_replace(".", "", ($request->pv_impostos)));
-        $padrao_de_vida->extrasoutros = str_replace(",", ".", str_replace(".", "", ($request->pv_extras)));
+        if (isset($request->pv_gerais) == true) {
+            $padrao_de_vida->despezasgerais = str_replace(",", ".", str_replace(".", "", ($request->pv_gerais)));
+        } else {
+
+            $padrao_de_vida->moradia = str_replace(",", ".", str_replace(".", "", ($request->pv_moradia)));
+            $padrao_de_vida->servicos = str_replace(",", ".", str_replace(".", "", ($request->pv_servicos)));
+            $padrao_de_vida->transporte = str_replace(",", ".", str_replace(".", "", ($request->pv_transporte)));
+            $padrao_de_vida->saude = str_replace(",", ".", str_replace(".", "", ($request->pv_saude)));
+            $padrao_de_vida->vestuario = str_replace(",", ".", str_replace(".", "", ($request->pv_vestuario)));
+            $padrao_de_vida->seguroDeVidaPrevidencia = str_replace(",", ".", str_replace(".", "", ($request->pv_seguro_vida)));
+            $padrao_de_vida->lazer = str_replace(",", ".", str_replace(".", "", ($request->pv_lazer)));
+            $padrao_de_vida->impostos = str_replace(",", ".", str_replace(".", "", ($request->pv_impostos)));
+            $padrao_de_vida->extrasoutros = str_replace(",", ".", str_replace(".", "", ($request->pv_extras)));
+        }
         $padrao_de_vida->idCliente = $request->idCliente;
         $retorno = $padrao_de_vida->save();
         if ($request->id == 0) {

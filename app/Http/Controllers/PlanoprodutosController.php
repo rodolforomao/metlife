@@ -118,7 +118,7 @@ class PlanoprodutosController extends Controller {
     }
 
     public function store(Request $request) {
-        $count = count($request->vigencia);
+        $count = count($request->prazo);
         $retorno = false;
         for ($i = 0; $i < $count; $i++) {
             $retorno[$i] = $this->update($request, $i);

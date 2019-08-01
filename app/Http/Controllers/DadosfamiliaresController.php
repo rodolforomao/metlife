@@ -84,30 +84,7 @@ class DadosfamiliaresController extends Controller {
         echo json_encode($ret);
     }
 
-    public function update(Request $request) {
-        $dadosfamiliare = null;
-        if ($request->id > 0) {
-            $dadosfamiliare = Dadosfamiliare::findOrFail($request->id);
-        } else {
-            $dadosfamiliare = new Dadosfamiliare;
-        }
-
-        $dadosfamiliare->id = $request->id ?: 0;
-        $dadosfamiliare->idCliente = $request->idCliente;
-        $dadosfamiliare->tipoFamiliar = $request->tipoFamiliar;
-        $dadosfamiliare->nome = $request->df_conjuje;
-        $dadosfamiliare->datanascimento = date('Y-m-d', strtotime(str_replace("/", "-", ($request->data_nascimento_conjugue))));
-        $retorno = $dadosfamiliare->save();
-
-        if ($request->id == 0) {
-            $retorno = DB::getPdo()->lastInsertId();
-        } else {
-            $retorno = $request->id;
-        }
-        return json_encode($retorno);
-    }
-
-    public function updateFilhos(Request $request, $contador) {
+    public function update(Request $request, $contador) {
         $dadosfamiliare = null;
         if ($request->id[$contador] > 0) {
             $dadosfamiliare = Dadosfamiliare::findOrFail($request->id[$contador]);
@@ -117,9 +94,9 @@ class DadosfamiliaresController extends Controller {
 
         $dadosfamiliare->id = $request->id[$contador] ?: 0;
         $dadosfamiliare->idCliente = $request->idCliente;
-        $dadosfamiliare->tipoFamiliar = $request->tipoFamiliar;
-        $dadosfamiliare->nome = $request->df_filho[$contador];
-        $dadosfamiliare->datanascimento = date('Y-m-d', strtotime(str_replace("/", "-", ($request->data_nascimento_filho[$contador]))));
+        $dadosfamiliare->tipoFamiliar = $request->tipoFamiliar[$contador];
+        $dadosfamiliare->nome = $request->df_nome[$contador];
+        $dadosfamiliare->datanascimento = date('Y-m-d', strtotime(str_replace("/", "-", ($request->data_nascimento[$contador]))));
         $dadosfamiliare->save();
 
         if ($request->id[$contador] == 0) {
@@ -128,24 +105,17 @@ class DadosfamiliaresController extends Controller {
             $retorno["id"] = $request->id[$contador];
         }
 
-        $retorno["data_nascimento_filho"] = $request->data_nascimento_filho[$contador];
-        $retorno["df_filho"] = $request->df_filho[$contador];
+        $retorno["data_nascimento"] = $request->data_nascimento[$contador];
+        $retorno["df_nome"] = $request->df_nome[$contador];
+        $retorno["tipoFamiliar"] = $request->tipoFamiliar[$contador];
 
         return ($retorno);
     }
 
     public function store(Request $request) {
-        if ($request->tipoFamiliar == "Conjugue") {
-            $retorno = ($this->update($request));
-        } else if ($request->tipoFamiliar == "Filho") {
-            $count = count($request->df_filho);
-            if ($count > 0) {
-                for ($i = 0; $i < $count; $i++) {
-                    $retorno[$i] = $this->updateFilhos($request, $i);
-                }
-            }
-        } else {
-            $retorno = false;
+        $count = count($request->df_nome);
+        for ($i = 0; $i < $count; $i++) {
+            $retorno[$i] = $this->update($request, $i);
         }
         return $retorno;
     }

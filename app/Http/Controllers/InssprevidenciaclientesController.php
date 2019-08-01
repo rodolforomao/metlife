@@ -99,6 +99,7 @@ class InssprevidenciaclientesController extends Controller {
         $inssprevidenciacliente->previdencia = $request->previdencia[$contador];
         $inssprevidenciacliente->pgblvgbl = $request->pglb_vgbl[$contador];
         $inssprevidenciacliente->saldoacumulado = str_replace(",", ".", str_replace(".", "", ($request->saldo_acumulado[$contador])));
+        $inssprevidenciacliente->rendaestimada = str_replace(",", ".", str_replace(".", "", ($request->renda_estimada[$contador])));
         $inssprevidenciacliente->contribuicaoanual = $request->contribuicao_anual[$contador];
         $inssprevidenciacliente->save();
 
@@ -109,6 +110,7 @@ class InssprevidenciaclientesController extends Controller {
         }
 
         $retorno["previdencia"] = $request->previdencia[$contador] ?: "";
+        $retorno["renda_estimada"] = $request->renda_estimada[$contador] ?: "";
         $retorno["pglb_vgbl"] = $request->pglb_vgbl[$contador] ?: "";
         $retorno["saldo_acumulado"] = $request->saldo_acumulado[$contador] ?: "";
         $retorno["contribuicao_anual"] = $request->contribuicao_anual[$contador] ?: "";
@@ -125,7 +127,7 @@ class InssprevidenciaclientesController extends Controller {
 
     public function destroy(Request $request) {
         $retorno = Inssprevidenciacliente::where('id', $request->id)->delete();
-        
+
         return $retorno;
     }
 

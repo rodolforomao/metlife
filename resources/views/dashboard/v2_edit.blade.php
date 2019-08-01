@@ -2,42 +2,45 @@
 
 @section('content')
 <?php
-//Dados Conjugue ---------------------------------------------------------------
-$nome_conjugue = "";
-$id_conjugue = "";
-$data_nascimento_conjugue = "";
-foreach ($dadosFamiliarConjugue as $conjugue) {
-    $nome_conjugue = $conjugue->nome;
-    $id_conjugue = $conjugue->id;
-    $data_nascimento_conjugue = date('d/m/Y', strtotime(($conjugue->datanascimento)));
-}
-
 //Dados Filho ------------------------------------------------------------------
-$dadosFilho = "";
-foreach ($dadosFamiliarFilho as $filho) {
-    $dadosFilho .= "<div class='row' id='filho_deleta" . $filho->id . "'>";
-    $dadosFilho .= "<input type='hidden' name='id[]' value='" . $filho->id . "'>";
-    $dadosFilho .= "    <div class='col-md-6'>";
-    $dadosFilho .= "        <div class='form-group'>";
-    $dadosFilho .= "            <label>Filho</label>";
-    $dadosFilho .= "            <input type='text' class='form-control' name='df_filho[]' placeholder='Filho' value='" . $filho->nome . "'>";
-    $dadosFilho .= "        </div>";
-    $dadosFilho .= "    </div>";
-    $dadosFilho .= "    <div class='col-md-5'>";
-    $dadosFilho .= "        <div class='form-group'>";
-    $dadosFilho .= "            <label>Data Nascimento</label>";
-    $dadosFilho .= "            <div class='input-group'>";
-    $dadosFilho .= "                <div class='input-group-prepend'>";
-    $dadosFilho .= "                    <span class='input-group-text'><i class='fa fa-calendar'></i></span>";
-    $dadosFilho .= "                    <input name='data_nascimento_filho[]' type='text' data-provide='datepicker' class='datepicker form-control' value='" . date('d/m/Y', strtotime(($filho->datanascimento))) . "'>";
-    $dadosFilho .= "                </div>";
-    $dadosFilho .= "            </div>";
-    $dadosFilho .= "        </div>";
-    $dadosFilho .= "    </div>";
-    $dadosFilho .= "   <div class='col-md-1'>";
-    $dadosFilho .= "       <input type='button' value='-' class='btn btn-default' onclick='deletaFilho(" . $filho->id . ")' style='position: relative;top: 30px;'/>";
-    $dadosFilho .= "   </div>";
-    $dadosFilho .= "</div>";
+$dadosFamiliar = "";
+$contadorFamiliar = 0;
+foreach ($dadosFamiliares as $familiar) {
+    $dadosFamiliar .= "<div class='row' id='filho_deleta" . $familiar->id . "'>";
+    $dadosFamiliar .= "<input type='hidden' name='id[]' value='" . $familiar->id . "'>";
+    $dadosFamiliar .= "   <div class='col-md-4'>";
+    $dadosFamiliar .= "       <div class='form-group'>";
+    $dadosFamiliar .= "           <label>Grau de Parentesco</label>";
+    $dadosFamiliar .= "           <select type='text' class='form-control' id='tipo_familiar" . $contadorFamiliar . "' name='tipoFamiliar[]' placeholder='Grau de Parentesco'>";
+    $dadosFamiliar .= "               <option value=''>Selecione</option>";
+    $dadosFamiliar .= "               <option value='Conjugue'>Conjugue</option>";
+    $dadosFamiliar .= "               <option value='Filho'>Filho</option>";
+    $dadosFamiliar .= "           </select>";
+    $dadosFamiliar .= "       </div>";
+    $dadosFamiliar .= "   </div>";
+    $dadosFamiliar .= "   <div class='col-md-4'>";
+    $dadosFamiliar .= "       <div class='form-group'>";
+    $dadosFamiliar .= "           <label>Nome</label>";
+    $dadosFamiliar .= "           <input type='text' class='form-control' name='df_nome[]' placeholder='Nome' value='" . $familiar->nome . "'>";
+    $dadosFamiliar .= "       </div>";
+    $dadosFamiliar .= "   </div>";
+    $dadosFamiliar .= "   <div class='col-md-3'>";
+    $dadosFamiliar .= "       <div class='form-group'>";
+    $dadosFamiliar .= "           <label>Data Nascimento</label>";
+    $dadosFamiliar .= "           <div class='input-group'>";
+    $dadosFamiliar .= "               <div class='input-group-prepend'>";
+    $dadosFamiliar .= "                   <span class='input-group-text'><i class='fa fa-calendar'></i></span>";
+    $dadosFamiliar .= "                   <input name='data_nascimento[]' type='text' data-provide='datepicker' class='datepicker form-control' value='" . date('d/m/Y', strtotime(($familiar->datanascimento))) . "'>";
+    $dadosFamiliar .= "               </div>";
+    $dadosFamiliar .= "           </div>";
+    $dadosFamiliar .= "       </div>";
+    $dadosFamiliar .= "   </div> ";
+    $dadosFamiliar .= "   <div class='col-md-1'>";
+    $dadosFamiliar .= "       <label>&nbsp;</label>";
+    $dadosFamiliar .= "       <input type='button' value='-' class='btn btn-default' onclick='deletaFamiliar(" . $familiar->id . ")' style='position: relative;top: 30px;'/>";
+    $dadosFamiliar .= "   </div>";
+    $dadosFamiliar .= "</div>";
+    $contadorFamiliar++;
 }
 
 //Dados Rendientos Principal ---------------------------------------------------
@@ -45,25 +48,63 @@ $id_rendimento_principal = "";
 $rendimento_mensal_principal = "";
 $outras_rendas_principal = "";
 $declaracao_ir_principal = "";
+$rendimentosFamiliares = "";
 foreach ($dadosRendimentoPrincipal as $rendimento) {
-    $id_rendimento_principal = $rendimento->id;
-    $rendimento_mensal_principal = number_format($rendimento->remendimentosmensal, 2, ",", ".");
-    $outras_rendas_principal = number_format($rendimento->outrasrendas, 2, ",", ".");
-    $declaracao_ir_principal = $rendimento->declaracaodeir;
+    if ($rendimento->tipoFamiliar == "Principal") {
+        $id_rendimento_principal = $rendimento->id;
+        $rendimento_mensal_principal = number_format($rendimento->remendimentosmensal, 2, ",", ".");
+        $outras_rendas_principal = number_format($rendimento->outrasrendas, 2, ",", ".");
+        $declaracao_ir_principal = $rendimento->declaracaodeir;
+    } else {
+        $rendimentosFamiliares .= "<div class='row' id='rendimentos_delete" . $rendimento->id . "'>";
+        $rendimentosFamiliares .= "<input type='hidden' value='" . $rendimento->id . "' name='id[]'>";
+        $rendimentosFamiliares .= "   <div class='col-md-3'>";
+        $rendimentosFamiliares .= "       <div class='form-group'>";
+        $rendimentosFamiliares .= "           <label>Grau de Parentesco</label>";
+        $rendimentosFamiliares .= "           <select type='text' class='form-control' id='tipoFamiliar" . $rendimento->id . "' name='tipoFamiliar[]' placeholder='Grau de Parentesco'>";
+        $rendimentosFamiliares .= "               <option value=''>Selecione</option>";
+        $rendimentosFamiliares .= "               <option value='Conjugue'>Conjugue</option>";
+        $rendimentosFamiliares .= "               <option value='Filho'>Filho</option>";
+        $rendimentosFamiliares .= "           </select>";
+        $rendimentosFamiliares .= "       </div>";
+        $rendimentosFamiliares .= "   </div>";
+        $rendimentosFamiliares .= "   <div class='col-md-3'>";
+        $rendimentosFamiliares .= "       <label>Rendimento Mensal</label>";
+        $rendimentosFamiliares .= "       <div class='input-group date'>";
+        $rendimentosFamiliares .= "           <div class='input-group-prepend'>";
+        $rendimentosFamiliares .= "               <span class='input-group-text'>R$</span>";
+        $rendimentosFamiliares .= "           </div>";
+        $rendimentosFamiliares .= "           <input name='ren_redimento_mensal[]' class='form-control' placeholder='Renda Mensal' value='" . $rendimento->remendimentosmensal . "'";
+        $rendimentosFamiliares .= "               onkeydown='FormataMoeda(this, 20, event)' onkeypress='return maskKeyPress(event)' onchange=''>";
+        $rendimentosFamiliares .= "       </div>";
+        $rendimentosFamiliares .= "   </div>";
+        $rendimentosFamiliares .= "   <div class='col-md-3'>";
+        $rendimentosFamiliares .= "       <label>Outras Rendas</label>";
+        $rendimentosFamiliares .= "       <div class='input-group date'>";
+        $rendimentosFamiliares .= "           <div class='input-group-prepend'>";
+        $rendimentosFamiliares .= "               <span class='input-group-text'>R$</span>";
+        $rendimentosFamiliares .= "           </div>";
+        $rendimentosFamiliares .= "           <input name='ren_outras[]' class='form-control' placeholder='Renda Mensal' value='" . $rendimento->outrasrendas . "'";
+        $rendimentosFamiliares .= "               onkeydown='FormataMoeda(this, 20, event)' onkeypress='return maskKeyPress(event)' onchange=''>";
+        $rendimentosFamiliares .= "       </div>";
+        $rendimentosFamiliares .= "   </div>";
+        $rendimentosFamiliares .= "   <div class='col-md-2'>";
+        $rendimentosFamiliares .= "       <div class='form-group'>";
+        $rendimentosFamiliares .= "           <label>Declaração de IR</label>";
+        $rendimentosFamiliares .= "           <select name='declaracaodeir[]' id='declaracaodeir" . $rendimento->id . "' class='form-control'>";
+        $rendimentosFamiliares .= "               <option value=''>Selecione</option>";
+        $rendimentosFamiliares .= "               <option value='1'>Completa</option>";
+        $rendimentosFamiliares .= "               <option value='2'>Simplificada</option>";
+        $rendimentosFamiliares .= "           </select>";
+        $rendimentosFamiliares .= "      </div>";
+        $rendimentosFamiliares .= "   </div>";
+        $rendimentosFamiliares .= "   <div class='col-md-1'>";
+        $rendimentosFamiliares .= "       <label>&nbsp;</label>";
+        $rendimentosFamiliares .= "       <input type='button' value='-' class='btn btn-default' onclick='deletaRendimentoFamiliar(" . $rendimento->id . ")' style='position: relative;top: 30px;'/>";
+        $rendimentosFamiliares .= "   </div>";
+        $rendimentosFamiliares .= "</div>";
+    }
 }
-
-//Dados Rendientos Conjugue -----------------------------------------------------
-$id_rendimento_conjugue = "";
-$rendimento_mensal_conjugue = "";
-$outras_rendas_conjugue = "";
-$declaracao_ir_conjugue = "";
-foreach ($dadosRendimentoPrincipal as $rendimento) {
-    $id_rendimento_conjugue = $rendimento->id;
-    $rendimento_mensal_conjugue = number_format($rendimento->remendimentosmensal, 2, ",", ".");
-    $outras_rendas_conjugue = number_format($rendimento->outrasrendas, 2, ",", ".");
-    $declaracao_ir_conjugue = $rendimento->declaracaodeir;
-}
-
 //Dados Patrimonio -------------------------------------------------------------
 $id_patrimonio = "";
 $imoveis = "";
@@ -114,108 +155,87 @@ foreach ($dadosPadraoVida as $padrao_vida) {
 
 //Dados Educação ---------------------------------------------------------------
 $educacao = "";
+//echo $dadosEducacao;
+$array_tipoFamiliar = array();
+$array_apelido = array();
+$array_idade = array();
+
 foreach ($dadosEducacao as $educacaoFilhos) {
-    $educacao .= "<div class='row' id='filhoEducacao_delete" . $educacaoFilhos->id . "'>";
-    $educacao .= "   <input type='hidden' name='id[]'  value='" . $educacaoFilhos->id . "'>";
-    $educacao .= "   <div class='col-md-4'>";
+    if (!in_array($educacaoFilhos->tipoFamiliar, $array_tipoFamiliar)) {
+        array_push($array_tipoFamiliar, $educacaoFilhos->tipoFamiliar);
+        array_push($array_apelido, $educacaoFilhos->apelidofilho);
+        array_push($array_idade, $educacaoFilhos->idadeserie);
+    }
+}
+for ($i = 0; $i < count($array_tipoFamiliar); $i++) {
+    $educacao .= "<div class='row'>";
+    $educacao .= "   <div class='col-md-3'>";
+    $educacao .= "       <div class='form-group'>";
+    $educacao .= "           <label>Grau de Parentesco</label>";
+    $educacao .= "           <select type='text' class='form-control' id='tipoFamiliar_Educacao" . $i . "' name='tipoFamiliar[]' placeholder='Grau de Parentesco'>";
+    $educacao .= "               <option value=''>Selecione</option>";
+    $educacao .= "               <option value='1'>Conjugue</option>";
+    $educacao .= "               <option value='2'>Filho</option>";
+    $educacao .= "           </select>";
+    $educacao .= "       </div>";
+    $educacao .= "   </div>";
+    $educacao .= "   <div class='col-md-3'>";
     $educacao .= "       <div class='form-group'>";
     $educacao .= "           <label>Apelido</label>";
-    $educacao .= "           <input type='text' class='form-control' name='apelido[]' placeholder='Apelido' value='" . $educacaoFilhos->apelidofilho . "'>";
+    $educacao .= "           <input type='text' class='form-control' value='" . $array_apelido[$i] . "' name='apelido[]' placeholder='Apelido'>";
     $educacao .= "       </div>";
     $educacao .= "   </div>";
-    $educacao .= "   <div class='col-md-4'>";
+    $educacao .= "   <div class='col-md-3'>";
     $educacao .= "       <div class='form-group'>";
     $educacao .= "           <label>Idade / Série</label>";
-    $educacao .= "           <input type='text' class='form-control' name='idadeserie[]' placeholder='Idade / Série' value='" . $educacaoFilhos->idadeserie . "'>";
-    $educacao .= "       </div>";
-    $educacao .= "   </div>";
-    $educacao .= "   <div class='col-md-4'>";
-    $educacao .= "       <div class='form-group'>";
-    $educacao .= "           <label>Total de Anos Para Formação</label>";
-    $educacao .= "           <input type='text' class='form-control' name='total_anos[]' placeholder='Total de Anos Para Formação' value='" . $educacaoFilhos->totaldeanosparaformacao . "'>";
-    $educacao .= "       </div>";
-    $educacao .= "   </div> ";
-    $educacao .= "   <div class='col-sm-12 col-md-4'>";
-    $educacao .= "       <div class='row'>";
-    $educacao .= "           <div class='col-md-12 border-bottom'>";
-    $educacao .= "               <small>Infantil / Básico (12 anos)</small>";
-    $educacao .= "           </div>";
-    $educacao .= "           <div class='col-md-4'>";
-    $educacao .= "               <div class='form-group'>";
-    $educacao .= "                   <label>Custo</label>";
-    $educacao .= "                   <input type='text' class='form-control' name='basico_mensal[]' value='" . $educacaoFilhos->basicocusto . "'>";
-    $educacao .= "               </div>";
-    $educacao .= "           </div>";
-    $educacao .= "           <div class='col-md-4'>";
-    $educacao .= "               <div class='form-group'>";
-    $educacao .= "                   <label>Anos</label>";
-    $educacao .= "                   <input type='text' class='form-control' name='basico_anos[]' value='" . $educacaoFilhos->basicoanos . "'>";
-    $educacao .= "               </div>";
-    $educacao .= "           </div>";
-    $educacao .= "           <div class='col-md-4'>";
-    $educacao .= "               <div class='form-group'>";
-    $educacao .= "                   <label>Total</label>";
-    $educacao .= "                   <input type='text' class='form-control' name='basico_total[]' value='" . $educacaoFilhos->basicototal . "'>";
-    $educacao .= "               </div>";
-    $educacao .= "           </div>";
-    $educacao .= "       </div>";
-    $educacao .= "   </div>";
-    $educacao .= "   <div class='col-sm-12 col-md-4 blue-background'>";
-    $educacao .= "       <div class='row'>";
-    $educacao .= "           <div class='col-md-12 border-bottom'>";
-    $educacao .= "               <small>Fundamental (3 anos)</small>";
-    $educacao .= "           </div>";
-    $educacao .= "           <div class='col-md-4'>";
-    $educacao .= "               <div class='form-group'>";
-    $educacao .= "                   <label>Custo</label>";
-    $educacao .= "                   <input type='text' class='form-control' name='fundamental_mensal[]' value='" . $educacaoFilhos->fundamentalcusto . "'>";
-    $educacao .= "               </div>";
-    $educacao .= "           </div>";
-    $educacao .= "           <div class='col-md-4'>";
-    $educacao .= "               <div class='form-group'>";
-    $educacao .= "                   <label>Anos</label>";
-    $educacao .= "                   <input type='text' class='form-control' name='fundamental_anos[]' value='" . $educacaoFilhos->fundamentalanos . "'>";
-    $educacao .= "               </div>";
-    $educacao .= "           </div>";
-    $educacao .= "           <div class='col-md-4'>";
-    $educacao .= "               <div class='form-group'>";
-    $educacao .= "                   <label>Total</label>";
-    $educacao .= "                   <input type='text' class='form-control' name='fundamental_total[]' value='" . $educacaoFilhos->fundamentaltotal . "'>";
-    $educacao .= "               </div>";
-    $educacao .= "           </div>";
-    $educacao .= "       </div>";
-    $educacao .= "   </div>";
-    $educacao .= "   <div class='col-sm-12 col-md-4'>";
-    $educacao .= "       <div class='row'>";
-    $educacao .= "           <div class='col-md-12 border-bottom'>";
-    $educacao .= "               <small>Superior (4 a 5 anos)</small>";
-    $educacao .= "           </div>";
-    $educacao .= "           <div class='col-md-4'>";
-    $educacao .= "               <div class='form-group'>";
-    $educacao .= "                   <label>Custo</label>";
-    $educacao .= "                   <input type='text' class='form-control' name='superior_mensal[]' value='" . $educacaoFilhos->superiorcusto . "'>";
-    $educacao .= "               </div>";
-    $educacao .= "           </div>";
-    $educacao .= "           <div class='col-md-4'>";
-    $educacao .= "               <div class='form-group'>";
-    $educacao .= "                   <label>Anos</label>";
-    $educacao .= "                   <input type='text' class='form-control' name='superior_anos[]' value='" . $educacaoFilhos->superioranos . "'>";
-    $educacao .= "               </div>";
-    $educacao .= "           </div>";
-    $educacao .= "           <div class='col-md-4'>";
-    $educacao .= "               <div class='form-group'>";
-    $educacao .= "                   <label>Total</label>";
-    $educacao .= "                   <input type='text' class='form-control' name='superior_total[]' value='" . $educacaoFilhos->superiortotal . "'>";
-    $educacao .= "               </div>";
-    $educacao .= "           </div>";
+    $educacao .= "           <input type='text' class='form-control' value='" . $array_idade[$i] . "' name='idadeserie[]' placeholder='Idade / Série'>";
     $educacao .= "       </div>";
     $educacao .= "   </div>";
     $educacao .= "   <div class='col-md-12'>";
-    $educacao .= "       <input type='button' value='Remover' class='pull-right btn btn-default' onclick='deletaEducacao(" . $educacaoFilhos->id . ")'/>";
+    $educacao .= "       <table class='table table-hover' style='font-size: 12px;'>";
+    $educacao .= "           <thead>";
+    $educacao .= "               <tr>";
+    $educacao .= "                   <th style='width: 160px;'>Ensino</th>";
+    $educacao .= "                   <th>Custo</th>";
+    $educacao .= "                   <th>Anos</th>";
+    $educacao .= "                   <th>Total</th>";
+    $educacao .= "               </tr>";
+    $educacao .= "           </thead>";
+    $educacao .= "           <tbody>";
+    for ($j = 1; $j <= 5; $j++) {
+        $educacao .= "               <tr>";
+        $educacao .= "                   <td>";
+        $educacao .= "                       <input type='text' class='form-control' style='font-size: 12px;' value='" + data[i][j] . ensino + "' disabled='true'>";
+        $educacao .= "                       <input type='hidden' value='" + data[i][j] . id + "' name='id" + j + "[]'>";
+        $educacao .= "                   </td>";
+        $educacao .= "                   <td class='yellow-background'>";
+        $educacao .= "                       <div class='input-group date'>";
+        $educacao .= "                           <div class='input-group-prepend'>";
+        $educacao .= "                               <span class='input-group-text'>R$</span>";
+        $educacao .= "                           </div>";
+        $educacao .= "                           <input name='custo" + j + "[]' value='" + data[i][j] . custo + "' class='form-control'";
+        $educacao .= "                               onkeydown='FormataMoeda(this, 20, event)' onkeypress='return maskKeyPress(event)' onchange=''>";
+        $educacao .= "                       </div>";
+        $educacao .= "                   </td>";
+        $educacao .= "                   <td class='yellow-background'>";
+        $educacao .= "                       <input name='anos" + j + "[]' value='" + data[i][j] . anos + "' class='form-control'>";
+        $educacao .= "                   </td>";
+        $educacao .= "                   <td class='yellow-background'>";
+        $educacao .= "                       <div class='input-group date'>";
+        $educacao .= "                           <div class='input-group-prepend'>";
+        $educacao .= "                               <span class='input-group-text'>R$</span>";
+        $educacao .= "                           </div>";
+        $educacao .= "                           <input name='total" + j + "[]' class='form-control' value='" + data[i][j] . total + "'";
+        $educacao .= "                               onkeydown='FormataMoeda(this, 20, event)' onkeypress='return maskKeyPress(event)' onchange=''>";
+        $educacao .= "                       </div>";
+        $educacao .= "                   </td>";
+        $educacao .= "               </tr>";
+    }
+    $educacao .= "           </tbody>";
+    $educacao .= "       </table>";
     $educacao .= "   </div>";
     $educacao .= "</div>";
 }
-
 //Dados Rendientos Conjugue -----------------------------------------------------
 $id_saldo_emprestimos = "";
 $descoberto_emprestimo = "";
@@ -592,7 +612,7 @@ foreach ($dadosPlanoConjugue as $plano) {
                                     <a href="javascript:void(0)" id="educacaoFilhos_menu" onClick="openEducacaoFilhos()" class="nav-link">
                                         <i class="nav-icon fa fa-graduation-cap"></i>
                                         <p>
-                                            Educação dos Filhos
+                                            Educação
                                         </p>
                                     </a>
                                 </li>
@@ -733,41 +753,18 @@ foreach ($dadosPlanoConjugue as $plano) {
                             </h3>
                         </div>
                         <div class="card-body">
-                            <form role="form" id="formDadosFamiliares">
-                                <input type="hidden" name="id" value="{{$id_conjugue}}">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Cônjuge</label>
-                                            <input type="text" class="form-control" id="df_conjuje" name="df_conjuje" placeholder="Cônjuge" value="{{$nome_conjugue}}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Data Nascimento</label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                                </div>
-                                                <input value="{{$data_nascimento_conjugue}}" id="data_nascimento_conjugue" name="data_nascimento_conjugue" type="text" data-provide="datepicker" class="datepicker form-control">
-                                            </div>
-                                        </div>
-                                    </div>                    
-                                </div>
-                            </form>
                             <div class="row">
                                 <div class="col-md-12 border-bottom">
-                                    <h3>Filho(s) <button type="button" class="btn btn-sm btn-info" onclick="addCampoFilho()">+</button></h3>
+                                    <h3>Familiar(es) <button type="button" class="btn btn-sm btn-info" onclick="addCampoFamiliar()">+</button></h3>
                                 </div>
                             </div>
-                            <form role="form" id="formDadosFamiliaresFilhos">
-                                <?= $dadosFilho ?>
+                            <form role="form" id="formDadosFamiliares">
+                                <?= $dadosFamiliar ?>
                             </form>
                         </div>
                         <div class="card-footer">
                             <button type="button" class="btn btn-primary" id="insereDadosFamiliares">Salvar</button>
                         </div>
-
                     </div>
                 </div>
 
@@ -809,58 +806,23 @@ foreach ($dadosPlanoConjugue as $plano) {
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Declaração de IR</label>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="declaracaodeir" value="1" <?= $declaracao_ir_principal == 1 ? "checked" : ""; ?>>
-                                                <label class="form-check-label">Completa</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="declaracaodeir" value="2" <?= $declaracao_ir_principal == 2 ? "checked" : ""; ?>>
-                                                <label class="form-check-label">Simplificada</label>
-                                            </div>
+                                            <select name='declaracaodeir_principal' id="declaracaodeir_principal" class='form-control'>
+                                                <option value=''>Selecione</option>
+                                                <option value='1'>Completa</option>
+                                                <option value='2'>Simplificada</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
                                 <br>
                                 <div class="row">
-                                    <input type="hidden" id="id_rendimento_conjugue" name="id_rendimento_conjugue" value="{{$id_rendimento_conjugue}}">
-                                    <div class="col-md-12 border-bottom">
-                                        <h3>Cônjuge</h3>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Rendimento Mensal</label>
-                                        <div class="input-group date">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">R$</span>
-                                            </div>
-                                            <input id="ren_redimento_mensal_conjugue" name="ren_redimento_mensal_conjugue" class="form-control" placeholder="Renda Mensal"
-                                                   onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="" value="{{$rendimento_mensal_conjugue}}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Outras Rendas</label>
-                                        <div class="input-group date">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">R$</span>
-                                            </div>
-                                            <input id="ren_outras_conjugue" name="ren_outras_conjugue" class="form-control" placeholder="Renda Mensal"
-                                                   onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="" value="{{$outras_rendas_conjugue}}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Declaração de IR</label>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="declaracaodeir_conjugue" value="1" <?= $declaracao_ir_conjugue == 1 ? "checked" : ""; ?>>
-                                                <label class="form-check-label">Completa</label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="declaracaodeir_conjugue" value="2" <?= $declaracao_ir_conjugue == 2 ? "checked" : ""; ?>>
-                                                <label class="form-check-label">Simplificada</label>
-                                            </div>
-                                        </div>
+                                    <h3 class="col-md-12 border-bottom">
+                                        Familiar(es)<button type="button" class="btn btn-sm btn-info addDivSeguro" onclick="addCampoRendimentos()">+</button>
+                                    </h3>
+                                    <div class="card-body"  id="divRendimentosFamiliares">
+                                        <?= $rendimentosFamiliares ?>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="card-footer">
                                 <button type="button" class="btn btn-primary" id="inserirRendimentos">Salvar</button>
@@ -941,10 +903,9 @@ foreach ($dadosPlanoConjugue as $plano) {
                                             <label>Inventário</label>
                                             <div class="input-group date">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text">R$</span>
+                                                    <span class="input-group-text">%</span>
                                                 </div>
-                                                <input id="patrim_inventario" name="patrim_inventario" class="form-control" placeholder="Inventário"
-                                                       onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="somaTotalPatriomio()" value="{{$inventario}}">
+                                                <input id="patrim_inventario" name="patrim_inventario" class="form-control" placeholder="Inventário" value="{{$inventario}}">
                                             </div>
                                         </div>
                                     </div>
@@ -953,10 +914,9 @@ foreach ($dadosPlanoConjugue as $plano) {
                                             <label>Emergência <small>(X de renda mensal)</small></label>
                                             <div class="input-group date">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text">R$</span>
+                                                    <span class="input-group-text">(X)</span>
                                                 </div>
-                                                <input id="patrim_emergencia" name="patrim_emergencia" class="form-control" placeholder="Emergência"
-                                                       onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="somaTotalPatriomio()" value="{{$emergencia}}">
+                                                <input id="patrim_emergencia" name="patrim_emergencia" class="form-control" placeholder="Emergência" value="{{$emergencia}}">
                                             </div>
                                         </div>
                                     </div>
@@ -982,25 +942,22 @@ foreach ($dadosPlanoConjugue as $plano) {
                     </div>
                 </div>
 
-                <!--Educação dos Filhos-->
+                <!--Educação-->
                 <div class="col-sm-12 col-md-9 no-display" id="educacao_filhos">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">
-                                Educação dos Filhos
+                                Educação <button type="button" class="btn btn-sm btn-info" onclick="addCampoFilhoEducacao()">+</button>
                             </h3>
                         </div>
                         <form role="form" id="formEducacaoFilhos">
-                            <div class="card-header">
-                                <h3>Filho <button type="button" class="btn btn-sm btn-info" onclick="addCampoFilhoEducacao()">+</button></h3>
-                            </div>
                             <div class="card-body"  id="divEducacaoFilhos">
                                 <?= $educacao ?>
                             </div>
-                            <div class="card-footer">
-                                <button type="button" class="btn btn-primary" id="insereEducacaoFilhos">Salvar</button>
-                            </div>
                         </form>   
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-primary" id="insereEducacaoFilhos">Salvar</button>
+                        </div>
                     </div>
                 </div>
 
@@ -1038,7 +995,7 @@ foreach ($dadosPlanoConjugue as $plano) {
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">R$</span>
                                                 </div>
-                                                <input id="pv_moradia" name="pv_moradia" class="form-control" placeholder="Moradia" value="{{$moradia}}"
+                                                <input id="pv_moradia" name="pv_moradia" class="form-control" placeholder="Moradia" value="{{$moradia}}" onchange="somaValorPadraoVida(this.value)"
                                                        onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
                                             </div>
                                         </div>
@@ -1050,7 +1007,7 @@ foreach ($dadosPlanoConjugue as $plano) {
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">R$</span>
                                                 </div>
-                                                <input id="pv_servicos" name="pv_servicos" class="form-control" placeholder="Serviços" value="{{$servicos}}"
+                                                <input id="pv_servicos" name="pv_servicos" class="form-control" placeholder="Serviços" value="{{$servicos}}" onchange="somaValorPadraoVida(this.value)"
                                                        onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
                                             </div>
                                         </div>
@@ -1062,7 +1019,7 @@ foreach ($dadosPlanoConjugue as $plano) {
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">R$</span>
                                                 </div>
-                                                <input id="pv_transporte" name="pv_transporte" class="form-control" placeholder="Transporte" value="{{$transporte}}"
+                                                <input id="pv_transporte" name="pv_transporte" class="form-control" placeholder="Transporte" value="{{$transporte}}" onchange="somaValorPadraoVida(this.value)"
                                                        onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
                                             </div>
                                         </div>
@@ -1074,7 +1031,7 @@ foreach ($dadosPlanoConjugue as $plano) {
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">R$</span>
                                                 </div>
-                                                <input id="pv_saude" name="pv_saude" class="form-control" placeholder="Saúde" value="{{$saude}}"
+                                                <input id="pv_saude" name="pv_saude" class="form-control" placeholder="Saúde" value="{{$saude}}" onchange="somaValorPadraoVida(this.value)"
                                                        onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
                                             </div>
                                         </div>
@@ -1087,7 +1044,7 @@ foreach ($dadosPlanoConjugue as $plano) {
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">R$</span>
                                                 </div>
-                                                <input id="pv_vestuario" name="pv_vestuario" class="form-control" placeholder="Vestuário" value="{{$vestuario}}"
+                                                <input id="pv_vestuario" name="pv_vestuario" class="form-control" placeholder="Vestuário" value="{{$vestuario}}" onchange="somaValorPadraoVida(this.value)"
                                                        onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
                                             </div>
                                         </div>
@@ -1099,7 +1056,7 @@ foreach ($dadosPlanoConjugue as $plano) {
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">R$</span>
                                                 </div>
-                                                <input id="pv_seguro_vida" name="pv_seguro_vida" class="form-control" placeholder="Seguro de Vida/Previdência" value="{{$seguro_vida_previdencia}}"
+                                                <input id="pv_seguro_vida" name="pv_seguro_vida" class="form-control" placeholder="Seguro de Vida/Previdência" value="{{$seguro_vida_previdencia}}" onchange="somaValorPadraoVida(this.value)"
                                                        onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
                                             </div>
                                         </div>
@@ -1111,7 +1068,7 @@ foreach ($dadosPlanoConjugue as $plano) {
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">R$</span>
                                                 </div>
-                                                <input id="pv_lazer" name="pv_lazer" class="form-control" placeholder="Lazer" value="{{$lazer}}"
+                                                <input id="pv_lazer" name="pv_lazer" class="form-control" placeholder="Lazer" value="{{$lazer}}" onchange="somaValorPadraoVida(this.value)"
                                                        onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
                                             </div>
                                         </div>
@@ -1123,7 +1080,7 @@ foreach ($dadosPlanoConjugue as $plano) {
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">R$</span>
                                                 </div>
-                                                <input id="pv_impostos" name="pv_impostos" class="form-control" placeholder="Impostos" value="{{$impostos}}"
+                                                <input id="pv_impostos" name="pv_impostos" class="form-control" placeholder="Impostos" value="{{$impostos}}" onchange="somaValorPadraoVida(this.value)"
                                                        onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
                                             </div>
                                         </div>
@@ -1135,13 +1092,12 @@ foreach ($dadosPlanoConjugue as $plano) {
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">R$</span>
                                                 </div>
-                                                <input id="pv_extras" name="pv_extras" class="form-control" placeholder="Extras/Outros" value="{{$extrasoutros}}"
+                                                <input id="pv_extras" name="pv_extras" class="form-control" placeholder="Extras/Outros" value="{{$extrasoutros}}" onchange="somaValorPadraoVida(this.value)"
                                                        onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="card-footer">
                                 <button type="button" class="btn btn-primary" id="inserePadraoVida">Salvar</button>
@@ -1453,6 +1409,7 @@ foreach ($dadosPlanoConjugue as $plano) {
 <script>
                                         $("#sexo").val("{{$dadoscadastrais->sexo}}");
                                         $("#estadocivil").val("{{$dadoscadastrais->estadocivil}}");
+                                        $("#declaracaodeir_principal").val("{{$declaracao_ir_principal}}");
 </script>
 <script src="/dist/js/cadastro.js"></script>
 <script src="/dist/js/cadastro/dadoscadastrais.js"></script>

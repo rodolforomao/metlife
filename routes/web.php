@@ -18,9 +18,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/dashboard/home', 'DashboardController@versionone')->name('home');
+//Route::get('/dashboard/home', 'DashboardController@versionfour')->name('home');
+Route::get('/home', 'DashboardController@versionfour')->name('home');
+Route::get('/dashboard/v1', 'DashboardController@versionone')->name('v1');
 Route::get('/dashboard/v2', 'DashboardController@versiontwo')->name('v2');
 Route::get('/dashboard/v3', 'DashboardController@versionthree')->name('v3');
+Route::get('/dashboard/cadastrados', 'DashboardController@cadastrados');
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
@@ -83,6 +86,7 @@ Route::post('/dadosFamiliares/excluir', 'DadosfamiliaresController@destroy');
 
 //Rendimentos
 Route::post('/rendimentos/cadastro', 'RendimentomensalsController@store');
+Route::post('/rendimentos/excluir', 'RendimentomensalsController@destroy');
 
 //Patrimonio
 Route::post('/patrimoio/cadastro', 'PatrimoniosController@store');
@@ -112,6 +116,9 @@ Route::post('/planos/cadastro', 'PlanoprodutosController@store');
 
 //Editar
 Route::get('/dashboard/editar/{id}', 'EditarController@index');
+
+//Editar
+Route::get('/dashboard/relatorio/{id}', 'RelatorioController@index');
 
 Route::resource('saldoemprestimo', 'saldoemprestimoController');
 Route::resource('emprestimounitario', 'emprestimounitarioController');

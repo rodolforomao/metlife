@@ -19,7 +19,7 @@ use App\Insssegurocliente;
 use App\Planoprodutodesc;
 use DB;
 
-class EditarController extends Controller {
+class RelatorioController extends Controller {
 
     public function __construct() {
         //$this->middleware('auth');
@@ -27,10 +27,8 @@ class EditarController extends Controller {
 
     public function index(Request $request, $id) {
         $dadosCadastrais = Dadoscadastrai::findOrFail($id);
-        $dadosFamiliarConjugue = Dadosfamiliare::where('idCliente', $id)->where('tipoFamiliar', 'Conjugue')->get();
-        $dadosFamiliarFilho = Dadosfamiliare::where('idCliente', $id)->where('tipoFamiliar', 'Filho')->get();
-        $dadosRendimentoPrincipal = Rendimentomensal::where('idCliente', $id)->where('tipoFamiliar', 'Principal')->get();
-        $dadosRendimentoConjugue = Rendimentomensal::where('idCliente', $id)->where('tipoFamiliar', 'Conjugue')->get();
+        $dadosFamiliares = Dadosfamiliare::where('idCliente', $id)->get();
+        $dadosRendimentoPrincipal = Rendimentomensal::where('idCliente', $id)->get();
         $dadosPatrimonio = Patrimonio::where('idCliente', $id)->get();
         $dadosPadraoVida = Padrao_de_vida::where('idCliente', $id)->get();
         $dadosEducacao = Educacao::where('idCliente', $id)->get();
@@ -40,7 +38,7 @@ class EditarController extends Controller {
         $dadosFGTS_INSS_conjugue = Inssfgtsprevidenciaseguro::where('idCliente', $id)->where('tipoFamiliar', 'Conjugue')->get();
         $dadosPrevidencia = Inssprevidenciacliente::where('idCliente', $id)->get();
         $dadosSeguro = Insssegurocliente::where('idCliente', $id)->get();
-        
+
         $dadosPlanosPrincipal = Planoprodutodesc::
                         select("descricao", "planoprodutos.id", "planoprodutodescs.id as idProduto", "vigencia", "prazo", "capital", "valor", "tipoFamiliar")->
                         leftJoin('planoprodutos', function ($join) {
@@ -58,12 +56,10 @@ class EditarController extends Controller {
                         ->where('idCliente', $id)
                         ->orwhereNull('idCliente')->get();
 
-        return view('dashboard.v2_edit', [
+        return view('dashboard.v3', [
             'dadoscadastrais' => $dadosCadastrais,
-            'dadosFamiliarConjugue' => $dadosFamiliarConjugue,
-            'dadosFamiliarFilho' => $dadosFamiliarFilho,
+            'dadosFamiliares' => $dadosFamiliares,
             'dadosRendimentoPrincipal' => $dadosRendimentoPrincipal,
-            'dadosRendimentoConjugue' => $dadosRendimentoConjugue,
             'dadosPatrimonio' => $dadosPatrimonio,
             'dadosPadraoVida' => $dadosPadraoVida,
             'dadosEducacao' => $dadosEducacao,
