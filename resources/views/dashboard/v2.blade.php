@@ -183,13 +183,10 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Celular</label>
-                                            <input type="text" id="dc_celular" class="form-control" placeholder="Celular" name="dc_celular" name="tel" maxlength="15" OnKeyPress="formatar('## #####-####', this)" >
-                                            <!--<input type="text" class="form-control"  placeholder="Celular">-->
+                                            <input type="text" id="dc_celular" class="form-control" placeholder="Celular" name="dc_celular" name="tel" maxlength="14" OnKeyPress="formatar('## # ####-####', this)" >
                                         </div>
                                     </div>
-
                                 </div>
-
                             </div>
                             <div class="card-footer">
                                 <button type="button" class="btn btn-primary" id="inserirDadosCadastrais">Salvar</button>

@@ -11,7 +11,7 @@ $(document).ready(function () {
         idCliente.value = $("#idCliente").val();
 
         tipoFamiliar.name = "tipoFamiliar";
-        tipoFamiliar.value = "Principal";
+        tipoFamiliar.value = "1";
 
         formPrincipalSeguros.push(idCliente);
         formPrincipalSeguros.push(tipoFamiliar);
@@ -34,7 +34,7 @@ $(document).ready(function () {
             idCliente.value = $("#idCliente").val();
 
             tipoFamiliar.name = "tipoFamiliar";
-            tipoFamiliar.value = "Principal";
+            tipoFamiliar.value = "2";
 
             formPrevidenciaPrincipal.push(idCliente);
             formPrevidenciaPrincipal.push(tipoFamiliar);

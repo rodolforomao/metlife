@@ -94,8 +94,8 @@ class InssfgtsprevidenciasegurosController extends Controller {
         }
 
         $inssfgtsprevidenciaseguro->id = $request->id ?: 0;
-        $inssfgtsprevidenciaseguro->idCliente = $request->idCliente;
-        $inssfgtsprevidenciaseguro->tipoFamiliar = $request->tipoFamiliar;
+//        $inssfgtsprevidenciaseguro->idCliente = $request->idCliente;
+        $inssfgtsprevidenciaseguro->idDadosFamiliares = $request->idCliente;
         $inssfgtsprevidenciaseguro->fgts = $request->fgts;
         $inssfgtsprevidenciaseguro->fgts = str_replace(",", ".", str_replace(".", "", ($request->fgts)));
         $inssfgtsprevidenciaseguro->inss = str_replace(",", ".", str_replace(".", "", ($request->inss)));

@@ -14,28 +14,16 @@ $(document).ready(function () {
             success: function (data) {
                 $("#divEducacaoFilhos").html("");
                 for (i = 0; i < data.length; i++) {
+                    console.log(dadosFamiliares);
                     var html = "";
                     html += "<div class='row' id='filhoEducacao_delete" + i + "'>";
                     html += "   <div class='col-md-3'>";
                     html += "       <div class='form-group'>";
-                    html += "           <label>Grau de Parentesco</label>";
-                    html += "           <select type='text' class='form-control' id='tipoFamiliar_Educacao" + i + "' name='tipoFamiliar[]' placeholder='Grau de Parentesco'>";
-                    html += "               <option value=''>Selecione</option>";
-                    html += "               <option value='1'>Conjugue</option>";
-                    html += "               <option value='2'>Filho</option>";
-                    html += "           </select>";
-                    html += "       </div>";
-                    html += "   </div>";
-                    html += "   <div class='col-md-3'>";
-                    html += "       <div class='form-group'>";
-                    html += "           <label>Apelido</label>";
-                    html += "           <input type='text' class='form-control' id='apelido_Educacao" + i + "' name='apelido[]' placeholder='Apelido'>";
-                    html += "       </div>";
-                    html += "   </div>";
-                    html += "   <div class='col-md-3'>";
-                    html += "       <div class='form-group'>";
                     html += "           <label>Idade / Série</label>";
-                    html += "           <input type='text' class='form-control' id='idade_Educacao" + i + "' name='idadeserie[]' placeholder='Idade / Série'>";
+                    html += "           <select type='text' class='form-control' id='tipo_familiar_educacao" + i + "' name='tipoFamiliar[]' placeholder='Grau de Parentesco'>";
+                    html += "               <option value=''>Selecione</option>";
+                    html += dadosFamiliares;
+                    html += "           </select>";
                     html += "       </div>";
                     html += "   </div>";
                     html += "   <div class='col-md-12'>";
@@ -79,7 +67,7 @@ $(document).ready(function () {
                         html += "               </tr>";
                         var tipoFamiliar = (data[i][j].tipoFamiliar);
                         var apelido = (data[i][j].apelido);
-                        var idadeserie =(data[i][j].idadeserie);
+                        var idadeserie = (data[i][j].idadeserie);
                     }
                     html += "           </tbody>";
                     html += "       </table>";
@@ -89,12 +77,10 @@ $(document).ready(function () {
                     html += "   </div>";
                     html += "</div>";
                     $("#divEducacaoFilhos").append(html);
-                    $("#tipoFamiliar_Educacao" + i).val(tipoFamiliar);
-                    $("#apelido_Educacao" + i).val(apelido);
-                    $("#idade_Educacao" + i).val(idadeserie);
+                    $("#tipo_familiar_educacao" + i).val(tipoFamiliar);
                 }
                 $.notify('Cadastrado com sucesso!', "success");
-//                $('#padraoVida_menu').click();
+                $('#padraoVida_menu').click();
             }, error: function (data) {
                 $.notify('Falha no cadastro', "warning");
             }
@@ -108,24 +94,11 @@ function addCampoFilhoEducacao() {
     html += "<div class='row' id='filhoEducacao" + qtdeCamposEducacao + "'>";
     html += "   <div class='col-md-3'>";
     html += "       <div class='form-group'>";
-    html += "           <label>Grau de Parentesco</label>";
-    html += "           <select type='text' class='form-control' name='tipoFamiliar[]' placeholder='Grau de Parentesco'>";
+    html += "           <label>Familiar</label>";
+    html += "           <select type='text' class='form-control' id='tipo_familiar_educacao" + i + "' name='tipoFamiliar[]' placeholder='Grau de Parentesco'>";
     html += "               <option value=''>Selecione</option>";
-    html += "               <option value='1'>Conjugue</option>";
-    html += "               <option value='2'>Filho</option>";
+    html += dadosFamiliares;
     html += "           </select>";
-    html += "       </div>";
-    html += "   </div>";
-    html += "   <div class='col-md-3'>";
-    html += "       <div class='form-group'>";
-    html += "           <label>Apelido</label>";
-    html += "           <input type='text' class='form-control' name='apelido[]' placeholder='Apelido'>";
-    html += "       </div>";
-    html += "   </div>";
-    html += "   <div class='col-md-3'>";
-    html += "       <div class='form-group'>";
-    html += "           <label>Idade / Série</label>";
-    html += "           <input type='text' class='form-control' name='idadeserie[]' placeholder='Idade / Série'>";
     html += "       </div>";
     html += "   </div>";
     html += "   <div class='col-md-12'>";

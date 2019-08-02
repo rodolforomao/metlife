@@ -96,9 +96,10 @@ class DadoscadastraisController extends Controller {
         } else {
             $dadoscadastrai = new Dadoscadastrai;
         }
-
+                 
         $dadoscadastrai->id = $request->id ?: 0;
         $dadoscadastrai->nomecompleto = $request->dc_nome_completo;
+        $dadoscadastrai->idUser = 1;
         $dadoscadastrai->cpf = $request->cpf;
         $dadoscadastrai->datanascimento = date('Y-m-d', strtotime(str_replace("/", "-", ($request->data_nascimento))));
         $dadoscadastrai->sexo = $request->sexo;
@@ -113,6 +114,7 @@ class DadoscadastraisController extends Controller {
         } else {
             $retorno = $request->id;
         }
+        
         return json_encode($retorno);
     }
 

@@ -161,10 +161,35 @@ $array_apelido = array();
 $array_idade = array();
 
 foreach ($dadosEducacao as $educacaoFilhos) {
-    if (!in_array($educacaoFilhos->tipoFamiliar, $array_tipoFamiliar)) {
-        array_push($array_tipoFamiliar, $educacaoFilhos->tipoFamiliar);
-        array_push($array_apelido, $educacaoFilhos->apelidofilho);
-        array_push($array_idade, $educacaoFilhos->idadeserie);
+    if (!in_array($educacaoFilhos->idDadosFamiliares, $array_tipoFamiliar)) {
+        array_push($array_tipoFamiliar, $educacaoFilhos->idDadosFamiliares);
+//        $educacao .= "               <tr>";
+//        $educacao .= "                   <td>";
+//        $educacao .= "                       <input type='text' class='form-control' style='font-size: 12px;' value='" + data[i][j] . ensino + "' disabled='true'>";
+//        $educacao .= "                       <input type='hidden' value='" + data[i][j] . id + "' name='id" + j + "[]'>";
+//        $educacao .= "                   </td>";
+//        $educacao .= "                   <td class='yellow-background'>";
+//        $educacao .= "                       <div class='input-group date'>";
+//        $educacao .= "                           <div class='input-group-prepend'>";
+//        $educacao .= "                               <span class='input-group-text'>R$</span>";
+//        $educacao .= "                           </div>";
+//        $educacao .= "                           <input name='custo" + j + "[]' value='" + data[i][j] . custo + "' class='form-control'";
+//        $educacao .= "                               onkeydown='FormataMoeda(this, 20, event)' onkeypress='return maskKeyPress(event)' onchange=''>";
+//        $educacao .= "                       </div>";
+//        $educacao .= "                   </td>";
+//        $educacao .= "                   <td class='yellow-background'>";
+//        $educacao .= "                       <input name='anos" + j + "[]' value='" + data[i][j] . anos + "' class='form-control'>";
+//        $educacao .= "                   </td>";
+//        $educacao .= "                   <td class='yellow-background'>";
+//        $educacao .= "                       <div class='input-group date'>";
+//        $educacao .= "                           <div class='input-group-prepend'>";
+//        $educacao .= "                               <span class='input-group-text'>R$</span>";
+//        $educacao .= "                           </div>";
+//        $educacao .= "                           <input name='total" + j + "[]' class='form-control' value='" + data[i][j] . total + "'";
+//        $educacao .= "                               onkeydown='FormataMoeda(this, 20, event)' onkeypress='return maskKeyPress(event)' onchange=''>";
+//        $educacao .= "                       </div>";
+//        $educacao .= "                   </td>";
+//        $educacao .= "               </tr>";
     }
 }
 for ($i = 0; $i < count($array_tipoFamiliar); $i++) {
@@ -179,18 +204,6 @@ for ($i = 0; $i < count($array_tipoFamiliar); $i++) {
     $educacao .= "           </select>";
     $educacao .= "       </div>";
     $educacao .= "   </div>";
-    $educacao .= "   <div class='col-md-3'>";
-    $educacao .= "       <div class='form-group'>";
-    $educacao .= "           <label>Apelido</label>";
-    $educacao .= "           <input type='text' class='form-control' value='" . $array_apelido[$i] . "' name='apelido[]' placeholder='Apelido'>";
-    $educacao .= "       </div>";
-    $educacao .= "   </div>";
-    $educacao .= "   <div class='col-md-3'>";
-    $educacao .= "       <div class='form-group'>";
-    $educacao .= "           <label>Idade / Série</label>";
-    $educacao .= "           <input type='text' class='form-control' value='" . $array_idade[$i] . "' name='idadeserie[]' placeholder='Idade / Série'>";
-    $educacao .= "       </div>";
-    $educacao .= "   </div>";
     $educacao .= "   <div class='col-md-12'>";
     $educacao .= "       <table class='table table-hover' style='font-size: 12px;'>";
     $educacao .= "           <thead>";
@@ -202,35 +215,7 @@ for ($i = 0; $i < count($array_tipoFamiliar); $i++) {
     $educacao .= "               </tr>";
     $educacao .= "           </thead>";
     $educacao .= "           <tbody>";
-    for ($j = 1; $j <= 5; $j++) {
-        $educacao .= "               <tr>";
-        $educacao .= "                   <td>";
-        $educacao .= "                       <input type='text' class='form-control' style='font-size: 12px;' value='" + data[i][j] . ensino + "' disabled='true'>";
-        $educacao .= "                       <input type='hidden' value='" + data[i][j] . id + "' name='id" + j + "[]'>";
-        $educacao .= "                   </td>";
-        $educacao .= "                   <td class='yellow-background'>";
-        $educacao .= "                       <div class='input-group date'>";
-        $educacao .= "                           <div class='input-group-prepend'>";
-        $educacao .= "                               <span class='input-group-text'>R$</span>";
-        $educacao .= "                           </div>";
-        $educacao .= "                           <input name='custo" + j + "[]' value='" + data[i][j] . custo + "' class='form-control'";
-        $educacao .= "                               onkeydown='FormataMoeda(this, 20, event)' onkeypress='return maskKeyPress(event)' onchange=''>";
-        $educacao .= "                       </div>";
-        $educacao .= "                   </td>";
-        $educacao .= "                   <td class='yellow-background'>";
-        $educacao .= "                       <input name='anos" + j + "[]' value='" + data[i][j] . anos + "' class='form-control'>";
-        $educacao .= "                   </td>";
-        $educacao .= "                   <td class='yellow-background'>";
-        $educacao .= "                       <div class='input-group date'>";
-        $educacao .= "                           <div class='input-group-prepend'>";
-        $educacao .= "                               <span class='input-group-text'>R$</span>";
-        $educacao .= "                           </div>";
-        $educacao .= "                           <input name='total" + j + "[]' class='form-control' value='" + data[i][j] . total + "'";
-        $educacao .= "                               onkeydown='FormataMoeda(this, 20, event)' onkeypress='return maskKeyPress(event)' onchange=''>";
-        $educacao .= "                       </div>";
-        $educacao .= "                   </td>";
-        $educacao .= "               </tr>";
-    }
+
     $educacao .= "           </tbody>";
     $educacao .= "       </table>";
     $educacao .= "   </div>";

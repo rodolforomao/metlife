@@ -95,7 +95,7 @@ class RendimentomensalsController extends Controller {
 
         $rendimentomensal->id = $request->id_rendimento_principal ?: 0;
         $rendimentomensal->idCliente = $request->idCliente;
-        $rendimentomensal->tipoFamiliar = "Principal";
+        $rendimentomensal->idTipoFamiliar = 1;
         $rendimentomensal->remendimentosmensal = $request->ren_redimento_mensal_principal;
         $rendimentomensal->remendimentosmensal = str_replace(",", ".", str_replace(".", "", ($request->ren_redimento_mensal_principal)));
         $rendimentomensal->outrasrendas = str_replace(",", ".", str_replace(".", "", ($request->ren_outras_principal)));
@@ -118,7 +118,7 @@ class RendimentomensalsController extends Controller {
         }
         $rendimentomensal->id = $request->id[$contador];
         $rendimentomensal->idCliente = $request->idCliente;
-        $rendimentomensal->tipoFamiliar = $request->tipoFamiliar[$contador];
+        $rendimentomensal->idTipoFamiliar = $request->tipoFamiliar[$contador];
         $rendimentomensal->remendimentosmensal = str_replace(",", ".", str_replace(".", "", ($request->ren_redimento_mensal[$contador])));
         $rendimentomensal->outrasrendas = str_replace(",", ".", str_replace(".", "", ($request->ren_outras[$contador])));
         $rendimentomensal->declaracaodeir = $request->declaracaodeir[$contador];

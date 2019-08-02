@@ -92,14 +92,14 @@ class EducacaosController extends Controller {
         }
 
         $educacao->id = $request["id"] ?: 0;
-        $educacao->idCliente = $request["idCliente"];
-        $educacao->apelidofilho = $request["apelido"];
-        $educacao->idadeserie = $request["idadeserie"];
+//        $educacao->idCliente = $request["idCliente"];
+//        $educacao->apelidofilho = $request["apelido"];
+//        $educacao->idadeserie = $request["idadeserie"];
         $educacao->custo = str_replace(",", ".", str_replace(".", "", ($request["custo"] ?: 0)));
         $educacao->anos = $request["anos"];
         $educacao->total = str_replace(",", ".", str_replace(".", "", ($request["total"] ?: 0)));
-        $educacao->tipoFamiliar = $request["tipoFamiliar"];
-        $educacao->tipoEducacao = $request["tipoEnsino"];
+        $educacao->idDadosFamiliares = $request["tipoFamiliar"];
+        $educacao->idTipoEducacao = $request["tipoEnsino"];
 
         $educacao->save();
         if ($request["id"] == "") {
@@ -141,8 +141,8 @@ class EducacaosController extends Controller {
             $dados["idCliente"] = $request->idCliente;
             for ($i = 0; $i < $count; $i++) {
                 $dados["tipoFamiliar"] = $request->tipoFamiliar[$i];
-                $dados["apelido"] = $request->apelido[$i];
-                $dados["idadeserie"] = $request->idadeserie[$i];
+//                $dados["apelido"] = $request->apelido[$i];
+//                $dados["idadeserie"] = $request->idadeserie[$i];
                 for ($j = 1; $j <= 5; $j++) {
                     $dados["tipoEnsino"] = $j;
                     $dados["id"] = $request["id$j"][$i];

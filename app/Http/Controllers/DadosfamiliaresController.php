@@ -94,7 +94,7 @@ class DadosfamiliaresController extends Controller {
 
         $dadosfamiliare->id = $request->id[$contador] ?: 0;
         $dadosfamiliare->idCliente = $request->idCliente;
-        $dadosfamiliare->tipoFamiliar = $request->tipoFamiliar[$contador];
+        $dadosfamiliare->idTipoFamiliar = $request->tipoFamiliar[$contador];
         $dadosfamiliare->nome = $request->df_nome[$contador];
         $dadosfamiliare->datanascimento = date('Y-m-d', strtotime(str_replace("/", "-", ($request->data_nascimento[$contador]))));
         $dadosfamiliare->save();

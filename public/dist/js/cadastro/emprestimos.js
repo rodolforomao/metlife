@@ -6,7 +6,7 @@ $(document).ready(function () {
         idCliente.name = "idCliente";
         idCliente.value = $("#idCliente").val();
         formSaldoEmprestimos.push(idCliente);
-        if (formSaldoEmprestimos.length > 1) {
+        if (formSaldoEmprestimos.length > 2) {
             $.ajax({
                 type: 'POST',
                 url: '/saldoEmprestimos/cadastro',
@@ -120,8 +120,8 @@ function addCampoEmprestimo() {
     html += "           <label>Possui Seguro</label>";
     html += "           <select class='form-control' name='possui_seguro[]'>";
     html += "               <option value=''>Selecione</option>";
-    html += "               <option value='Sim'>Sim</option>";
-    html += "               <option value='Não'>Não</option>";
+    html += "               <option value='1'>Sim</option>";
+    html += "               <option value='2'>Não</option>";
     html += "           <select>";
     html += "       </div>";
     html += "   </div>";

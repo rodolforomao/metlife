@@ -95,7 +95,7 @@ class InssprevidenciaclientesController extends Controller {
 
         $inssprevidenciacliente->id = $request->id[$contador] ?: 0;
         $inssprevidenciacliente->idCliente = $request->idCliente;
-        $inssprevidenciacliente->tipoFamiliar = $request->tipoFamiliar;
+        $inssprevidenciacliente->idTipoFamiliar = $request->tipoFamiliar;
         $inssprevidenciacliente->previdencia = $request->previdencia[$contador];
         $inssprevidenciacliente->pgblvgbl = $request->pglb_vgbl[$contador];
         $inssprevidenciacliente->saldoacumulado = str_replace(",", ".", str_replace(".", "", ($request->saldo_acumulado[$contador])));

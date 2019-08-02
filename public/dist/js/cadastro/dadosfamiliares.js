@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    dadosFamiliares ="";
     //Dados Familiares----------------------------------------------------------
     $("#insereDadosFamiliares").click(function () {
         var idCliente = new Object();
@@ -16,8 +17,11 @@ $(document).ready(function () {
                 success: function (data) {
                     $.notify('Cadastrado com sucesso!', "success");
                     $("#formDadosFamiliares").html("");
-                     var html = "";
+
+                    dadosFamiliares = "";
+                    var html = "";
                     for (i = 0; i < data.length; i++) {
+                        dadosFamiliares += "    <option value='" + data[i].id + "'>" + data[i].df_nome + "</option>";
                         html = "";
                         html += "<div class='row' id='filho_deleta" + data[i].id + "'>";
                         html += "<input type='hidden' name='id[]' value='" + data[i].id + "'>";
@@ -26,8 +30,8 @@ $(document).ready(function () {
                         html += "           <label>Grau de Parentesco</label>";
                         html += "           <select type='text' class='form-control' id='tipo_familiar" + i + "' name='tipoFamiliar[]' placeholder='Grau de Parentesco'>";
                         html += "               <option value=''>Selecione</option>";
-                        html += "               <option value='Conjugue'>Conjugue</option>";
-                        html += "               <option value='Filho'>Filho</option>";
+                        html += "               <option value='1'>Conjugue</option>";
+                        html += "               <option value='2'>Filho</option>";
                         html += "           </select>";
                         html += "       </div>";
                         html += "   </div>";
@@ -79,8 +83,8 @@ function addCampoFamiliar() {
     html += "           <label>Grau de Parentesco</label>";
     html += "           <select type='text' class='form-control' name='tipoFamiliar[]' placeholder='Grau de Parentesco'>";
     html += "               <option value=''>Selecione</option>";
-    html += "               <option value='Conjugue'>Conjugue</option>";
-    html += "               <option value='Filho'>Filho</option>";
+    html += "               <option value='1'>Conjugue</option>";
+    html += "               <option value='2'>Filho</option>";
     html += "           </select>";
     html += "       </div>";
     html += "   </div>";
