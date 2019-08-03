@@ -14,7 +14,6 @@ $(document).ready(function () {
             success: function (data) {
                 $("#divEducacaoFilhos").html("");
                 for (i = 0; i < data.length; i++) {
-                    console.log(dadosFamiliares);
                     var html = "";
                     html += "<div class='row' id='filhoEducacao_delete" + i + "'>";
                     html += "   <div class='col-md-3'>";
@@ -95,7 +94,7 @@ function addCampoFilhoEducacao() {
     html += "   <div class='col-md-3'>";
     html += "       <div class='form-group'>";
     html += "           <label>Familiar</label>";
-    html += "           <select type='text' class='form-control' id='tipo_familiar_educacao" + i + "' name='tipoFamiliar[]' placeholder='Grau de Parentesco'>";
+    html += "           <select type='text' class='form-control' id='tipo_familiar_educacao" + qtdeCamposEducacao + "' name='tipoFamiliar[]' placeholder='Grau de Parentesco'>";
     html += "               <option value=''>Selecione</option>";
     html += dadosFamiliares;
     html += "           </select>";

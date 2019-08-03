@@ -31,7 +31,17 @@ class EditarController extends Controller {
         $dadosRendimentoPrincipal = Rendimentomensal::where('idCliente', $id)->get();
         $dadosPatrimonio = Patrimonio::where('idCliente', $id)->get();
         $dadosPadraoVida = Padrao_de_vida::where('idCliente', $id)->get();
-        $dadosEducacao = Educacao::where('idDadosFamiliares', $id)->get();
+        $dadosEducacao = Educacao::
+                        select("educacaos.id", "idTipoEducacao", "custo", "anos", "anos", "total", "idDadosFamiliares", "tipoeducacaos.descricao")->
+                        leftJoin('dadosfamiliares', function ($join) {
+                            $join->on('dadosfamiliares.id', '=', 'educacaos.idDadosFamiliares');
+                        })->
+                        leftJoin('tipoeducacaos', function ($join) {
+                            $join->on('tipoeducacaos.id', '=', 'educacaos.idTipoEducacao');
+                        })
+                        ->where('dadosfamiliares.idCliente', $id)
+                        ->orwhereNull('idCliente')->get();
+
         $dadosSaldoEmprestimo = Saldoemprestimo::where('idCliente', $id)->get();
         $dadosEmprestimos = Emprestimo::where('idCliente', $id)->get();
         $dadosFGTS_INSS_principal = Inssfgtsprevidenciaseguro::where('idDadosFamiliares', $id)->get();
@@ -40,18 +50,20 @@ class EditarController extends Controller {
         $dadosSeguro = Insssegurocliente::where('idDadosFamiliares', $id)->get();
 
         $dadosPlanosPrincipal = Planoprodutodesc::
-                        select("descricao", "planovalores.id", "planoprodutodescs.id as idProduto", "vigencia", "prazo", "capitalsegurado", "valor", "idTipoFamiliar")->
-                        leftJoin('planovalores', function ($join) {
-                            $join->on('planovalores.idPlanoProduto', '=', 'planoprodutodescs.id');
+                        select("descricao", "planoprodutos.id", "planoprodutodescs.id as idProduto", "vigencia", "prazo", "capitalsegurado", "valor", "idTipoFamiliar")->
+                        leftJoin('planoprodutos', function ($join) {
+                            $join->on('planoprodutos.idPlanoProduto', '=', 'planoprodutodescs.id');
                         })
                         ->where('idCliente', $id)
+                        ->where('idTipoFamiliar', 1)
                         ->orwhereNull('idCliente')->get();
         $dadosPlanoConjugue = Planoprodutodesc::
-                        select("descricao", "planovalores.id", "planoprodutodescs.id as idProduto", "vigencia", "prazo", "capitalsegurado", "valor", "idTipoFamiliar")->
-                        leftJoin('planovalores', function ($join) {
-                            $join->on('planovalores.idPlanoProduto', '=', 'planoprodutodescs.id');
+                        select("descricao", "planoprodutos.id", "planoprodutodescs.id as idProduto", "vigencia", "prazo", "capitalsegurado", "valor", "idTipoFamiliar")->
+                        leftJoin('planoprodutos', function ($join) {
+                            $join->on('planoprodutos.idPlanoProduto', '=', 'planoprodutodescs.id');
                         })
                         ->where('idCliente', $id)
+                        ->where('idTipoFamiliar', 2)
                         ->orwhereNull('idCliente')->get();
 
         return view('dashboard.v2_edit', [

@@ -405,7 +405,7 @@
                         </div>
                         <form role="form" id="formEducacaoFilhos">
                             <div class="card-body"  id="divEducacaoFilhos">
-                                
+
                             </div>
                         </form>   
                         <div class="card-footer">
@@ -808,7 +808,8 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                         </div>
-                                                        <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control" disabled="true">
+                                                        <input type="text" data-provide="datepicker" class="datepicker form-control" disabled="true">
+                                                        <input name="vigencia[]" type="hidden">
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
@@ -1136,7 +1137,8 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                         </div>
-                                                        <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control" disabled="true">
+                                                        <input type="text" data-provide="datepicker" class="datepicker form-control" disabled="true">
+                                                        <input name="vigencia[]" type="hidden">
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">

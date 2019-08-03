@@ -94,25 +94,22 @@ class PlanoprodutosController extends Controller {
 
         $planoproduto->id = $request->id[$contador] ?: 0;
         $planoproduto->idCliente = $request->idCliente;
-        $planoproduto->idproduto = $request->id_produto[$contador];
-        $planoproduto->tipoFamiliar = $request->tipoFamiliar;
+        $planoproduto->idPlanoProduto = $request->id_produto[$contador];
+        $planoproduto->idTipoFamiliar = $request->tipoFamiliar;
         $planoproduto->vigencia = date('Y-m-d', strtotime(str_replace("/", "-", ($request->vigencia[$contador]))));
-        $planoproduto->prazo = $request->prazo[$contador];
-        $planoproduto->capital = str_replace(",", ".", str_replace(".", "", ($request->capital_segurado[$contador])));
-        $planoproduto->valor = str_replace(",", ".", str_replace(".", "", ($request->valor[$contador])));
+        $planoproduto->prazo = $request->prazo[$contador] ?: 0;
+        $planoproduto->capitalsegurado = str_replace(",", ".", str_replace(".", "", ($request->capital_segurado[$contador] ?: 0)));
+        $planoproduto->valor = str_replace(",", ".", str_replace(".", "", ($request->valor[$contador] ?: 0)));
 
-        if (!empty($request->vigencia[$contador])) {
-            $planoproduto->save();
-            $retorno["id_produto"] = $request->id_produto[$contador] ?: "";
+        $planoproduto->save();
+        $retorno["id_produto"] = $request->id_produto[$contador] ?: "";
 
-            if ($request->id[$contador] == 0) {
-                $retorno["id"] = DB::getPdo()->lastInsertId();
-            } else {
-                $retorno["id"] = $request->id[$contador];
-            }
+        if ($request->id[$contador] == 0) {
+            $retorno["id"] = DB::getPdo()->lastInsertId();
         } else {
-            $retorno["retorno"] = false;
+            $retorno["id"] = $request->id[$contador];
         }
+
 
         return ($retorno);
     }

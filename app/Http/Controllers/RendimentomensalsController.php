@@ -95,7 +95,7 @@ class RendimentomensalsController extends Controller {
 
         $rendimentomensal->id = $request->id_rendimento_principal ?: 0;
         $rendimentomensal->idCliente = $request->idCliente;
-        $rendimentomensal->idTipoFamiliar = 1;
+        $rendimentomensal->idTipoFamiliar = 3;
         $rendimentomensal->remendimentosmensal = $request->ren_redimento_mensal_principal;
         $rendimentomensal->remendimentosmensal = str_replace(",", ".", str_replace(".", "", ($request->ren_redimento_mensal_principal)));
         $rendimentomensal->outrasrendas = str_replace(",", ".", str_replace(".", "", ($request->ren_outras_principal)));

@@ -108,8 +108,8 @@ class EducacaosController extends Controller {
             $retorno["id"] = $request["id"];
         }
 
-        $retorno["apelido"] = $request["apelido"] ?: "";
-        $retorno["idadeserie"] = $request["idadeserie"] ?: "";
+//        $retorno["apelido"] = $request["apelido"] ?: "";
+//        $retorno["idadeserie"] = $request["idadeserie"] ?: "";
         $retorno["custo"] = $request["custo"] ?: "";
         $retorno["anos"] = $request["anos"] ?: "";
         $retorno["total"] = $request["total"] ?: "";
