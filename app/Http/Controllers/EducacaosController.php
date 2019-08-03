@@ -84,55 +84,78 @@ class EducacaosController extends Controller {
         echo json_encode($ret);
     }
 
-    public function update(Request $request, $contador) {
-        if ($request->id[$contador] > 0) {
-            $educacao = Educacao::findOrFail($request->id[$contador]);
+    public function update($request) {
+        if ($request["id"] > 0) {
+            $educacao = Educacao::findOrFail($request["id"]);
         } else {
             $educacao = new Educacao;
         }
 
-        $educacao->id = $request->id[$contador] ?: 0;
-        $educacao->idCliente = $request->idCliente;
-        $educacao->apelidofilho = $request->apelido[$contador];
-        $educacao->idadeserie = $request->idadeserie[$contador];
-        $educacao->totaldeanosparaformacao = $request->total_anos[$contador];
-        $educacao->basicocusto = $request->basico_mensal[$contador];
-        $educacao->basicoanos = $request->basico_anos[$contador];
-        $educacao->basicototal = $request->basico_total[$contador];
-        $educacao->fundamentalcusto = $request->fundamental_mensal[$contador];
-        $educacao->fundamentalanos = $request->fundamental_anos[$contador];
-        $educacao->fundamentaltotal = $request->fundamental_total[$contador];
-        $educacao->superiorcusto = $request->superior_mensal[$contador];
-        $educacao->superioranos = $request->superior_anos[$contador];
-        $educacao->superiortotal = $request->superior_total[$contador];
+        $educacao->id = $request["id"] ?: 0;
+//        $educacao->idCliente = $request["idCliente"];
+//        $educacao->apelidofilho = $request["apelido"];
+//        $educacao->idadeserie = $request["idadeserie"];
+        $educacao->custo = str_replace(",", ".", str_replace(".", "", ($request["custo"] ?: 0)));
+        $educacao->anos = $request["anos"];
+        $educacao->total = str_replace(",", ".", str_replace(".", "", ($request["total"] ?: 0)));
+        $educacao->idDadosFamiliares = $request["tipoFamiliar"];
+        $educacao->idTipoEducacao = $request["tipoEnsino"];
+
         $educacao->save();
-        if ($request->id[$contador] == 0) {
+        if ($request["id"] == "") {
             $retorno["id"] = DB::getPdo()->lastInsertId();
         } else {
-            $retorno["id"] = $request->id[$contador];
+            $retorno["id"] = $request["id"];
         }
 
-        $retorno["apelido"] = $request->apelido[$contador] ?: "";
-        $retorno["idadeserie"] = $request->idadeserie[$contador] ?: "";
-        $retorno["total_anos"] = $request->total_anos[$contador] ?: "";
-        $retorno["basico_mensal"] = $request->basico_mensal[$contador] ?: "";
-        $retorno["basico_anos"] = $request->basico_anos[$contador] ?: "";
-        $retorno["basico_total"] = $request->basico_total[$contador] ?: "";
-        $retorno["fundamental_mensal"] = $request->fundamental_mensal[$contador] ?: "";
-        $retorno["fundamental_anos"] = $request->fundamental_anos[$contador] ?: "";
-        $retorno["fundamental_total"] = $request->fundamental_total[$contador] ?: "";
-        $retorno["superior_mensal"] = $request->superior_mensal[$contador] ?: "";
-        $retorno["superior_anos"] = $request->superior_anos[$contador] ?: "";
-        $retorno["superior_total"] = $request->superior_total[$contador] ?: "";
-
+//        $retorno["apelido"] = $request["apelido"] ?: "";
+//        $retorno["idadeserie"] = $request["idadeserie"] ?: "";
+        $retorno["custo"] = $request["custo"] ?: "";
+        $retorno["anos"] = $request["anos"] ?: "";
+        $retorno["total"] = $request["total"] ?: "";
+        $retorno["tipoFamiliar"] = $request["tipoFamiliar"] ?: "";
+        $retorno["tipoEnsino"] = $request["tipoEnsino"] ?: "";
+        switch ($retorno["tipoEnsino"]) {
+            case 1:
+                $retorno["ensino"] = "Básico";
+                break;
+            case 2:
+                $retorno["ensino"] = "Intanfil";
+                break;
+            case 3:
+                $retorno["ensino"] = "Fundamental";
+                break;
+            case 4:
+                $retorno["ensino"] = "Médio";
+                break;
+            case 5:
+                $retorno["ensino"] = "Superior";
+                break;
+        }
         return ($retorno);
     }
 
     public function store(Request $request) {
-        $count = count($request->idadeserie);
-        for ($i = 0; $i < $count; $i++) {
-            $retorno[$i] = $this->update($request, $i);
+        $count = count($request->tipoFamiliar);
+        if ($count > 0) {
+            $dados["idCliente"] = $request->idCliente;
+            for ($i = 0; $i < $count; $i++) {
+                $dados["tipoFamiliar"] = $request->tipoFamiliar[$i];
+//                $dados["apelido"] = $request->apelido[$i];
+//                $dados["idadeserie"] = $request->idadeserie[$i];
+                for ($j = 1; $j <= 5; $j++) {
+                    $dados["tipoEnsino"] = $j;
+                    $dados["id"] = $request["id$j"][$i];
+                    $dados["custo"] = $request["custo$j"][$i];
+                    $dados["anos"] = $request["anos$j"][$i];
+                    $dados["total"] = $request["total$j"][$i];
+                    $retorno[$i][$j] = $this->update($dados);
+                }
+            }
+        } else {
+            $retorno = null;
         }
+
         return ($retorno);
     }
 

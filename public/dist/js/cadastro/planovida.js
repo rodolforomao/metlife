@@ -8,7 +8,7 @@ $(document).ready(function () {
         tipoFamiliar.name = "tipoFamiliar";
 
         var formPlanoPrincipal = $("#formPlanoPrincipal").serializeArray();
-        tipoFamiliar.value = "Principal";
+        tipoFamiliar.value = "1";
 
         formPlanoPrincipal.push(idCliente);
         formPlanoPrincipal.push(tipoFamiliar);
@@ -53,7 +53,7 @@ $(document).ready(function () {
             }
         });
         var formPlanoConjugue = $("#formPlanoConjugue").serializeArray();
-        tipoFamiliar.value = "Conjugue";
+        tipoFamiliar.value = "2";
 
         formPlanoConjugue.push(idCliente);
         formPlanoConjugue.push(tipoFamiliar);

@@ -95,11 +95,11 @@ class RendimentomensalsController extends Controller {
 
         $rendimentomensal->id = $request->id_rendimento_principal ?: 0;
         $rendimentomensal->idCliente = $request->idCliente;
-        $rendimentomensal->tipoFamiliar = "Principal";
+        $rendimentomensal->idTipoFamiliar = 3;
         $rendimentomensal->remendimentosmensal = $request->ren_redimento_mensal_principal;
         $rendimentomensal->remendimentosmensal = str_replace(",", ".", str_replace(".", "", ($request->ren_redimento_mensal_principal)));
         $rendimentomensal->outrasrendas = str_replace(",", ".", str_replace(".", "", ($request->ren_outras_principal)));
-        $rendimentomensal->declaracaodeir = $request->declaracaodeir;
+        $rendimentomensal->declaracaodeir = $request->declaracaodeir_principal;
         $rendimentomensal->save();
 
         if ($request->id_rendimento_principal == 0) {
@@ -107,45 +107,49 @@ class RendimentomensalsController extends Controller {
         } else {
             $retorno = $request->id_rendimento_principal;
         }
-        return json_encode($retorno);
+        return ($retorno);
     }
 
-    public function updateConjugue(Request $request) {
-       $request->id_rendimento_conjugue = str_replace('"', "", $request->id_rendimento_conjugue);
-        if ($request->id_rendimento_conjugue > 0) {
-            $rendimentomensal = Rendimentomensal::findOrFail($request->id_rendimento_conjugue);
+    public function updateFamiliar(Request $request, $contador) {
+        if ($request->id[$contador] > 0) {
+            $rendimentomensal = Rendimentomensal::findOrFail($request->id[$contador]);
         } else {
             $rendimentomensal = new Rendimentomensal;
         }
-
+        $rendimentomensal->id = $request->id[$contador];
         $rendimentomensal->idCliente = $request->idCliente;
-        $rendimentomensal->tipoFamiliar = "Conjugue";
-        $rendimentomensal->remendimentosmensal = str_replace(",", ".", str_replace(".", "", ($request->ren_redimento_mensal_conjugue)));
-        $rendimentomensal->outrasrendas = str_replace(",", ".", str_replace(".", "", ($request->ren_outras_conjugue)));
-        $rendimentomensal->declaracaodeir = $request->declaracaodeir_conjugue;
+        $rendimentomensal->idTipoFamiliar = $request->tipoFamiliar[$contador];
+        $rendimentomensal->remendimentosmensal = str_replace(",", ".", str_replace(".", "", ($request->ren_redimento_mensal[$contador])));
+        $rendimentomensal->outrasrendas = str_replace(",", ".", str_replace(".", "", ($request->ren_outras[$contador])));
+        $rendimentomensal->declaracaodeir = $request->declaracaodeir[$contador];
         $rendimentomensal->save();
-        if ($request->id_rendimento_conjugue == 0) {
-            $retorno = DB::getPdo()->lastInsertId();
+        if ($request->iddeclaracaodeir == 0) {
+            $retorno["id"] = DB::getPdo()->lastInsertId();
         } else {
-            $retorno = $request->id_rendimento_conjugue;
+            $retorno["id"] = $request->id;
         }
-        return json_encode($retorno);
+        $retorno["tipoFamiliar"] = $request->tipoFamiliar[$contador];
+        $retorno["remendimentosmensal"] = $request->ren_redimento_mensal[$contador];
+        $retorno["outrasrendas"] = $request->ren_outras[$contador];
+        $retorno["declaracaodeir"] = $request->declaracaodeir[$contador];
+
+        return ($retorno);
     }
 
     public function store(Request $request) {
         $retorno["principal"] = $this->update($request);
-        if (!empty($request->ren_redimento_mensal_conjugue)) {
-            $retorno["conjugue"] = $this->updateConjugue($request);
+        if (isset($request->tipoFamiliar)) {
+            $count = count($request->tipoFamiliar);
+            for ($i = 0; $i < $count; $i++) {
+                $retorno["familiares"][$i] = $this->updateFamiliar($request, $i);
+            }
         }
         return $retorno;
     }
 
-    public function destroy(Request $request, $id) {
-
-        $rendimentomensal = Rendimentomensal::findOrFail($id);
-
-        $rendimentomensal->delete();
-        return "OK";
+    public function destroy(Request $request) {
+        $retorno = Rendimentomensal::where('id', $request->id)->delete();
+        return $retorno;
     }
 
 }

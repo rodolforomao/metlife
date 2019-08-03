@@ -93,8 +93,8 @@ class InssseguroclientesController extends Controller {
         }
 
         $insssegurocliente->id = $request->id[$contador] ?: 0;
-        $insssegurocliente->idCliente = $request->idCliente;
-        $insssegurocliente->tipoFamiliar = $request->tipoFamiliar;
+        $insssegurocliente->idDadosFamiliares = $request->idCliente;
+//        $insssegurocliente->tipoFamiliar = $request->tipoFamiliar;
         $insssegurocliente->segurodevida = $request->seguro_vida[$contador];
         $insssegurocliente->capitalsegurado = $request->capital_segurado[$contador];
         $insssegurocliente->premiomensal = $request->premio_mensal[$contador];
