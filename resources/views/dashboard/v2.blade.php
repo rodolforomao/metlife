@@ -122,7 +122,7 @@
                             </h3>
                         </div>
                         <form role="form" id="formDadosCadastrais">
-                            <input type="text" id="idCliente" name="id">
+                            <input type="hidden" id="idCliente" name="id">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -217,7 +217,6 @@
                         <div class="card-footer">
                             <button type="button" class="btn btn-primary" id="insereDadosFamiliares">Salvar</button>
                         </div>
-
                     </div>
                 </div>
 

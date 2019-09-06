@@ -94,11 +94,11 @@ class InssfgtsprevidenciasegurosController extends Controller {
         }
 
         $inssfgtsprevidenciaseguro->id = $request->id ?: 0;
-//        $inssfgtsprevidenciaseguro->idCliente = $request->idCliente;
-        $inssfgtsprevidenciaseguro->idDadosFamiliares = $request->idCliente;
-        $inssfgtsprevidenciaseguro->fgts = $request->fgts;
-        $inssfgtsprevidenciaseguro->fgts = str_replace(",", ".", str_replace(".", "", ($request->fgts)));
-        $inssfgtsprevidenciaseguro->inss = str_replace(",", ".", str_replace(".", "", ($request->inss)));
+        $inssfgtsprevidenciaseguro->idCliente = $request->idCliente;
+        $inssfgtsprevidenciaseguro->idTipoFamiliar = $request->tipoFamiliar;
+        $inssfgtsprevidenciaseguro->fgts = $request->fgts ?: 0;
+        $inssfgtsprevidenciaseguro->fgts = str_replace(",", ".", str_replace(".", "", ($request->fgts ?: 0)));
+        $inssfgtsprevidenciaseguro->inss = str_replace(",", ".", str_replace(".", "", ($request->inss ?: 0)));
         $inssfgtsprevidenciaseguro->idadeaposentadoria = $request->idade_aposentadoria;
 
         $inssfgtsprevidenciaseguro->save();

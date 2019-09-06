@@ -32,22 +32,22 @@ class EditarController extends Controller {
         $dadosPatrimonio = Patrimonio::where('idCliente', $id)->get();
         $dadosPadraoVida = Padrao_de_vida::where('idCliente', $id)->get();
         $dadosEducacao = Educacao::
-                        select("educacaos.id", "idTipoEducacao", "custo", "anos", "anos", "total", "idDadosFamiliares", "tipoeducacaos.descricao")->
-                        leftJoin('dadosfamiliares', function ($join) {
-                            $join->on('dadosfamiliares.id', '=', 'educacaos.idDadosFamiliares');
-                        })->
+                        select("educacaos.id", "idTipoEducacao","idTipoFamiliar", "custo", "anos", "total", "tipoeducacaos.descricao")->
+//                        leftJoin('dadosfamiliares', function ($join) {
+//                            $join->on('dadosfamiliares.id', '=', 'educacaos.idDadosFamiliares');
+//                        })->
                         leftJoin('tipoeducacaos', function ($join) {
                             $join->on('tipoeducacaos.id', '=', 'educacaos.idTipoEducacao');
                         })
-                        ->where('dadosfamiliares.idCliente', $id)
+                        ->where('educacaos.idCliente', $id)
                         ->orwhereNull('idCliente')->get();
 
         $dadosSaldoEmprestimo = Saldoemprestimo::where('idCliente', $id)->get();
         $dadosEmprestimos = Emprestimo::where('idCliente', $id)->get();
-        $dadosFGTS_INSS_principal = Inssfgtsprevidenciaseguro::where('idDadosFamiliares', $id)->get();
-        $dadosFGTS_INSS_conjugue = Inssfgtsprevidenciaseguro::where('idDadosFamiliares', $id)->get();
+        $dadosFGTS_INSS_principal = Inssfgtsprevidenciaseguro::where('idCliente', $id)->where('idTipoFamiliar', '1')->get();
+        $dadosFGTS_INSS_conjugue = Inssfgtsprevidenciaseguro::where('idCliente', $id)->where('idTipoFamiliar', '2')->get();
         $dadosPrevidencia = Inssprevidenciacliente::where('idCliente', $id)->get();
-        $dadosSeguro = Insssegurocliente::where('idDadosFamiliares', $id)->get();
+        $dadosSeguro = Insssegurocliente::where('idCliente', $id)->get();
 
         $dadosPlanosPrincipal = Planoprodutodesc::
                         select("descricao", "planoprodutos.id", "planoprodutodescs.id as idProduto", "vigencia", "prazo", "capitalsegurado", "valor", "idTipoFamiliar")->

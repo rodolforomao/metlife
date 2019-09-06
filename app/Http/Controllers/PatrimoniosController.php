@@ -95,14 +95,14 @@ class PatrimoniosController extends Controller {
 
         $patrimonio->id = $request->id ?: 0;
         $patrimonio->idCliente = $request->idCliente;
-        $patrimonio->imoveis = str_replace(",", ".", str_replace(".", "", ($request->patrim_imoveis)));
-        $patrimonio->fundos = str_replace(",", ".", str_replace(".", "", ($request->patrim_acoes)));
-        $patrimonio->reservas = str_replace(",", ".", str_replace(".", "", ($request->patrim_reservas)));
-        $patrimonio->inventario = str_replace(",", ".", str_replace(".", "", ($request->patrim_inventario)));
-        $patrimonio->emergencia = str_replace(",", ".", str_replace(".", "", ($request->patrim_emergencia)));
-        $patrimonio->funeral = str_replace(",", ".", str_replace(".", "", ($request->patrim_funaral)));
-        $patrimonio->outros = str_replace(",", ".", str_replace(".", "", ($request->patrim_outros)));
-                $retorno = $patrimonio->save();
+        $patrimonio->imoveis = str_replace(",", ".", str_replace(".", "", ($request->patrim_imoveis ?: 0)));
+        $patrimonio->fundos = str_replace(",", ".", str_replace(".", "", ($request->patrim_acoes ?: 0)));
+        $patrimonio->reservas = str_replace(",", ".", str_replace(".", "", ($request->patrim_reservas ?: 0)));
+        $patrimonio->inventario = str_replace(",", ".", str_replace(".", "", ($request->patrim_inventario ?: 0)));
+        $patrimonio->emergencia = str_replace(",", ".", str_replace(".", "", ($request->patrim_emergencia ?: 0)));
+        $patrimonio->funeral = str_replace(",", ".", str_replace(".", "", ($request->patrim_funaral ?: 0)));
+        $patrimonio->outros = str_replace(",", ".", str_replace(".", "", ($request->patrim_outros ?: 0)));
+        $retorno = $patrimonio->save();
         if ($request->id == 0) {
             $retorno = DB::getPdo()->lastInsertId();
         } else {
