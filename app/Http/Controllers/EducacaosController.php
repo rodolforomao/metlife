@@ -92,13 +92,13 @@ class EducacaosController extends Controller {
         }
 
         $educacao->id = $request["id"] ?: 0;
-//        $educacao->idCliente = $request["idCliente"];
+        $educacao->idCliente = $request["idCliente"];
 //        $educacao->apelidofilho = $request["apelido"];
 //        $educacao->idadeserie = $request["idadeserie"];
         $educacao->custo = str_replace(",", ".", str_replace(".", "", ($request["custo"] ?: 0)));
         $educacao->anos = $request["anos"];
         $educacao->total = str_replace(",", ".", str_replace(".", "", ($request["total"] ?: 0)));
-        $educacao->idDadosFamiliares = $request["tipoFamiliar"];
+        $educacao->idTipoFamiliar = $request["tipoFamiliar"];
         $educacao->idTipoEducacao = $request["tipoEnsino"];
 
         $educacao->save();

@@ -16,8 +16,8 @@ foreach ($dadosFamiliares as $familiar) {
     $dadosFamiliar .= "           <label>Grau de Parentesco</label>";
     $dadosFamiliar .= "           <select type='text' class='form-control' id='tipo_familiar" . $contadorFamiliar . "' name='tipoFamiliar[]' placeholder='Grau de Parentesco'>";
     $dadosFamiliar .= "               <option value=''>Selecione</option>";
-    $dadosFamiliar .= "               <option value='1'>Conjugue</option>";
-    $dadosFamiliar .= "               <option value='2'>Filho</option>";
+    $dadosFamiliar .= "               <option value='2'>Conjugue</option>";
+    $dadosFamiliar .= "               <option value='3'>Filho</option>";
     $dadosFamiliar .= "           </select>";
     $dadosFamiliar .= "       </div>";
     $dadosFamiliar .= "   </div>";
@@ -58,7 +58,7 @@ $rendimentosFamiliares = "";
 $rendimento_dadosTipoFamiliar = array();
 $contadorRendimento = 0;
 foreach ($dadosRendimentoPrincipal as $rendimento) {
-    if ($rendimento->idTipoFamiliar == "3") {
+    if ($rendimento->idTipoFamiliar == "1") {
         $id_rendimento_principal = $rendimento->id;
         $rendimento_mensal_principal = number_format($rendimento->remendimentosmensal, 2, ",", ".");
         $outras_rendas_principal = number_format($rendimento->outrasrendas, 2, ",", ".");
@@ -72,8 +72,8 @@ foreach ($dadosRendimentoPrincipal as $rendimento) {
         $rendimentosFamiliares .= "           <label>Grau de Parentesco</label>";
         $rendimentosFamiliares .= "           <select type='text' class='form-control' id='tipoFamiliar_rendimento" . $contadorRendimento . "' name='tipoFamiliar[]' placeholder='Grau de Parentesco'>";
         $rendimentosFamiliares .= "               <option value=''>Selecione</option>";
-        $rendimentosFamiliares .= "               <option value='1'>Conjugue</option>";
-        $rendimentosFamiliares .= "               <option value='2'>Filho</option>";
+        $rendimentosFamiliares .= "               <option value='2'>Conjugue</option>";
+        $rendimentosFamiliares .= "               <option value='3'>Filho</option>";
         $rendimentosFamiliares .= "           </select>";
         $rendimentosFamiliares .= "       </div>";
         $rendimentosFamiliares .= "   </div>";
@@ -149,6 +149,8 @@ $seguro_vida_previdencia = "";
 $lazer = "";
 $impostos = "";
 $extrasoutros = "";
+$disabled_despesas = "";
+$disabled_todos = "";
 foreach ($dadosPadraoVida as $padrao_vida) {
     $id_padrao_vida = $padrao_vida->id;
     $moradia = number_format($padrao_vida->moradia, 2, ",", ".");
@@ -180,28 +182,38 @@ $array_apelido = array();
 $array_idade = array();
 $contadorEducacao = 1;
 foreach ($dadosEducacao as $educacaoFilhos) {
-    $dados[$educacaoFilhos->idDadosFamiliares]["custo"][$contadorEducacao] = number_format($educacaoFilhos->custo, 2, ",", ".");
+    if (!in_array($educacaoFilhos->idTipoFamiliar, $educacao_dadosTipoFamiliar)) {
+        array_push($educacao_dadosTipoFamiliar, $educacaoFilhos->idTipoFamiliar);
+    }
+    $dados[$educacaoFilhos->idTipoFamiliar]["custo"][$contadorEducacao] = number_format($educacaoFilhos->custo, 2, ",", ".");
+    $dados[$educacaoFilhos->idTipoFamiliar]["anos"][$contadorEducacao] = $educacaoFilhos->anos;
+    $dados[$educacaoFilhos->idTipoFamiliar]["total"][$contadorEducacao] = number_format($educacaoFilhos->total, 2, ",", ".");
+    $dados[$educacaoFilhos->idTipoFamiliar]["tipoEducacao"][$contadorEducacao] = $educacaoFilhos->idTipoEducacao;
+    $dados[$educacaoFilhos->idTipoFamiliar]["id"][$contadorEducacao] = $educacaoFilhos->id;
+    $dados[$educacaoFilhos->idTipoFamiliar]["descricao"][$contadorEducacao] = $educacaoFilhos->descricao;
 
-    $dados[$educacaoFilhos->idDadosFamiliares]["anos"][$contadorEducacao] = $educacaoFilhos->anos;
-    $dados[$educacaoFilhos->idDadosFamiliares]["total"][$contadorEducacao] = number_format($educacaoFilhos->total, 2, ",", ".");
-    $dados[$educacaoFilhos->idDadosFamiliares]["tipoEducacao"][$contadorEducacao] = $educacaoFilhos->idTipoEducacao;
-    $dados[$educacaoFilhos->idDadosFamiliares]["id"][$contadorEducacao] = $educacaoFilhos->id;
-    $dados[$educacaoFilhos->idDadosFamiliares]["descricao"][$contadorEducacao] = $educacaoFilhos->descricao;
-
-    if (!in_array($educacaoFilhos->idDadosFamiliares, $educacao_dadosTipoFamiliar)) {
-        array_push($educacao_dadosTipoFamiliar, $educacaoFilhos->idDadosFamiliares);
+    if ($contadorEducacao == 5) {
+        $contadorEducacao = 0;
     }
     $contadorEducacao++;
 }
 $contadorTipoFamiliar = 0;
+//echo "<pre>";
+//var_dump($dados[1]["descricao"]);
+//echo "</pre>";
+//die();
 for ($i = 0; $i < count($educacao_dadosTipoFamiliar); $i++) {
+
     $educacao .= "<div class='row'>";
     $educacao .= "   <div class='col-md-3'>";
     $educacao .= "       <div class='form-group'>";
     $educacao .= "           <label>Grau de Parentesco</label>";
     $educacao .= "           <select type='text' class='form-control' id='tipoFamiliar_Educacao" . $i . "' name='tipoFamiliar[]' placeholder='Grau de Parentesco'>";
     $educacao .= "              <option value=''>Selecione</option>";
-    $educacao .= $selectFamiliares;
+    $educacao .= "              <option value='1'>Principal</option>";
+    $educacao .= "              <option value='2'>Conjugue</option>";
+    $educacao .= "              <option value='3'>Filho</option>";
+//    $educacao .= $selectFamiliares;
     $educacao .= "           </select>";
     $educacao .= "       </div>";
     $educacao .= "   </div>";
@@ -500,8 +512,9 @@ foreach ($dadosPlanosPrincipal as $plano) {
     $planos_principal .= "          </div>";
     if ($plano->idProduto == 1) {
         $planos_principal .= "          <input type='text' data-provide='datepicker' class='datepicker form-control' disabled='true'>";
+        $planos_principal .= "          <input name='vigencia[]' type='hidden'>";
     } else {
-        $planos_principal .= "          <input name='vigencia[]' type='text' data-provide='datepicker' class='datepicker form-control' value='" . ($plano->vigencia !== "1970-01-01" ? date('d/m/Y', strtotime(($plano->vigencia))) : "") . "'>";
+        $planos_principal .= "          <input name='vigencia[]' type='text' data-provide='datepicker' class='datepicker form-control' value='" . ($plano->vigencia === "1970-01-01" || $plano->vigencia === "" ? "" : date('d/m/Y', strtotime(($plano->vigencia)))) . "'>";
     }
     $planos_principal .= "      </div>";
     $planos_principal .= "  </td>";
@@ -543,8 +556,9 @@ foreach ($dadosPlanoConjugue as $plano) {
     $planos_conjugue .= "          </div>";
     if ($plano->idProduto == 1) {
         $planos_conjugue .= "          <input type='text' data-provide='datepicker' class='datepicker form-control' disabled='true'>";
+        $planos_conjugue .= "          <input name='vigencia[]' type='hidden'>";
     } else {
-        $planos_conjugue .= "          <input name='vigencia[]' type='text' data-provide='datepicker' class='datepicker form-control' value='" . ($plano->vigencia !== "1970-01-01" ? date('d/m/Y', strtotime(($plano->vigencia))) : "") . "'>";
+        $planos_conjugue .= "          <input name='vigencia[]' type='text' data-provide='datepicker' class='datepicker form-control' value='" . ($plano->vigencia === "1970-01-01" || $plano->vigencia === "" ? "" : date('d/m/Y', strtotime(($plano->vigencia)))) . "'>";
     }
     $planos_conjugue .= "          <input name='vigencia[]' type='hidden'>";
     $planos_conjugue .= "      </div>";

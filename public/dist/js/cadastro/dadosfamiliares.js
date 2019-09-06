@@ -30,8 +30,8 @@ $(document).ready(function () {
                         html += "           <label>Grau de Parentesco</label>";
                         html += "           <select type='text' class='form-control' id='tipo_familiar" + i + "' name='tipoFamiliar[]' placeholder='Grau de Parentesco'>";
                         html += "               <option value=''>Selecione</option>";
-                        html += "               <option value='1'>Conjugue</option>";
-                        html += "               <option value='2'>Filho</option>";
+                        html += "               <option value='2'>Conjugue</option>";
+                        html += "               <option value='3'>Filho</option>";
                         html += "           </select>";
                         html += "       </div>";
                         html += "   </div>";
@@ -83,8 +83,8 @@ function addCampoFamiliar() {
     html += "           <label>Grau de Parentesco</label>";
     html += "           <select type='text' class='form-control' name='tipoFamiliar[]' placeholder='Grau de Parentesco'>";
     html += "               <option value=''>Selecione</option>";
-    html += "               <option value='1'>Conjugue</option>";
-    html += "               <option value='2'>Filho</option>";
+    html += "               <option value='2'>Conjugue</option>";
+    html += "               <option value='3'>Filho</option>";
     html += "           </select>";
     html += "       </div>";
     html += "   </div>";

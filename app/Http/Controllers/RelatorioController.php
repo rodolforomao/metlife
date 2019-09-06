@@ -28,45 +28,53 @@ class RelatorioController extends Controller {
     public function index(Request $request, $id) {
         $dadosCadastrais = Dadoscadastrai::findOrFail($id);
         $dadosFamiliares = Dadosfamiliare::where('idCliente', $id)->get();
-        $dadosRendimentoPrincipal = Rendimentomensal::where('idCliente', $id)->get();
+        $dadosRendimento = Rendimentomensal::where('idCliente', $id)->get();
         $dadosPatrimonio = Patrimonio::where('idCliente', $id)->get();
         $dadosPadraoVida = Padrao_de_vida::where('idCliente', $id)->get();
-        $dadosEducacao = Educacao::where('idCliente', $id)->get();
+        $dadosEducacao = Educacao::
+                        select("educacaos.id", "idTipoEducacao", "idTipoFamiliar", "custo", "anos", "anos", "total", "tipoeducacaos.descricao")->
+//                        leftJoin('dadosfamiliares', function ($join) {
+//                            $join->on('dadosfamiliares.id', '=', 'educacaos.idDadosFamiliares');
+//                        })->
+                        leftJoin('tipoeducacaos', function ($join) {
+                            $join->on('tipoeducacaos.id', '=', 'educacaos.idTipoEducacao');
+                        })
+                        ->where('educacaos.idCliente', $id)
+                        ->orwhereNull('idCliente')->get();
+
         $dadosSaldoEmprestimo = Saldoemprestimo::where('idCliente', $id)->get();
         $dadosEmprestimos = Emprestimo::where('idCliente', $id)->get();
-        $dadosFGTS_INSS_principal = Inssfgtsprevidenciaseguro::where('idCliente', $id)->where('tipoFamiliar', 'Principal')->get();
-        $dadosFGTS_INSS_conjugue = Inssfgtsprevidenciaseguro::where('idCliente', $id)->where('tipoFamiliar', 'Conjugue')->get();
-        $dadosPrevidencia = Inssprevidenciacliente::where('idCliente', $id)->get();
-        $dadosSeguro = Insssegurocliente::where('idCliente', $id)->get();
+        $dadosFGTS_INSS = Inssfgtsprevidenciaseguro::where('idCliente', $id)->where('idTipoFamiliar', '1')->get();
+        $dadosPrevidencia = Inssprevidenciacliente::where('idCliente', $id)->where('idTipoFamiliar', '1')->get();
+        $dadosSeguro = Insssegurocliente::where('idCliente', $id)->where('idTipoFamiliar', '1')->get();
 
         $dadosPlanosPrincipal = Planoprodutodesc::
-                        select("descricao", "planoprodutos.id", "planoprodutodescs.id as idProduto", "vigencia", "prazo", "capital", "valor", "tipoFamiliar")->
+                        select("descricao", "planoprodutos.id", "planoprodutodescs.id as idProduto", "vigencia", "prazo", "capitalsegurado", "valor", "idTipoFamiliar")->
                         leftJoin('planoprodutos', function ($join) {
-                            $join->on('planoprodutos.idproduto', '=', 'planoprodutodescs.id')
-                            ->where('planoprodutos.tipoFamiliar', '=', 'Principal');
+                            $join->on('planoprodutos.idPlanoProduto', '=', 'planoprodutodescs.id');
                         })
                         ->where('idCliente', $id)
+                        ->where('idTipoFamiliar', 1)
                         ->orwhereNull('idCliente')->get();
         $dadosPlanoConjugue = Planoprodutodesc::
-                        select("descricao", "planoprodutos.id", "planoprodutodescs.id as idProduto", "vigencia", "prazo", "capital", "valor", "tipoFamiliar")->
+                        select("descricao", "planoprodutos.id", "planoprodutodescs.id as idProduto", "vigencia", "prazo", "capitalsegurado", "valor", "idTipoFamiliar")->
                         leftJoin('planoprodutos', function ($join) {
-                            $join->on('planoprodutos.idproduto', '=', 'planoprodutodescs.id')
-                            ->where('planoprodutos.tipoFamiliar', '=', 'Conjugue');
+                            $join->on('planoprodutos.idPlanoProduto', '=', 'planoprodutodescs.id');
                         })
                         ->where('idCliente', $id)
+                        ->where('idTipoFamiliar', 2)
                         ->orwhereNull('idCliente')->get();
 
         return view('dashboard.v3', [
             'dadoscadastrais' => $dadosCadastrais,
             'dadosFamiliares' => $dadosFamiliares,
-            'dadosRendimentoPrincipal' => $dadosRendimentoPrincipal,
+            'dadosRendimento' => $dadosRendimento,
             'dadosPatrimonio' => $dadosPatrimonio,
             'dadosPadraoVida' => $dadosPadraoVida,
             'dadosEducacao' => $dadosEducacao,
             'dadosSaldoEmprestimo' => $dadosSaldoEmprestimo,
             'dadosEmprestimos' => $dadosEmprestimos,
-            'dadosFGTS_INSS_principal' => $dadosFGTS_INSS_principal,
-            'dadosFGTS_INSS_conjugue' => $dadosFGTS_INSS_conjugue,
+            'dadosFGTS_INSS' => $dadosFGTS_INSS,
             'dadosPrevidencia' => $dadosPrevidencia,
             'dadosSeguro' => $dadosSeguro,
             'dadosPlanosPrincipal' => $dadosPlanosPrincipal,

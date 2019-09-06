@@ -21,7 +21,10 @@ $(document).ready(function () {
                     html += "           <label>Idade / Série</label>";
                     html += "           <select type='text' class='form-control' id='tipo_familiar_educacao" + i + "' name='tipoFamiliar[]' placeholder='Grau de Parentesco'>";
                     html += "               <option value=''>Selecione</option>";
-                    html += dadosFamiliares;
+                    html += "               <option value='1'>Principal</option>";
+                    html += "               <option value='2'>Conjugue</option>";
+                    html += "               <option value='3'>Filhos</option>";
+//                    html += dadosFamiliares;
                     html += "           </select>";
                     html += "       </div>";
                     html += "   </div>";
@@ -96,7 +99,10 @@ function addCampoFilhoEducacao() {
     html += "           <label>Familiar</label>";
     html += "           <select type='text' class='form-control' id='tipo_familiar_educacao" + qtdeCamposEducacao + "' name='tipoFamiliar[]' placeholder='Grau de Parentesco'>";
     html += "               <option value=''>Selecione</option>";
-    html += dadosFamiliares;
+    html += "               <option value='1'>Principal</option>";
+    html += "               <option value='2'>Conjugue</option>";
+    html += "               <option value='3'>Filhos</option>";
+//    html += dadosFamiliares;
     html += "           </select>";
     html += "       </div>";
     html += "   </div>";
