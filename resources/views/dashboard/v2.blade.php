@@ -2,6 +2,7 @@
 
 @section('content')
 <link rel="stylesheet" href="/dist/plugins/notify/notify.css">
+<link rel="stylesheet" href="/dist/plugins/datepicker/datepicker3.css">
 
 <div class="content-wrapper">
 
@@ -207,7 +208,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12 border-bottom">
-                                    <h3>Familiar(es) <button type="button" class="btn btn-sm btn-info" onclick="addCampoFamiliar()">+</button></h3>
+                                    <h3>Dependente(s) Financeiro(s)<button type="button" class="btn btn-sm btn-info" onclick="addCampoFilho()">+</button></h3>
                                 </div>
                             </div>
                             <form role="form" id="formDadosFamiliares">
@@ -308,6 +309,8 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Fundos/Investimentos/Ações</label>
@@ -320,6 +323,8 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Reservas/Poupança</label>
@@ -332,6 +337,8 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Outros <small>(veículos, participações, obras de arte, etc.)</small></label>
@@ -344,14 +351,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 border-top">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 border-top">
                                         <label>Total </label><span class="pull-right" id="valorTotal_patrimonio">R$ 0,00</span>
                                     </div>
-
                                 </div>
                                 <br><br>
-                                <div class="row" style="background: #f4f6f9;">
-                                    <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-6" style="background: #f4f6f9;">
                                         <div class="form-group">
                                             <label>Inventário</label>
                                             <div class="input-group date">
@@ -362,10 +370,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6" style="background: #f4f6f9;">
                                         <div class="form-group">
                                             <label>Emergência <small>(X de renda mensal)</small></label>
-                                            <div class="input-group date">
+                                            <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">(X)</span>
                                                 </div>
@@ -373,15 +383,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6" style="background: #f4f6f9;">
                                         <div class="form-group">
                                             <label>Funeral</label>
                                             <div class="input-group date">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">R$</span>
                                                 </div>
-                                                <input id="patrim_funaral" name="patrim_funaral" class="form-control" placeholder="Funeral" value="10.000,00"
-                                                       onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
+                                                <input id="patrim_funaral" name="patrim_funaral" value="10.000,00"class="form-control" placeholder="Funeral"
+                                                       onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="somaTotalPatriomio()">
                                             </div>
                                         </div>
                                     </div>                      
@@ -400,12 +412,165 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">
-                                Educação <button type="button" class="btn btn-sm btn-info" onclick="addCampoFilhoEducacao()">+</button>
+                                Educação
                             </h3>
                         </div>
                         <form role="form" id="formEducacaoFilhos">
-                            <div class="card-body"  id="divEducacaoFilhos">
+                            <div class="card-body">
+                                <div id="divEducacaoFilhos">
+                                    <div class="border-bottom">
+                                        <h3>Filho <button type="button" class="btn btn-sm btn-info" onclick="addCampoFilhoEducacao()">+</button></h3>
+                                    </div>
+                                </div>
+                                <br>
+                                <!--<div class="row border-top">
+                                    <div class="col-md-6">
+                                        <label>Total Despesas com Educação</label><br>
+                                        <span>R$ 0,00</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Maior Periodo para Formação (Anos)</label><br>
+                                        <span>0</span>
+                                    </div>
+                                </div>-->
 
+                                <div class="row">
+                                    <table class="table table-hover" style="font-size: 12px;">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 160px;"></th>
+                                                <th>Custo</th>
+                                                <th>Anos</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Infantil
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input id="educacao_custo" name="educacao_custo" class="form-control" onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <input type="text" class="form-control" style="font-size: 12px;" >
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input id="educacao_custo" name="educacao_custo" class="form-control" onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Básico
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input id="educacao_custo" name="educacao_custo" class="form-control" onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <input type="text" class="form-control" style="font-size: 12px;" >
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input id="educacao_custo" name="educacao_custo" class="form-control" onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Fundamental (3 anos)
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input id="educacao_custo" name="educacao_custo" class="form-control" onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <input type="text" class="form-control" style="font-size: 12px;" >
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input id="educacao_custo" name="educacao_custo" class="form-control" onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Superior (4 a 5 anos)
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input id="educacao_custo" name="educacao_custo" class="form-control" onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <input type="text" class="form-control" style="font-size: 12px;" >
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input id="educacao_custo" name="educacao_custo" class="form-control" onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Especialização
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input id="educacao_custo" name="educacao_custo" class="form-control" onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
+                                                    </div>
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <input type="text" class="form-control" style="font-size: 12px;" >
+                                                </td>
+                                                <td class="yellow-background">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">R$</span>
+                                                        </div>
+                                                        <input id="educacao_custo" name="educacao_custo" class="form-control" onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)">
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="button" class="btn btn-primary" id="insereEducacaoFilhos">Salvar</button>
                             </div>
                         </form>   
                         <div class="card-footer">
@@ -632,7 +797,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>INSS <small>Rensa Mensal</small></label>
+                                            <label>INSS <small>Renda Mensal</small></label>
                                             <div class="input-group date">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">R$</span>
@@ -698,7 +863,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>INSS <small>Rensa Mensal</small></label>
+                                            <label>INSS <small>Renda Mensal</small></label>
                                             <div class="input-group date">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">R$</span>
@@ -768,7 +933,11 @@
                                 </div>
                                 <div class="col-md-2">
                                     <label>Risco</label><br>
-                                    <span>Padrão</span>
+                                    <select class='form-control' name='plano_risco'>";
+                                        <option>Selecione</option>
+                                        <option>Padrão</option>
+                                        <option>Agravado</option>
+                                   </select>
                                 </div>
                                 <div class="col-md-2">
                                     <label>CPF</label><br>
@@ -813,7 +982,8 @@
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
-                                                    <input name="prazo[]" class="form-control">
+                                                    <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
                                                 </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group date">
@@ -849,8 +1019,8 @@
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
-                                                    <input name="prazo[]" class="form-control">
-                                                    </div>
+                                                    <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
                                                 </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group date">
@@ -886,8 +1056,8 @@
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
-                                                    <input name="prazo[]" class="form-control">
-                                                    </div>
+                                                    <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
                                                 </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group date">
@@ -923,8 +1093,8 @@
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
-                                                    <input name="prazo[]" class="form-control">
-                                                    </div>
+                                                    <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
                                                 </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group date">
@@ -960,8 +1130,8 @@
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
-                                                    <input name="prazo[]" class="form-control">
-                                                    </div>
+                                                    <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
                                                 </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group date">
@@ -997,8 +1167,8 @@
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
-                                                    <input name="prazo[]" class="form-control">
-                                                    </div>
+                                                    <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
                                                 </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group date">
@@ -1034,8 +1204,8 @@
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
-                                                    <input name="prazo[]" class="form-control">
-                                                    </div>
+                                                    <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
                                                 </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group date">
@@ -1071,8 +1241,8 @@
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
-                                                    <input name="prazo[]" class="form-control">
-                                                    </div>
+                                                    <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
                                                 </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group date">
@@ -1120,7 +1290,7 @@
                                             <tr>
                                                 <th style="width: 160px;">Produto</th>
                                                 <th>Vigência</th>
-                                                <th>Prazo</th>
+                                                <th>Prazo (Anos)</th>
                                                 <th>Capital Segurado</th>
                                                 <th>Valor</th>
                                             </tr>
@@ -1142,7 +1312,8 @@
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
-                                                    <input name="prazo[]" class="form-control">
+                                                    <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
                                                 </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group date">
@@ -1177,9 +1348,9 @@
                                                         <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control">
                                                     </div>
                                                 </td>
-                                                <td class="yellow-background">
-                                                    <input name="prazo[]" class="form-control">
-                                                    </div>
+                                                <td class="yellow-background">                    
+                                                    <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">                                              
                                                 </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group date">
@@ -1215,8 +1386,8 @@
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
-                                                    <input name="prazo[]" class="form-control">
-                                                    </div>
+                                                    <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
                                                 </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group date">
@@ -1251,9 +1422,9 @@
                                                         <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control">
                                                     </div>
                                                 </td>
-                                                <td class="yellow-background">
-                                                    <input name="prazo[]" class="form-control">
-                                                    </div>
+                                                <td class="yellow-background">                              
+                                                    <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
                                                 </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group date">
@@ -1289,8 +1460,8 @@
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
-                                                    <input name="prazo[]" class="form-control">
-                                                    </div>
+                                                    <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
                                                 </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group date">
@@ -1325,9 +1496,9 @@
                                                         <input name="vigencia[]" type="text" data-provide="datepicker" class="datepicker form-control">
                                                     </div>
                                                 </td>
-                                                <td class="yellow-background">
-                                                    <input name="prazo[]" class="form-control">
-                                                    </div>
+                                                <td class="yellow-background">                            
+                                                    <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
                                                 </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group date">
@@ -1363,8 +1534,8 @@
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
-                                                    <input name="prazo[]" class="form-control">
-                                                    </div>
+                                                    <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
                                                 </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group date">
@@ -1400,8 +1571,8 @@
                                                     </div>
                                                 </td>
                                                 <td class="yellow-background">
-                                                    <input name="prazo[]" class="form-control">
-                                                    </div>
+                                                    <input name="prazo[]" class="form-control"
+                                                               onkeydown="FormataMoeda(this, 20, event)" onkeypress="return maskKeyPress(event)" onchange="">
                                                 </td>
                                                 <td class="yellow-background">
                                                     <div class="input-group date">
@@ -1433,7 +1604,12 @@
                     </div>
 
                 </div>
-            </div>      
+            </div>   
+
+            <!--Botão flutuante-->
+            <a href="{{ route('v1') }}" class="btn btn-primary floatButton">
+                <b><i class="fa fa-chevron-left"></i></b>
+            </a>
     </section>
     <!-- /.content -->
 </div>

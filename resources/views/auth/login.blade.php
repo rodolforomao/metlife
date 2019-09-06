@@ -53,10 +53,10 @@
                             </div>
                         </div>
                         <div class="row">     
-                            <div class="col-12">
+                            <!-- <div class="col-12">
                                 <a href="#" style="font-size: 12px;">Esqueci minha senha.</a>
-                            </div>
-                            <div class="col-12 text-muted" style="font-size: 12px;">
+                            </div> -->
+                            <div class="col-12 text-muted" style="font-size: 12px; top: 10px;">
                                 Não tem uma conta? <a href="{{route('register')}}" >Registre-se</a>
                             </div>
                         </div>
