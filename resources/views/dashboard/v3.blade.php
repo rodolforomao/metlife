@@ -103,6 +103,8 @@ foreach ($dadosEmprestimos as $emprestimo) {
 //Educação
 $custo_educacao = 0;
 $anos_educacao = 0;
+$custo_educacao_tipo = [];
+$total_custo_educacao_tipo = [];
 foreach ($dadosEducacao as $educacao) {
     $custo_educacao += $educacao->custo;
     $anos_educacao += $educacao->anos;
