@@ -21,7 +21,7 @@
 <div class="login-page">
     <div class="box-login">      
         <div class="card-login">
-            <div class="row align-items-center" style="min-height: 500px;">
+            <div class="row align-items-center" style="min-height: 450px;">
                 <div class="col-sm-12 col-md-6 border-right"> 
                     <img src="/dist/img/brazilian_color.png" style="width: 100%;">
                 </div>

@@ -18,15 +18,26 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'DashboardController@versionfour')->name('home');
-Route::get('/dashboard/home', 'DashboardController@versionfour')->name('home');
+//Home - Botões de acesso as telas
+Route::get('/home', 'DashboardController@versionone')->name('home');
+Route::get('/dashboard/home', 'DashboardController@versionone')->name('home');
 Route::get('/dashboard/v1', 'DashboardController@versionone')->name('v1');
+
+//Tela de Fechamento
 Route::get('/dashboard/v2', 'DashboardController@versiontwo')->name('v2');
+
+//Tela de Relatório
 Route::get('/dashboard/v3', 'DashboardController@versionthree')->name('v3');
 
-
+//Tela de AbFone
 Route::get('/dashboard/cadastrados', 'DashboardController@cadastrados');
 Route::get('/dashboard/v4', 'DashboardController@versionfour')->name('v4');
+
+//Tela de Agenda
+Route::get('/dashboard/v5', 'DashboardController@versionfive')->name('v5');
+
+//Tela de Clientes
+Route::get('/dashboard/v6', 'DashboardController@versionsix')->name('v6');
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
