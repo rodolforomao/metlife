@@ -244,6 +244,7 @@ foreach ($dadosSeguro as $seguro) {
 
                                 <?php
                                 $x = 0;
+                                $totalNecessidade = array();
                                 for ($i = 1; $i <= count($custo_educacao_tipo); $i++) {
                                     if ($anos_educacao_tipo[$i] > 0) {
                                         $total = $custo_educacao_tipo[$i];
