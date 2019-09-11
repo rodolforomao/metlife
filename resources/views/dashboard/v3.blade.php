@@ -524,13 +524,13 @@ foreach ($dadosSeguro as $seguro) {
                     <b>Nome</b>
                 </div>
                 <div class="col-md-2">  
-                    Aciole
+                    {{$dadoscadastrais->nomecompleto}}
                 </div>
                 <div class="col-md-1">  
                     <b>Sexo</b>
                 </div>
                 <div class="col-md-1">  
-                    Masculino
+                    {{$dadoscadastrais->sexo}}
                 </div>
             </div>    
             <div class="row">
@@ -538,58 +538,28 @@ foreach ($dadosSeguro as $seguro) {
                     <b>Elaborado</b>
                 </div>
                 <div class="col-md-2">  
-                    13/06/2019
+                    {{date('d/m/Y', strtotime(($dadoscadastrais->created_at)))}}
                 </div>
                 <div class="col-md-1">  
                     <b>Idade</b>
                 </div>
                 <div class="col-md-1">  
-                    37
+                    {{$idade}}
                 </div>
                 <div class="col-md-1">  
                     <b>Nascimento</b>
                 </div>
                 <div class="col-md-1">  
-                    21/06/1982
+                    {{date('d/m/Y', strtotime(($dadoscadastrais->datanascimento)))}}
                 </div>
             </div>
             <hr>
-            <div class="row">         
+            <div class="row">       
+                <div class="col-md-3">
+
+                </div>
                 <div class="col-7">
                     <div id="graf_painel_pie" class="pie-grafico"></div>
-                </div>
-                <div class="col-5 align-self-center">
-                    <table class="table table-striped font-table">
-                        <thead class="title-table">
-                            <tr>
-                                <th></th>
-                                <th>Soma</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Ad. Invalidez Acidental</td>
-                                <td>R$ 67,76</td>
-                            </tr>
-                            <tr>
-                                <td>Doenças Graves</td>
-                                <td>R$ 143,64</td>
-                            </tr>
-                            <tr>
-                                <td>Internação Hospitalar</td>
-                                <td>R$ 11,98</td>
-                            </tr>
-                            <tr>
-                                <td>Vitalício</td>
-                                <td>R$ 136,48</td>
-                            </tr>
-
-                            <tr>
-                                <td><b>Total Geral</b></td>
-                                <td><b>R$ 359,87</b></td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>  
 
@@ -641,5 +611,5 @@ for ($i = 0; $i < count($plano_produto); $i++) {
     var anos_educacao = {{$anos_educacao}}
     necessidadeProtecao(idade, inventario, emergencial, funeral, custo_educacao_anual, custo_educacao_total, anos_educacao);
     custoTotalVida(idade, despesaFixa, custo_educacao_anual, custo_educacao_total, anos_educacao, funeral, emergencial, funeral);
-    graf_painel(produto_prazo,produto_descricao);
+    graf_painel(produto_prazo, produto_descricao);
 </script>
