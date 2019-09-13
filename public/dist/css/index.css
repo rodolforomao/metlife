@@ -94,3 +94,14 @@
     background: #3a9fe1 !important;
     color:white;
 }
+
+.floatButton {
+  position: fixed;
+    bottom: 30px;
+    right: 10px;
+    z-index: 9999;
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    padding: 17px;
+}
