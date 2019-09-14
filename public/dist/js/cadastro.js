@@ -3,6 +3,19 @@ $('a.nav-link').click(function () {
     $(this).addClass("active");
 
 });
+
+$( document ).ready(function() {
+    $('#dados_cadastrais').show();
+    $('#dados_familiares').hide();
+    $('#rendimentos').hide();
+    $('#patrimonio').hide();
+    $('#educacao_filhos').hide();
+    $('#padrao_vida').hide();
+    $('#emprestimos').hide();
+    $('#seguros_previdencias').hide();
+    $('#plano').hide();
+});
+
 function openDadosCadastrais() {
     $('#dados_cadastrais').show();
     $('#dados_familiares').hide();

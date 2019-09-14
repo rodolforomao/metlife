@@ -13,7 +13,7 @@
                     <div class="col-sm-12">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                            <li class="breadcrumb-item active">Clientes</li>
+                            <li class="breadcrumb-item active">Fechamento</li>
                         </ol>
                     </div>
                 </div>
@@ -22,30 +22,28 @@
 
         <section class="content">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-condensed table-hover table-striped center" style="width: 100%;" id="tableUsuarios">
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 10px">#</th>
-                                                <th>Cliente</th>
-                                                <th>Data de Cadastro</th>
-                                                <th>Editar</th>
-                                                <th>Relatório</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-condensed table-hover table-striped center" style="width: 100%;" id="tableUsuarios">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10px">#</th>
+                                        <th>Cliente</th>
+                                        <th>Data de Cadastro</th>
+                                        <th>Editar</th>
+                                        <th>Relatório</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
                         </div>
 
-                    </div>          
+                    </div>
+                </div>
+                <div class="row">
+                    <a  data-toggle="tooltip" data-placement="top" title="Cadastrar" class="floatButton btn btn-block btn-primary" href="{{ route('v2') }}"><i class="fa fa-plus"></i></a>
                 </div>
         </section>
     </div>

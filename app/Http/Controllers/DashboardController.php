@@ -31,6 +31,10 @@ class DashboardController extends Controller {
         return view('dashboard.v6');
     }
 
+    public function versionseven() {
+        return view('dashboard.v7');
+    }
+
     public function cadastrados() {
         $dadosCadastrais = Dadoscadastrai::all();
         $retorno["data"] = array();

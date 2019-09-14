@@ -1438,7 +1438,10 @@
                     </div>
 
                 </div>
-            </div>      
+            </div>  
+            <div class="row">
+                <a data-toggle="tooltip" data-placement="top" title="Voltar" class="floatButton btn btn-block btn-primary" href="{{ route('v6') }}"><i class="fa fa-arrow-left"></i></a>
+            </div>    
     </section>
     <!-- /.content -->
 </div>
@@ -1446,7 +1449,6 @@
 @endsection
 
 @section('javascript')
-
 <!-- jQuery -->
 <script src="/dist/plugins/jquery/jquery.min.js"></script>
 <script src="/dist/plugins/datepicker/bootstrap-datepicker.js"></script>

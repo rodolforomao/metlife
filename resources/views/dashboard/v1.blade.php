@@ -45,7 +45,7 @@
                   <h1 class="title">Fechamento</h1>
                   <p class="desc">Less unicorn and apart and credibly yikes touched much jeez that so reverent the by a as that kiwi fed wherever more aboard.</p>
                 </div>
-                <a href="{{ route('v2') }}" ></a>
+                <a href="{{ route('v6') }}" ></a>
               </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
@@ -55,7 +55,7 @@
                   <h1 class="title">Clientes</h1>
                   <p class="desc">Less unicorn and apart and credibly yikes touched much jeez that so reverent the by a as that kiwi fed wherever more aboard.</p>
                 </div>
-                <a href="{{ route('v6') }}" ></a>
+                <a href="{{ route('v7') }}" ></a>
               </div>
             </div>
           </div>

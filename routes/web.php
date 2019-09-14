@@ -24,6 +24,8 @@ Route::get('/dashboard/home', 'DashboardController@versionone')->name('home');
 Route::get('/dashboard/v1', 'DashboardController@versionone')->name('v1');
 
 //Tela de Fechamento
+Route::get('/dashboard/v6', 'DashboardController@versionsix')->name('v6');
+//Tela de Fechamento cadastro
 Route::get('/dashboard/v2', 'DashboardController@versiontwo')->name('v2');
 
 //Tela de Relatório
@@ -37,7 +39,7 @@ Route::get('/dashboard/v4', 'DashboardController@versionfour')->name('v4');
 Route::get('/dashboard/v5', 'DashboardController@versionfive')->name('v5');
 
 //Tela de Clientes
-Route::get('/dashboard/v6', 'DashboardController@versionsix')->name('v6');
+Route::get('/dashboard/v7', 'DashboardController@versionseven')->name('v7');
 
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
