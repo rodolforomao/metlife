@@ -76,6 +76,7 @@ foreach ($dadosRendimento as $rendimento) {
 }
 //Dados Rendimentos Principal ---------------------------------------------------
 $inss = 0;
+$fgts = 0;
 foreach ($dadosFGTS_INSS as $inss_fgts) {
     $inss = ($inss_fgts->inss + $renda) * 12;
     $fgts = $inss_fgts->fgts;
