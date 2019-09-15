@@ -458,59 +458,59 @@ foreach ($dadosSeguro as $seguro) {
                 </table>
             </div>  
 
-            <div class="row">         
-                <table class="table table-striped font-table border-table">
-                    <thead class="title-table">
-                        <tr>
-                            <th colspan="5" class="border-table">Cobertutas em caso de:</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="line-table">
-                            <td class="border-table">
-                                <div class="row margin">
-                                    <div class="col-12"><b>Morte Qualquer Causa</b></div>
-                                    <div class="col-12">Vitalício</div>
-                                    <div class="col-6">R$</div><div class="col-6">60.000</div>
-                                    <div class="col-6"><b><h4>R$</h4></b></div><div class="col-6"><b><h4>60.000</h4></b></div>
-                                </div>
-                            </td>
-                            <td class="border-table">
-                                <div class="row margin">
-                                    <div class="col-12"><b>Morte Acidental</b></div>
-                                    <div class="col-12">Capital morte acidental</div>
-                                    <div class="col-6">R$</div><div class="col-6">-</div>
-                                    <div class="col-6"><b><h4>R$</h4></b></div><div class="col-6"><b><h4>60.000</h4></b></div>
-                                </div>
-                            </td>
-                            <td class="border-table">
-                                <div class="row margin">
-                                    <div class="col-12"><b>Invalidez</b></div>
-                                    <div class="col-12">Vitalício</div>
-                                    <div class="col-6">R$</div><div class="col-6">500.000</div>
-                                    <div class="col-6"><b><h4>R$</h4></b></div><div class="col-6"><b><h4>500.000</h4></b></div>
-                                </div>
-                            </td>
-                            <td class="border-table">
-                                <div class="row margin">
-                                    <div class="col-12"><b>Doenças Graves</b></div>
-                                    <div class="col-12">Vitalício</div>
-                                    <div class="col-6">R$</div><div class="col-6">500.000</div>
-                                    <div class="col-6"><b><h4>R$</h4></b></div><div class="col-6"><b><h4>500.000</h4></b></div>
-                                </div>
-                            </td>
-                            <td class="border-table">
-                                <div class="row margin">
-                                    <div class="col-12"><b>Internação Hospitalar</b></div>
-                                    <div class="col-12">Vitalício</div>
-                                    <div class="col-6">R$</div><div class="col-6">200,00</div>
-                                    <div class="col-6"><b><h4>R$</h4></b></div><div class="col-6"><b> <h4>200,00</h4></b></div>
-                                </div>
-                            </td>
-                        </tr>               
-                    </tbody>
-                </table>
-            </div>  
+            <!--            <div class="row">         
+                            <table class="table table-striped font-table border-table">
+                                <thead class="title-table">
+                                    <tr>
+                                        <th colspan="5" class="border-table">Cobertutas em caso de:</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="line-table">
+                                        <td class="border-table">
+                                            <div class="row margin">
+                                                <div class="col-12"><b>Morte Qualquer Causa</b></div>
+                                                <div class="col-12">Vitalício</div>
+                                                <div class="col-6">R$</div><div class="col-6">60.000</div>
+                                                <div class="col-6"><b><h4>R$</h4></b></div><div class="col-6"><b><h4>60.000</h4></b></div>
+                                            </div>
+                                        </td>
+                                        <td class="border-table">
+                                            <div class="row margin">
+                                                <div class="col-12"><b>Morte Acidental</b></div>
+                                                <div class="col-12">Capital morte acidental</div>
+                                                <div class="col-6">R$</div><div class="col-6">-</div>
+                                                <div class="col-6"><b><h4>R$</h4></b></div><div class="col-6"><b><h4>60.000</h4></b></div>
+                                            </div>
+                                        </td>
+                                        <td class="border-table">
+                                            <div class="row margin">
+                                                <div class="col-12"><b>Invalidez</b></div>
+                                                <div class="col-12">Vitalício</div>
+                                                <div class="col-6">R$</div><div class="col-6">500.000</div>
+                                                <div class="col-6"><b><h4>R$</h4></b></div><div class="col-6"><b><h4>500.000</h4></b></div>
+                                            </div>
+                                        </td>
+                                        <td class="border-table">
+                                            <div class="row margin">
+                                                <div class="col-12"><b>Doenças Graves</b></div>
+                                                <div class="col-12">Vitalício</div>
+                                                <div class="col-6">R$</div><div class="col-6">500.000</div>
+                                                <div class="col-6"><b><h4>R$</h4></b></div><div class="col-6"><b><h4>500.000</h4></b></div>
+                                            </div>
+                                        </td>
+                                        <td class="border-table">
+                                            <div class="row margin">
+                                                <div class="col-12"><b>Internação Hospitalar</b></div>
+                                                <div class="col-12">Vitalício</div>
+                                                <div class="col-6">R$</div><div class="col-6">200,00</div>
+                                                <div class="col-6"><b><h4>R$</h4></b></div><div class="col-6"><b> <h4>200,00</h4></b></div>
+                                            </div>
+                                        </td>
+                                    </tr>               
+                                </tbody>
+                            </table>
+                        </div>  -->
         </div>  
     </section>  
 
@@ -581,6 +581,7 @@ foreach ($dadosSeguro as $seguro) {
 <script src="/dist/js/relatorio/necessidade_protecao.js"></script>
 <script src="/dist/js/relatorio/custo_total_vida.js"></script>
 <script src="/dist/js/relatorio/graf_painel.js"></script>
+<script src="/dist/js/relatorio/graf_painel_pie.js"></script>
 
 
 <script>
@@ -613,4 +614,6 @@ for ($i = 0; $i < count($plano_produto); $i++) {
     necessidadeProtecao(idade, inventario, emergencial, funeral, custo_educacao_anual, custo_educacao_total, anos_educacao);
     custoTotalVida(idade, despesaFixa, custo_educacao_anual, custo_educacao_total, anos_educacao, funeral, emergencial, funeral);
     graf_painel(produto_prazo, produto_descricao);
+    graf_painel_pie();
+
 </script>
