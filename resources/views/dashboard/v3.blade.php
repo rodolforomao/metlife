@@ -445,7 +445,7 @@ foreach ($dadosSeguro as $seguro) {
                             <tr>
                                 <td><b>{{$plano->descricao}}</b></td>
                                 <td>{{$plano->vigencia == "" || $plano->vigencia == "1970-01-01"  ? "" : date('d/m/Y', strtotime(($plano->vigencia)))}}</td>
-                                <td>{{$plano->prazo == ""? "" : $plano->prazo / 12}}</td>
+                                <td>{{$plano->prazo == ""? "" : number_format($plano->prazo / 12, 0, ",", ".")}}</td>
                                 <td>{{$plano->capitalsegurado == "" ? "" : "R$" . number_format($plano->capitalsegurado, 2, ",", ".")}}</td>
                                 <td>{{$plano->valor == "" ? "" : "R$" . number_format($plano->valor, 2, ",", ".")}}</td>
                                 <?php if ($i == 0) { ?>

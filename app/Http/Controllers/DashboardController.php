@@ -45,7 +45,7 @@ class DashboardController extends Controller {
                 "cliente" => $lista->nomecompleto,
                 "dataCadastro" => date("d/m/Y", strtotime((string) ($lista->created_at))),
                 "editar" => "<a href='/dashboard/editar/{$lista->id}' class='btn btn-default'>Editar</a>",
-                "relatorio" => "<a href='/dashboard/relatorio/{$lista->id}' class='btn btn-default'>Relatório</a>"
+                "relatorio" => "<a href='/dashboard/relatorio/{$lista->id}' class='btn btn-default' target='_blank'>Relatório</a>"
             );
         }
         echo (json_encode($retorno));
