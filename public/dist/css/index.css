@@ -37,7 +37,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 15px;
+    padding: 65px 0px;
 }
 
 .container .box a {
@@ -55,7 +55,7 @@
 }
 
 .container .box .boxContent .title {
-    font-size: 24px;
+    font-size: 28px;
     color: #1d9ee1;
     font-weight: bold;
     padding: 10px;

@@ -23,7 +23,6 @@
                 <div class="boxContent">
                   <i class="fa fa-phone icon"></i>
                   <h1 class="title">AB Fone</h1>
-                  <p class="desc">Less unicorn and apart and credibly yikes touched much jeez that so reverent the by a as that kiwi fed wherever more aboard.</p>
                 </div>
                 <a href="{{ route('v4') }}" ></a>
               </div>
@@ -33,7 +32,6 @@
                 <div class="boxContent">
                   <i class="fa fa-calendar icon"></i>
                   <h1 class="title">Agenda</h1>
-                  <p class="desc">Less unicorn and apart and credibly yikes touched much jeez that so reverent the by a as that kiwi fed wherever more aboard.</p>
                 </div>
                 <a href="{{ route('v5') }}" ></a>
               </div>
@@ -43,7 +41,6 @@
                 <div class="boxContent">
                   <i class="fa fa-clipboard icon"></i>
                   <h1 class="title">Fechamento</h1>
-                  <p class="desc">Less unicorn and apart and credibly yikes touched much jeez that so reverent the by a as that kiwi fed wherever more aboard.</p>
                 </div>
                 <a href="{{ route('v6') }}" ></a>
               </div>
@@ -53,7 +50,6 @@
                 <div class="boxContent">
                   <i class="fa fa-users icon"></i>
                   <h1 class="title">Clientes</h1>
-                  <p class="desc">Less unicorn and apart and credibly yikes touched much jeez that so reverent the by a as that kiwi fed wherever more aboard.</p>
                 </div>
                 <a href="{{ route('v7') }}" ></a>
               </div>
