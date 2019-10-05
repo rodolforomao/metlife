@@ -1,8 +1,10 @@
-function invalidezDoencaGrave(idade, inss) {
+function invalidezDoencaGrave(idade, previdencia, inss, despesaFixa) {
     var count = 85 - idade;
     var array_despesa_inss = [];
+    var array_despesa_fixa = [];
     for (var i = 0; i <= count; i++) {
-        array_despesa_inss.push(inss);
+        array_despesa_inss.push((previdencia + inss) * 12);
+        array_despesa_fixa.push(despesaFixa);
     }
 
     Highcharts.chart('graf_invalidez', {
@@ -59,19 +61,19 @@ function invalidezDoencaGrave(idade, inss) {
                     }
                 }
             },
-//            line: {
-//                pointStart: idade,
-//                marker: {
-//                    enabled: false,
-//                    symbol: 'circle',
-//                    radius: 2,
-//                    states: {
-//                        hover: {
-//                            enabled: true
-//                        }
-//                    }
-//                }
-//            }
+            line: {
+                pointStart: idade,
+                marker: {
+                    enabled: false,
+                    symbol: 'circle',
+                    radius: 2,
+                    states: {
+                        hover: {
+                            enabled: true
+                        }
+                    }
+                }
+            }
         },
         series: [{
                 color: {
@@ -82,16 +84,12 @@ function invalidezDoencaGrave(idade, inss) {
                     }
                 },
                 name: 'INSS',
-                data: array_despesa_inss
+                data: array_despesa_fixa
             },
-//            {
-//                name: 'Renda',
-//                type: 'line',
-//                data: [
-//                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-//                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-//                ]
-//            }
-        ]
+            {
+                name: 'Renda',
+                type: 'line',
+                data: array_despesa_inss
+            }]
     });
 }

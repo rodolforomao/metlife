@@ -1,10 +1,16 @@
-function situacaoAtual(idade, despesaFixa, renda) {
+function situacaoAtual(idade, despesaFixa, renda, previdencia, inss) {
     var count = 85 - idade;
+    var count_idade = idade;
     var array_despesa_fixa = [];
     var array_despesa_renda = [];
     for (var i = 0; i <= count; i++) {
         array_despesa_fixa.push(despesaFixa);
-        array_despesa_renda.push(renda);
+        if (count_idade >= 65) {
+            array_despesa_renda.push((previdencia + inss) * 12);
+        } else {
+            array_despesa_renda.push(renda * 12);
+        }
+        count_idade++;
     }
 
     Highcharts.chart('graf_situacao_atual', {

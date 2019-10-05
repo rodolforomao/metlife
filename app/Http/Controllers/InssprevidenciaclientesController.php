@@ -96,11 +96,11 @@ class InssprevidenciaclientesController extends Controller {
         $inssprevidenciacliente->id = $request->id[$contador] ?: 0;
         $inssprevidenciacliente->idCliente = $request->idCliente;
         $inssprevidenciacliente->idTipoFamiliar = $request->tipoFamiliar;
-        $inssprevidenciacliente->previdencia = $request->previdencia[$contador];
-        $inssprevidenciacliente->pgblvgbl = $request->pglb_vgbl[$contador];
-        $inssprevidenciacliente->saldoacumulado = str_replace(",", ".", str_replace(".", "", ($request->saldo_acumulado[$contador])));
-        $inssprevidenciacliente->rendaestimada = str_replace(",", ".", str_replace(".", "", ($request->renda_estimada[$contador])));
-        $inssprevidenciacliente->contribuicaoanual = $request->contribuicao_anual[$contador];
+        $inssprevidenciacliente->previdencia = $request->previdencia[$contador] ?: 0;
+        $inssprevidenciacliente->pgblvgbl = $request->pglb_vgbl[$contador] ?: 0;
+        $inssprevidenciacliente->saldoacumulado = str_replace(",", ".", str_replace(".", "", ($request->saldo_acumulado[$contador] ?: 0)));
+//        $inssprevidenciacliente->rendaestimada = str_replace(",", ".", str_replace(".", "", ($request->renda_estimada[$contador])));
+        $inssprevidenciacliente->contribuicaoanual = $request->contribuicao_anual[$contador] ?: 0;
         $inssprevidenciacliente->save();
 
         if ($request->id[$contador] == 0) {

@@ -9,11 +9,13 @@ function custoTotalVida(idade, despesaFixa, custo_educacao_anual, custo_educacao
     var array_funeral = [];
     var array_inventario = [];
     var array_emergencial = [];
+    var despesaFixaTotal = despesaFixa * prazo;
     for (var i = 0; i < prazo; i++) {
-        array_despesaGeral.push(despesaFixa);
+        array_despesaGeral.push(despesaFixaTotal);
         array_inventario.push(inventario);
         array_emergencial.push(emergencial);
         array_funeral.push(funeral);
+        despesaFixaTotal = despesaFixaTotal - despesaFixa;
     }
 
     var array_educacao = [];

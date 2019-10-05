@@ -34,7 +34,7 @@ $(document).ready(function () {
             idCliente.value = $("#idCliente").val();
 
             tipoFamiliar.name = "tipoFamiliar";
-            tipoFamiliar.value = "2";
+            tipoFamiliar.value = "1";
 
             formPrevidenciaPrincipal.push(idCliente);
             formPrevidenciaPrincipal.push(tipoFamiliar);
@@ -109,7 +109,7 @@ $(document).ready(function () {
             idCliente.value = $("#idCliente").val();
 
             tipoFamiliar.name = "tipoFamiliar";
-            tipoFamiliar.value = "Principal";
+            tipoFamiliar.value = "1";
 
             formSeguroPrincipal.push(idCliente);
             formSeguroPrincipal.push(tipoFamiliar);
@@ -161,7 +161,7 @@ $(document).ready(function () {
         idCliente.value = $("#idCliente").val();
 
         tipoFamiliar.name = "tipoFamiliar";
-        tipoFamiliar.value = "Conjugue";
+        tipoFamiliar.value = "2";
 
         formConjugueSeguros.push(idCliente);
         formConjugueSeguros.push(tipoFamiliar);
@@ -187,7 +187,7 @@ $(document).ready(function () {
             idCliente.value = $("#idCliente").val();
 
             tipoFamiliar.name = "tipoFamiliar";
-            tipoFamiliar.value = "Conjugue";
+            tipoFamiliar.value = "2";
 
             formPrevidenciaConjugue.push(idCliente);
             formPrevidenciaConjugue.push(tipoFamiliar);
@@ -262,7 +262,7 @@ $(document).ready(function () {
             idCliente.value = $("#idCliente").val();
 
             tipoFamiliar.name = "tipoFamiliar";
-            tipoFamiliar.value = "Conjugue";
+            tipoFamiliar.value = "2";
 
             formSeguroConjugue.push(idCliente);
             formSeguroConjugue.push(tipoFamiliar);

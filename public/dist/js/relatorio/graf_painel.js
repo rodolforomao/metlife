@@ -1,5 +1,4 @@
 function graf_painel(plano_prazo, produto_descricao) {
-
     Highcharts.chart('graf_painel', {
         chart: {
             type: 'bar'
@@ -8,7 +7,7 @@ function graf_painel(plano_prazo, produto_descricao) {
             text: null
         },
         xAxis: {
-            categories: produto_descricao
+            categories: produto_descricao.reverse()
         },
         yAxis: {
             min: 0,
@@ -33,7 +32,7 @@ function graf_painel(plano_prazo, produto_descricao) {
         },
         series: [{
                 name: 'Produto',
-                data: plano_prazo
+                data: plano_prazo.reverse()
             }]
     });
 }

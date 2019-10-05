@@ -1,4 +1,4 @@
-function graf_painel_pie() {
+function graf_painel_pie(produto_valor, produto_descricao) {
     Highcharts.chart('graf_painel_pie', {
         chart: {
             type: 'variablepie'
@@ -35,23 +35,12 @@ function graf_painel_pie() {
                 innerSize: '50%',
                 zMin: 0,
                 name: 'Produtos',
-                data: [{
-                        name: 'Vitalício',
-                        y: 136.49,
-                        z: 38.3
-                    }, {
-                        name: 'Ad. Invalidez',
-                        y: 67.76,
-                        z: 19.7
-                    }, {
-                        name: 'Doenças Graves',
-                        y: 143.64,
-                        z: 40.6
-                    }, {
-                        name: 'Internação',
-                        y: 11.98,
-                        z: 11.5
-                    }]
+                data: [
+                    {name: 'Vitalício', y: 10, z: 38.3},
+                    {name: 'Ad. Invalidez', y: 20, z: 19.7},
+                    {name: 'Doenças Graves', y: 30, z: 40.6},
+                    {name: 'Internação', y: 40, z: 11.5}
+                ]
             }]
     });
 }

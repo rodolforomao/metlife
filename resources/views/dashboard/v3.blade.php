@@ -78,8 +78,14 @@ foreach ($dadosRendimento as $rendimento) {
 $inss = 0;
 $fgts = 0;
 foreach ($dadosFGTS_INSS as $inss_fgts) {
-    $inss = ($inss_fgts->inss + $renda) * 12;
+    $inss = $inss_fgts->inss;
     $fgts = $inss_fgts->fgts;
+}
+
+//Dados Rendimentos Principal ---------------------------------------------------
+$previdencia = 0;
+foreach ($dadosPrevidencia as $dadosPrevidencia) {
+    $previdencia = $dadosPrevidencia->previdencia;
 }
 
 $inventario = "";
@@ -90,6 +96,7 @@ foreach ($dadosPatrimonio as $patrimonio) {
     $inventario = $patrimonio->inventario;
     $emergencia = $patrimonio->emergencia;
     $funeral = $patrimonio->funeral;
+    $fundos = $patrimonio->fundos;
     $valor_total_patrimonio = (($patrimonio->imoveis + $patrimonio->fundos + $patrimonio->reservas + $patrimonio->outros) * $inventario) / 100;
 }
 
@@ -104,11 +111,13 @@ foreach ($dadosEmprestimos as $emprestimo) {
 //Educação
 $custo_educacao = 0;
 $anos_educacao = 0;
+$total_custo_educacao = 0;
 $custo_educacao_tipo = [];
 $total_custo_educacao_tipo = [];
 foreach ($dadosEducacao as $educacao) {
     $custo_educacao += $educacao->custo;
     $anos_educacao += $educacao->anos;
+    $total_custo_educacao += $educacao->total;
     $custo_educacao_tipo[$educacao->idTipoEducacao] = ($educacao->custo * 12) ?: 0;
     $anos_educacao_tipo[$educacao->idTipoEducacao] = $educacao->anos ?: 0;
     $total_custo_educacao_tipo[$educacao->idTipoEducacao] = $educacao->anos * $educacao->custo * 12;
@@ -222,7 +231,12 @@ foreach ($dadosSeguro as $seguro) {
                             <tr>
                                 <th>Aciole</th>
                                 <?php
-                                $prazo = (int) ((99 - $idade) / 5);
+                                if ($idade >= 50) {
+                                    $prazo = (int) ((99 - $idade) / 5);
+                                } else {
+                                    $prazo = (int) ((50) / 5);
+                                }
+
                                 $idade_ = $idade;
                                 for ($i = 0; $i <= $prazo; $i++) {
                                     echo "<th>$idade_</th>";
@@ -235,34 +249,33 @@ foreach ($dadosSeguro as $seguro) {
                             <tr>
                                 <td><b>Despesas Fixas</b></td>
                                 <?php
-                                for ($i = 0; $i <= $prazo; $i++) {
-                                    echo "<th>R$" . number_format($despezasgerais, 2, ".", ",") . "</th>";
+                                $despesaFixaTotal = ($despezasgerais) * ($prazo * 5);
+                                for ($i = 0; $i <= ($prazo); $i++) {
+                                    echo "<th>R$" . number_format($despesaFixaTotal, 2, ",", ".") . "</th>";
+                                    $totalNecessidade[$i] = $despesaFixaTotal;
+                                    $despesaFixaTotal = $despesaFixaTotal - ($despezasgerais * 5);
                                 }
                                 ?>
                             </tr>
                             <tr>
                                 <td><b>Educação</b></td>
-
                                 <?php
-                                $x = 0;
-                                $totalNecessidade = array();
-                                for ($i = 1; $i <= count($custo_educacao_tipo); $i++) {
-                                    if ($anos_educacao_tipo[$i] > 0) {
-                                        $total = $custo_educacao_tipo[$i];
-                                        for ($j = 1; $j <= $anos_educacao_tipo[$i]; $j++) {
-                                            if (5 % $j == 0) {
-                                                echo "<th>R$" . number_format($total, 2, ".", ",") . "</th>";
-                                                $totalNecessidade[$x] = $total;
-                                                $x++;
-                                            }
-                                        }
+                                $custo_anoEducacao = $total_custo_educacao / $anos_educacao;
+                                echo $custo_anoEducacao;
+                                for ($i = 0; $i <= ($prazo); $i++) {
+                                    if ($total_custo_educacao > 0) {
+                                        echo "<th>R$" . number_format($total_custo_educacao, 2, ",", ".") . "</th>";
+                                        $totalNecessidade[$i] += $total_custo_educacao;
+                                    } else {
+                                        echo "<th>R$" . number_format(0, 2, ",", ".") . "</th>";
+                                        $totalNecessidade[$i] = 0;
                                     }
+                                    $total_custo_educacao = $total_custo_educacao - ($custo_anoEducacao * 5);
                                 }
                                 $falta_prazo_educacao = $prazo - count($totalNecessidade);
-                                echo $falta_prazo_educacao;
                                 for ($i = 0; $i <= $falta_prazo_educacao; $i++) {
                                     echo "<th>R$-</th>";
-                                    $totalNecessidade[$x] = 0;
+                                    $totalNecessidade[$i] = 0;
                                     $x++;
                                 }
                                 ?>
@@ -279,7 +292,7 @@ foreach ($dadosSeguro as $seguro) {
                                 <td><b>Inventário</b></td>
                                 <?php
                                 for ($i = 0; $i <= $prazo; $i++) {
-                                    echo "<th>" . number_format($inventario, 1, ".", ",") . "%</th>";
+                                    echo "<th>R$" . number_format(($valor_total_patrimonio * $inventario) / 100, 2, ",", ".") . "</th>";
                                 }
                                 ?>
                             </tr>
@@ -287,7 +300,7 @@ foreach ($dadosSeguro as $seguro) {
                                 <td><b>Emergêncial</b></td>
                                 <?php
                                 for ($i = 0; $i <= $prazo; $i++) {
-                                    echo "<th>" . number_format($emergencia, 0, ".", ",") . "x</th>";
+                                    echo "<th>R$" . number_format($emergencia * $fundos, 2, ",", ".") . "</th>";
                                 }
                                 ?>
                             </tr>
@@ -321,16 +334,22 @@ foreach ($dadosSeguro as $seguro) {
                             <tr>
                                 <td><b>INSS</b></td>
                                 <?php
-                                for ($i = 0; $i <= $prazo; $i++) {
-                                    echo "<th>R$-</th>";
+                                $inssTotal = ($inss * 12) * ($prazo * 5);
+                                for ($i = 0; $i <= ($prazo); $i++) {
+                                    echo "<th>R$" . number_format($inssTotal, 2, ",", ".") . "</th>";
+                                    $inssGarantia[$i] = $inssTotal;
+                                    $inssTotal = $inssTotal - ($inss * 12 * 5);
                                 }
                                 ?>
                             </tr>
                             <tr>
                                 <td><b>Previdência</b></td>
                                 <?php
-                                for ($i = 0; $i <= $prazo; $i++) {
-                                    echo "<th>R$-</th>";
+                                $previdenciaTotal = ($previdencia * 12) * ($prazo * 5);
+                                for ($i = 0; $i <= ($prazo); $i++) {
+                                    echo "<th>R$" . number_format($previdenciaTotal, 2, ",", ".") . "</th>";
+                                    $previdenciaGarantia[$i] = $previdenciaTotal;
+                                    $previdenciaTotal = $previdenciaTotal - ($previdencia * 12 * 5);
                                 }
                                 ?>
                             </tr>
@@ -354,9 +373,11 @@ foreach ($dadosSeguro as $seguro) {
                             <tr class="title-table">
                                 <td>Total de Garantias</td>
                                 <?php
-                                $totalGarantias = $valor_total_patrimonio + $seguro_vida + $fgts;
                                 for ($i = 0; $i <= $prazo; $i++) {
-                                    echo "<th>R$" . number_format($totalGarantias, 2, ".", ",") . "</th>";
+                                    $totalGarantias[$i] = $inssGarantia[$i] + $previdenciaGarantia[$i] + $valor_total_patrimonio + $seguro_vida + $fgts;
+                                }
+                                for ($i = 0; $i <= $prazo; $i++) {
+                                    echo "<th>R$" . number_format($totalGarantias[$i], 2, ".", ",") . "</th>";
                                 }
                                 ?>
                             </tr>
@@ -365,7 +386,7 @@ foreach ($dadosSeguro as $seguro) {
                                 <td><b>Necessidades Não Cobertas</b></td>
                                 <?php
                                 for ($i = 0; $i <= $prazo; $i++) {
-                                    $necessidadeNaoCobertas[$i] = $totalNecessidade[$i] - $totalGarantias;
+                                    $necessidadeNaoCobertas[$i] = ($totalGarantias[$i]) - $totalNecessidade[$i];
                                     echo "<th>R$" . number_format($necessidadeNaoCobertas[$i], 2, ".", ",") . "</th>";
                                 }
                                 ?>
@@ -426,7 +447,6 @@ foreach ($dadosSeguro as $seguro) {
                             <th>Vigência</th>
                             <th>Prazo</th>
                             <th>Capital</th>
-                            <th>Segurado</th>
                             <th>Gráfico</th>
                         </tr>
                     </thead>
@@ -436,81 +456,101 @@ foreach ($dadosSeguro as $seguro) {
                         $i = 0;
                         foreach ($dadosPlanosPrincipal as $plano) {
                             $plano_produto[$i] = $plano->descricao;
-                            if ($plano->idProduto == 1) {
+                            $plano_capital_segurado[$i] = $plano->capitalsegurado;
+                            $plano_valor[$i] = $plano->valor;
+                            if ($plano->idProduto == 1 || $plano->idProduto == 2) {
                                 $plano_prazo[$i] = 99;
+                                $vigencia = "Vitalicio";
                             } else {
-                                $plano_prazo[$i] = $plano->prazo == 0 || $plano->prazo == "" ? 0 : $plano->prazo / 12;
+                                $plano_prazo[$i] = (int) ( $plano->prazo == 0 || $plano->prazo == "" ? 0 : $plano->prazo / 12);
+                                $data1 = new DateTime($plano->vigencia);
+                                $data2 = new DateTime();
+
+                                $vigencia = $data1->diff($data2);
+                                $vigencia = $vigencia->y;
                             }
-                            ?>
-                            <tr>
-                                <td><b>{{$plano->descricao}}</b></td>
-                                <td>{{$plano->vigencia == "" || $plano->vigencia == "1970-01-01"  ? "" : date('d/m/Y', strtotime(($plano->vigencia)))}}</td>
-                                <td>{{$plano->prazo == ""? "" : number_format($plano->prazo / 12, 0, ",", ".")}}</td>
-                                <td>{{$plano->capitalsegurado == "" ? "" : "R$" . number_format($plano->capitalsegurado, 2, ",", ".")}}</td>
-                                <td>{{$plano->valor == "" ? "" : "R$" . number_format($plano->valor, 2, ",", ".")}}</td>
-                                <?php if ($i == 0) { ?>
-                                    <td rowspan="{{$rowspan}}" style="width: 40%; background: white;"><div id="graf_painel" class="min-grafico"></div></td>
-                                <?php } ?>
-                            </tr>
-                            <?php $i++; ?>
-                        <?php } ?>
+                            if ($plano->capitalsegurado > 0) {
+                                ?>
+                                <tr>
+                                    <td><b>{{$plano->descricao}}</b></td>
+                                    <td>{{$vigencia}}</td>
+                                    <td>{{$plano->prazo == ""? "" : number_format(($plano->prazo / 12), 0, ",", ".")}}</td>
+                                    <td>{{$plano->capitalsegurado == "" ? "" : "R$" . number_format($plano->capitalsegurado, 2, ",", ".")}}</td>
+                                    <?php if ($i == 0) { ?>
+                                        <td rowspan="{{$rowspan}}" style="width: 40%; background: white;"><div id="graf_painel" class="min-grafico"></div></td>
+                                    <?php } ?>
+                                </tr>
+                            <?php } $i++; ?>
+                        <?php }
+                        ?>
                     </tbody>
                 </table>
             </div>  
 
-            <!--            <div class="row">         
-                            <table class="table table-striped font-table border-table">
-                                <thead class="title-table">
-                                    <tr>
-                                        <th colspan="5" class="border-table">Cobertutas em caso de:</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="line-table">
-                                        <td class="border-table">
-                                            <div class="row margin">
-                                                <div class="col-12"><b>Morte Qualquer Causa</b></div>
-                                                <div class="col-12">Vitalício</div>
-                                                <div class="col-6">R$</div><div class="col-6">60.000</div>
-                                                <div class="col-6"><b><h4>R$</h4></b></div><div class="col-6"><b><h4>60.000</h4></b></div>
-                                            </div>
-                                        </td>
-                                        <td class="border-table">
-                                            <div class="row margin">
-                                                <div class="col-12"><b>Morte Acidental</b></div>
-                                                <div class="col-12">Capital morte acidental</div>
-                                                <div class="col-6">R$</div><div class="col-6">-</div>
-                                                <div class="col-6"><b><h4>R$</h4></b></div><div class="col-6"><b><h4>60.000</h4></b></div>
-                                            </div>
-                                        </td>
-                                        <td class="border-table">
-                                            <div class="row margin">
-                                                <div class="col-12"><b>Invalidez</b></div>
-                                                <div class="col-12">Vitalício</div>
-                                                <div class="col-6">R$</div><div class="col-6">500.000</div>
-                                                <div class="col-6"><b><h4>R$</h4></b></div><div class="col-6"><b><h4>500.000</h4></b></div>
-                                            </div>
-                                        </td>
-                                        <td class="border-table">
-                                            <div class="row margin">
-                                                <div class="col-12"><b>Doenças Graves</b></div>
-                                                <div class="col-12">Vitalício</div>
-                                                <div class="col-6">R$</div><div class="col-6">500.000</div>
-                                                <div class="col-6"><b><h4>R$</h4></b></div><div class="col-6"><b><h4>500.000</h4></b></div>
-                                            </div>
-                                        </td>
-                                        <td class="border-table">
-                                            <div class="row margin">
-                                                <div class="col-12"><b>Internação Hospitalar</b></div>
-                                                <div class="col-12">Vitalício</div>
-                                                <div class="col-6">R$</div><div class="col-6">200,00</div>
-                                                <div class="col-6"><b><h4>R$</h4></b></div><div class="col-6"><b> <h4>200,00</h4></b></div>
-                                            </div>
-                                        </td>
-                                    </tr>               
-                                </tbody>
-                            </table>
-                        </div>  -->
+            <div class="row">         
+                <table class="table table-striped font-table border-table">
+                    <thead class="title-table">
+                        <tr>
+                            <th colspan="6" class="border-table">Cobertutas em caso de:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="line-table">
+                            <td class="border-table">
+                                <div class="row margin">
+                                    <div class="col-12"><b>Previdência</b></div>
+                                    <div class="col-12"><br><br></div>
+                                    <div class="col-6"></div><div class="col-6"><br><br></div>
+                                    <div class="col-6"><b><h4>R$</h4></b></div><div class="col-6"><b><h4><?= number_format($previdencia, 2, ",", ".") ?></h4></b></div>
+                                </div>
+                            </td>
+                            <td class="border-table">
+                                <div class="row margin">
+                                    <div class="col-12"><b>Morte</b></div>
+                                    <div class="col-6">Vitálicio</div><div class="col-6">R$<?= number_format($plano_capital_segurado[0], 2, ",", ".") ?></div>
+                                    <div class="col-6">Compra de Capital</div><div class="col-6">R$<?= number_format($plano_capital_segurado[1], 2, ",", ".") ?></div>
+                                    <div class="col-6">Temporário</div><div class="col-6">R$<?= number_format($plano_capital_segurado[5], 2, ",", ".") ?></div>
+                                    <div class="col-6">Educação</div><div class="col-6">R$</div>
+                                    <?php $total_plano = $plano_capital_segurado[0] + $plano_capital_segurado[1] + $plano_capital_segurado[5] ?>
+                                    <div class="col-6"><b><h4>Total</h4></b></div><div class="col-6"><b><h4>R$<?= number_format($total_plano, 2, ",", ".") ?></h4></b></div>
+                                </div>
+                            </td>
+                            <td class="border-table">
+                                <div class="row margin">
+                                    <div class="col-12"><b>Assistência Funeral</b></div>
+                                    <div class="col-12"><br><br></div>
+                                    <div class="col-6"></div><div class="col-6"><br><br></div>
+                                    <div class="col-6"><b><h4>R$</h4></b></div><div class="col-6"><b><h4><?= number_format($plano_capital_segurado[8], 2, ",", ".") ?></h4></b></div>
+                                </div>
+                            </td>
+                            <td class="border-table">
+                                <div class="row margin">
+                                    <div class="col-12"><b>Invalidez Acidental</b></div>
+                                    <div class="col-12"><br><br></div>
+                                    <div class="col-6"></div><div class="col-6"><br><br></div>
+                                    <div class="col-6"><b><h4>R$</h4></b></div><div class="col-6"><b><h4><?= number_format($plano_capital_segurado[6], 2, ",", ".") ?></h4></b></div>
+                                </div>
+                            </td>
+                            <td class="border-table">
+                                <div class="row margin">
+                                    <div class="col-12"><b>Doença Grave</b></div>
+                                    <div class="col-12"><br><br></div>
+                                    <div class="col-6"></div><div class="col-6"><br><br></div>
+                                    <div class="col-6"><b><h4>R$</h4></b></div><div class="col-6"><b> <h4><?= number_format($plano_capital_segurado[4], 2, ",", ".") ?></h4></b></div>
+                                </div>
+                            </td>
+                            <td class="border-table">
+                                <div class="row margin">
+                                    <div class="col-12"><b>Diario de Internação Hospitalar</b></div>
+                                    <div class="col-12">(por mês)</div>
+                                    <div class="col-6"></div><div class="col-6"><br><br></div>
+                                    <div class="col-6"><b><h4>R$</h4></b></div><div class="col-6"><b> <h4><?= number_format(array_sum($plano_capital_segurado) * 30, 2, ",", ".") ?></h4></b></div>
+                                </div>
+                            </td>
+                        </tr>               
+                    </tbody>
+                </table>
+            </div>  
         </div>  
     </section>  
 
@@ -586,6 +626,7 @@ foreach ($dadosSeguro as $seguro) {
 
 <script>
 var produto_descricao = [];
+var produto_valor = [];
 var produto_prazo = [];</script>
 
 <?php
@@ -595,6 +636,9 @@ for ($i = 0; $i < count($plano_prazo); $i++) {
 for ($i = 0; $i < count($plano_produto); $i++) {
     echo "<script>produto_descricao.push('" . $plano_produto[$i] . "')</script>";
 }
+for ($i = 0; $i < count($plano_valor); $i++) {
+    echo "<script>produto_valor.push('" . $plano_valor[$i] . "')</script>";
+}
 ?>
 
 <script>
@@ -602,9 +646,10 @@ for ($i = 0; $i < count($plano_produto); $i++) {
 
     var despesaFixa = {{$despezasgerais}}
     var renda = {{$renda}};
-    situacaoAtual(idade, despesaFixa, renda);
-    var inss = {{$inss}}
-    invalidezDoencaGrave(idade, inss);
+    var inss = {{$inss}};
+    var previdencia = {{$previdencia}};
+    situacaoAtual(idade, despesaFixa, renda, previdencia, inss);
+    invalidezDoencaGrave(idade, previdencia, inss, despesaFixa);
     var inventario = {{$valor_total_patrimonio}}
     var emergencial = {{$emergencia * $renda}}
     var funeral = {{$funeral}}
@@ -614,6 +659,6 @@ for ($i = 0; $i < count($plano_produto); $i++) {
     necessidadeProtecao(idade, inventario, emergencial, funeral, custo_educacao_anual, custo_educacao_total, anos_educacao);
     custoTotalVida(idade, despesaFixa, custo_educacao_anual, custo_educacao_total, anos_educacao, funeral, emergencial, funeral);
     graf_painel(produto_prazo, produto_descricao);
-    graf_painel_pie();
+    graf_painel_pie(produto_valor, produto_descricao);
 
 </script>
