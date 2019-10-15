@@ -37,7 +37,7 @@ function calculo_idade($data) {
 }
 
 //Tela 1 Situação Atual
-$despezasgerais = "";
+$despezasgerais = 0;
 $moradia = "";
 $servicos = "";
 $transporte = "";
@@ -88,10 +88,11 @@ foreach ($dadosPrevidencia as $dadosPrevidencia) {
     $previdencia = $dadosPrevidencia->previdencia;
 }
 
-$inventario = "";
+$inventario = 0;
 $emergencia = 0;
 $funeral = 0;
-$valor_total_patrimonio = "";
+$valor_total_patrimonio = 0;
+$fundos = 0;
 foreach ($dadosPatrimonio as $patrimonio) {
     $inventario = $patrimonio->inventario;
     $emergencia = $patrimonio->emergencia;
@@ -260,8 +261,11 @@ foreach ($dadosSeguro as $seguro) {
                             <tr>
                                 <td><b>Educação</b></td>
                                 <?php
-                                $custo_anoEducacao = $total_custo_educacao / $anos_educacao;
-                                echo $custo_anoEducacao;
+                                $total_custo_educacao = 0;
+                                $custo_anoEducacao = 0;
+                                if ($anos_educacao > 0) {
+                                    $custo_anoEducacao = $total_custo_educacao / $anos_educacao;
+                                }
                                 for ($i = 0; $i <= ($prazo); $i++) {
                                     if ($total_custo_educacao > 0) {
                                         echo "<th>R$" . number_format($total_custo_educacao, 2, ",", ".") . "</th>";
@@ -454,9 +458,10 @@ foreach ($dadosSeguro as $seguro) {
                         <?php $rowspan = count($dadosPlanosPrincipal) ?>
                         <?php
                         $i = 0;
+                        $plano_capital_segurado = [0, 0, 0, 0, 0, 0, 0, 0, 0];
                         foreach ($dadosPlanosPrincipal as $plano) {
                             $plano_produto[$i] = $plano->descricao;
-                            $plano_capital_segurado[$i] = $plano->capitalsegurado;
+                            $plano_capital_segurado[$i] = $plano->capitalsegurado == "" ? 0 : $plano->capitalsegurado;
                             $plano_valor[$i] = $plano->valor;
                             if ($plano->idProduto == 1 || $plano->idProduto == 2) {
                                 $plano_prazo[$i] = 99;
@@ -481,7 +486,8 @@ foreach ($dadosSeguro as $seguro) {
                                     <?php } ?>
                                 </tr>
                             <?php } $i++; ?>
-                        <?php }
+                            <?php
+                        }
                         ?>
                     </tbody>
                 </table>
